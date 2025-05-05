@@ -1,0 +1,135 @@
+{
+    "text": "The Iranian advanced persistent threat actor and cyberespionage group, APT35, also known as Charming Kitten or Phosphorus, has been making headlines since 2014. During that time, the group launched one of the most sophisticated internet based spying campaigns organized by Iranian threat actors - a campaign conducted via social media. Since then, the group has not slowed down and has been responsible for several other cyber attacks around the world. In 2019, APT35 was responsible for targeting several academic institutions in the U.S, France, and the Middle East region. In late 2020, the group targeted medical research organizations in Israel and in the U.S. By 2021, APT35 was abusing Microsoft Exchange Server vulnerabilities that were chained together (ProxyShell). As of 2022, APT35 has been observed using new tactics to attack a wide range of targets. Using a new strain of malware, the threat actors were able to use the malware for intelligence collection. The group has also been seen using a new tool called Hyperscrape to quietly extract emails from victim's mailboxes.",
+    "explicit_triplets": [
+        {
+            "subject": "APT35",
+            "relation": "is also known as",
+            "object": "Charming Kitten"
+        },
+        {
+            "subject": "APT35",
+            "relation": "is also known as",
+            "object": "Phosphorus"
+        },
+        {
+            "subject": "APT35",
+            "relation": "launched",
+            "object": "a sophisticated internet based spying campaign"
+        },
+        {
+            "subject": "APT35",
+            "relation": "targeted",
+            "object": "academic institutions in the U.S, France, and the Middle East region"
+        },
+        {
+            "subject": "APT35",
+            "relation": "targeted",
+            "object": "medical research organizations in Israel and in the U.S."
+        },
+        {
+            "subject": "APT35",
+            "relation": "abused",
+            "object": "Microsoft Exchange Server vulnerabilities"
+        },
+        {
+            "subject": "Microsoft Exchange Server vulnerabilities",
+            "relation": "were chained together as",
+            "object": "ProxyShell"
+        },
+        {
+            "subject": "APT35",
+            "relation": "used",
+            "object": "a new strain of malware"
+        },
+        {
+            "subject": "APT35",
+            "relation": "used malware for",
+            "object": "intelligence collection"
+        },
+        {
+            "subject": "APT35",
+            "relation": "used",
+            "object": "Hyperscrape"
+        },
+        {
+            "subject": "Hyperscrape",
+            "relation": "extracts",
+            "object": "emails from victim's mailboxes"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "APT35",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "Charming Kitten",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "Phosphorus",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "a sophisticated internet based spying campaign",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "academic institutions in the U.S, France, and the Middle East region",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "medical research organizations in Israel and in the U.S.",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Microsoft Exchange Server vulnerabilities",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "ProxyShell",
+            "entity_type": "Exploit Target",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "a new strain of malware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "intelligence collection",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "Hyperscrape",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "emails from victim's mailboxes",
+            "entity_type": "Information",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

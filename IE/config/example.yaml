@@ -1,0 +1,24 @@
+defaults:  
+  - _self_
+
+### basic setting
+inSet: data/test
+outSet: output/IE-output
+
+### LLM setting
+model: gpt-4.1 #your openAI model
+api_key: <sk-xxx> #your openAI API key
+
+### demonstration setting
+retriever:
+  type: "kNN" #retriever type
+  permutation: asc #the permutation of the kNN
+shot: 3 #k of the kNN
+demoSet: data/demo #store the demos
+
+### prompt setting
+ie_prompt_set: tools/IE_prompt #the folder stored the prompt templates 
+templ: ie.jinja #used prompt template
+
+### prompt store
+prompt_store: prompt_store/IE-prompts #store the prompt used for each CTI report

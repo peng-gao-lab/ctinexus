@@ -1,0 +1,239 @@
+{
+    "text": "Over 100 organizations in the US and EU have been targeted in recent large-scale phishing campaigns distributing the information stealer malware known as StrelaStealer, Palo Alto Networks reports. First documented in November 2022, StrelaStealer harvests credentials from the well-known email clients and sends them to an attacker-controlled command-and-control (C&C) server specified in the malware\u2019s configuration. Over the past five months, Palo Alto Networks identified multiple large-scale campaigns carrying attachments deploying the infostealer in the form of a malicious DLL.Following an initial wave of emails in November 2023, the attackers launched two more in January and February 2024, mostly targeting the same North American and European regions. Tailored to local languages, the spam messages were mainly sent to organizations in the high-tech sector, with entities across finance, professional and legal services, manufacturing, government, utilities and energy, insurance, and construction targeted as well. Unlike earlier StrelaStealer campaigns that featured ISO attachments containing LNK and HTML files designed to fetch the malware from a remote server, the recent attacks involved a ZIP attachment that contained a JScript file designed to drop the final payload in the form of a DLL.",
+    "explicit_triplets": [
+        {
+            "subject": "StrelaStealer",
+            "relation": "was first documented in",
+            "object": "November 2022"
+        },
+        {
+            "subject": "StrelaStealer",
+            "relation": "harvests",
+            "object": "credentials from the well-known email clients"
+        },
+        {
+            "subject": "StrelaStealer",
+            "relation": "sends credentials to",
+            "object": "attacker-controlled command-and-control (C&C) server"
+        },
+        {
+            "subject": "attackers",
+            "relation": "launched campaigns in",
+            "object": "November 2023"
+        },
+        {
+            "subject": "attackers",
+            "relation": "launched campaigns in",
+            "object": "January and February 2024"
+        },
+        {
+            "subject": "phishing campaigns",
+            "relation": "targeted",
+            "object": "organizations in the US and EU"
+        },
+        {
+            "subject": "phishing campaigns",
+            "relation": "distributed",
+            "object": "StrelaStealer"
+        },
+        {
+            "subject": "phishing campaigns",
+            "relation": "used attachments containing",
+            "object": "malicious DLL"
+        },
+        {
+            "subject": "phishing campaigns",
+            "relation": "included spam messages tailored to",
+            "object": "local languages"
+        },
+        {
+            "subject": "spam messages",
+            "relation": "mainly sent to",
+            "object": "organizations in the high-tech sector"
+        },
+        {
+            "subject": "spam messages",
+            "relation": "targeted organizations in",
+            "object": "finance, professional and legal services, manufacturing, government, utilities and energy, insurance, and construction"
+        },
+        {
+            "subject": "earlier StrelaStealer campaigns",
+            "relation": "featured",
+            "object": "ISO attachments containing LNK and HTML files"
+        },
+        {
+            "subject": "recent attacks",
+            "relation": "involved",
+            "object": "ZIP attachment containing a JScript file"
+        },
+        {
+            "subject": "JScript file",
+            "relation": "drops",
+            "object": "DLL payload"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "StrelaStealer",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "November 2022",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "credentials from the well-known email clients",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "attacker-controlled command-and-control (C&C) server",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "attackers",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "November 2023",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "January and February 2024",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "phishing campaigns",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "organizations in the US and EU",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "malicious DLL",
+            "entity_type": "Malware Characteristic:Payload",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "local languages",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "spam messages",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "organizations in the high-tech sector",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "finance, professional and legal services, manufacturing, government, utilities and energy, insurance, and construction",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "earlier StrelaStealer campaigns",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 15,
+            "entity_name": "ISO attachments containing LNK and HTML files",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 16,
+            "entity_name": "recent attacks",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 17,
+            "entity_name": "JScript file",
+            "entity_type": "Indicator:File",
+            "mentions": [
+                "ZIP attachment containing a JScript file"
+            ]
+        },
+        {
+            "entity_id": 18,
+            "entity_name": "DLL payload",
+            "entity_type": "Malware Characteristic:Payload",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 4,
+                "entity_text": "attackers"
+            },
+            "relation": "distributed",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "StrelaStealer"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 11,
+                "entity_text": "spam messages"
+            },
+            "relation": "distribute",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "StrelaStealer"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 14,
+                "entity_text": "earlier StrelaStealer campaigns"
+            },
+            "relation": "involved distribution of",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "StrelaStealer"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 17,
+                "entity_text": "JScript file"
+            },
+            "relation": "is designed to drop",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "StrelaStealer"
+            }
+        }
+    ]
+}

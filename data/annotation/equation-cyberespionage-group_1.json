@@ -1,0 +1,123 @@
+{
+    "text": "Equation has employed a number of specialist tools. Among these are Trojan.Grokey a custom keylogger (also known as \u201cGrok\u201d) and W32.Fanni, which is also known as \u201cFanny worm\u201d. This worm's chief purpose appears to be the targeting of air-gapped networks. It can receive commands and exfiltrate data through infected USB sticks. Fanny used two zero day exploits that were also used in the Stuxnet attacks. The exploits were used in Fanny prior to Stuxnet indicating that Equation had prior knowledge of the vulnerabilities. Another similarity lies in the fact that Stuxnet was also designed to attack air-gapped networks.",
+    "explicit_triplets": [
+        {
+            "subject": "Equation",
+            "relation": "employed",
+            "object": "Trojan.Grokey"
+        },
+        {
+            "subject": "Equation",
+            "relation": "employed",
+            "object": "W32.Fanni"
+        },
+        {
+            "subject": "Trojan.Grokey",
+            "relation": "is also known as",
+            "object": "Grok"
+        },
+        {
+            "subject": "W32.Fanni",
+            "relation": "is also known as",
+            "object": "Fanny worm"
+        },
+        {
+            "subject": "Fanny worm",
+            "relation": "targets",
+            "object": "air-gapped networks"
+        },
+        {
+            "subject": "Fanny worm",
+            "relation": "receives commands through",
+            "object": "infected USB sticks"
+        },
+        {
+            "subject": "Fanny worm",
+            "relation": "exfiltrates data through",
+            "object": "infected USB sticks"
+        },
+        {
+            "subject": "Fanny worm",
+            "relation": "used",
+            "object": "two zero day exploits"
+        },
+        {
+            "subject": "two zero day exploits",
+            "relation": "also used in",
+            "object": "Stuxnet attacks"
+        },
+        {
+            "subject": "Equation",
+            "relation": "had prior knowledge of",
+            "object": "two zero day exploits"
+        },
+        {
+            "subject": "Stuxnet",
+            "relation": "designed to attack",
+            "object": "air-gapped networks"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Equation",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "Trojan.Grokey",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "W32.Fanni",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "Grok",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Fanny worm",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "air-gapped networks",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "infected USB sticks",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "two zero day exploits",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "Stuxnet attacks",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "Stuxnet",
+            "entity_type": "Malware",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

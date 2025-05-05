@@ -1,0 +1,170 @@
+{
+    "text": "LockBit uses a ransomware-as-a-service (RaaS) model and consistently conceived new ways to stay ahead of its competitors. Its double extortion methods also adds more pressure to victims, raising the stakes of their campaigns. One of its notable tactics was the creation and use of the malware StealBit, which automates data exfiltration. This tool was seen with the release of LockBit 2.0, which has been touted by its creators for having the fastest and most efficient encryption among its competition. In October 2021, LockBit also expanded to Linux hosts, specifically ESXi servers, in its release of Linux-ESXI Locker version 1.0. This variant is capable of targeting Linux hosts and could have a big impact on targeted organizations. Another side of LockBit's operations is its recruitment of and marketing to affiliates. It has been known to hire network access brokers, cooperate with other criminal groups (such as the now defunct Maze), recruit company insiders, and sponsor underground technical writing contests to recruit talented hackers. Using such tactics, the LockBit group has built itself into one of the most professional organized criminal gangs in the criminal underground.",
+    "explicit_triplets": [
+        {
+            "subject": "LockBit",
+            "relation": "uses",
+            "object": "a ransomware-as-a-service (RaaS) model"
+        },
+        {
+            "subject": "LockBit",
+            "relation": "created and used",
+            "object": "malware StealBit"
+        },
+        {
+            "subject": "StealBit",
+            "relation": "automates",
+            "object": "data exfiltration"
+        },
+        {
+            "subject": "StealBit",
+            "relation": "was released with",
+            "object": "LockBit 2.0"
+        },
+        {
+            "subject": "LockBit",
+            "relation": "expanded to",
+            "object": "Linux hosts"
+        },
+        {
+            "subject": "Linux-ESXI Locker version 1.0",
+            "relation": "targets",
+            "object": "Linux hosts"
+        },
+        {
+            "subject": "LockBit",
+            "relation": "expanded in",
+            "object": "October 2021"
+        },
+        {
+            "subject": "Linux hosts",
+            "relation": "include specifically",
+            "object": "ESXi servers"
+        },
+        {
+            "subject": "LockBit",
+            "relation": "recruits",
+            "object": "network access brokers"
+        },
+        {
+            "subject": "LockBit",
+            "relation": "cooperates with",
+            "object": "criminal groups"
+        },
+        {
+            "subject": "criminal groups",
+            "relation": "include",
+            "object": "Maze"
+        },
+        {
+            "subject": "LockBit",
+            "relation": "recruits",
+            "object": "company insiders"
+        },
+        {
+            "subject": "LockBit",
+            "relation": "sponsors",
+            "object": "underground technical writing contests"
+        },
+        {
+            "subject": "underground technical writing contests",
+            "relation": "aim to recruit",
+            "object": "talented hackers"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "LockBit",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "a ransomware-as-a-service (RaaS) model",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "StealBit",
+            "entity_type": "Malware",
+            "mentions": [
+                "malware StealBit"
+            ]
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "data exfiltration",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "LockBit 2.0",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Linux hosts",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Linux-ESXI Locker version 1.0",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "October 2021",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "ESXi servers",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "network access brokers",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "criminal groups",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "Maze",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "company insiders",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "underground technical writing contests",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "talented hackers",
+            "entity_type": "Attacker",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

@@ -1,0 +1,309 @@
+{
+    "text": "Discovered in August 2021, Quantum ransomware is linked to the Quantum Locker operation. Quantum Locker has had a few rebrands (AstroLocker, MountLocker, and XingLocker). Our technology partner, AdvIntel, confirmed that Quantum is a splinter group from Conti and that the ransomware operation was taken over by Conti Team Two in April 2022 - keeping Quantum's original name. In June 2022, Quantum was observed employing their version of BazarCall, called Jormungandr, and hiring people who specialized in OSINT, spamming, design, and call center operations. BazarCall is a method that is also known as call-back phishing. This tactic emerged in early 2021 as an attack vector used by Ryuk ransomware (later evolving into Conti). BazarCall is used to gain initial access into a victim's network and involves emailing victims. The emails allege that a paid subscription is up for automatic renewal, but the renewal can be cancelled if the victim calls a specific number. Once the victim calls the number, the threat actor on the other end of the line convinces the victim via social engineering to start a remote access session by the use of legitimate software controlled by a network intruder. While the victim is distracted on the call, the intruder tries to figure out how to compromise the victim's network without triggering alarms. These kinds of attacks are highly targeted and make it difficult for cyber security professionals to detect due to the social engineering aspect of the attack. AdvIntel believes that the switch to social engineering is more than likely due to the predictability of ransomware attacks, causing profits to decline for adversaries. If threat actors like Quantum are able to trick people, they can have a more flexible approach to their attacks - making them difficult to defend. Quantum's BazarCall campaigns have grown more sophisticated in just two months' time. They've impersonated a large number of brands, including: Gobble, Luchechko Mortgage Team, CrowdStrike, HelloFresh, Oracle, Ginyard International US Equal Opportunity Employment Commission",
+    "explicit_triplets": [
+        {
+            "subject": "Quantum ransomware",
+            "relation": "discovered in",
+            "object": "August 2021"
+        },
+        {
+            "subject": "Quantum ransomware",
+            "relation": "linked to",
+            "object": "Quantum Locker"
+        },
+        {
+            "subject": "Quantum Locker",
+            "relation": "had rebrands",
+            "object": "AstroLocker"
+        },
+        {
+            "subject": "Quantum Locker",
+            "relation": "had rebrands",
+            "object": "MountLocker"
+        },
+        {
+            "subject": "Quantum Locker",
+            "relation": "had rebrands",
+            "object": "XingLocker"
+        },
+        {
+            "subject": "Quantum",
+            "relation": "is a splinter group from",
+            "object": "Conti"
+        },
+        {
+            "subject": "Quantum ransomware operation",
+            "relation": "taken over by",
+            "object": "Conti Team Two"
+        },
+        {
+            "subject": "Quantum ransomware operation",
+            "relation": "taken over in",
+            "object": "April 2022"
+        },
+        {
+            "subject": "Quantum",
+            "relation": "employed",
+            "object": "Jormungandr"
+        },
+        {
+            "subject": "Jormungandr",
+            "relation": "is version of",
+            "object": "BazarCall"
+        },
+        {
+            "subject": "Quantum",
+            "relation": "observed employing Jormungandr in",
+            "object": "June 2022"
+        },
+        {
+            "subject": "Quantum",
+            "relation": "hired people specialized in",
+            "object": "OSINT"
+        },
+        {
+            "subject": "Quantum",
+            "relation": "hired people specialized in",
+            "object": "spamming"
+        },
+        {
+            "subject": "Quantum",
+            "relation": "hired people specialized in",
+            "object": "design"
+        },
+        {
+            "subject": "Quantum",
+            "relation": "hired people specialized in",
+            "object": "call center operations"
+        },
+        {
+            "subject": "BazarCall",
+            "relation": "also known as",
+            "object": "call-back phishing"
+        },
+        {
+            "subject": "BazarCall",
+            "relation": "emerged in",
+            "object": "early 2021"
+        },
+        {
+            "subject": "BazarCall",
+            "relation": "used as attack vector by",
+            "object": "Ryuk ransomware"
+        },
+        {
+            "subject": "BazarCall",
+            "relation": "used to gain",
+            "object": "initial access into a victim's network"
+        },
+        {
+            "subject": "Quantum",
+            "relation": "impersonated",
+            "object": "Gobble"
+        },
+        {
+            "subject": "Quantum",
+            "relation": "impersonated",
+            "object": "Luchechko Mortgage Team"
+        },
+        {
+            "subject": "Quantum",
+            "relation": "impersonated",
+            "object": "CrowdStrike"
+        },
+        {
+            "subject": "Quantum",
+            "relation": "impersonated",
+            "object": "HelloFresh"
+        },
+        {
+            "subject": "Quantum",
+            "relation": "impersonated",
+            "object": "Oracle"
+        },
+        {
+            "subject": "Quantum",
+            "relation": "impersonated",
+            "object": "Ginyard International US Equal Opportunity Employment Commission"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Quantum ransomware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "August 2021",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "Quantum Locker",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "AstroLocker",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "MountLocker",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "XingLocker",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Quantum",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "Conti",
+            "entity_type": "Attacker",
+            "mentions": [
+                "Conti Team Two"
+            ]
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "Quantum ransomware operation",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "April 2022",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "Jormungandr",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "BazarCall",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "June 2022",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "OSINT",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "spamming",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 15,
+            "entity_name": "design",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 16,
+            "entity_name": "call center operations",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 17,
+            "entity_name": "call-back phishing",
+            "entity_type": "Malware Characteristic:Payload",
+            "mentions": []
+        },
+        {
+            "entity_id": 18,
+            "entity_name": "early 2021",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 19,
+            "entity_name": "Ryuk ransomware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 20,
+            "entity_name": "initial access into a victim's network",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 21,
+            "entity_name": "Gobble",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 22,
+            "entity_name": "Luchechko Mortgage Team",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 23,
+            "entity_name": "CrowdStrike",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 24,
+            "entity_name": "HelloFresh",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 25,
+            "entity_name": "Oracle",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 26,
+            "entity_name": "Ginyard International US Equal Opportunity Employment Commission",
+            "entity_type": "Organization",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 6,
+                "entity_text": "Quantum"
+            },
+            "relation": "is linked to",
+            "object": {
+                "entity_id": 2,
+                "entity_text": "Quantum Locker"
+            }
+        }
+    ]
+}

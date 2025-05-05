@@ -1,0 +1,109 @@
+{
+    "text": "Over 5,300 internet-exposed GitLab instances are vulnerable to CVE-2023-7028, a zero-click account takeover flaw GitLab warned about earlier this month. The critical (CVSS score: 10.0) flaw allows attackers to send password reset emails for a targeted account to an attacker-controlled email address, allowing the threat actor to change the password and take over the account. Based on GitLab's role as a software development and project planning platform and the type and severity of the flaw, these servers are at risk of supply chain attacks, proprietary code disclosure, API key leaks, and other malicious activity.",
+    "explicit_triplets": [
+        {
+            "subject": "GitLab instances",
+            "relation": "are vulnerable to",
+            "object": "CVE-2023-7028"
+        },
+        {
+            "subject": "CVE-2023-7028",
+            "relation": "is rated",
+            "object": "critical (CVSS score: 10.0)"
+        },
+        {
+            "subject": "CVE-2023-7028",
+            "relation": "allows",
+            "object": "attackers to send password reset emails for a targeted account to an attacker-controlled email address"
+        },
+        {
+            "subject": "attackers",
+            "relation": "can take over",
+            "object": "the targeted account"
+        },
+        {
+            "subject": "GitLab instances",
+            "relation": "are at risk of",
+            "object": "supply chain attacks"
+        },
+        {
+            "subject": "GitLab instances",
+            "relation": "are at risk of",
+            "object": "proprietary code disclosure"
+        },
+        {
+            "subject": "GitLab instances",
+            "relation": "are at risk of",
+            "object": "API key leaks"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "GitLab instances",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "CVE-2023-7028",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "critical (CVSS score: 10.0)",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "attackers to send password reset emails for a targeted account to an attacker-controlled email address",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "attackers",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "the targeted account",
+            "entity_type": "Account",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "supply chain attacks",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "proprietary code disclosure",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "API key leaks",
+            "entity_type": "Credential",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 5,
+                "entity_text": "the targeted account"
+            },
+            "relation": "exists on",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "GitLab instances"
+            }
+        }
+    ]
+}

@@ -1,0 +1,163 @@
+{
+    "text": "On July 11, 2023, Unit 42 cloud researchers discovered a new peer-to-peer (P2P) worm we call P2PInfect. Written in Rust, a highly scalable and cloud-friendly programming language, this worm is capable of cross-platform infections and targets Redis, a popular open-source database application that is heavily used within cloud environments. Redis instances can be run on both Linux and Windows operating systems. Unit 42 researchers have identified over 307,000 unique Redis systems communicating publicly over the last two weeks, of which 934 may be vulnerable to this P2P worm variant. While not all of the 307,000 Redis instances will be vulnerable, the worm will still target these systems and attempt the compromise. The P2PInfect worm infects vulnerable Redis instances by exploiting the Lua sandbox escape vulnerability, CVE-2022-0543. While the vulnerability was disclosed in 2022, its scope is not fully known at this point. However, it is rated in the NIST National Vulnerability Database with a Critical CVSS score of 10.0. Additionally, the fact that P2PInfect exploits Redis servers running on both Linux and Windows operating systems makes it more scalable and potent than other worms. The P2P worm observed by Unit 42 researchers serves as an example of a serious attack threat actors could conduct using this vulnerability.",
+    "explicit_triplets": [
+        {
+            "subject": "Unit 42 cloud researchers",
+            "relation": "discovered",
+            "object": "P2PInfect"
+        },
+        {
+            "subject": "P2PInfect",
+            "relation": "is written in",
+            "object": "Rust"
+        },
+        {
+            "subject": "P2PInfect",
+            "relation": "targets",
+            "object": "Redis"
+        },
+        {
+            "subject": "Redis",
+            "relation": "runs on",
+            "object": "Linux operating systems"
+        },
+        {
+            "subject": "Redis",
+            "relation": "runs on",
+            "object": "Windows operating systems"
+        },
+        {
+            "subject": "Unit 42 researchers",
+            "relation": "identified",
+            "object": "307,000 unique Redis systems"
+        },
+        {
+            "subject": "934 Redis systems",
+            "relation": "may be vulnerable to",
+            "object": "P2PInfect"
+        },
+        {
+            "subject": "P2PInfect",
+            "relation": "infects",
+            "object": "vulnerable Redis instances"
+        },
+        {
+            "subject": "P2PInfect",
+            "relation": "exploits",
+            "object": "CVE-2022-0543"
+        },
+        {
+            "subject": "CVE-2022-0543",
+            "relation": "has CVSS score",
+            "object": "10.0"
+        },
+        {
+            "subject": "P2PInfect",
+            "relation": "exploits",
+            "object": "Redis servers running on Linux operating systems"
+        },
+        {
+            "subject": "P2PInfect",
+            "relation": "exploits",
+            "object": "Redis servers running on Windows operating systems"
+        },
+        {
+            "subject": "P2PInfect",
+            "relation": "is an example of",
+            "object": "serious attack threat actors could conduct"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 1,
+            "entity_name": "P2PInfect",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "Rust",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "Redis",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Linux operating systems",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Windows operating systems",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 0,
+            "entity_name": "Unit 42 researchers",
+            "entity_type": "Organization",
+            "mentions": [
+                "Unit 42 cloud researchers"
+            ]
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "934 Redis systems",
+            "entity_type": "Infrastructure",
+            "mentions": [
+                "307,000 unique Redis systems"
+            ]
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "307,000 unique Redis systems",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "vulnerable Redis instances",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "CVE-2022-0543",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "10.0",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "Redis servers running on Linux operating systems",
+            "entity_type": "Infrastructure",
+            "mentions": [
+                "Redis servers running on Windows operating systems"
+            ]
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "Redis servers running on Windows operating systems",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "serious attack threat actors could conduct",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

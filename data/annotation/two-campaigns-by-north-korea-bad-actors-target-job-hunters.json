@@ -1,0 +1,150 @@
+{
+    "text": "Unit 42 researchers recently discovered two separate campaigns targeting job-seeking activities linked to state-sponsored threat actors associated with the Democratic People's Republic of Korea (DPRK), commonly known as North Korea. We call the first campaign \u201cContagious Interview,\u201d where threat actors pose as employers (often anonymously or with vague identities) to lure software developers into installing malware through the interview process. This malware creates the potential for various types of theft. We attribute with moderate confidence that Contagious Interview is run by a North Korea state-sponsored threat actor. We call the second campaign \u201cWagemole,\u201d where threat actors seek unauthorized employment with organizations based in the US and other parts of the world, with potential for both financial gain and espionage. We attribute with high confidence that Wagemole is a North Korea state-sponsored threat. Activity from both campaigns remains an ongoing active threat.",
+    "explicit_triplets": [
+        {
+            "subject": "Unit 42 researchers",
+            "relation": "discovered",
+            "object": "two separate campaigns"
+        },
+        {
+            "subject": "two separate campaigns",
+            "relation": "target",
+            "object": "job-seeking activities"
+        },
+        {
+            "subject": "two separate campaigns",
+            "relation": "linked to",
+            "object": "state-sponsored threat actors"
+        },
+        {
+            "subject": "state-sponsored threat actors",
+            "relation": "associated with",
+            "object": "North Korea"
+        },
+        {
+            "subject": "threat actors",
+            "relation": "pose as",
+            "object": "employers"
+        },
+        {
+            "subject": "threat actors",
+            "relation": "lure",
+            "object": "software developers"
+        },
+        {
+            "subject": "software developers",
+            "relation": "install",
+            "object": "malware"
+        },
+        {
+            "subject": "malware",
+            "relation": "creates potential for",
+            "object": "various types of theft"
+        },
+        {
+            "subject": "Contagious Interview",
+            "relation": "is run by",
+            "object": "North Korea state-sponsored threat actor"
+        },
+        {
+            "subject": "Wagemole",
+            "relation": "targets",
+            "object": "organizations based in the US and other parts of the world"
+        },
+        {
+            "subject": "Wagemole",
+            "relation": "has potential for",
+            "object": "financial gain and espionage"
+        },
+        {
+            "subject": "Wagemole",
+            "relation": "is",
+            "object": "North Korea state-sponsored threat"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Unit 42 researchers",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "two separate campaigns",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "job-seeking activities",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "state-sponsored threat actors",
+            "entity_type": "Attacker",
+            "mentions": [
+                "threat actors",
+                "North Korea state-sponsored threat",
+                "North Korea state-sponsored threat actor"
+            ]
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "North Korea",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "employers",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "software developers",
+            "entity_type": "Account",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "malware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "various types of theft",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "Contagious Interview",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "Wagemole",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "organizations based in the US and other parts of the world",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "financial gain and espionage",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

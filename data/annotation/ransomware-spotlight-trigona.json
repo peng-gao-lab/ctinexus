@@ -1,0 +1,109 @@
+{
+    "text": "The Trigona ransomware is also linked to BlackCat (also known as AlphaVM, AlphaV, or ALPHV); however, there are currently no known similarities between the two groups. It is possible that BlackCat only utilized or collaborated with the threat actors deploying Trigona. A report by Arete confirmed that Trigona had been observed exploiting CVE-2021-40539 for initial access.\u202fOnce it takes hold of a victim's system and data, threat actors behind Trigona then provide an authorization key for victims to register to the negotiation portal. Trigona published critical data stolen from victims such as documents and contracts on their leak site. The website featured bidding options to acquire access to the leaked data and contained a countdown timer, which could have served to place more pressure on victims to pay up.",
+    "explicit_triplets": [
+        {
+            "subject": "Trigona ransomware",
+            "relation": "linked to",
+            "object": "BlackCat"
+        },
+        {
+            "subject": "BlackCat",
+            "relation": "known as",
+            "object": "AlphaVM, AlphaV, or ALPHV"
+        },
+        {
+            "subject": "Trigona",
+            "relation": "exploits",
+            "object": "CVE-2021-40539"
+        },
+        {
+            "subject": "Trigona",
+            "relation": "provides",
+            "object": "authorization key"
+        },
+        {
+            "subject": "Trigona",
+            "relation": "published",
+            "object": "critical data stolen from victims"
+        },
+        {
+            "subject": "Trigona",
+            "relation": "uses",
+            "object": "negotiation portal"
+        },
+        {
+            "subject": "critical data stolen from victims",
+            "relation": "include",
+            "object": "documents and contracts"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Trigona ransomware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "BlackCat",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "AlphaVM, AlphaV, or ALPHV",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "Trigona",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "CVE-2021-40539",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "authorization key",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "critical data stolen from victims",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "negotiation portal",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "documents and contracts",
+            "entity_type": "Information",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 1,
+                "entity_text": "BlackCat"
+            },
+            "relation": "is linked to",
+            "object": {
+                "entity_id": 3,
+                "entity_text": "Trigona"
+            }
+        }
+    ]
+}

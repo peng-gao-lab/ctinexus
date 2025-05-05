@@ -1,0 +1,268 @@
+{
+    "text": "Flax Typhoon has been active since mid-2021 and has targeted government agencies and education, critical manufacturing, and information technology organizations in Taiwan. Some victims have also been observed elsewhere in Southeast Asia, as well as in North America and Africa. Flax Typhoon focuses on persistence, lateral movement, and credential access. As with any observed nation-state actor activity, Microsoft has directly notified targeted or compromised customers, providing them with important information needed to secure their environments. Flax Typhoon is known to use the China Chopper web shell, Metasploit, Juicy Potato privilege escalation tool, Mimikatz, and SoftEther virtual private network (VPN) client. However, Flax Typhoon primarily relies on living-off-the-land techniques and hands-on-keyboard activity. Flax Typhoon achieves initial access by exploiting known vulnerabilities in public-facing servers and deploying web shells like China Chopper. Following initial access, Flax Typhoon uses command-line tools to first establish persistent access over the remote desktop protocol, then deploy a VPN connection to actor-controlled network infrastructure, and finally collect credentials from compromised systems. Flax Typhoon further uses this VPN access to scan for vulnerabilities on targeted systems and organizations from the compromised systems.",
+    "explicit_triplets": [
+        {
+            "subject": "Flax Typhoon",
+            "relation": "has been active since",
+            "object": "mid-2021"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "has targeted",
+            "object": "government agencies and education, critical manufacturing, and information technology organizations in Taiwan"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "has victims observed in",
+            "object": "Southeast Asia"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "has victims observed in",
+            "object": "North America"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "has victims observed in",
+            "object": "Africa"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "focuses on",
+            "object": "persistence"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "focuses on",
+            "object": "lateral movement"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "focuses on",
+            "object": "credential access"
+        },
+        {
+            "subject": "Microsoft",
+            "relation": "has directly notified",
+            "object": "targeted or compromised customers"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "uses",
+            "object": "China Chopper web shell"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "uses",
+            "object": "Metasploit"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "uses",
+            "object": "Juicy Potato privilege escalation tool"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "uses",
+            "object": "Mimikatz"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "uses",
+            "object": "SoftEther virtual private network (VPN) client"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "relies on",
+            "object": "living-off-the-land techniques"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "achieves initial access by exploiting",
+            "object": "known vulnerabilities in public-facing servers"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "deploys",
+            "object": "China Chopper web shell"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "uses",
+            "object": "command-line tools"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "establishes persistent access over",
+            "object": "remote desktop protocol"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "deploys",
+            "object": "a VPN connection to actor-controlled network infrastructure"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "collects",
+            "object": "credentials from compromised systems"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "uses VPN access to",
+            "object": "scan for vulnerabilities on targeted systems and organizations"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Flax Typhoon",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "mid-2021",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "government agencies and education, critical manufacturing, and information technology organizations in Taiwan",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "Southeast Asia",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "North America",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Africa",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "persistence",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "lateral movement",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "credential access",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "Microsoft",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "targeted or compromised customers",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "China Chopper web shell",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "Metasploit",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "Juicy Potato privilege escalation tool",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "Mimikatz",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 15,
+            "entity_name": "SoftEther virtual private network (VPN) client",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 16,
+            "entity_name": "living-off-the-land techniques",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 17,
+            "entity_name": "known vulnerabilities in public-facing servers",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 18,
+            "entity_name": "command-line tools",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 19,
+            "entity_name": "remote desktop protocol",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 20,
+            "entity_name": "a VPN connection to actor-controlled network infrastructure",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 21,
+            "entity_name": "credentials from compromised systems",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 22,
+            "entity_name": "scan for vulnerabilities on targeted systems and organizations",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 9,
+                "entity_text": "Microsoft"
+            },
+            "relation": "has directly notified customers targeted by",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Flax Typhoon"
+            }
+        }
+    ]
+}

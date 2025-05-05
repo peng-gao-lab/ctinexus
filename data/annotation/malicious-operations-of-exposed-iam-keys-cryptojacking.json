@@ -1,0 +1,117 @@
+{
+    "text": "Unit 42 researchers have identified an active campaign we are calling EleKtra-Leak, which performs automated targeting of exposed identity and access management (IAM) credentials within public GitHub repositories. AWS detects and auto-remediates much of the threat of exposed credentials in popular source code repositories by applying a special quarantine policy \u2014 but by manually removing that automatic protection, we were able to develop deeper insights into the activities that the actor would carry out in the case where compromised credentials are obtained in some other way. In those cases, the threat actor associated with the campaign was able to create multiple AWS Elastic Compute (EC2) instances that they used for wide-ranging and long-lasting cryptojacking operations. We believe these operations have been active for at least two years and are still active today.",
+    "explicit_triplets": [
+        {
+            "subject": "Unit 42 researchers",
+            "relation": "identified",
+            "object": "EleKtra-Leak"
+        },
+        {
+            "subject": "EleKtra-Leak",
+            "relation": "targets",
+            "object": "identity and access management (IAM) credentials within public GitHub repositories"
+        },
+        {
+            "subject": "AWS",
+            "relation": "detects and auto-remediates",
+            "object": "exposed credentials in popular source code repositories"
+        },
+        {
+            "subject": "threat actor",
+            "relation": "creates",
+            "object": "multiple AWS Elastic Compute (EC2) instances"
+        },
+        {
+            "subject": "AWS Elastic Compute (EC2) instances",
+            "relation": "are used for",
+            "object": "cryptojacking operations"
+        },
+        {
+            "subject": "cryptojacking operations",
+            "relation": "have been active for",
+            "object": "at least two years"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Unit 42 researchers",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "EleKtra-Leak",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "identity and access management (IAM) credentials within public GitHub repositories",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "AWS",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "exposed credentials in popular source code repositories",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "threat actor",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "AWS Elastic Compute (EC2) instances",
+            "entity_type": "Infrastructure",
+            "mentions": [
+                "multiple AWS Elastic Compute (EC2) instances"
+            ]
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "cryptojacking operations",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "at least two years",
+            "entity_type": "Time",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 1,
+                "entity_text": "EleKtra-Leak"
+            },
+            "relation": "creates and uses",
+            "object": {
+                "entity_id": 6,
+                "entity_text": "AWS Elastic Compute (EC2) instances"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 3,
+                "entity_text": "AWS"
+            },
+            "relation": "provides",
+            "object": {
+                "entity_id": 6,
+                "entity_text": "AWS Elastic Compute (EC2) instances"
+            }
+        }
+    ]
+}

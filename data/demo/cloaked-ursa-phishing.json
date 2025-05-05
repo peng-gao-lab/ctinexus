@@ -1,0 +1,131 @@
+{
+    "text": "Russia's Foreign Intelligence Service hackers, which we call Cloaked Ursa (aka APT29, UAC-0004, Midnight Blizzard/Nobelium, Cozy Bear) are well known for targeting diplomatic missions globally. Their initial access attempts over the past two years have predominantly used phishing lures with a theme of diplomatic operations such as the following: 1. Notes verbale (semiformal government-to-government diplomatic communications) 2. Embassies' operating status updates 3. Schedules for diplomats 4. Invitations to embassy events. These types of lures are generally sent to individuals who handle this type of embassy correspondence as part of their daily jobs. They are meant to entice targets to open the files on behalf of the organization they work for. Recently, Unit 42 researchers observed instances of Cloaked Ursa using lures focusing on the diplomats themselves more than the countries they represent. We have identified Cloaked Ursa targeting diplomatic missions within Ukraine by leveraging something that all recently placed diplomats need \u2013 a vehicle. We observed Cloaked Ursa targeting at least 22 of over 80 foreign missions located in Kyiv. While we don't have details on their infection success rate, this is a truly astonishing number for a clandestine operation conducted by an advanced persistent threat (APT) that the United States and the United Kingdom publicly attribute to Russia's Foreign Intelligence Service (SVR).",
+    "explicit_triplets": [
+        {
+            "subject": "Cloaked Ursa",
+            "relation": "is also known as",
+            "object": "APT29"
+        },
+        {
+            "subject": "Cloaked Ursa",
+            "relation": "is also known as",
+            "object": "Midnight Blizzard/Nobelium"
+        },
+        {
+            "subject": "Cloaked Ursa",
+            "relation": "is also known as",
+            "object": "Cozy Bear"
+        },
+        {
+            "subject": "Cloaked Ursa",
+            "relation": "is attributed to",
+            "object": "Russia's Foreign Intelligence Service"
+        },
+        {
+            "subject": "Cloaked Ursa",
+            "relation": "is known for targeting",
+            "object": "diplomatic missions globally"
+        },
+        {
+            "subject": "Cloaked Ursa",
+            "relation": "used",
+            "object": "phishing lures"
+        },
+        {
+            "subject": "phishing lures",
+            "relation": "had themes",
+            "object": "diplomatic operations"
+        },
+        {
+            "subject": "phishing lures",
+            "relation": "targeted",
+            "object": "individuals who handle embassy correspondence"
+        },
+        {
+            "subject": "Cloaked Ursa",
+            "relation": "used lures focused on",
+            "object": "diplomats themselves"
+        },
+        {
+            "subject": "Cloaked Ursa",
+            "relation": "targeted",
+            "object": "diplomatic missions within Ukraine"
+        },
+        {
+            "subject": "Cloaked Ursa",
+            "relation": "targeted",
+            "object": "foreign missions located in Kyiv"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Cloaked Ursa",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "APT29",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "Midnight Blizzard/Nobelium",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "Cozy Bear",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Russia's Foreign Intelligence Service",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "diplomatic missions globally",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "phishing lures",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "diplomatic operations",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "individuals who handle embassy correspondence",
+            "entity_type": "Account",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "diplomats themselves",
+            "entity_type": "Account",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "foreign missions located in Kyiv",
+            "entity_type": "Organization",
+            "mentions": [
+                "diplomatic missions within Ukraine"
+            ]
+        }
+    ],
+    "implicit_triplets": []
+}

@@ -1,0 +1,298 @@
+{
+    "text": "Organizations in the Defense Industrial Base (DIB) sector are in the crosshairs of an Iranian threat actor as part of a campaign designed to deliver a never-before-seen backdoor called FalseFont. The findings come from Microsoft, which is tracking the activity under its weather-themed moniker Peach Sandstorm (formerly Holmium), which is also known as APT33, Elfin, and Refined Kitten. FalseFont is a custom backdoor with a wide range of functionalities that allow operators to remotely access an infected system, launch additional files, and send information to its [command-and-control] servers. In a report published in September 2023, Microsoft linked the group to password spray attacks carried out against thousands of organizations globally between February and July 2023. The intrusions primarily singled out satellite, defense, and pharmaceutical sectors. The end goal, the company said, is to facilitate intelligence collection in support of Iranian state interests. Peach Sandstorm is believed to have been active since at least 2013. The disclosure comes as the Israel National Cyber Directorate (INCD) accused Iran and Hezbollah of attempting to unsuccessfully target Ziv Hospital through hacking crews named Agrius and Lebanese Cedar.",
+    "explicit_triplets": [
+        {
+            "subject": "Organizations in the Defense Industrial Base (DIB) sector",
+            "relation": "targeted by",
+            "object": "Iranian threat actor"
+        },
+        {
+            "subject": "Iranian threat actor",
+            "relation": "delivers",
+            "object": "FalseFont"
+        },
+        {
+            "subject": "Microsoft",
+            "relation": "tracks",
+            "object": "Peach Sandstorm"
+        },
+        {
+            "subject": "Peach Sandstorm",
+            "relation": "also known as",
+            "object": "APT33"
+        },
+        {
+            "subject": "Peach Sandstorm",
+            "relation": "also known as",
+            "object": "Elfin"
+        },
+        {
+            "subject": "Peach Sandstorm",
+            "relation": "also known as",
+            "object": "Refined Kitten"
+        },
+        {
+            "subject": "FalseFont",
+            "relation": "allows",
+            "object": "operators to remotely access an infected system"
+        },
+        {
+            "subject": "FalseFont",
+            "relation": "allows operators to",
+            "object": "launch additional files"
+        },
+        {
+            "subject": "FalseFont",
+            "relation": "allows operators to",
+            "object": "send information to its command-and-control servers"
+        },
+        {
+            "subject": "Microsoft",
+            "relation": "linked",
+            "object": "Peach Sandstorm to password spray attacks"
+        },
+        {
+            "subject": "password spray attacks",
+            "relation": "targeted",
+            "object": "thousands of organizations globally"
+        },
+        {
+            "subject": "password spray attacks",
+            "relation": "occurred between",
+            "object": "February and July 2023"
+        },
+        {
+            "subject": "Intrusions",
+            "relation": "targeted",
+            "object": "satellite, defense, and pharmaceutical sectors"
+        },
+        {
+            "subject": "Peach Sandstorm",
+            "relation": "active since at least",
+            "object": "2013"
+        },
+        {
+            "subject": "Israel National Cyber Directorate (INCD)",
+            "relation": "accused",
+            "object": "Iran and Hezbollah"
+        },
+        {
+            "subject": "Iran and Hezbollah",
+            "relation": "attempted to target",
+            "object": "Ziv Hospital"
+        },
+        {
+            "subject": "Agrius",
+            "relation": "is named as",
+            "object": "hacking crew"
+        },
+        {
+            "subject": "Lebanese Cedar",
+            "relation": "is named as",
+            "object": "hacking crew"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Organizations in the Defense Industrial Base (DIB) sector",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "Iranian threat actor",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "FalseFont",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "Microsoft",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Peach Sandstorm",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "APT33",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Elfin",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "Refined Kitten",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "operators to remotely access an infected system",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "launch additional files",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "send information to its command-and-control servers",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "Peach Sandstorm to password spray attacks",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "password spray attacks",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "thousands of organizations globally",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "February and July 2023",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 15,
+            "entity_name": "Intrusions",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 16,
+            "entity_name": "satellite, defense, and pharmaceutical sectors",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 17,
+            "entity_name": "2013",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 18,
+            "entity_name": "Israel National Cyber Directorate (INCD)",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 19,
+            "entity_name": "Iran and Hezbollah",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 20,
+            "entity_name": "Ziv Hospital",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 21,
+            "entity_name": "Agrius",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 22,
+            "entity_name": "hacking crew",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 23,
+            "entity_name": "Lebanese Cedar",
+            "entity_type": "Attacker",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 2,
+                "entity_text": "FalseFont"
+            },
+            "relation": "is used by",
+            "object": {
+                "entity_id": 4,
+                "entity_text": "Peach Sandstorm"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 12,
+                "entity_text": "password spray attacks"
+            },
+            "relation": "are conducted by",
+            "object": {
+                "entity_id": 4,
+                "entity_text": "Peach Sandstorm"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 15,
+                "entity_text": "Intrusions"
+            },
+            "relation": "carried out by",
+            "object": {
+                "entity_id": 4,
+                "entity_text": "Peach Sandstorm"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 19,
+                "entity_text": "Iran and Hezbollah"
+            },
+            "relation": "are associated with",
+            "object": {
+                "entity_id": 4,
+                "entity_text": "Peach Sandstorm"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 4,
+                "entity_text": "Peach Sandstorm"
+            },
+            "relation": "is an instance of",
+            "object": {
+                "entity_id": 22,
+                "entity_text": "hacking crew"
+            }
+        }
+    ]
+}

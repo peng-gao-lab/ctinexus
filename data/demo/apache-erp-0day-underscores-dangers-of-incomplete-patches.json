@@ -1,0 +1,137 @@
+{
+    "text": "Unknown groups have launched probes against a zero-day vulnerability identified in Apache's OfBiz enterprise resource planning (ERP) framework - an increasingly popular strategy of analyzing patches for ways to bypass software fixes. The 0-day vulnerability (CVE-2023-51467) in Apache OFBiz, disclosed on Dec. 26, allows an attacker to access sensitive information and remotely execute code against applications using the ERP framework, according to an analysis by cybersecurity firm SonicWall. The Apache Software Foundation had originally released a patch for a related issue, CVE-2023-49070, but the fix failed to protect against other variations of the attack.",
+    "explicit_triplets": [
+        {
+            "subject": "Unknown groups",
+            "relation": "launched probes against",
+            "object": "zero-day vulnerability CVE-2023-51467"
+        },
+        {
+            "subject": "zero-day vulnerability CVE-2023-51467",
+            "relation": "affects",
+            "object": "Apache OfBiz"
+        },
+        {
+            "subject": "zero-day vulnerability CVE-2023-51467",
+            "relation": "allows attacker to",
+            "object": "access sensitive information"
+        },
+        {
+            "subject": "zero-day vulnerability CVE-2023-51467",
+            "relation": "allows attacker to",
+            "object": "remotely execute code against applications"
+        },
+        {
+            "subject": "Apache Software Foundation",
+            "relation": "released patch for",
+            "object": "CVE-2023-49070"
+        },
+        {
+            "subject": "patch for CVE-2023-49070",
+            "relation": "failed to protect against",
+            "object": "other variations of the attack"
+        },
+        {
+            "subject": "zero-day vulnerability CVE-2023-51467",
+            "relation": "disclosed on",
+            "object": "Dec. 26"
+        },
+        {
+            "subject": "SonicWall",
+            "relation": "analyzed",
+            "object": "zero-day vulnerability CVE-2023-51467"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Unknown groups",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "zero-day vulnerability CVE-2023-51467",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "Apache OfBiz",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "access sensitive information",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "remotely execute code against applications",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Apache Software Foundation",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "CVE-2023-49070",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "patch for CVE-2023-49070",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "other variations of the attack",
+            "entity_type": "Malware Characteristic:Variants",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "Dec. 26",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "SonicWall",
+            "entity_type": "Organization",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 5,
+                "entity_text": "Apache Software Foundation"
+            },
+            "relation": "disclosed",
+            "object": {
+                "entity_id": 1,
+                "entity_text": "zero-day vulnerability CVE-2023-51467"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 7,
+                "entity_text": "patch for CVE-2023-49070"
+            },
+            "relation": "failed to protect against",
+            "object": {
+                "entity_id": 1,
+                "entity_text": "zero-day vulnerability CVE-2023-51467"
+            }
+        }
+    ]
+}

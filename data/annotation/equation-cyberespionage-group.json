@@ -1,0 +1,186 @@
+{
+    "text": "The Dyre financial Trojan has emerged over the past year to become one of the most potent financial fraud tools in operation. Dyre is configured to defraud the customers of more than 1,000 banks and other companies worldwide. Consumers in English-speaking countries, in particular the US and UK, are most at risk, since this is where the largest numbers of targeted banks are located.After a number of recent takedowns against major financial threats such as Gameover Zeus, Shylock, and Ramnit, the threat posed by these groups has receded but Dyre has taken their place as one of the main threats to ordinary consumers. Detected by Symantec as Infostealer.Dyre, Dyre targets Windows computers and can steal banking and other credentials by attacking all three major web browsers (Internet Explorer, Chrome, and Firefox). Dyre is a two-pronged threat. Aside from stealing credentials, it can also be used to infect victims with other types of malware, such as adding them to spam botnets.",
+    "explicit_triplets": [
+        {
+            "subject": "Dyre",
+            "relation": "is configured to defraud",
+            "object": "customers of more than 1,000 banks and other companies worldwide"
+        },
+        {
+            "subject": "Dyre",
+            "relation": "targets",
+            "object": "banks in English-speaking countries"
+        },
+        {
+            "subject": "banks in English-speaking countries",
+            "relation": "are primarily located in",
+            "object": "US and UK"
+        },
+        {
+            "subject": "Dyre",
+            "relation": "targets",
+            "object": "Windows computers"
+        },
+        {
+            "subject": "Dyre",
+            "relation": "can steal",
+            "object": "banking and other credentials"
+        },
+        {
+            "subject": "Dyre",
+            "relation": "attacks",
+            "object": "Internet Explorer"
+        },
+        {
+            "subject": "Dyre",
+            "relation": "attacks",
+            "object": "Chrome"
+        },
+        {
+            "subject": "Dyre",
+            "relation": "attacks",
+            "object": "Firefox"
+        },
+        {
+            "subject": "Dyre",
+            "relation": "is detected by",
+            "object": "Symantec"
+        },
+        {
+            "subject": "Dyre",
+            "relation": "is also used to infect victims with",
+            "object": "other types of malware"
+        },
+        {
+            "subject": "Dyre",
+            "relation": "adds victims to",
+            "object": "spam botnets"
+        },
+        {
+            "subject": "Gameover Zeus",
+            "relation": "has been subject of",
+            "object": "recent takedowns"
+        },
+        {
+            "subject": "Shylock",
+            "relation": "has been subject of",
+            "object": "recent takedowns"
+        },
+        {
+            "subject": "Ramnit",
+            "relation": "has been subject of",
+            "object": "recent takedowns"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Dyre",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "customers of more than 1,000 banks and other companies worldwide",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "banks in English-speaking countries",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "US and UK",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Windows computers",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "banking and other credentials",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Internet Explorer",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "Chrome",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "Firefox",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "Symantec",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "other types of malware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "spam botnets",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "Gameover Zeus",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "recent takedowns",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "Shylock",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 15,
+            "entity_name": "Ramnit",
+            "entity_type": "Malware",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 13,
+                "entity_text": "recent takedowns"
+            },
+            "relation": "led to emergence of",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Dyre"
+            }
+        }
+    ]
+}

@@ -1,0 +1,153 @@
+{
+    "text": "Graphican is an evolution of the known Flea backdoor Ketrican, which itself was based on a previous malware \u2014 BS2005 \u2014 also used by Flea. Graphican has the same basic functionality as Ketrican, with the difference between them being Graphican's use of the Microsoft Graph API and OneDrive to obtain its command-and-control (C&C) infrastructure. This technique was used in a similar way by the Russian state-sponsored APT group Swallowtail (aka APT28, Fancy Bear, Sofacy, Strontium) in a campaign in 2022 in which it delivered the Graphite malware. In that campaign, the Graphite malware used the Microsoft Graph API and OneDrive as a C&C server. The observed Graphican samples did not have a hardcoded C&C server, rather they connected to OneDrive via the Microsoft Graph API to get the encrypted C&C server address from a child folder inside the Person folder. The malware then decoded the folder name and used it as a C&C server for the malware. All instances of this variant used the same parameters to authenticate to the Microsoft Graph API.",
+    "explicit_triplets": [
+        {
+            "subject": "Graphican",
+            "relation": "is an evolution of",
+            "object": "Ketrican"
+        },
+        {
+            "subject": "Ketrican",
+            "relation": "is based on",
+            "object": "BS2005"
+        },
+        {
+            "subject": "Graphican",
+            "relation": "uses",
+            "object": "Microsoft Graph API and OneDrive"
+        },
+        {
+            "subject": "Swallowtail",
+            "relation": "delivered",
+            "object": "Graphite malware"
+        },
+        {
+            "subject": "Swallowtail",
+            "relation": "is located in",
+            "object": "Russia"
+        },
+        {
+            "subject": "Swallowtail",
+            "relation": "is also known as",
+            "object": "APT28"
+        },
+        {
+            "subject": "Swallowtail",
+            "relation": "is also known as",
+            "object": "Fancy Bear"
+        },
+        {
+            "subject": "Swallowtail",
+            "relation": "is also known as",
+            "object": "Sofacy"
+        },
+        {
+            "subject": "Swallowtail",
+            "relation": "is also known as",
+            "object": "Strontium"
+        },
+        {
+            "subject": "Graphite malware",
+            "relation": "used",
+            "object": "Microsoft Graph API and OneDrive"
+        },
+        {
+            "subject": "Graphican",
+            "relation": "connects to",
+            "object": "OneDrive via the Microsoft Graph API"
+        },
+        {
+            "subject": "Graphican",
+            "relation": "retrieves",
+            "object": "encrypted C&C server address"
+        },
+        {
+            "subject": "Graphican",
+            "relation": "uses",
+            "object": "decoded folder name as C&C server"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Graphican",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "Ketrican",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "BS2005",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "Microsoft Graph API and OneDrive",
+            "entity_type": "Infrastructure",
+            "mentions": [
+                "OneDrive via the Microsoft Graph API"
+            ]
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Swallowtail",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Graphite malware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Russia",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "APT28",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "Fancy Bear",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "Sofacy",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "Strontium",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "encrypted C&C server address",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "decoded folder name as C&C server",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

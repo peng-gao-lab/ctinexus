@@ -1,0 +1,146 @@
+{
+    "text": "Nation-state actors affiliated to North Korea have been observed using spear-phishing attacks to deliver an assortment of backdoors and tools such as AppleSeed, Meterpreter, and TinyNuke to seize control of compromised machines. South Korea-based cybersecurity company AhnLab attributed the activity to an advanced persistent threat group known as Kimsuky. A notable point about attacks that use AppleSeed is that similar methods of attack have been used for many years with no significant changes to the malware that are used together. Kimsuky, active for over a decade, is known for its targeting of a wide range of entities in South Korea, before expanding its focus to include other geographies in 2017. It was sanctioned by the U.S. government late last month for amassing intelligence to support North Korea's strategic objectives. The threat actor's espionage campaigns are realized through spear-phishing attacks containing malicious lure documents that, upon opening, culminate in the deployment of various malware families.",
+    "explicit_triplets": [
+        {
+            "subject": "Nation-state actors",
+            "relation": "affiliated to",
+            "object": "North Korea"
+        },
+        {
+            "subject": "Nation-state actors",
+            "relation": "use",
+            "object": "spear-phishing attacks"
+        },
+        {
+            "subject": "spear-phishing attacks",
+            "relation": "deliver",
+            "object": "AppleSeed"
+        },
+        {
+            "subject": "spear-phishing attacks",
+            "relation": "deliver",
+            "object": "Meterpreter"
+        },
+        {
+            "subject": "spear-phishing attacks",
+            "relation": "deliver",
+            "object": "TinyNuke"
+        },
+        {
+            "subject": "AhnLab",
+            "relation": "attributed activity to",
+            "object": "Kimsuky"
+        },
+        {
+            "subject": "Kimsuky",
+            "relation": "targets",
+            "object": "entities in South Korea"
+        },
+        {
+            "subject": "Kimsuky",
+            "relation": "expanded focus to include",
+            "object": "other geographies"
+        },
+        {
+            "subject": "U.S. government",
+            "relation": "sanctioned",
+            "object": "Kimsuky"
+        },
+        {
+            "subject": "Kimsuky",
+            "relation": "uses",
+            "object": "spear-phishing attacks"
+        },
+        {
+            "subject": "spear-phishing attacks",
+            "relation": "contain",
+            "object": "malicious lure documents"
+        },
+        {
+            "subject": "malicious lure documents",
+            "relation": "culminate in deployment of",
+            "object": "malware families"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Nation-state actors",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "North Korea",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "spear-phishing attacks",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "AppleSeed",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Meterpreter",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "TinyNuke",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "AhnLab",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "Kimsuky",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "entities in South Korea",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "other geographies",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "U.S. government",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "malicious lure documents",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "malware families",
+            "entity_type": "Malware",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

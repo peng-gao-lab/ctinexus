@@ -1,0 +1,118 @@
+{
+    "text": "SilverRAT shows that the region's cybercriminal groups are becoming more sophisticated, according to Cyfirma's analysis. The first version of SilverRAT, whose source code was leaked by unknown actors in October, consists of a builder that allows the user to construct a remote access Trojan with specific features. The more interesting features, according to Cyfirma's analysis, include using either an IP address or webpage for command and control, bypasses for antivirus software, the ability to erase system restore points, and the delayed execution of payloads. At least two threat actors \u2014 one using the handle \"Dangerous silver\" and a second using \"Monstermc\" \u2014 are the developers behind both SilverRAT and a previous program, S500 RAT, according to Cyfirma's analysis. The hackers operate on Telegram and through online forums where they sell malware-as-a-service, distribute cracked RATs from other developers, and offer a variety of other services. In addition, they have a blog and website called Anonymous Arabic.",
+    "explicit_triplets": [
+        {
+            "subject": "unknown actors",
+            "relation": "leaked source code of",
+            "object": "SilverRAT"
+        },
+        {
+            "subject": "SilverRAT",
+            "relation": "consists of",
+            "object": "a builder"
+        },
+        {
+            "subject": "SilverRAT",
+            "relation": "uses",
+            "object": "an IP address or webpage for command and control"
+        },
+        {
+            "subject": "SilverRAT",
+            "relation": "bypasses",
+            "object": "antivirus software"
+        },
+        {
+            "subject": "SilverRAT",
+            "relation": "has capability to erase",
+            "object": "system restore points"
+        },
+        {
+            "subject": "SilverRAT",
+            "relation": "has feature for",
+            "object": "delayed execution of payloads"
+        },
+        {
+            "subject": "Dangerous silver",
+            "relation": "is developer of",
+            "object": "SilverRAT"
+        },
+        {
+            "subject": "Monstermc",
+            "relation": "is developer of",
+            "object": "SilverRAT"
+        },
+        {
+            "subject": "Dangerous silver",
+            "relation": "is developer of",
+            "object": "S500 RAT"
+        },
+        {
+            "subject": "Monstermc",
+            "relation": "is developer of",
+            "object": "S500 RAT"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "unknown actors",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "SilverRAT",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "a builder",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "an IP address or webpage for command and control",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "antivirus software",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "system restore points",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "delayed execution of payloads",
+            "entity_type": "Malware Characteristic:Feature",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "Dangerous silver",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "Monstermc",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "S500 RAT",
+            "entity_type": "Malware",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

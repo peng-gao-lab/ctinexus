@@ -1,0 +1,123 @@
+{
+    "text": "Volt Typhoon achieves initial access to targeted organizations through internet-facing Fortinet FortiGuard devices. Microsoft continues to investigate Volt Typhoon's methods for gaining access to these devices. The threat actor attempts to leverage any privileges afforded by the Fortinet device, extracts credentials to an Active Directory account used by the device, and then attempts to authenticate to other devices on the network with those credentials. Volt Typhoon proxies all its network traffic to its targets through compromised SOHO network edge devices (including routers). Microsoft has confirmed that many of the devices, which include those manufactured by ASUS, Cisco, D-Link, NETGEAR, and Zyxel, allow the owner to expose HTTP or SSH management interfaces to the internet. Owners of network edge devices should ensure that management interfaces are not exposed to the public internet in order to reduce their attack surface. By proxying through these devices, Volt Typhoon enhances the stealth of their operations and lowers overhead costs for acquiring infrastructure.",
+    "explicit_triplets": [
+        {
+            "subject": "Volt Typhoon",
+            "relation": "achieves initial access through",
+            "object": "Fortinet FortiGuard devices"
+        },
+        {
+            "subject": "Microsoft",
+            "relation": "investigates methods of",
+            "object": "Volt Typhoon"
+        },
+        {
+            "subject": "Volt Typhoon",
+            "relation": "extracts credentials from",
+            "object": "Fortinet FortiGuard devices"
+        },
+        {
+            "subject": "Volt Typhoon",
+            "relation": "authenticates to",
+            "object": "other devices on the network"
+        },
+        {
+            "subject": "Volt Typhoon",
+            "relation": "proxies traffic through",
+            "object": "compromised SOHO network edge devices"
+        },
+        {
+            "subject": "compromised SOHO network edge devices",
+            "relation": "include those manufactured by",
+            "object": "ASUS"
+        },
+        {
+            "subject": "compromised SOHO network edge devices",
+            "relation": "include those manufactured by",
+            "object": "Cisco"
+        },
+        {
+            "subject": "compromised SOHO network edge devices",
+            "relation": "include those manufactured by",
+            "object": "D-Link"
+        },
+        {
+            "subject": "compromised SOHO network edge devices",
+            "relation": "include those manufactured by",
+            "object": "NETGEAR"
+        },
+        {
+            "subject": "compromised SOHO network edge devices",
+            "relation": "include those manufactured by",
+            "object": "Zyxel"
+        },
+        {
+            "subject": "Volt Typhoon",
+            "relation": "enhances stealth by proxying through",
+            "object": "compromised SOHO network edge devices"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Volt Typhoon",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "Fortinet FortiGuard devices",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "Microsoft",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "other devices on the network",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "compromised SOHO network edge devices",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "ASUS",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Cisco",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "D-Link",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "NETGEAR",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "Zyxel",
+            "entity_type": "Organization",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

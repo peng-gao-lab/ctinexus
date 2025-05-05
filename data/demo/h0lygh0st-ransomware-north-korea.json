@@ -1,0 +1,143 @@
+{
+    "text": "Microsoft researchers have linked an emerging ransomware threat that already has compromised a number of small-to-mid-sized businesses to financially motivated North Korean state-sponsored actors that have been active since last year. A group tracked by researchers from Microsoft Threat Intelligence Center (MSTIC) as DEV-0530 but that calls itself H0lyGh0st has been developing and using ransomware in attacks since June 2021. H0lyGh0st\u2019s standard modus operandi is to use a namesake ransomware to encrypt all files on the target device using the file extension .h0lyenc, then send the victim a sample of the files as proof. The group interacts with victims on a .onion site that it maintains and on which it provides a contact form for victims to get in touch, researchers said.",
+    "explicit_triplets": [
+        {
+            "subject": "Microsoft researchers",
+            "relation": "linked",
+            "object": "an emerging ransomware threat"
+        },
+        {
+            "subject": "an emerging ransomware threat",
+            "relation": "compromised",
+            "object": "small-to-mid-sized businesses"
+        },
+        {
+            "subject": "an emerging ransomware threat",
+            "relation": "linked to",
+            "object": "North Korean state-sponsored actors"
+        },
+        {
+            "subject": "North Korean state-sponsored actors",
+            "relation": "have been active since",
+            "object": "last year"
+        },
+        {
+            "subject": "Microsoft Threat Intelligence Center (MSTIC)",
+            "relation": "tracked",
+            "object": "DEV-0530"
+        },
+        {
+            "subject": "DEV-0530",
+            "relation": "calls itself",
+            "object": "H0lyGh0st"
+        },
+        {
+            "subject": "H0lyGh0st",
+            "relation": "developing and using",
+            "object": "ransomware"
+        },
+        {
+            "subject": "H0lyGh0st",
+            "relation": "has been active since",
+            "object": "June 2021"
+        },
+        {
+            "subject": "H0lyGh0st",
+            "relation": "uses",
+            "object": "namesake ransomware"
+        },
+        {
+            "subject": "namesake ransomware",
+            "relation": "encrypts",
+            "object": "all files on the target device"
+        },
+        {
+            "subject": "namesake ransomware",
+            "relation": "uses",
+            "object": "file extension .h0lyenc"
+        },
+        {
+            "subject": "H0lyGh0st",
+            "relation": "interacts with victims via",
+            "object": ".onion site"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Microsoft researchers",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "an emerging ransomware threat",
+            "entity_type": "Malware",
+            "mentions": [
+                "namesake ransomware",
+                "ransomware"
+            ]
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "small-to-mid-sized businesses",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "North Korean state-sponsored actors",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "last year",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Microsoft Threat Intelligence Center (MSTIC)",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "DEV-0530",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "H0lyGh0st",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "June 2021",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "all files on the target device",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "file extension .h0lyenc",
+            "entity_type": "Malware Characteristic:Feature",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": ".onion site",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

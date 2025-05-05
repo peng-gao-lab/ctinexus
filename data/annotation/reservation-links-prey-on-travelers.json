@@ -1,0 +1,121 @@
+{
+    "text": "A longtime threat group identified as TA558 has ramped up efforts to target the travel and hospitality industries. After a lull in activity, believed tied to COVID-related travel restrictions, the threat group has ramped up campaigns to exploit an uptick in travel and related airline and hotel bookings. Warnings come from security researchers who say TA558 cybercriminals have revamped their 2018 campaigns with fake reservation emails that contain links \u2013 that if clicked \u2013 deliver a malicious malware payload containing a potpourri of malware variants. What makes this most recent campaign unique, according to a report by Proofpoint, is the use of RAR and ISO file attachments linked to messages. ISO and RAR are single compressed files, that if executed, decompress the file and folder data inside of them.",
+    "explicit_triplets": [
+        {
+            "subject": "TA558",
+            "relation": "has ramped up efforts to target",
+            "object": "the travel and hospitality industries"
+        },
+        {
+            "subject": "TA558",
+            "relation": "has ramped up campaigns to exploit",
+            "object": "an uptick in travel and related airline and hotel bookings"
+        },
+        {
+            "subject": "TA558",
+            "relation": "revamped",
+            "object": "their 2018 campaigns"
+        },
+        {
+            "subject": "TA558 cybercriminals",
+            "relation": "use",
+            "object": "fake reservation emails"
+        },
+        {
+            "subject": "fake reservation emails",
+            "relation": "contain",
+            "object": "links"
+        },
+        {
+            "subject": "links",
+            "relation": "deliver",
+            "object": "a malicious malware payload"
+        },
+        {
+            "subject": "a malicious malware payload",
+            "relation": "contains",
+            "object": "a potpourri of malware variants"
+        },
+        {
+            "subject": "recent campaign",
+            "relation": "uses",
+            "object": "RAR and ISO file attachments"
+        },
+        {
+            "subject": "RAR and ISO file attachments",
+            "relation": "linked to",
+            "object": "messages"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "TA558",
+            "entity_type": "Attacker",
+            "mentions": [
+                "TA558 cybercriminals"
+            ]
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "the travel and hospitality industries",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "an uptick in travel and related airline and hotel bookings",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "fake reservation emails",
+            "entity_type": "Indicator:Email",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "links",
+            "entity_type": "Indicator:URL",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "a malicious malware payload",
+            "entity_type": "Malware Characteristic:Payload",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "a potpourri of malware variants",
+            "entity_type": "Malware Characteristic:Variants",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "recent campaign",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "their 2018 campaigns",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "RAR and ISO file attachments",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "messages",
+            "entity_type": "Indicator:Email",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

@@ -1,0 +1,17 @@
+defaults:  
+  - _self_
+
+# basic setting
+inSet: output/EM-output
+outSet: output/EM-output-IOC-protect
+
+# OpenAI setting
+model: gpt-4.1 #your openAI model
+api_key: <sk-xxx> #your openAI API key
+
+# Prompt setting
+merge_prompt_folder: tools/EM_prompt
+merge_prompt_file: merge-IOC.jinja
+
+# Prompt store
+merge_prompt_store: prompt_store/EM-prompts

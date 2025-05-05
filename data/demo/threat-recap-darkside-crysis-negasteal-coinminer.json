@@ -1,0 +1,126 @@
+{
+    "text": "Crysis/Dharma ransomware (detected by Trend Micro as Ransom.Win32.CRYSIS.TIBGGS) has released a hacking toolkit named Toolbox, Sophos reports. Toolbox contains Mimikatz to harvest passwords, NirSoft Remote Desktop PassView to steal remote desktop protocol (RDP) passwords, Hash Suite Tools Free to dump hashes, and other tools to help find target computers and deploy the ransomware payload. With this kit, even rookie hackers can infiltrate networks easily. Crysis operates under a ransomware-as-a-service (RaaS) model, and this hacking tool only makes it easier for affiliates to spread the ransomware to more targets.",
+    "explicit_triplets": [
+        {
+            "subject": "Crysis/Dharma ransomware",
+            "relation": "released",
+            "object": "a hacking toolkit named Toolbox"
+        },
+        {
+            "subject": "Toolbox",
+            "relation": "contains",
+            "object": "Mimikatz"
+        },
+        {
+            "subject": "Toolbox",
+            "relation": "contains",
+            "object": "NirSoft Remote Desktop PassView"
+        },
+        {
+            "subject": "Toolbox",
+            "relation": "contains",
+            "object": "Hash Suite Tools Free"
+        },
+        {
+            "subject": "Mimikatz",
+            "relation": "harvests",
+            "object": "passwords"
+        },
+        {
+            "subject": "NirSoft Remote Desktop PassView",
+            "relation": "steals",
+            "object": "remote desktop protocol (RDP) passwords"
+        },
+        {
+            "subject": "Hash Suite Tools Free",
+            "relation": "dumps",
+            "object": "hashes"
+        },
+        {
+            "subject": "Toolbox",
+            "relation": "helps find",
+            "object": "target computers"
+        },
+        {
+            "subject": "Toolbox",
+            "relation": "deploys",
+            "object": "the ransomware payload"
+        },
+        {
+            "subject": "Crysis/Dharma ransomware",
+            "relation": "operates under",
+            "object": "ransomware-as-a-service (RaaS) model"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Crysis/Dharma ransomware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "Toolbox",
+            "entity_type": "Tool",
+            "mentions": [
+                "a hacking toolkit named Toolbox"
+            ]
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "Mimikatz",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "NirSoft Remote Desktop PassView",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Hash Suite Tools Free",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "passwords",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "remote desktop protocol (RDP) passwords",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "hashes",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "target computers",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "the ransomware payload",
+            "entity_type": "Malware Characteristic:Payload",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "ransomware-as-a-service (RaaS) model",
+            "entity_type": "Malware Characteristic:Feature",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

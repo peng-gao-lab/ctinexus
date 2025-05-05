@@ -1,0 +1,151 @@
+{
+    "text": "A new vulnerability dubbed 'LeftoverLocals' affecting graphics processing units from AMD, Apple, Qualcomm, and Imagination Technologies allows retrieving data from the local memory space. Tracked as CVE-2023-4969, the security issue enables data recovery from vulnerable GPUs, especially in the context of large language models (LLMs) and machine learning (ML) processes. LeftoverLocals lets attackers launch a 'listener' - a GPU kernel that reads from uninitialized local memory and can dump the data in a persistent location, such as the global memory. If the local memory is not cleared, the attacker can use the listener to read values left behind by the 'writer' - a program that stores values to local memory. The recovered data can reveal sensitive information about the victim's computations, including model inputs, outputs, weights, and intermediate computations.",
+    "explicit_triplets": [
+        {
+            "subject": "LeftoverLocals",
+            "relation": "affects",
+            "object": "graphics processing units"
+        },
+        {
+            "subject": "graphics processing units",
+            "relation": "from",
+            "object": "AMD"
+        },
+        {
+            "subject": "graphics processing units",
+            "relation": "from",
+            "object": "Apple"
+        },
+        {
+            "subject": "graphics processing units",
+            "relation": "from",
+            "object": "Qualcomm"
+        },
+        {
+            "subject": "graphics processing units",
+            "relation": "from",
+            "object": "Imagination Technologies"
+        },
+        {
+            "subject": "LeftoverLocals",
+            "relation": "is tracked as",
+            "object": "CVE-2023-4969"
+        },
+        {
+            "subject": "CVE-2023-4969",
+            "relation": "enables",
+            "object": "data recovery from vulnerable GPUs"
+        },
+        {
+            "subject": "LeftoverLocals",
+            "relation": "lets attackers launch",
+            "object": "a listener"
+        },
+        {
+            "subject": "a listener",
+            "relation": "reads from",
+            "object": "uninitialized local memory"
+        },
+        {
+            "subject": "a listener",
+            "relation": "dumps data into",
+            "object": "global memory"
+        },
+        {
+            "subject": "attacker",
+            "relation": "uses",
+            "object": "a listener"
+        },
+        {
+            "subject": "attacker",
+            "relation": "reads values left by",
+            "object": "the writer"
+        },
+        {
+            "subject": "the writer",
+            "relation": "stores values to",
+            "object": "local memory"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "LeftoverLocals",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "graphics processing units",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "AMD",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "Apple",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Qualcomm",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Imagination Technologies",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "CVE-2023-4969",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "data recovery from vulnerable GPUs",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "a listener",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "local memory",
+            "entity_type": "Infrastructure",
+            "mentions": ["uninitialized local memory"]
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "attacker",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "the writer",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "global memory",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}
