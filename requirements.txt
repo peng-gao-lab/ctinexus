@@ -1,0 +1,11 @@
+gradio
+hydra-core
+jinja2
+nltk
+omegaconf
+openai
+pandas
+python-dotenv
+requests
+scikit-learn
+scipy

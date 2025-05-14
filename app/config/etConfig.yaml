@@ -1,0 +1,17 @@
+defaults:  
+  - base
+  - _self_
+
+#basic setting
+inSet: output/IE-output
+outSet: output/ET-output 
+
+# OpenAI setting
+model: gpt-4.1 #your openAI model
+
+# Prompt setting
+tag_prompt_folder: app/tools/ET_prompt
+tag_prompt_file: et.jinja
+
+# Prompt store
+tag_prompt_store: app/prompt_store/ET-prompts
