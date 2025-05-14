@@ -1,4 +1,5 @@
 import json
+import os
 import sys
 
 import gradio as gr
@@ -9,6 +10,11 @@ from hydra import compose, initialize
 from llm_processor import LLMExtractor, LLMTagger
 
 load_dotenv()
+
+
+def check_api_key():
+    """Check if OPENAI_API_KEY is set"""
+    return bool(os.getenv("OPENAI_API_KEY"))
 
 
 def run_extraction(text: str = None) -> dict:
@@ -63,8 +69,16 @@ def run_pipeline(text: str = None):
 
 def main():
     # Accept "text as an argument via command line
+    warning = None
+    if not check_api_key():
+        warning = "⚠️ **Warning: OPENAI_API_KEY environment variable is not set in the .env file. The application will not function correctly.**"
+
     if len(sys.argv) > 1:
+        if warning:
+            print(warning)
+
         text = sys.argv[1]
+
         extraction_result = run_extraction(text)
         typing_result = run_entity_typing(extraction_result)
         merging_result = run_entity_merging(typing_result)
@@ -75,6 +89,9 @@ def main():
         with gr.Blocks(title="CTINexus") as ctinexus:
             gr.Markdown("# CTINexus")
             gr.Markdown("Run the CTI analysis steps.")
+
+            if warning:
+                gr.Markdown(warning)
 
             with gr.Row():
                 with gr.Column():
