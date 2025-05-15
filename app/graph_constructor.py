@@ -1,10 +1,10 @@
 from collections import defaultdict
 
+import litellm
 import networkx as nx
 import plotly.graph_objects as go
 from llm_processor import LLMLinker
 from omegaconf import DictConfig
-from openai import OpenAI
 from scipy.spatial.distance import cosine
 
 
@@ -119,14 +119,15 @@ class Linker:
 
 class Merger:
     def get_embedding(self, text):
-        client = OpenAI(api_key=self.config.api_key)
-        if str(self.config.model).startswith("gpt"):
-            embedding_model = self.config.embedding_model_openai
-        else:
+        if self.config.provider == "AWS":
             embedding_model = self.config.embedding_model_bedrock
-        response = client.embeddings.create(input=text, model=embedding_model)
+        else:
+            embedding_model = self.config.embedding_model_openai
 
-        return response.data[0].embedding
+        response = litellm.embedding(model=embedding_model, input=text)
+
+        # litellm returns a dict with 'data' containing a list of embeddings
+        return response["data"][0]["embedding"]
 
     def calculate_similarity(self, node1, node2):
         """Calculate the cosine similarity between two nodes based on their embeddings."""

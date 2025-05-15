@@ -1,6 +1,7 @@
 # Base configuration with common settings
 api_key: ${oc.env:OPENAI_API_KEY}  # Will be populated from environment variable 
 
+provider: OpenAI
 model: gpt-4.1 #default model
 
 # Prompt setting

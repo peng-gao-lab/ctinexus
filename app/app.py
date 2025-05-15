@@ -21,6 +21,9 @@ def check_api_key() -> bool:
     """Define Models and check if API KEYS are set"""
     if os.getenv("OPENAI_API_KEY"):
         MODELS["OpenAI"] = {
+            "o4-mini": "o4 Mini — Faster, more affordable reasoning model ($1.1 • $4.4)",
+            "o3-mini": "o3 Mini — A small model alternative to o3 ($1.1 • $4.4)",
+            "o3": "o3 — Most powerful reasoning model ($10 • $40)",
             "gpt-4.1": "GPT-4.1 — Flagship GPT model for complex tasks ($2 • $8)",
             "gpt-4o": "GPT-4o — Fast, intelligent, flexible GPT model ($2.5 • $10)",
             "gpt-4.1-mini": "GPT-4.1 Mini — Balanced for intelligence, speed, and cost ($0.4 • $1.6)",
@@ -72,6 +75,13 @@ def run_link_prediction(config: DictConfig, result) -> dict:
     return Linker(config).call(result)
 
 
+def get_model_provider(model):
+    for provider, models in MODELS.items():
+        if model in models:
+            return provider
+    return None
+
+
 def run_pipeline(
     text: str = None, model: str = None, progress=gr.Progress(track_tqdm=False)
 ):
@@ -79,10 +89,14 @@ def run_pipeline(
     if not text:
         return "Please enter some text to process."
 
+    provider = get_model_provider(model)
     with initialize(version_base="1.2", config_path="config"):
-        config = compose(
-            config_name="config.yaml", overrides=[f"model={model}"] if model else []
-        )
+        overrides = []
+        if model:
+            overrides.append(f"model={model}")
+        if provider:
+            overrides.append(f"provider={provider}")
+        config = compose(config_name="config.yaml", overrides=overrides)
 
     try:
         progress(0, desc="Entity Extraction...")

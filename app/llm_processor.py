@@ -10,6 +10,7 @@ from jinja2 import Environment, FileSystemLoader, meta
 from omegaconf import DictConfig
 
 logger = logging.getLogger(__name__)
+litellm.drop_params = True
 
 
 def with_retry(max_attempts=5):
@@ -313,25 +314,16 @@ class ResponseParser:
         self.query = llmExtractor.query
 
     def parse(self):
-        def get_char_before_hyphen(s):
-            index = s.find("-")
-            if index > 0:
-                return s[:index]
-            return None
-
-        is_gpt = get_char_before_hyphen(self.config.model) == "gpt"
-        JSONResp = extract_json_from_response(
+        response_content = extract_json_from_response(
             self.llm_response.choices[0].message.content
         )
 
         self.output = {
             "CTI": self.query,
-            "IE": JSONResp,
-            "usage": UsageCalculator(self.config, self.llm_response).calculate()
-            if is_gpt
-            else None,
+            "IE": response_content,
+            "usage": UsageCalculator(self.config, self.llm_response).calculate(),
             "prompt": self.prompt,
-            "triples_count": len(JSONResp["triplets"]),
+            "triples_count": len(response_content["triplets"]),
         }
 
         return self.output

@@ -19,6 +19,18 @@
         "input": 0.0000001,
         "output": 0.0000004
     },
+    "o3": {
+        "input": 0.00001,
+        "output": 0.00004
+    },
+    "o3-mini": {
+        "input": 0.0000011,
+        "output": 0.0000044
+    },
+    "o4-mini": {
+        "input": 0.0000011,
+        "output": 0.0000044
+    },
     "anthropic.claude-3-7-sonnet": {
         "input": 0.000003,
         "output": 0.000015
