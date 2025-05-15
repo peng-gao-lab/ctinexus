@@ -1,13 +1,18 @@
 import json
 import logging
 import os
+import random
 import re
 import time
 from functools import wraps
 
 import litellm
+import numpy as np
+import pandas as pd
 from jinja2 import Environment, FileSystemLoader, meta
+from nltk.corpus import stopwords
 from omegaconf import DictConfig
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 logger = logging.getLogger(__name__)
 litellm.drop_params = True
@@ -247,6 +252,11 @@ class LLMExtractor:
     def call(self, query: str) -> dict:
         self.query = query
 
+        if self.config.retriever == "fixed":
+            self.demos = None
+        else:
+            self.demos, self.demosInfo = DemoRetriever(self).retriveDemo()
+
         self.prompt = PromptConstructor(self).generate_prompt()
         self.llm_response, self.response_time = LLMCaller(
             self.config, self.prompt
@@ -269,11 +279,24 @@ class LLMExtractor:
         outJSON["IE"]["Prompt"] = {}
         outJSON["IE"]["Prompt"]["prompt_template"] = self.config.ie_templ
 
+        if self.demos is not None:
+            outJSON["IE"]["Prompt"]["demo_retriever"] = self.config.retriever.type
+            outJSON["IE"]["Prompt"]["demos"] = self.demosInfo
+            outJSON["IE"]["Prompt"]["demo_number"] = self.config.shot
+
+            if self.config.retriever.type == "kNN":
+                outJSON["IE"]["Prompt"]["permutation"] = (
+                    self.config.retriever.permutation
+                )
+        else:
+            outJSON["IE"]["Prompt"]["demo_retriever"] = self.config.retriever
+
         return outJSON
 
 
 class PromptConstructor:
     def __init__(self, llmExtractor):
+        self.demos = llmExtractor.demos
         self.config = llmExtractor.config
         self.query = llmExtractor.query
         self.templ = self.config.ie_templ
@@ -295,7 +318,10 @@ class PromptConstructor:
             template = env.get_template(DymTemplate)
 
             if variables:
-                Uprompt = template.render(query=self.query)
+                if self.demos is not None:
+                    Uprompt = template.render(demos=self.demos, query=self.query)
+                else:
+                    Uprompt = template.render(query=self.query)
             else:
                 Uprompt = template.render()
 
@@ -364,6 +390,121 @@ class UsageCalculator:
         }
 
         return usageDict
+
+
+class DemoRetriever:
+    """
+    This class is used to retrieve prompt examples for the LLMExtractor.
+    """
+
+    def __init__(self, LLMExtractor) -> None:
+        self.config = LLMExtractor.config
+
+    def retrieveRandomDemo(self, k):
+        documents = []
+
+        for CTI_folder in os.listdir(self.config.demo_set):
+            CTIfolderPath = os.path.join(self.config.demo_set, CTI_folder)
+
+            for JSONfile in os.listdir(CTIfolderPath):
+                with open(os.path.join(CTIfolderPath, JSONfile), "r") as f:
+                    js = json.load(f)
+                documents.append(
+                    (
+                        (
+                            (js["CTI"]["text"], js["IE"]["triplets"]),
+                            (JSONfile, "random"),
+                        )
+                    )
+                )
+
+        random.shuffle(documents)
+        top_k = documents[:k]
+
+        return [(demo[0][0], demo[0][1]) for demo in top_k], [
+            (demo[1][0], demo[1][1]) for demo in top_k
+        ]
+
+    def retrievekNNDemo(self, permutation, k):
+        def most_similar(doc_id, similarity_matrix):
+            docs = []
+            similar_ix = np.argsort(similarity_matrix[doc_id])[::-1]
+
+            for ix in similar_ix:
+                if ix == doc_id:
+                    continue
+
+                for doc in documents:
+                    if doc[0] == documents_df.iloc[ix]["documents"]:
+                        docs.append((doc, similarity_matrix[doc_id][ix]))
+
+            return docs
+
+        documents = []
+
+        for JSONfile in os.listdir(self.config.demoSet):
+            with open(os.path.join(self.config.demoSet, JSONfile), "r") as f:
+                js = json.load(f)
+                documents.append((js["text"], JSONfile))
+
+        documents_df = pd.DataFrame(
+            [doc[0] for doc in documents], columns=["documents"]
+        )
+        stop_words_l = stopwords.words("english")
+        documents_df["documents_cleaned"] = documents_df.documents.apply(
+            lambda x: " ".join(
+                re.sub(r"[^a-zA-Z]", " ", w).lower()
+                for w in x.split()
+                if re.sub(r"[^a-zA-Z]", " ", w).lower() not in stop_words_l
+            )
+        )
+        tfidfvectoriser = TfidfVectorizer()
+        tfidfvectoriser.fit(documents_df.documents_cleaned)
+        tfidf_vectors = tfidfvectoriser.transform(documents_df.documents_cleaned)
+        pairwise_similarities = np.dot(tfidf_vectors, tfidf_vectors.T).toarray()
+        top_k = most_similar(0, pairwise_similarities)[:k]
+
+        if permutation == "desc":
+            return top_k
+
+        elif permutation == "asc":
+            return top_k[::-1]
+
+    def retriveDemo(self):
+        if self.config.retriever["type"] == "kNN":
+            demos = self.retrievekNNDemo(
+                self.config.retriever["permutation"], self.config.shot
+            )
+            ConsturctedDemos = []
+
+            for demo in demos:
+                demoFileName = demo[0][1]
+                demoSimilarity = demo[1]
+
+                for JSONfile in os.listdir(self.config.demoSet):
+                    if JSONfile == demoFileName:
+                        with open(
+                            os.path.join(self.config.demoSet, JSONfile), "r"
+                        ) as f:
+                            js = json.load(f)
+                            ConsturctedDemos.append(
+                                (
+                                    (js["text"], js["explicit_triplets"]),
+                                    (demoFileName, demoSimilarity),
+                                )
+                            )
+
+            return [(demo[0][0], demo[0][1]) for demo in ConsturctedDemos], [
+                (demo[1][0], demo[1][1]) for demo in ConsturctedDemos
+            ]
+
+        elif self.config.retriever["type"] == "rand":
+            return self.retrieveRandomDemo(self.config.shot)
+
+        else:
+            print(
+                'Invalid retriever type. Please choose between "kNN", "random", and "fixed".'
+            )
 
 
 def extract_json_from_response(response_text):

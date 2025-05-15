@@ -32,3 +32,6 @@ ie_templ: ie.jinja #used prompt template
 ## prompt constructor
 link_prompt_folder: app/prompts
 link_prompt_file: link.jinja
+
+
+demoSet: app/data/demo
