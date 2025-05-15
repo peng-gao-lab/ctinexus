@@ -225,7 +225,7 @@ class LLMCaller:
                     "prompt": self.prompt[-1]["content"],
                     "max_gen_len": 4096,
                     "temperature": 0.8,
-                    "top_p": 0.9
+                    "top_p": 0.9,
                 }
             else:
                 body = {

@@ -2,10 +2,12 @@ boto3
 gradio
 hydra-core
 jinja2
+networkx
 nltk
 omegaconf
 openai
 pandas
+plotly
 python-dotenv
 requests
 scikit-learn

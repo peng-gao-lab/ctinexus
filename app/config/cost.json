@@ -70,5 +70,5 @@
     "meta.llama3-3-70b-instruct-v1:0": {
         "input": 0.00000075,
         "output": 0.000003
-    },
+    }
 }

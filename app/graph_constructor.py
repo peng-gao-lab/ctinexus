@@ -1,7 +1,7 @@
-import json
-import os
 from collections import defaultdict
 
+import networkx as nx
+import plotly.graph_objects as go
 from llm_processor import LLMLinker
 from omegaconf import DictConfig
 from openai import OpenAI
@@ -259,3 +259,217 @@ class Merger:
         self.js["EA"]["entity_num"] = self.entity_id
 
         return self.js
+
+
+def create_graph_visualization(result: dict) -> go.Figure:
+    """Create an interactive graph visualization using Plotly"""
+    # Create a directed graph
+    G = nx.DiGraph()
+
+    # Define colors for different entity types
+    entity_colors = {
+        "Malware": "#ff4444",  # Bright Red
+        "Tool": "#44ff44",  # Bright Green
+        "Event": "#4444ff",  # Bright Blue
+        "Organization": "#ffaa44",  # Bright Orange
+        "Time": "#aa44ff",  # Bright Purple
+        "Information": "#44ffff",  # Bright Cyan
+        "Indicator": "#ff44ff",  # Bright Magenta
+        "Indicator:File": "#ff44ff",  # Bright Magenta
+        "default": "#aaaaaa",  # Light Gray
+    }
+
+    # Add nodes and edges from the aligned triplets
+    if "EA" in result and "aligned_triplets" in result["EA"]:
+        for triplet in result["EA"]["aligned_triplets"]:
+            # Add subject node
+            subject = triplet["subject"]
+            G.add_node(
+                subject["entity_id"],
+                text=subject["entity_text"],
+                type=subject["mention_class"],
+                color=entity_colors.get(
+                    subject["mention_class"], entity_colors["default"]
+                ),
+            )
+
+            # Add object node
+            object_node = triplet["object"]
+            G.add_node(
+                object_node["entity_id"],
+                text=object_node["entity_text"],
+                type=object_node["mention_class"],
+                color=entity_colors.get(
+                    object_node["mention_class"], entity_colors["default"]
+                ),
+            )
+
+            # Add edge with relation
+            G.add_edge(
+                subject["entity_id"],
+                object_node["entity_id"],
+                relation=triplet["relation"],
+            )
+
+    # Add predicted links if available
+    if "LP" in result and "predicted_links" in result["LP"]:
+        for link in result["LP"]["predicted_links"]:
+            G.add_edge(
+                link["subject"]["entity_id"],
+                link["object"]["entity_id"],
+                relation=link["relation"],
+                predicted=True,
+            )
+
+    # Create the layout with better spacing
+    pos = nx.spring_layout(G, k=1, iterations=50)
+
+    # Create edge traces for regular and predicted edges
+    regular_edges = [
+        (u, v) for u, v, d in G.edges(data=True) if not d.get("predicted", False)
+    ]
+    predicted_edges = [
+        (u, v) for u, v, d in G.edges(data=True) if d.get("predicted", False)
+    ]
+
+    edge_traces = []
+
+    # Regular edges
+    if regular_edges:
+        edge_x = []
+        edge_y = []
+        edge_text = []
+        for u, v in regular_edges:
+            x0, y0 = pos[u]
+            x1, y1 = pos[v]
+            edge_x.extend([x0, x1, None])
+            edge_y.extend([y0, y1, None])
+            edge_text.append(G.edges[u, v].get("relation", ""))
+
+        edge_traces.append(
+            go.Scatter(
+                x=edge_x,
+                y=edge_y,
+                line=dict(width=1, color="#666666"),
+                hoverinfo="text",
+                text=edge_text,
+                mode="lines",
+                hoverlabel=dict(bgcolor="#27272a", font=dict(color="white")),
+                name="Regular Links",
+            )
+        )
+
+    # Predicted edges
+    if predicted_edges:
+        edge_x = []
+        edge_y = []
+        edge_text = []
+        for u, v in predicted_edges:
+            x0, y0 = pos[u]
+            x1, y1 = pos[v]
+            edge_x.extend([x0, x1, None])
+            edge_y.extend([y0, y1, None])
+            edge_text.append(G.edges[u, v].get("relation", ""))
+
+        edge_traces.append(
+            go.Scatter(
+                x=edge_x,
+                y=edge_y,
+                line=dict(width=1, color="#ff4444"),
+                hoverinfo="text",
+                text=edge_text,
+                mode="lines",
+                hoverlabel=dict(bgcolor="#27272a", font=dict(color="white")),
+                name="Predicted Links",
+            )
+        )
+
+    # Create node trace
+    node_x = []
+    node_y = []
+    node_text = []
+    node_color = []
+    node_size = []
+
+    for node in G.nodes(data=True):
+        x, y = pos[node[0]]
+        node_x.append(x)
+        node_y.append(y)
+        node_text.append(f"{node[1]['text']}<br>Type: {node[1]['type']}")
+        node_color.append(node[1]["color"])
+        # Size based on number of connections
+        node_size.append(15 + len(G[node[0]]) * 2)
+
+    node_trace = go.Scatter(
+        x=node_x,
+        y=node_y,
+        mode="markers+text",
+        hoverinfo="text",
+        text=[node.split("<br>")[0] for node in node_text],
+        textposition="top center",
+        textfont=dict(color="white"),
+        marker=dict(
+            color=node_color, size=node_size, line=dict(width=2, color="#ffffff")
+        ),
+        name="Entities",
+    )
+
+    # Create the figure with improved layout
+    fig = go.Figure(
+        data=edge_traces + [node_trace],
+        layout=go.Layout(
+            title=dict(
+                text="Entity Relationship Graph", font=dict(size=16, color="white")
+            ),
+            showlegend=True,
+            hovermode="closest",
+            dragmode="pan",  # Set default drag mode to pan
+            margin=dict(b=20, l=5, r=5, t=40),
+            xaxis=dict(
+                showgrid=False,
+                zeroline=False,
+                showticklabels=False,
+                showline=False,
+                range=[-1.1, 1.1],
+            ),
+            yaxis=dict(
+                showgrid=False,
+                zeroline=False,
+                showticklabels=False,
+                showline=False,
+                range=[-1.1, 1.1],
+            ),
+            plot_bgcolor="#27272a",
+            paper_bgcolor="#27272a",
+            height=600,
+            width=800,
+            legend=dict(
+                font=dict(color="white"), bgcolor="#27272a", bordercolor="#444444"
+            ),
+            modebar=dict(bgcolor="#27272a", color="white", activecolor="#ff4444"),
+        ),
+    )
+
+    # Add legend for entity types
+    legend_items = []
+    for entity_type, color in entity_colors.items():
+        if entity_type != "default":
+            legend_items.append(
+                go.Scatter(
+                    x=[None],
+                    y=[None],
+                    mode="markers",
+                    marker=dict(size=10, color=color),
+                    name=entity_type,
+                    showlegend=True,
+                )
+            )
+
+    fig.add_traces(legend_items)
+
+    # Configure the modebar (toolbar) buttons
+    fig.update_layout(
+        modebar_add=["zoom", "pan", "zoomIn", "zoomOut", "resetScale", "resetView"]
+    )
+
+    return fig
