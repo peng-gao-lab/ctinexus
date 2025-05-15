@@ -108,8 +108,32 @@ def run_pipeline(
 
 def build_interface(warning: str = None):
     with gr.Blocks(title="CTINexus") as ctinexus:
-        gr.Markdown("# CTINexus")
-        gr.Markdown("Run the CTI analysis steps.")
+        gr.HTML("""
+            <style>
+                .image-container {
+                    background: none !important;
+                    border: none !important;
+                    padding: 0 !important;
+                    margin: 0 auto !important;
+                    display: flex !important;
+                    justify-content: center !important;
+                }
+                .image-container img {
+                    border: none !important;
+                    box-shadow: none !important;
+                }
+            </style>
+        """)
+
+        gr.Image(value="app/static/logo.png", 
+                width=100, 
+                height=100, 
+                show_label=False, 
+                elem_classes="image-container",
+                interactive=False, 
+                show_download_button=False,
+                show_fullscreen_button=False,
+                show_share_button=False)
 
         if warning:
             gr.Markdown(warning)
@@ -141,11 +165,11 @@ def build_interface(warning: str = None):
 
         with gr.Row():
             with gr.Column(scale=1):
-                results_box = gr.Textbox(
+                results_box = gr.Code(
                     label="Results",
-                    lines=15,
+                    language="json",
                     interactive=False,
-                    show_copy_button=True,
+                    show_line_numbers=False,
                     elem_classes=["results-box"],
                 )
             with gr.Column(scale=2):
@@ -160,6 +184,9 @@ def build_interface(warning: str = None):
                 .results-box {
                     overflow-y: auto !important;
                     max-height: 600px !important;
+                }
+                .results-box .monaco-editor {
+                    background-color: #27272a !important;
                 }
             </style>
         """)
