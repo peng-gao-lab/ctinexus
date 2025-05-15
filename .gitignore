@@ -175,7 +175,6 @@ cython_debug/
 
 output/*
 outputs/*
-prompt_store/*
 
 #macOS
 .DS_Store

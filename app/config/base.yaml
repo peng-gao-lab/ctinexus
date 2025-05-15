@@ -1,2 +1,0 @@
-# Base configuration with common settings
-api_key: ${oc.env:OPENAI_API_KEY}  # Will be populated from environment variable 

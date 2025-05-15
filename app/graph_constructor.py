@@ -120,9 +120,11 @@ class Linker:
 class Merger:
     def get_embedding(self, text):
         client = OpenAI(api_key=self.config.api_key)
-        response = client.embeddings.create(
-            input=text, model=self.config.embedding_model
-        )
+        if str(self.config.model).startswith("gpt"):
+            embedding_model = self.config.embedding_model_openai
+        else:
+            embedding_model = self.config.embedding_model_bedrock
+        response = client.embeddings.create(input=text, model=embedding_model)
 
         return response.data[0].embedding
 

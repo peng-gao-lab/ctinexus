@@ -1,0 +1,33 @@
+# Base configuration with common settings
+api_key: ${oc.env:OPENAI_API_KEY}  # Will be populated from environment variable 
+
+model: gpt-4.1 #default model
+
+# Prompt setting
+merge_prompt_folder: app/prompts
+merge_prompt_file: merge-IOC.jinja
+
+# LLM setting
+embedding_model_openai: text-embedding-3-large
+embedding_model_bedrock: amazon.titan-embed-text-v2:0
+
+# Merging setting
+similarity_threshold: 0.6 #choose your similarity threshold
+
+# Prompt setting
+tag_prompt_folder: app/prompts
+tag_prompt_file: et.jinja
+
+### demonstration setting
+retriever:
+  type: "kNN" #retriever type
+  permutation: asc #the permutation of the kNN
+shot: 3 #k of the kNN
+
+### prompt setting
+ie_prompt_set: app/prompts #the folder stored the prompt templates 
+ie_templ: ie.jinja #used prompt template
+
+## prompt constructor
+link_prompt_folder: app/prompts
+link_prompt_file: link.jinja

@@ -1,19 +1,4 @@
 services:
-  falkordb:
-    image: falkordb/falkordb:latest
-    ports:
-      - "3000:3000"
-    volumes:
-      - falkordb_data:/data
-    networks:
-      - ctinexus_network
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    expose:
-      - "6379"
 
   ctinexus:
     build:
@@ -22,14 +7,10 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - FALKORDB_URI=bolt://falkordb:6379
-      - FALKORDB_USER=falkordb
-      - FALKORDB_PASSWORD=""  # Update if authentication is enabled
       - GRADIO_SERVER_NAME=0.0.0.0
       - GRADIO_SERVER_PORT=8000
-    depends_on:
-      falkordb:
-        condition: service_healthy
+    env_file:
+      - .env
     networks:
       - ctinexus_network
     volumes:

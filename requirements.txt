@@ -1,3 +1,4 @@
+boto3
 gradio
 hydra-core
 jinja2

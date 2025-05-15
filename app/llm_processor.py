@@ -2,14 +2,38 @@ import json
 import logging
 import os
 import time
-from json import JSONDecodeError
+from functools import wraps
 
+import boto3
 import requests
 from jinja2 import Environment, FileSystemLoader, meta
 from omegaconf import DictConfig
 from openai import OpenAI
 
 logger = logging.getLogger(__name__)
+
+
+def with_retry(max_attempts=5):
+    """Decorator to handle retry logic for API calls"""
+
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            for attempt in range(max_attempts):
+                try:
+                    return func(*args, **kwargs)
+                except Exception as e:
+                    logger.error("Error in attempt %d: %s", attempt + 1, str(e))
+                    if attempt < max_attempts - 1:
+                        logger.info("Retrying...")
+                    else:
+                        logger.error("Maximum retries reached. Exiting...")
+                        raise e
+            return None
+
+        return wrapper
+
+    return decorator
 
 
 class LLMTagger:
@@ -20,10 +44,8 @@ class LLMTagger:
         triples = result["IE"]["triplets"]
 
         self.prompt = self.generate_prompt(triples)
-        self.response, self.response_time, _ = LLMCaller(
-            self.config, self.prompt
-        ).call()
-        self.usage = UsageCalculator(self.response).calculate()
+        self.response, self.response_time = LLMCaller(self.config, self.prompt).call()
+        self.usage = UsageCalculator(self.config, self.response).calculate()
         self.response_content = json.loads(self.response.choices[0].message.content)
 
         result["ET"] = {}
@@ -65,8 +87,8 @@ class LLMLinker:
         for main_node in self.main_nodes:
             prompt = self.generate_prompt(main_node)
             llmCaller = LLMCaller(self.config, prompt)
-            self.llm_response, self.response_time, _ = llmCaller.call()
-            self.usage = UsageCalculator(self.llm_response).calculate()
+            self.llm_response, self.response_time = llmCaller.call()
+            self.usage = UsageCalculator(self.config, self.llm_response).calculate()
             self.response_content = json.loads(
                 self.llm_response.choices[0].message.content
             )
@@ -172,135 +194,126 @@ class LLMCaller:
     def __init__(self, config: DictConfig, prompt) -> None:
         self.config = config
         self.prompt = prompt
+        if not str(self.config.model).startswith("gpt"):
+            self.bedrock = boto3.client(
+                service_name="bedrock-runtime",
+                region_name=os.getenv("AWS_REGION", "us-east-1"),
+                aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"),
+                aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"),
+            )
 
-    def query_llama(self):
+    @with_retry()
+    def query_bedrock(self):
+        """Query AWS Bedrock models"""
+        model_id = self.config.model
+        self.max_tokens = 4096
+        try:
+            if "anthropic" in model_id:
+                messages = [
+                    {"role": msg["role"], "content": msg["content"]}
+                    for msg in self.prompt
+                    if msg["role"] in ["user", "assistant"]
+                ]
+
+                body = {
+                    "max_tokens": 4096,
+                    "messages": messages,
+                    "response_format": {"type": "json_object"},
+                }
+            elif "meta" in model_id:
+                body = {
+                    "prompt": self.prompt[-1]["content"],
+                    "max_gen_len": 4096,
+                    "temperature": 0.8,
+                    "top_p": 0.9
+                }
+            else:
+                body = {
+                    "prompt": self.prompt[-1]["content"],
+                    "max_tokens": 4096,
+                    "temperature": 0.8,
+                    "response_format": {"type": "json_object"},
+                }
+
+            logger.info(f"Invoking Bedrock model: {model_id}")
+            response = self.bedrock.invoke_model(
+                modelId=model_id, body=json.dumps(body)
+            )
+
+            response_body = json.loads(response.get("body").read())
+            response_text = (
+                response_body["content"][0]["text"]
+                if "anthropic" in model_id
+                else response_body["completion"]
+            )
+
+            return json.loads(response_text.replace("\n", ""))
+
+        except Exception as e:
+            models = boto3.client(
+                "bedrock",
+                region_name=os.getenv("AWS_REGION"),
+                aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"),
+                aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"),
+            ).list_foundation_models(byInferenceType="ON_DEMAND")
+
+            modelSummaries = models.get("modelSummaries")
+            print(modelSummaries)
+
+            if modelSummaries:
+                model_ids = [model["modelId"] for model in models["modelSummaries"]]
+            else:
+                model_ids = []
+            logger.error(f"Error invoking Bedrock model {model_id}: {str(e)}")
+            if "ValidationException" in str(e):
+                logger.error(f"Available models: {model_ids}")
+            raise Exception(
+                f"Error invoking Bedrock model {model_id}: {str(e)}\nAvailable models: {model_ids}"
+            )
+
+    @with_retry()
+    def query_ollama(self, model_name):
+        """Query Ollama models (LLaMA and QWen)"""
         OLLAMA_API_URL = "http://localhost:11434/api/chat"
-
         payload = {
-            "model": "llama3:70b",
+            "model": model_name,
             "messages": self.prompt,
             "stream": False,
             "format": "json",
         }
 
-        max_retries = 5
-        attempts = 0
+        response = requests.post(OLLAMA_API_URL, json=payload)
+        response_text = response.json()["message"]["content"]
+        return json.loads(response_text.replace("\n", ""))
 
-        while attempts < max_retries:
-            response = requests.post(OLLAMA_API_URL, json=payload)
+    @with_retry()
+    def query_openai(self):
+        """Query OpenAI models"""
+        client = OpenAI(api_key=self.config.api_key)
 
-            try:
-                response_text = response.json()["message"]["content"]
-                response_text = response_text.replace("\n", "")
-                response_json = json.loads(response_text)
-                return response_json
+        response = client.chat.completions.create(
+            model=self.config.model,
+            response_format={"type": "json_object"},
+            messages=self.prompt,
+            max_tokens=4096,
+        )
 
-            except JSONDecodeError as e:
-                logger.error(
-                    "JSONDecodeError: Unable to parse the JSON response: %s", e
-                )
+        return response
 
-            except Exception as e:
-                logger.error("Error: An unexpected error occurred: %s", e)
-
-            attempts += 1
-            logger.info("Retrying... (Attempt %d of %d)", attempts, max_retries)
-            logger.info("Response: %s", response.text)
-
-        logger.error("Maximum retries reached. Exiting...")
-
-        return None
-
-    def query_qwen(self):
-        OLLAMA_API_URL = "http://localhost:11434/api/chat"
-
-        payload = {
-            "model": "qwen2.5:72b",
-            "messages": self.prompt,
-            "stream": False,
-            "format": "json",
-        }
-
-        max_retries = 5
-        attempts = 0
-
-        while attempts < max_retries:
-            response = requests.post(OLLAMA_API_URL, json=payload)
-
-            try:
-                response_text = response.json()["message"]["content"]
-                response_text = response_text.replace("\n", "")
-                response_json = json.loads(response_text)
-                return response_json
-
-            except JSONDecodeError as e:
-                logger.error(
-                    "JSONDecodeError: Unable to parse the JSON response: %s", e
-                )
-
-            except Exception as e:
-                logger.error("Error: An unexpected error occurred: %s", e)
-
-            attempts += 1
-            logger.info("Retrying... (Attempt %d of %d)", attempts, max_retries)
-            logger.info("Response: %s", response.text)
-
-        logger.error("Maximum retries reached. Exiting...")
-
-        return None
-
-    def call(self, validate=False) -> tuple[dict, float, dict]:
+    def call(self) -> tuple[dict, float]:
         startTime = time.time()
 
         if self.config.model == "LLaMA":
-            response = self.query_llama()
-            JSONResp = response
-            success = True
-
+            response = self.query_ollama("llama3:70b")
         elif self.config.model == "QWen":
-            response = self.query_qwen()
-            JSONResp = response
-            success = True
-
+            response = self.query_ollama("qwen2.5:72b")
+        elif str(self.config.model).startswith("gpt"):
+            response = self.query_openai()
         else:
-            JSONResp = {}
-            attempts = 0
-            max_attempts = 5
-            success = False
+            response = self.query_bedrock()
 
-            while attempts < max_attempts and not success:
-                client = OpenAI(api_key=self.config.api_key)
-
-                response = client.chat.completions.create(
-                    model=self.config.model,
-                    response_format={"type": "json_object"},
-                    messages=self.prompt,
-                    max_tokens=4096,
-                )
-
-                if validate:
-                    try:
-                        JSONResp = json.loads(response.choices[0].message.content)
-                        JSONResp["triplets"]
-                        success = True
-
-                    except (json.decoder.JSONDecodeError, KeyError) as e:
-                        attempts += 1
-                        logger.error(f"Attempt {attempts}: {str(e)}")
-
-                        if attempts < max_attempts:
-                            logger.info("Retrying...")
-
-                        else:
-                            logger.error("Maximum attempts reached. Failing...")
-                            raise e
-                else:
-                    success = True
-
-        endTime = time.time()
-        generation_time = endTime - startTime
-
-        return response, generation_time, JSONResp
+        generation_time = time.time() - startTime
+        return response, generation_time
 
 
 class LLMExtractor:
@@ -311,9 +324,10 @@ class LLMExtractor:
         self.query = query
 
         self.prompt = PromptConstructor(self).generate_prompt()
-        self.llm_response, self.response_time, self.JSONResp = LLMCaller(
+        self.llm_response, self.response_time = LLMCaller(
             self.config, self.prompt
-        ).call(validate=True)
+        ).call()
+
         self.output = ResponseParser(self).parse()
 
         if self.config.model == "LLaMA" or self.config.model == "QWen":
@@ -329,7 +343,7 @@ class LLMExtractor:
         outJSON["IE"]["cost"] = self.output["usage"]
         outJSON["IE"]["time"] = self.response_time
         outJSON["IE"]["Prompt"] = {}
-        outJSON["IE"]["Prompt"]["prompt_template"] = self.config.templ
+        outJSON["IE"]["Prompt"]["prompt_template"] = self.config.ie_templ
 
         return outJSON
 
@@ -338,7 +352,7 @@ class PromptConstructor:
     def __init__(self, llmExtractor):
         self.config = llmExtractor.config
         self.query = llmExtractor.query
-        self.templ = self.config.templ
+        self.templ = self.config.ie_templ
 
     def generate_prompt(self) -> list[dict]:
         try:
@@ -373,7 +387,6 @@ class ResponseParser:
         self.llm_response = llmExtractor.llm_response
         self.prompt = llmExtractor.prompt
         self.config = llmExtractor.config
-        self.JSONResp = llmExtractor.JSONResp
         self.query = llmExtractor.query
 
     def parse(self):
@@ -384,30 +397,38 @@ class ResponseParser:
             return None
 
         is_gpt = get_char_before_hyphen(self.config.model) == "gpt"
+        JSONResp = json.loads(self.llm_response.choices[0].message.content)
 
         self.output = {
             "CTI": self.query,
-            "IE": self.JSONResp,
-            "usage": UsageCalculator(self.llm_response).calculate() if is_gpt else None,
+            "IE": JSONResp,
+            "usage": UsageCalculator(self.config, self.llm_response).calculate()
+            if is_gpt
+            else None,
             "prompt": self.prompt,
-            "triples_count": len(self.JSONResp["triplets"]),
+            "triples_count": len(JSONResp["triplets"]),
         }
 
         return self.output
 
 
 class UsageCalculator:
-    def __init__(self, response) -> None:
+    def __init__(self, config, response) -> None:
         self.response = response
-        self.model = response.model
+        self.model = config.model
 
     def calculate(self):
-        # import menu
-        with open("app/tools/menu/menu.json", "r") as f:
+        with open("app/config/cost.json", "r") as f:
             data = json.load(f)
 
-        iprice = data[self.model]["input"]
-        oprice = data[self.model]["output"]
+        if self.model not in data:
+            logger.error(
+                f"Model {self.model} not found in cost.json. Setting cost to 0."
+            )
+            print(data)
+
+        iprice = data[self.model]["input"] if self.model in data else 0
+        oprice = data[self.model]["output"] if self.model in data else 0
         usageDict = {}
         usageDict["model"] = self.model
         usageDict["input"] = {
