@@ -125,15 +125,17 @@ def build_interface(warning: str = None):
             </style>
         """)
 
-        gr.Image(value="app/static/logo.png", 
-                width=100, 
-                height=100, 
-                show_label=False, 
-                elem_classes="image-container",
-                interactive=False, 
-                show_download_button=False,
-                show_fullscreen_button=False,
-                show_share_button=False)
+        gr.Image(
+            value="app/static/logo.png",
+            width=100,
+            height=100,
+            show_label=False,
+            elem_classes="image-container",
+            interactive=False,
+            show_download_button=False,
+            show_fullscreen_button=False,
+            show_share_button=False,
+        )
 
         if warning:
             gr.Markdown(warning)

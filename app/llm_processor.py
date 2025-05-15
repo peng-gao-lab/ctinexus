@@ -1,14 +1,13 @@
 import json
 import logging
 import os
+import re
 import time
 from functools import wraps
 
-import boto3
-import requests
+import litellm
 from jinja2 import Environment, FileSystemLoader, meta
 from omegaconf import DictConfig
-from openai import OpenAI
 
 logger = logging.getLogger(__name__)
 
@@ -46,7 +45,9 @@ class LLMTagger:
         self.prompt = self.generate_prompt(triples)
         self.response, self.response_time = LLMCaller(self.config, self.prompt).call()
         self.usage = UsageCalculator(self.config, self.response).calculate()
-        self.response_content = json.loads(self.response.choices[0].message.content)
+        self.response_content = extract_json_from_response(
+            self.response.choices[0].message.content
+        )
 
         result["ET"] = {}
         result["ET"]["typed_triplets"] = self.response_content["tagged_triples"]
@@ -63,12 +64,10 @@ class LLMTagger:
 
         if vars != {}:
             UserPrompt = template.render(triples=triples)
-
         else:
             UserPrompt = template.render()
 
         prompt = [{"role": "user", "content": UserPrompt}]
-
         return prompt
 
 
@@ -89,7 +88,7 @@ class LLMLinker:
             llmCaller = LLMCaller(self.config, prompt)
             self.llm_response, self.response_time = llmCaller.call()
             self.usage = UsageCalculator(self.config, self.llm_response).calculate()
-            self.response_content = json.loads(
+            self.response_content = extract_json_from_response(
                 self.llm_response.choices[0].message.content
             )
 
@@ -97,7 +96,6 @@ class LLMLinker:
                 pred_sub = self.response_content["predicted_triple"]["subject"]
                 pred_obj = self.response_content["predicted_triple"]["object"]
                 pred_rel = self.response_content["predicted_triple"]["relation"]
-
             except:
                 values = list(self.response_content.values())
                 pred_sub, pred_rel, pred_obj = values[0], values[1], values[2]
@@ -111,7 +109,6 @@ class LLMLinker:
                     "mention_text": main_node["entity_text"],
                 }
                 new_obj = self.topic_node
-
             elif (
                 pred_obj == main_node["entity_text"]
                 and pred_sub == self.topic_node["entity_text"]
@@ -121,7 +118,6 @@ class LLMLinker:
                     "entity_id": main_node["entity_id"],
                     "mention_text": main_node["entity_text"],
                 }
-
             else:
                 print(
                     "Error: The predicted subject and object do not match the unvisited subject and topic entity, the LLM produce hallucination!"
@@ -181,12 +177,10 @@ class LLMLinker:
                 CTI=self.js["text"],
                 topic_node=self.topic_node["entity_text"],
             )
-
         else:
             User_prompt = template.render()
 
         prompt = [{"role": "user", "content": User_prompt}]
-
         return prompt
 
 
@@ -194,124 +188,53 @@ class LLMCaller:
     def __init__(self, config: DictConfig, prompt) -> None:
         self.config = config
         self.prompt = prompt
-        if not str(self.config.model).startswith("gpt"):
-            self.bedrock = boto3.client(
-                service_name="bedrock-runtime",
-                region_name=os.getenv("AWS_REGION", "us-east-1"),
-                aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"),
-                aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"),
-            )
+        self.max_tokens = 4096
 
     @with_retry()
-    def query_bedrock(self):
-        """Query AWS Bedrock models"""
-        model_id = self.config.model
-        self.max_tokens = 4096
+    def query_llm(self):
+        """Query LLM using litellm"""
         try:
+            model_id = self.config.model
+
+            # Format request based on model type
             if "anthropic" in model_id:
                 messages = [
                     {"role": msg["role"], "content": msg["content"]}
                     for msg in self.prompt
                     if msg["role"] in ["user", "assistant"]
                 ]
-
-                body = {
-                    "max_tokens": 4096,
-                    "messages": messages,
-                    "response_format": {"type": "json_object"},
-                }
+                response = litellm.completion(
+                    model=model_id,
+                    messages=messages,
+                    max_tokens=self.max_tokens,
+                    response_format={"type": "json_object"},
+                )
             elif "meta" in model_id:
-                body = {
-                    "prompt": self.prompt[-1]["content"],
-                    "max_gen_len": 4096,
-                    "temperature": 0.8,
-                    "top_p": 0.9,
-                }
+                response = litellm.completion(
+                    model=model_id,
+                    messages=[{"role": "user", "content": self.prompt[-1]["content"]}],
+                    max_tokens=self.max_tokens,
+                    temperature=0.8,
+                    top_p=0.9,
+                )
             else:
-                body = {
-                    "prompt": self.prompt[-1]["content"],
-                    "max_tokens": 4096,
-                    "temperature": 0.8,
-                    "response_format": {"type": "json_object"},
-                }
+                response = litellm.completion(
+                    model=model_id,
+                    messages=[{"role": "user", "content": self.prompt[-1]["content"]}],
+                    max_tokens=self.max_tokens,
+                    temperature=0.8,
+                    response_format={"type": "json_object"},
+                )
 
-            logger.info(f"Invoking Bedrock model: {model_id}")
-            response = self.bedrock.invoke_model(
-                modelId=model_id, body=json.dumps(body)
-            )
-
-            response_body = json.loads(response.get("body").read())
-            response_text = (
-                response_body["content"][0]["text"]
-                if "anthropic" in model_id
-                else response_body["completion"]
-            )
-
-            return json.loads(response_text.replace("\n", ""))
+            return response
 
         except Exception as e:
-            models = boto3.client(
-                "bedrock",
-                region_name=os.getenv("AWS_REGION"),
-                aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"),
-                aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"),
-            ).list_foundation_models(byInferenceType="ON_DEMAND")
-
-            modelSummaries = models.get("modelSummaries")
-            print(modelSummaries)
-
-            if modelSummaries:
-                model_ids = [model["modelId"] for model in models["modelSummaries"]]
-            else:
-                model_ids = []
-            logger.error(f"Error invoking Bedrock model {model_id}: {str(e)}")
-            if "ValidationException" in str(e):
-                logger.error(f"Available models: {model_ids}")
-            raise Exception(
-                f"Error invoking Bedrock model {model_id}: {str(e)}\nAvailable models: {model_ids}"
-            )
-
-    @with_retry()
-    def query_ollama(self, model_name):
-        """Query Ollama models (LLaMA and QWen)"""
-        OLLAMA_API_URL = "http://localhost:11434/api/chat"
-        payload = {
-            "model": model_name,
-            "messages": self.prompt,
-            "stream": False,
-            "format": "json",
-        }
-
-        response = requests.post(OLLAMA_API_URL, json=payload)
-        response_text = response.json()["message"]["content"]
-        return json.loads(response_text.replace("\n", ""))
-
-    @with_retry()
-    def query_openai(self):
-        """Query OpenAI models"""
-        client = OpenAI(api_key=self.config.api_key)
-
-        response = client.chat.completions.create(
-            model=self.config.model,
-            response_format={"type": "json_object"},
-            messages=self.prompt,
-            max_tokens=4096,
-        )
-
-        return response
+            logger.error(f"Error invoking LLM {model_id}: {str(e)}")
+            raise Exception(f"Error invoking LLM {model_id}: {str(e)}")
 
     def call(self) -> tuple[dict, float]:
         startTime = time.time()
-
-        if self.config.model == "LLaMA":
-            response = self.query_ollama("llama3:70b")
-        elif self.config.model == "QWen":
-            response = self.query_ollama("qwen2.5:72b")
-        elif str(self.config.model).startswith("gpt"):
-            response = self.query_openai()
-        else:
-            response = self.query_bedrock()
-
+        response = self.query_llm()
         generation_time = time.time() - startTime
         return response, generation_time
 
@@ -397,7 +320,9 @@ class ResponseParser:
             return None
 
         is_gpt = get_char_before_hyphen(self.config.model) == "gpt"
-        JSONResp = json.loads(self.llm_response.choices[0].message.content)
+        JSONResp = extract_json_from_response(
+            self.llm_response.choices[0].message.content
+        )
 
         self.output = {
             "CTI": self.query,
@@ -447,3 +372,23 @@ class UsageCalculator:
         }
 
         return usageDict
+
+
+def extract_json_from_response(response_text):
+    if isinstance(response_text, str):
+        try:
+            return json.loads(response_text)
+        except (json.JSONDecodeError, TypeError):
+            pass
+        json_matches = list(
+            re.finditer(r"\{[\s\S]*\}", response_text.replace("\n", ""))
+        )
+        try:
+            if json_matches:
+                return json.loads(json_matches[-1].group())
+            else:
+                print(response_text)
+        except:
+            print(json_matches[-1].group())
+    else:
+        return dict(response_text)
