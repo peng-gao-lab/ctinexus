@@ -133,7 +133,9 @@ class Merger:
     def get_embeddings(self, texts):
         """Get embeddings for multiple texts in a single API call"""
         startTime = time.time()
-        self.response = litellm.embedding(model=self.config.embedding_model, input=texts)
+        self.response = litellm.embedding(
+            model=self.config.embedding_model, input=texts
+        )
         self.usage = UsageCalculator(self.config, self.response).calculate()
         self.response_time = time.time() - startTime
         return [item["embedding"] for item in self.response["data"]]
@@ -185,14 +187,14 @@ class Merger:
                     if node["mention_id"] not in self.node_dict:
                         self.node_dict[node["mention_id"]] = []
                     self.node_dict[node["mention_id"]].append(node)
-        
+
         texts_to_embed = []
         mention_ids = []
         for key, node_list in self.node_dict.items():
             if key not in self.emb_dict:
                 texts_to_embed.append(node_list[0]["mention_text"])
                 mention_ids.append(key)
-        
+
         # Get embeddings in batch if there are texts to embed
         if texts_to_embed:
             embeddings = self.get_embeddings(texts_to_embed)
