@@ -150,8 +150,8 @@ class LLMLinker:
         LP = {
             "predicted_links": self.predicted_triples,
             "response_time": sum(self.response_times),
-            "model": self.config.model,
-            "usage": {
+            "model_usage": {
+                "model": self.config.model,
                 "input": {
                     "tokens": sum([usage["input"]["tokens"] for usage in self.usages]),
                     "cost": sum([usage["input"]["cost"] for usage in self.usages]),
@@ -274,8 +274,8 @@ class LLMExtractor:
         outJSON["IE"] = {}
         outJSON["IE"]["triplets"] = self.output["IE"]["triplets"]
         outJSON["IE"]["triples_count"] = self.output["triples_count"]
-        outJSON["IE"]["cost"] = self.output["usage"]
-        outJSON["IE"]["time"] = self.response_time
+        outJSON["IE"]["model_usage"] = self.output["usage"]
+        outJSON["IE"]["response_time"] = self.response_time
         outJSON["IE"]["Prompt"] = {}
         outJSON["IE"]["Prompt"]["prompt_template"] = self.config.ie_templ
 

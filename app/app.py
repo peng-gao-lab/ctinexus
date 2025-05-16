@@ -15,6 +15,7 @@ load_dotenv()
 
 # Available models
 MODELS = {}
+EMBEDDING_MODELS = {}
 
 
 def check_api_key() -> bool:
@@ -29,6 +30,10 @@ def check_api_key() -> bool:
             "gpt-4.1-mini": "GPT-4.1 Mini — Balanced for intelligence, speed, and cost ($0.4 • $1.6)",
             "gpt-4o-mini": "GPT-4o Mini — Fast, affordable small model for focused tasks ($0.15 • $0.6)",
             "gpt-4.1-nano": "GPT-4.1 Nano — Fastest, most cost-effective GPT-4.1 model ($0.1 • $0.4)",
+        }
+        EMBEDDING_MODELS["OpenAI"] = {
+            "text-embedding-3-large": "Text Embedding 3 Large — Most capable embedding model ($0.13)",
+            "text-embedding-3-small": "Text Embedding 3 Small — Small embedding model ($0.02)",
         }
     if os.getenv("AWS_ACCESS_KEY_ID"):
         MODELS["AWS"] = {
@@ -46,6 +51,9 @@ def check_api_key() -> bool:
             "meta.llama3-2-11b-instruct-v1:0": "Llama 3.2 11B — Compact, optimized for multilingual text ($0.2 • $0.8)",
             "meta.llama3-3-70b-instruct-v1:0": "Llama 3.3 70B — Balanced for complex text and coding ($0.75 • $3)",
         }
+        EMBEDDING_MODELS["AWS"] = {
+            "amazon.titan-embed-text-v2:0": "Titan Embed Text 2 — Balanced for intelligence and efficiency in text ($0.12)",
+        }
     return True if MODELS else False
 
 
@@ -59,8 +67,8 @@ def run_entity_typing(config: DictConfig, result: dict) -> dict:
     return LLMTagger(config).call(result)
 
 
-def run_entity_merging(config: DictConfig, result: dict) -> dict:
-    """Wrapper for Entity Merging"""
+def run_entity_aggregation(config: DictConfig, result: dict) -> dict:
+    """Wrapper for Entity Aggregation"""
     preprocessed_result = preprocessor(result)
     merged_result = Merger(config).call(preprocessed_result)
     return PostProcessor(config).call(merged_result)
@@ -82,34 +90,48 @@ def get_model_provider(model):
     return None
 
 
-def run_pipeline(
-    text: str = None, model: str = None, progress=gr.Progress(track_tqdm=False)
-):
-    """Run the entire pipeline in sequence"""
-    if not text:
-        return "Please enter some text to process."
-
+def get_config(model: str = None, embedding_model: str = None) -> DictConfig:
     provider = get_model_provider(model)
     with initialize(version_base="1.2", config_path="config"):
         overrides = []
         if model:
             overrides.append(f"model={model}")
+        if embedding_model:
+            overrides.append(f"embedding_model={embedding_model}")
         if provider:
             overrides.append(f"provider={provider}")
         config = compose(config_name="config.yaml", overrides=overrides)
+    return config
+
+
+def run_pipeline(
+    text: str = None,
+    ie_model: str = None,
+    et_model: str = None,
+    ea_model: str = None,
+    lp_model: str = None,
+    progress=gr.Progress(track_tqdm=False),
+):
+    """Run the entire pipeline in sequence"""
+    if not text:
+        return "Please enter some text to process."
 
     try:
+        config = get_config(ie_model, None)
         progress(0, desc="Entity Extraction...")
         extraction_result = run_extraction(config, text)
 
+        config = get_config(et_model, None)
         progress(0.3, desc="Entity Typing...")
         typing_result = run_entity_typing(config, extraction_result)
 
-        progress(0.6, desc="Entity Merging...")
-        merging_result = run_entity_merging(config, typing_result)
+        progress(0.6, desc="Entity Aggregation...")
+        config = get_config(None, ea_model)
+        aggregation_result = run_entity_aggregation(config, typing_result)
 
+        config = get_config(lp_model, None)
         progress(0.9, desc="Link Prediction...")
-        linking_result = run_link_prediction(config, merging_result)
+        linking_result = run_link_prediction(config, aggregation_result)
 
         progress(1.0, desc="Processing complete!")
 
@@ -136,6 +158,30 @@ def build_interface(warning: str = None):
                     border: none !important;
                     box-shadow: none !important;
                 }
+
+                .metric-label h2.output-class {
+                    font-size: 0.9em !important;
+                    font-weight: normal !important;
+                    padding: 4px 8px !important;
+                    line-height: 1.2 !important;
+                }
+
+                .metric-label th, td {
+                    border: 1px solid var(--block-border-color) !important;
+                }
+                
+                .metric-label .wrap {
+                    display: none !important;
+                }
+
+                .shadowbox {
+                    background: #27272a !important;
+                    border: 1px solid #444444 !important;
+                    border-radius: 4px !important;
+                    padding: 8px !important;
+                    margin: 4px 0 !important;
+                }
+                
             </style>
         """)
 
@@ -162,7 +208,7 @@ def build_interface(warning: str = None):
                     lines=10,
                 )
                 with gr.Row():
-                    with gr.Column(scale=1):
+                    with gr.Column():
                         provider_dropdown = gr.Dropdown(
                             choices=list(MODELS.keys()),
                             label="AI Provider",
@@ -170,14 +216,37 @@ def build_interface(warning: str = None):
                             if "OpenAI" in MODELS
                             else list(MODELS.keys())[0],
                         )
-                    with gr.Column(scale=2):
-                        model_dropdown = gr.Dropdown(
+                    with gr.Column():
+                        ie_dropdown = gr.Dropdown(
                             choices=get_model_choices(provider_dropdown.value),
-                            label="Model",
+                            label="Entity Extraction Model",
                             value=get_model_choices(provider_dropdown.value)[0][1],
                         )
-
+                with gr.Row():
+                    with gr.Column():
+                        et_dropdown = gr.Dropdown(
+                            choices=get_model_choices(provider_dropdown.value),
+                            label="Entity Typing Model",
+                            value=get_model_choices(provider_dropdown.value)[0][1],
+                        )
+                    with gr.Column():
+                        ea_dropdown = gr.Dropdown(
+                            choices=get_embedding_model_choices(provider_dropdown.value),
+                            label="Entity Aggregation Model",
+                            value=get_embedding_model_choices(provider_dropdown.value)[0][1],
+                        )
+                    with gr.Column():
+                        lp_dropdown = gr.Dropdown(
+                            choices=get_model_choices(provider_dropdown.value),
+                            label="Link Prediction Model",
+                            value=get_model_choices(provider_dropdown.value)[0][1],
+                        )
                 run_all_button = gr.Button("Run", variant="primary")
+        with gr.Row():
+            metrics_table = gr.Markdown(
+                value='<div class="shadowbox"><table style="width: 100%; text-align: center; border-collapse: collapse;"><tr><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Information Extraction</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Typing</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Aggregation</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Link Prediction</th></tr><tr><td></td><td></td><td></td><td></td></tr></table></div>',
+                elem_classes=["metric-label"],
+            )
 
         with gr.Row():
             with gr.Column(scale=1):
@@ -194,33 +263,24 @@ def build_interface(warning: str = None):
                     show_label=True,
                 )
 
-        # Add custom CSS for the results box
-        gr.HTML("""
-            <style>
-                .results-box {
-                    overflow-y: auto !important;
-                    max-height: 600px !important;
-                }
-                .results-box .monaco-editor {
-                    background-color: #27272a !important;
-                }
-            </style>
-        """)
-
-        def update_model_choices(provider):
-            return gr.Dropdown(choices=get_model_choices(provider))
+        def update_model_choices(
+            provider,
+        ) -> tuple[gr.Dropdown, gr.Dropdown, gr.Dropdown]:
+            model_dropdown = gr.Dropdown(choices=get_model_choices(provider))
+            embedded_model_dropdown = gr.Dropdown(choices=get_embedding_model_choices(provider))
+            return model_dropdown, model_dropdown, embedded_model_dropdown, model_dropdown
 
         # Connect buttons to their respective functions
         provider_dropdown.change(
             fn=update_model_choices,
             inputs=[provider_dropdown],
-            outputs=[model_dropdown],
+            outputs=[ie_dropdown, et_dropdown, ea_dropdown, lp_dropdown],
         )
 
         run_all_button.click(
             fn=process_and_visualize,
-            inputs=[text_input, model_dropdown],
-            outputs=[results_box, graph_output],
+            inputs=[text_input, ie_dropdown, et_dropdown, ea_dropdown, lp_dropdown],
+            outputs=[results_box, graph_output, metrics_table],
         )
 
     ctinexus.launch()
@@ -230,19 +290,34 @@ def get_model_choices(provider):
     """Get model choices with descriptions for the dropdown"""
     return [(desc, key) for key, desc in MODELS[provider].items()]
 
+def get_embedding_model_choices(provider):
+    """Get model choices with descriptions for the dropdown"""
+    return [(desc, key) for key, desc in EMBEDDING_MODELS[provider].items()]
 
-def process_and_visualize(text, model, progress=gr.Progress(track_tqdm=False)):
+
+def process_and_visualize(
+    text, ie_model, et_model, ea_model, lp_model, progress=gr.Progress(track_tqdm=False)
+):
     # Run pipeline with progress tracking
-    result = run_pipeline(text, model, progress)
+    result = run_pipeline(text, ie_model, et_model, ea_model, lp_model, progress)
     if result.startswith("Error:"):
-        return result, None
+        return result, None, '<div class="shadowbox"><table style="width: 100%; text-align: center; border-collapse: collapse;"><tr><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Information Extraction</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Typing</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Aggregation</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Link Prediction</th></tr><tr><td></td><td></td><td></td><td></td></tr></table></div>'
     try:
         # Create visualization without progress tracking
         result_dict = json.loads(result)
         graph_fig = create_graph_visualization(result_dict)
-        return result, graph_fig
+
+        # Extract metrics
+        ie_metrics = f"Model: {ie_model}<br>Time: {result_dict['IE']['response_time']:.2f}s<br>Cost: ${result_dict['IE']['model_usage']['total']['cost']:.6f}"
+        et_metrics = f"Model: {et_model}<br>Time: {result_dict['ET']['response_time']:.2f}s<br>Cost: ${result_dict['ET']['model_usage']['total']['cost']:.6f}"
+        ea_metrics = f"Model: {ea_model}<br>Time: {result_dict['EA']['response_time']:.2f}s<br>Cost: ${result_dict['EA']['model_usage']['total']['cost']:.6f}"
+        lp_metrics = f"Model: {lp_model}<br>Time: {result_dict['LP']['response_time']:.2f}s<br>Cost: ${result_dict['LP']['model_usage']['total']['cost']:.6f}"
+
+        metrics_table = f'<div class="shadowbox"><table style="width: 100%; text-align: center; border-collapse: collapse;"><tr><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Information Extraction</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Typing</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Aggregation</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Link Prediction</th></tr><tr><td>{ie_metrics}</td><td>{et_metrics}</td><td>{ea_metrics}</td><td>{lp_metrics}</td></tr></table></div>'
+
+        return result, graph_fig, metrics_table
     except Exception as e:
-        return result, None
+        return result, None, '<div class="shadowbox"><table style="width: 100%; text-align: center; border-collapse: collapse;"><tr><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Information Extraction</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Typing</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Aggregation</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Link Prediction</th></tr><tr><td></td><td></td><td></td><td></td></tr></table></div>'
 
 
 def main():

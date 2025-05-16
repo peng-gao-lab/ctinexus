@@ -9,8 +9,7 @@ merge_prompt_folder: app/prompts
 merge_prompt_file: merge-IOC.jinja
 
 # LLM setting
-embedding_model_openai: text-embedding-3-large
-embedding_model_bedrock: amazon.titan-embed-text-v2:0
+embedding_model: text-embedding-3-large
 
 # Merging setting
 similarity_threshold: 0.6 #choose your similarity threshold

@@ -1,9 +1,10 @@
 from collections import defaultdict
+import time
 
 import litellm
 import networkx as nx
 import plotly.graph_objects as go
-from llm_processor import LLMLinker
+from llm_processor import LLMLinker, UsageCalculator
 from omegaconf import DictConfig
 from scipy.spatial.distance import cosine
 
@@ -118,16 +119,22 @@ class Linker:
 
 
 class Merger:
+    def __init__(self, config: DictConfig):
+        self.config = config
+        self.node_dict = {}  # key is mention_id, value is a list of nodes
+        self.class_dict = {}  # key is mention_class, value is a set of mention_ids
+        self.entity_dict = {}  # key is entity_id, value is a set of mention_ids
+        self.emb_dict = {}  # key is mention_id, value is the embedding of the mention
+        self.entity_id = 0
+        self.usage = {}
+        self.response_time = 0
+        self.response = {}
     def get_embedding(self, text):
-        if self.config.provider == "AWS":
-            embedding_model = self.config.embedding_model_bedrock
-        else:
-            embedding_model = self.config.embedding_model_openai
-
-        response = litellm.embedding(model=embedding_model, input=text)
-
-        # litellm returns a dict with 'data' containing a list of embeddings
-        return response["data"][0]["embedding"]
+        startTime = time.time()
+        self.response_time = time.time() - startTime
+        self.response = litellm.embedding(model=self.config.embedding_model, input=text)
+        self.usage = UsageCalculator(self.config, self.response).calculate()
+        return self.response["data"][0]["embedding"]
 
     def calculate_similarity(self, node1, node2):
         """Calculate the cosine similarity between two nodes based on their embeddings."""
@@ -149,14 +156,6 @@ class Merger:
         # get the mention_text of the mention_id
         mention_text = self.node_dict[mention_id][0]["mention_text"]
         return mention_text
-
-    def __init__(self, config: DictConfig):
-        self.config = config
-        self.node_dict = {}  # key is mention_id, value is a list of nodes
-        self.class_dict = {}  # key is mention_class, value is a set of mention_ids
-        self.entity_dict = {}  # key is entity_id, value is a set of mention_ids
-        self.emb_dict = {}  # key is mention_id, value is the embedding of the mention
-        self.entity_id = 0
 
     def retrieve_node_list(self, m_id) -> list:
         """Retrieve the list of nodes with the given mention_id from the JSON data."""
@@ -258,7 +257,8 @@ class Merger:
                             node["entity_text"] = entity_text
 
         self.js["EA"]["entity_num"] = self.entity_id
-
+        self.js["EA"]["model_usage"] = self.usage
+        self.js["EA"]["response_time"] = self.response_time
         return self.js
 
 

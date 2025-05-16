@@ -79,8 +79,16 @@
         "input": 0.0000002,
         "output": 0.0000008
     },
-    "meta.llama3-3-70b-instruct-v1:0": {
-        "input": 0.00000075,
-        "output": 0.000003
+    "text-embedding-3-small": {
+        "input": 0.00000002,
+        "output": 0
+    },
+    "text-embedding-3-large": {
+        "input": 0.00000013,
+        "output": 0
+    },
+    "amazon.titan-embed-text-v2:0": {
+        "input": 0.00000012,
+        "output": 0
     }
 }
