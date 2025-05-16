@@ -130,12 +130,13 @@ class Merger:
         self.response_time = 0
         self.response = {}
 
-    def get_embedding(self, text):
+    def get_embeddings(self, texts):
+        """Get embeddings for multiple texts in a single API call"""
         startTime = time.time()
-        self.response_time = time.time() - startTime
-        self.response = litellm.embedding(model=self.config.embedding_model, input=text)
+        self.response = litellm.embedding(model=self.config.embedding_model, input=texts)
         self.usage = UsageCalculator(self.config, self.response).calculate()
-        return self.response["data"][0]["embedding"]
+        self.response_time = time.time() - startTime
+        return [item["embedding"] for item in self.response["data"]]
 
     def calculate_similarity(self, node1, node2):
         """Calculate the cosine similarity between two nodes based on their embeddings."""
@@ -177,19 +178,26 @@ class Merger:
 
     def call(self, result: dict) -> dict:
         self.js = result
+
         for triple in self.js["EA"]["aligned_triplets"]:
             for key, node in triple.items():
                 if key in ["subject", "object"]:
                     if node["mention_id"] not in self.node_dict:
                         self.node_dict[node["mention_id"]] = []
-
-                    self.node_dict[node["mention_id"]].append(
-                        node
-                    )  # with reference to the original node
-
+                    self.node_dict[node["mention_id"]].append(node)
+        
+        texts_to_embed = []
+        mention_ids = []
         for key, node_list in self.node_dict.items():
             if key not in self.emb_dict:
-                self.emb_dict[key] = self.get_embedding(node_list[0]["mention_text"])
+                texts_to_embed.append(node_list[0]["mention_text"])
+                mention_ids.append(key)
+        
+        # Get embeddings in batch if there are texts to embed
+        if texts_to_embed:
+            embeddings = self.get_embeddings(texts_to_embed)
+            for mention_id, embedding in zip(mention_ids, embeddings):
+                self.emb_dict[mention_id] = embedding
 
         for triple in self.js["EA"]["aligned_triplets"]:
             for key, node in triple.items():

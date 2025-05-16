@@ -71,7 +71,8 @@ def run_entity_aggregation(config: DictConfig, result: dict) -> dict:
     """Wrapper for Entity Aggregation"""
     preprocessed_result = preprocessor(result)
     merged_result = Merger(config).call(preprocessed_result)
-    return PostProcessor(config).call(merged_result)
+    final_result = PostProcessor(config).call(merged_result)
+    return final_result
 
 
 def run_link_prediction(config: DictConfig, result) -> dict:
@@ -256,7 +257,7 @@ def build_interface(warning: str = None):
                 run_all_button = gr.Button("Run", variant="primary")
         with gr.Row():
             metrics_table = gr.Markdown(
-                value='<div class="shadowbox"><table style="width: 100%; text-align: center; border-collapse: collapse;"><tr><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Information Extraction</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Typing</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Aggregation</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Link Prediction</th></tr><tr><td></td><td></td><td></td><td></td></tr></table></div>',
+                value=get_metrics_box(),
                 elem_classes=["metric-label"],
             )
 
@@ -297,12 +298,26 @@ def build_interface(warning: str = None):
         )
 
         run_all_button.click(
+            fn=clear_outputs,
+            inputs=[],
+            outputs=[results_box, graph_output, metrics_table],
+        ).then(
             fn=process_and_visualize,
             inputs=[text_input, ie_dropdown, et_dropdown, ea_dropdown, lp_dropdown],
             outputs=[results_box, graph_output, metrics_table],
         )
 
     ctinexus.launch()
+
+
+def get_metrics_box(
+    ie_metrics: str = "",
+    et_metrics: str = "",
+    ea_metrics: str = "",
+    lp_metrics: str = "",
+):
+    """Generate metrics box HTML with optional metrics values"""
+    return f'<div class="shadowbox"><table style="width: 100%; text-align: center; border-collapse: collapse;"><tr><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Information Extraction</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Typing</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Aggregation</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Link Prediction</th></tr><tr><td>{ie_metrics or ""}</td><td>{et_metrics or ""}</td><td>{ea_metrics or ""}</td><td>{lp_metrics or ""}</td></tr></table></div>'
 
 
 def get_model_choices(provider):
@@ -324,7 +339,7 @@ def process_and_visualize(
         return (
             result,
             None,
-            '<div class="shadowbox"><table style="width: 100%; text-align: center; border-collapse: collapse;"><tr><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Information Extraction</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Typing</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Aggregation</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Link Prediction</th></tr><tr><td></td><td></td><td></td><td></td></tr></table></div>',
+            get_metrics_box(),
         )
     try:
         # Create visualization without progress tracking
@@ -337,15 +352,20 @@ def process_and_visualize(
         ea_metrics = f"Model: {ea_model}<br>Time: {result_dict['EA']['response_time']:.2f}s<br>Cost: ${result_dict['EA']['model_usage']['total']['cost']:.6f}"
         lp_metrics = f"Model: {lp_model}<br>Time: {result_dict['LP']['response_time']:.2f}s<br>Cost: ${result_dict['LP']['model_usage']['total']['cost']:.6f}"
 
-        metrics_table = f'<div class="shadowbox"><table style="width: 100%; text-align: center; border-collapse: collapse;"><tr><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Information Extraction</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Typing</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Aggregation</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Link Prediction</th></tr><tr><td>{ie_metrics}</td><td>{et_metrics}</td><td>{ea_metrics}</td><td>{lp_metrics}</td></tr></table></div>'
+        metrics_table = get_metrics_box(ie_metrics, et_metrics, ea_metrics, lp_metrics)
 
         return result, graph_fig, metrics_table
     except Exception as e:
         return (
             result,
             None,
-            '<div class="shadowbox"><table style="width: 100%; text-align: center; border-collapse: collapse;"><tr><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Information Extraction</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Typing</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Aggregation</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Link Prediction</th></tr><tr><td></td><td></td><td></td><td></td></tr></table></div>',
+            get_metrics_box(),
         )
+
+
+def clear_outputs():
+    """Clear all outputs when run button is clicked"""
+    return "", None, get_metrics_box()
 
 
 def main():
