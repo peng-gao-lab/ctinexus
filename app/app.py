@@ -62,8 +62,8 @@ def run_extraction(config: DictConfig, text: str = None) -> dict:
     return LLMExtractor(config).call(text)
 
 
-def run_entity_typing(config: DictConfig, result: dict) -> dict:
-    """Wrapper for Entity Typing"""
+def run_entity_tagging(config: DictConfig, result: dict) -> dict:
+    """Wrapper for Entity Tagging"""
     return LLMTagger(config).call(result)
 
 
@@ -123,8 +123,8 @@ def run_pipeline(
         extraction_result = run_extraction(config, text)
 
         config = get_config(et_model, None)
-        progress(0.3, desc="Entity Typing...")
-        typing_result = run_entity_typing(config, extraction_result)
+        progress(0.3, desc="Entity Tagging...")
+        tagging_result = run_entity_typing(config, extraction_result)
 
         progress(0.6, desc="Entity Alignment...")
         config = get_config(None, ea_model)
@@ -212,7 +212,7 @@ def build_interface(warning: str = None):
                     lines=10,
                 )
                 gr.Markdown(
-                    "**Note:** Entity Extraction does best with a reasoning or full gpt model (e.g. o4-mini, gpt-4.1), Entity Typing tends to need a mid level gpt model (gpt-4o-mini, gpt-4.1-mini).",
+                    "**Note:** Entity Extraction does best with a reasoning or full gpt model (e.g. o4-mini, gpt-4.1), Entity Tagging tends to need a mid level gpt model (gpt-4o-mini, gpt-4.1-mini).",
                     elem_classes=["note-text"],
                 )
 
@@ -235,7 +235,7 @@ def build_interface(warning: str = None):
                     with gr.Column():
                         et_dropdown = gr.Dropdown(
                             choices=get_model_choices(provider_dropdown.value),
-                            label="Entity Typing Model",
+                            label="Entity Tagging Model",
                             value=get_model_choices(provider_dropdown.value)[0][1],
                         )
                     with gr.Column():
@@ -317,7 +317,7 @@ def get_metrics_box(
     lp_metrics: str = "",
 ):
     """Generate metrics box HTML with optional metrics values"""
-    return f'<div class="shadowbox"><table style="width: 100%; text-align: center; border-collapse: collapse;"><tr><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Information Extraction</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Typing</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Alignment</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Link Prediction</th></tr><tr><td>{ie_metrics or ""}</td><td>{et_metrics or ""}</td><td>{ea_metrics or ""}</td><td>{lp_metrics or ""}</td></tr></table></div>'
+    return f'<div class="shadowbox"><table style="width: 100%; text-align: center; border-collapse: collapse;"><tr><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Information Extraction</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Tagging</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Alignment</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Link Prediction</th></tr><tr><td>{ie_metrics or ""}</td><td>{et_metrics or ""}</td><td>{ea_metrics or ""}</td><td>{lp_metrics or ""}</td></tr></table></div>'
 
 
 def get_model_choices(provider):
