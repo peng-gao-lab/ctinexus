@@ -95,7 +95,7 @@ def get_model_provider(model):
     return None
 
 
-def get_config(model: str = None, embedding_model: str = None) -> DictConfig:
+def get_config(model: str = None, embedding_model: str = None, similarity_threshold: float = 0.6) -> DictConfig:
     provider = get_model_provider(model)
     with initialize(version_base="1.2", config_path="config"):
         overrides = []
@@ -103,6 +103,8 @@ def get_config(model: str = None, embedding_model: str = None) -> DictConfig:
             overrides.append(f"model={model}")
         if embedding_model:
             overrides.append(f"embedding_model={embedding_model}")
+        if similarity_threshold:
+            overrides.append(f"similarity_threshold={similarity_threshold}")
         if provider:
             overrides.append(f"provider={provider}")
         config = compose(config_name="config.yaml", overrides=overrides)
@@ -115,6 +117,7 @@ def run_pipeline(
     et_model: str = None,
     ea_model: str = None,
     lp_model: str = None,
+    similarity_threshold: float = 0.6,
     progress=gr.Progress(track_tqdm=False),
 ):
     """Run the entire pipeline in sequence"""
@@ -122,19 +125,20 @@ def run_pipeline(
         return "Please enter some text to process."
 
     try:
-        config = get_config(ie_model, None)
+        config = get_config(ie_model, None, None)
         progress(0, desc="Intelligence Extraction...")
         extraction_result = run_intel_extraction(config, text)
 
-        config = get_config(et_model, None)
+        config = get_config(et_model, None, None)
         progress(0.3, desc="Entity Tagging...")
         tagging_result = run_entity_tagging(config, extraction_result)
 
         progress(0.6, desc="Entity Alignment...")
-        config = get_config(None, ea_model)
+        config = get_config(None, ea_model, similarity_threshold)
+        config.similarity_threshold = similarity_threshold
         alignment_result = run_entity_alignment(config, tagging_result)
 
-        config = get_config(lp_model, None)
+        config = get_config(lp_model, None, None)
         progress(0.9, desc="Link Prediction...")
         linking_result = run_link_prediction(config, alignment_result)
 
@@ -221,7 +225,7 @@ def build_interface(warning: str = None):
                 )
 
                 with gr.Row():
-                    with gr.Column():
+                    with gr.Column(scale=1):
                         provider_dropdown = gr.Dropdown(
                             choices=list(MODELS.keys()),
                             label="AI Provider",
@@ -229,20 +233,22 @@ def build_interface(warning: str = None):
                             if "OpenAI" in MODELS
                             else list(MODELS.keys())[0],
                         )
-                    with gr.Column():
+                    with gr.Column(scale=2):
                         ie_dropdown = gr.Dropdown(
                             choices=get_model_choices(provider_dropdown.value),
                             label="Intelligence Extraction Model",
                             value=get_model_choices(provider_dropdown.value)[0][1],
                         )
-                with gr.Row():
-                    with gr.Column():
+
+                    with gr.Column(scale=2):
                         et_dropdown = gr.Dropdown(
                             choices=get_model_choices(provider_dropdown.value),
                             label="Entity Tagging Model",
                             value=get_model_choices(provider_dropdown.value)[0][1],
                         )
-                    with gr.Column():
+                with gr.Row():
+                    
+                    with gr.Column(scale=2):
                         ea_dropdown = gr.Dropdown(
                             choices=get_embedding_model_choices(
                                 provider_dropdown.value
@@ -252,12 +258,21 @@ def build_interface(warning: str = None):
                                 0
                             ][1],
                         )
-                    with gr.Column():
+                    with gr.Column(scale=1):
+                        similarity_slider = gr.Slider(
+                            minimum=0.0,
+                            maximum=1.0,
+                            value=0.6,
+                            step=0.05,
+                            label="Alignment Threshold (higher = more strict)",
+                        )
+                    with gr.Column(scale=2):
                         lp_dropdown = gr.Dropdown(
                             choices=get_model_choices(provider_dropdown.value),
                             label="Link Prediction Model",
                             value=get_model_choices(provider_dropdown.value)[0][1],
                         )
+                    
                 run_all_button = gr.Button("Run", variant="primary")
         with gr.Row():
             metrics_table = gr.Markdown(
@@ -307,7 +322,7 @@ def build_interface(warning: str = None):
             outputs=[results_box, graph_output, metrics_table],
         ).then(
             fn=process_and_visualize,
-            inputs=[text_input, ie_dropdown, et_dropdown, ea_dropdown, lp_dropdown],
+            inputs=[text_input, ie_dropdown, et_dropdown, ea_dropdown, lp_dropdown, similarity_slider],
             outputs=[results_box, graph_output, metrics_table],
         )
 
@@ -335,10 +350,10 @@ def get_embedding_model_choices(provider):
 
 
 def process_and_visualize(
-    text, ie_model, et_model, ea_model, lp_model, progress=gr.Progress(track_tqdm=False)
+    text, ie_model, et_model, ea_model, lp_model, similarity_threshold, progress=gr.Progress(track_tqdm=False)
 ):
     # Run pipeline with progress tracking
-    result = run_pipeline(text, ie_model, et_model, ea_model, lp_model, progress)
+    result = run_pipeline(text, ie_model, et_model, ea_model, lp_model, similarity_threshold, progress)
     if result.startswith("Error:"):
         return (
             result,
