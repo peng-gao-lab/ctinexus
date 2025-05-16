@@ -67,8 +67,8 @@ def run_entity_typing(config: DictConfig, result: dict) -> dict:
     return LLMTagger(config).call(result)
 
 
-def run_entity_aggregation(config: DictConfig, result: dict) -> dict:
-    """Wrapper for Entity Aggregation"""
+def run_entity_alignment(config: DictConfig, result: dict) -> dict:
+    """Wrapper for Entity Alignment"""
     preprocessed_result = preprocessor(result)
     merged_result = Merger(config).call(preprocessed_result)
     final_result = PostProcessor(config).call(merged_result)
@@ -126,13 +126,13 @@ def run_pipeline(
         progress(0.3, desc="Entity Typing...")
         typing_result = run_entity_typing(config, extraction_result)
 
-        progress(0.6, desc="Entity Aggregation...")
+        progress(0.6, desc="Entity Alignment...")
         config = get_config(None, ea_model)
-        aggregation_result = run_entity_aggregation(config, typing_result)
+        alignment_result = run_entity_alignment(config, typing_result)
 
         config = get_config(lp_model, None)
         progress(0.9, desc="Link Prediction...")
-        linking_result = run_link_prediction(config, aggregation_result)
+        linking_result = run_link_prediction(config, alignment_result)
 
         progress(1.0, desc="Processing complete!")
 
@@ -180,8 +180,8 @@ def build_interface(warning: str = None):
                 }
                 
                 .shadowbox {
-                    background: #27272a !important;
-                    border: 1px solid #444444 !important;
+                    background: var(--input-background-fill); !important;
+                    border: 1px solid var(--block-border-color) !important;
                     border-radius: 4px !important;
                     padding: 8px !important;
                     margin: 4px 0 !important;
@@ -243,7 +243,7 @@ def build_interface(warning: str = None):
                             choices=get_embedding_model_choices(
                                 provider_dropdown.value
                             ),
-                            label="Entity Aggregation Model",
+                            label="Entity Alignment Model",
                             value=get_embedding_model_choices(provider_dropdown.value)[
                                 0
                             ][1],
@@ -317,7 +317,7 @@ def get_metrics_box(
     lp_metrics: str = "",
 ):
     """Generate metrics box HTML with optional metrics values"""
-    return f'<div class="shadowbox"><table style="width: 100%; text-align: center; border-collapse: collapse;"><tr><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Information Extraction</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Typing</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Aggregation</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Link Prediction</th></tr><tr><td>{ie_metrics or ""}</td><td>{et_metrics or ""}</td><td>{ea_metrics or ""}</td><td>{lp_metrics or ""}</td></tr></table></div>'
+    return f'<div class="shadowbox"><table style="width: 100%; text-align: center; border-collapse: collapse;"><tr><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Information Extraction</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Typing</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Alignment</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Link Prediction</th></tr><tr><td>{ie_metrics or ""}</td><td>{et_metrics or ""}</td><td>{ea_metrics or ""}</td><td>{lp_metrics or ""}</td></tr></table></div>'
 
 
 def get_model_choices(provider):
