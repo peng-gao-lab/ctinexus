@@ -124,11 +124,11 @@ def run_pipeline(
 
         config = get_config(et_model, None)
         progress(0.3, desc="Entity Tagging...")
-        tagging_result = run_entity_typing(config, extraction_result)
+        tagging_result = run_entity_tagging(config, extraction_result)
 
         progress(0.6, desc="Entity Alignment...")
         config = get_config(None, ea_model)
-        alignment_result = run_entity_alignment(config, typing_result)
+        alignment_result = run_entity_alignment(config, tagging_result)
 
         config = get_config(lp_model, None)
         progress(0.9, desc="Link Prediction...")
