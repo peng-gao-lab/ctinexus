@@ -27,6 +27,9 @@ def check_api_key() -> bool:
             "o3": "o3 — Most powerful reasoning model ($10 • $40)",
             "gpt-4.1": "GPT-4.1 — Flagship GPT model for complex tasks ($2 • $8)",
             "gpt-4o": "GPT-4o — Fast, intelligent, flexible GPT model ($2.5 • $10)",
+            "gpt-4": "GPT-4 — An older high-intelligence GPT model ($30 • $60)",
+            "gpt-4-turbo": "GPT-4 Turbo — An older high-intelligence GPT model ($10 • $30)",
+            "gpt-3.5-turbo": "GPT-3.5 Turbo — Legacy GPT model for cheaper chat and non-chat tasks ($0.5 • $1.5)",
             "gpt-4.1-mini": "GPT-4.1 Mini — Balanced for intelligence, speed, and cost ($0.4 • $1.6)",
             "gpt-4o-mini": "GPT-4o Mini — Fast, affordable small model for focused tasks ($0.15 • $0.6)",
             "gpt-4.1-nano": "GPT-4.1 Nano — Fastest, most cost-effective GPT-4.1 model ($0.1 • $0.4)",
@@ -34,6 +37,7 @@ def check_api_key() -> bool:
         EMBEDDING_MODELS["OpenAI"] = {
             "text-embedding-3-large": "Text Embedding 3 Large — Most capable embedding model ($0.13)",
             "text-embedding-3-small": "Text Embedding 3 Small — Small embedding model ($0.02)",
+            "text-embedding-ada-002": "Text Embedding Ada 002 — Older embedding model ($0.1)",
         }
     if os.getenv("AWS_ACCESS_KEY_ID"):
         MODELS["AWS"] = {
@@ -52,12 +56,12 @@ def check_api_key() -> bool:
             "meta.llama3-3-70b-instruct-v1:0": "Llama 3.3 70B — Balanced for complex text and coding ($0.75 • $3)",
         }
         EMBEDDING_MODELS["AWS"] = {
-            "amazon.titan-embed-text-v2:0": "Titan Embed Text 2 — Balanced for intelligence and efficiency in text ($0.12)",
+            "amazon.titan-embed-text-v2:0": "Titan Embed Text 2 — Large embedding model ($0.12)",
         }
     return True if MODELS else False
 
 
-def run_extraction(config: DictConfig, text: str = None) -> dict:
+def run_entity_extraction(config: DictConfig, text: str = None) -> dict:
     """Wrapper for Information Extraction"""
     return LLMExtractor(config).call(text)
 
@@ -120,7 +124,7 @@ def run_pipeline(
     try:
         config = get_config(ie_model, None)
         progress(0, desc="Entity Extraction...")
-        extraction_result = run_extraction(config, text)
+        extraction_result = run_entity_extraction(config, text)
 
         config = get_config(et_model, None)
         progress(0.3, desc="Entity Tagging...")

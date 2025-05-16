@@ -7,6 +7,18 @@
         "input": 0.0000025,
         "output": 0.00001
     },
+    "gpt-4": {
+        "input": 0.00003,
+        "output": 0.00006
+    },
+    "gpt-4-turbo": {
+       "input": 0.00001,
+        "output": 0.00003
+    },
+    "gpt-3.5-turbo": {
+        "input": 0.0000005,
+        "output": 0.0000015
+    },
     "gpt-4.1-mini": {
         "input": 0.0000004,
         "output": 0.0000016
@@ -85,6 +97,10 @@
     },
     "text-embedding-3-large": {
         "input": 0.00000013,
+        "output": 0
+    },
+    "text-embedding-ada-002": {
+        "input": 0.0000001,
         "output": 0
     },
     "amazon.titan-embed-text-v2:0": {
