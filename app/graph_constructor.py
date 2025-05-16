@@ -1,5 +1,5 @@
-from collections import defaultdict
 import time
+from collections import defaultdict
 
 import litellm
 import networkx as nx
@@ -129,6 +129,7 @@ class Merger:
         self.usage = {}
         self.response_time = 0
         self.response = {}
+
     def get_embedding(self, text):
         startTime = time.time()
         self.response_time = time.time() - startTime

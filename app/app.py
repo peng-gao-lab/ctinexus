@@ -23,7 +23,7 @@ def check_api_key() -> bool:
     if os.getenv("OPENAI_API_KEY"):
         MODELS["OpenAI"] = {
             "o4-mini": "o4 Mini — Faster, more affordable reasoning model ($1.1 • $4.4)",
-            "o3-mini": "o3 Mini — A small model alternative to o3 ($1.1 • $4.4)",
+            "o3-mini": "o3 Mini — A small reasoning model alternative to o3 ($1.1 • $4.4)",
             "o3": "o3 — Most powerful reasoning model ($10 • $40)",
             "gpt-4.1": "GPT-4.1 — Flagship GPT model for complex tasks ($2 • $8)",
             "gpt-4o": "GPT-4o — Fast, intelligent, flexible GPT model ($2.5 • $10)",
@@ -174,6 +174,10 @@ def build_interface(warning: str = None):
                     display: none !important;
                 }
 
+                .note-text {
+                    text-align: center !important;
+                }
+                
                 .shadowbox {
                     background: #27272a !important;
                     border: 1px solid #444444 !important;
@@ -181,7 +185,6 @@ def build_interface(warning: str = None):
                     padding: 8px !important;
                     margin: 4px 0 !important;
                 }
-                
             </style>
         """)
 
@@ -207,6 +210,11 @@ def build_interface(warning: str = None):
                     placeholder="Enter text for processing...",
                     lines=10,
                 )
+                gr.Markdown(
+                    "**Note:** Entity Extraction does best with a reasoning or full gpt model (e.g. o4-mini, gpt-4.1), Entity Typing tends to need a mid level gpt model (gpt-4o-mini, gpt-4.1-mini).",
+                    elem_classes=["note-text"],
+                )
+
                 with gr.Row():
                     with gr.Column():
                         provider_dropdown = gr.Dropdown(
@@ -231,9 +239,13 @@ def build_interface(warning: str = None):
                         )
                     with gr.Column():
                         ea_dropdown = gr.Dropdown(
-                            choices=get_embedding_model_choices(provider_dropdown.value),
+                            choices=get_embedding_model_choices(
+                                provider_dropdown.value
+                            ),
                             label="Entity Aggregation Model",
-                            value=get_embedding_model_choices(provider_dropdown.value)[0][1],
+                            value=get_embedding_model_choices(provider_dropdown.value)[
+                                0
+                            ][1],
                         )
                     with gr.Column():
                         lp_dropdown = gr.Dropdown(
@@ -267,8 +279,15 @@ def build_interface(warning: str = None):
             provider,
         ) -> tuple[gr.Dropdown, gr.Dropdown, gr.Dropdown]:
             model_dropdown = gr.Dropdown(choices=get_model_choices(provider))
-            embedded_model_dropdown = gr.Dropdown(choices=get_embedding_model_choices(provider))
-            return model_dropdown, model_dropdown, embedded_model_dropdown, model_dropdown
+            embedded_model_dropdown = gr.Dropdown(
+                choices=get_embedding_model_choices(provider)
+            )
+            return (
+                model_dropdown,
+                model_dropdown,
+                embedded_model_dropdown,
+                model_dropdown,
+            )
 
         # Connect buttons to their respective functions
         provider_dropdown.change(
@@ -290,6 +309,7 @@ def get_model_choices(provider):
     """Get model choices with descriptions for the dropdown"""
     return [(desc, key) for key, desc in MODELS[provider].items()]
 
+
 def get_embedding_model_choices(provider):
     """Get model choices with descriptions for the dropdown"""
     return [(desc, key) for key, desc in EMBEDDING_MODELS[provider].items()]
@@ -301,7 +321,11 @@ def process_and_visualize(
     # Run pipeline with progress tracking
     result = run_pipeline(text, ie_model, et_model, ea_model, lp_model, progress)
     if result.startswith("Error:"):
-        return result, None, '<div class="shadowbox"><table style="width: 100%; text-align: center; border-collapse: collapse;"><tr><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Information Extraction</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Typing</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Aggregation</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Link Prediction</th></tr><tr><td></td><td></td><td></td><td></td></tr></table></div>'
+        return (
+            result,
+            None,
+            '<div class="shadowbox"><table style="width: 100%; text-align: center; border-collapse: collapse;"><tr><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Information Extraction</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Typing</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Aggregation</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Link Prediction</th></tr><tr><td></td><td></td><td></td><td></td></tr></table></div>',
+        )
     try:
         # Create visualization without progress tracking
         result_dict = json.loads(result)
@@ -317,7 +341,11 @@ def process_and_visualize(
 
         return result, graph_fig, metrics_table
     except Exception as e:
-        return result, None, '<div class="shadowbox"><table style="width: 100%; text-align: center; border-collapse: collapse;"><tr><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Information Extraction</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Typing</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Aggregation</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Link Prediction</th></tr><tr><td></td><td></td><td></td><td></td></tr></table></div>'
+        return (
+            result,
+            None,
+            '<div class="shadowbox"><table style="width: 100%; text-align: center; border-collapse: collapse;"><tr><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Information Extraction</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Typing</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Aggregation</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Link Prediction</th></tr><tr><td></td><td></td><td></td><td></td></tr></table></div>',
+        )
 
 
 def main():
