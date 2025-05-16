@@ -61,8 +61,8 @@ def check_api_key() -> bool:
     return True if MODELS else False
 
 
-def run_entity_extraction(config: DictConfig, text: str = None) -> dict:
-    """Wrapper for Information Extraction"""
+def run_intel_extraction(config: DictConfig, text: str = None) -> dict:
+    """Wrapper for Intelligence Extraction"""
     return LLMExtractor(config).call(text)
 
 
@@ -123,8 +123,8 @@ def run_pipeline(
 
     try:
         config = get_config(ie_model, None)
-        progress(0, desc="Entity Extraction...")
-        extraction_result = run_entity_extraction(config, text)
+        progress(0, desc="Intelligence Extraction...")
+        extraction_result = run_intel_extraction(config, text)
 
         config = get_config(et_model, None)
         progress(0.3, desc="Entity Tagging...")
@@ -216,7 +216,7 @@ def build_interface(warning: str = None):
                     lines=10,
                 )
                 gr.Markdown(
-                    "**Note:** Entity Extraction does best with a reasoning or full gpt model (e.g. o4-mini, gpt-4.1), Entity Tagging tends to need a mid level gpt model (gpt-4o-mini, gpt-4.1-mini).",
+                    "**Note:** Intelligence Extraction does best with a reasoning or full gpt model (e.g. o4-mini, gpt-4.1), Entity Tagging tends to need a mid level gpt model (gpt-4o-mini, gpt-4.1-mini).",
                     elem_classes=["note-text"],
                 )
 
@@ -232,7 +232,7 @@ def build_interface(warning: str = None):
                     with gr.Column():
                         ie_dropdown = gr.Dropdown(
                             choices=get_model_choices(provider_dropdown.value),
-                            label="Entity Extraction Model",
+                            label="Intelligence Extraction Model",
                             value=get_model_choices(provider_dropdown.value)[0][1],
                         )
                 with gr.Row():
@@ -321,7 +321,7 @@ def get_metrics_box(
     lp_metrics: str = "",
 ):
     """Generate metrics box HTML with optional metrics values"""
-    return f'<div class="shadowbox"><table style="width: 100%; text-align: center; border-collapse: collapse;"><tr><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Information Extraction</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Tagging</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Alignment</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Link Prediction</th></tr><tr><td>{ie_metrics or ""}</td><td>{et_metrics or ""}</td><td>{ea_metrics or ""}</td><td>{lp_metrics or ""}</td></tr></table></div>'
+    return f'<div class="shadowbox"><table style="width: 100%; text-align: center; border-collapse: collapse;"><tr><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Intelligence Extraction</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Tagging</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Entity Alignment</th><th style="width: 25%; border-bottom: 1px solid var(--block-border-color);">Link Prediction</th></tr><tr><td>{ie_metrics or ""}</td><td>{et_metrics or ""}</td><td>{ea_metrics or ""}</td><td>{lp_metrics or ""}</td></tr></table></div>'
 
 
 def get_model_choices(provider):
