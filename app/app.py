@@ -24,7 +24,8 @@ def check_api_key() -> bool:
         MODELS["OpenAI"] = {
             "o4-mini": "o4 Mini — Faster, more affordable reasoning model ($1.1 • $4.4)",
             "o3-mini": "o3 Mini — A small reasoning model alternative to o3 ($1.1 • $4.4)",
-            "o3": "o3 — Most powerful reasoning model ($10 • $40)",
+            "o3": "o3 — Most powerful reasoning model ($2 • $8)",
+            "o3-pro": "o3 Pro — Version of o3 with more compute for better responses ($20 • $80)", 
             "gpt-4.1": "GPT-4.1 — Flagship GPT model for complex tasks ($2 • $8)",
             "gpt-4o": "GPT-4o — Fast, intelligent, flexible GPT model ($2.5 • $10)",
             "gpt-4": "GPT-4 — An older high-intelligence GPT model ($30 • $60)",
