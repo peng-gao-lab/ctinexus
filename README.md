@@ -5,9 +5,10 @@
 </div>
 
 <p align="center">
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-lavender.svg" alt="License: MIT"></a>
   <a href='https://github.com/peng-gao-lab/CTINexus'><img src='https://img.shields.io/badge/Project-Github-pink'></a>
   <a href='https://arxiv.org/abs/2410.21060'><img src='https://img.shields.io/badge/Paper-Arxiv-crimson'></a>  
-  <a href='https://ctinexus.github.io/' target='_blank'><img src='https://img.shields.io/badge/Project-Blog-maroon'></a>
+  <a href='https://ctinexus.github.io/' target='_blank'><img src='https://img.shields.io/badge/Project-Blog-turquoise'></a>
 </p>
 
 The repository of **CTINexus**, a novel framework leveraging optimized in-context learning (ICL) of large language models (LLMs) for data-efficient CTI knowledge extraction and high-quality cybersecurity knowledge graph (CSKG) construction. CTINexus requires neither extensive data nor parameter tuning and can adapt to various ontologies with minimal annotated examples.
@@ -80,3 +81,6 @@ We hope our work serves as a foundation for further LLM applications in the CTI 
       organization={IEEE}
 }
 ```
+
+## License
+The source code is licensed under the [MIT](LICENSE.txt) License.
