@@ -5,9 +5,10 @@
 </div>
 
 <p align="center">
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-lavender.svg" alt="License: MIT"></a>
   <a href='https://github.com/peng-gao-lab/CTINexus'><img src='https://img.shields.io/badge/Project-Github-pink'></a>
   <a href='https://arxiv.org/abs/2410.21060'><img src='https://img.shields.io/badge/Paper-Arxiv-crimson'></a>  
-  <a href='https://ctinexus.github.io/' target='_blank'><img src='https://img.shields.io/badge/Project-Blog-maroon'></a>
+  <a href='https://ctinexus.github.io/' target='_blank'><img src='https://img.shields.io/badge/Project-Blog-turquoise'></a>
 </p>
 
 This is a fork of the [CTINexus demo](https://github.com/peng-gao-lab/CTINexus/) which converts it into a containerized micro-service as a proof-of-concept use case, allowing the user to submit text and return the processed framework results along with a visualization of the graph.  It uses [Gradio](https://www.gradio.app/) for the UI.  Please see their project [here](https://ctinexus.github.io/).
@@ -41,3 +42,7 @@ CTINexus composes of the following modules:
       organization={IEEE}
 }
 ```
+
+## License
+The source code is licensed under the [MIT](LICENSE.txt) License. 
+We warmly welcome industry collaboration. If you’re interested in building on CTINexus or exploring joint initiatives, please email yutongcheng@vt.edu—we’d be happy to set up a brief call to discuss ideas.
