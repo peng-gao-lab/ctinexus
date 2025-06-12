@@ -83,4 +83,5 @@ We hope our work serves as a foundation for further LLM applications in the CTI 
 ```
 
 ## License
-The source code is licensed under the [MIT](LICENSE.txt) License.
+The source code is licensed under the [MIT](LICENSE.txt) License. 
+We warmly welcome industry collaboration. If you’re interested in building on CTINexus or exploring joint initiatives, please email yutongcheng@vt.edu—we’d be happy to set up a brief call to discuss ideas.
