@@ -19,6 +19,8 @@ The repository of **CTINexus**, a novel framework leveraging optimized in-contex
 
 
 ## News
+🌟 [2025/06/14] Community spotlight — Jeff’s [fork](https://github.com/eljeffeg/CTINexus) turns CTINexus into a containerized micro-service PoC with a Gradio UI. Submit text and instantly see the extracted intel and interactive graph!
+
 🔥 [2025/04/21] We released the camera-ready paper on [arxiv](https://arxiv.org/pdf/2410.21060). 
 
 🔥 [2025/02/12] CTINexus is accepted at 2025 IEEE European Symposium on Security and Privacy ([Euro S&P](https://eurosp2025.ieee-security.org/index.html)).
