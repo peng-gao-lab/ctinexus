@@ -36,11 +36,12 @@ CTINexus composes of the following modules:
 
 
 
-## Get Start
+## Quick Start
 
-### 1. Datasets
-
-* [Dataset](https://github.com/peng-gao-lab/CTINexus/tree/main/data)
+### 1. Prerequisites
+```bash
+pip install -r requirements.txt
+```
 
 ### 2. Cybersecurity Triplet Extraction
 1. Update the [configuration file](IE/config/example.yaml). To use the optimal settings, simply insert your `OpenAI API key`.
