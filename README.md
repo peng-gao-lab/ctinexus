@@ -22,6 +22,13 @@ The repository of **CTINexus**, a novel framework leveraging optimized in-contex
   <img src="app/static/overview.png" alt="framework" width="500"/>
 </p>
 
+## News
+🌟 [2025/06/14] Community spotlight — Jeff’s [fork](https://github.com/eljeffeg/CTINexus) turns CTINexus into a containerized micro-service PoC with a Gradio UI. Submit text and instantly see the extracted intel and interactive graph!
+
+🔥 [2025/04/21] We released the camera-ready paper on [arxiv](https://arxiv.org/pdf/2410.21060). 
+
+🔥 [2025/02/12] CTINexus is accepted at 2025 IEEE European Symposium on Security and Privacy ([Euro S&P](https://eurosp2025.ieee-security.org/index.html)).
+
 
 ## Introduction
 CTINexus composes of the following modules: 
@@ -30,6 +37,44 @@ CTINexus composes of the following modules:
    * [ET](ET): Groups mentions of the same type.
    * [EM](EM): Merges mentions referring to the same entity with IOC protection.
 * [LP](LP): An long-distance relation prediction technique to further complete the CSKG with missing links.
+
+
+
+## Quick Start
+
+### 1. Prerequisites
+```bash
+pip install -r requirements.txt
+```
+
+### 2. Cybersecurity Triplet Extraction
+1. Update the [configuration file](IE/config/example.yaml). To use the optimal settings, simply insert your `OpenAI API key`.
+2. Run the following script to perform triplet extraction:
+   ```bash
+   sh tools/scripts/ie.sh
+   ```
+
+### 3. Hierarchical Entity Alignment
+#### 3.1 Course-grained Entity Typing
+1. Update the [configuration file](ET/config/example.yaml). To use the optimal settings, simply insert your `OpenAI API key`.
+2. Run the following script to perform triplet extraction:
+   ```bash
+   sh tools/scripts/et.sh
+   ```
+
+#### 3.2 Fine-grained Entity Merging
+1. Update the configuration files ([config1](EM/config/example.yaml), [config2](EM/postprocess/config/example.yaml)). To use the optimal settings, simply insert your `OpenAI API key`.
+2. Run the following script to perform entity alignment:
+   ```bash
+   sh tools/scripts/em.sh
+   ```
+
+### 4. Long-Distance Relation Prediction
+1. Update the [configuration file](LP/config/example.yaml). To use the optimal settings, simply insert your `OpenAI API key`.
+2. Run the following script to predict long-distance relations:
+   ```bash
+   sh tools/scripts/lp.sh
+   ```
 
 
 ## Citation
