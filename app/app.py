@@ -40,6 +40,19 @@ def check_api_key() -> bool:
             "text-embedding-3-small": "Text Embedding 3 Small — Small embedding model ($0.02)",
             "text-embedding-ada-002": "Text Embedding Ada 002 — Older embedding model ($0.1)",
         }
+    
+    if os.getenv("GEMINI_API_KEY"):
+        MODELS["Gemini"] = {
+            "gemini-2.5-pro": "Gemini 2.5 Pro — Most powerful thinking model with maximum response accuracy ($1.25 • $10)",
+            "gemini-2.5-flash": "Gemini 2.5 Flash — Best price-performance with adaptive thinking ($0.30 • $2.50)",
+            "gemini-2.5-flash-lite": "Gemini 2.5 Flash-Lite — Most cost-efficient for high throughput ($0.10 • $0.40)",
+            "gemini-2.0-flash": "Gemini 2.0 Flash — Balanced multimodal model for agents ($0.10 • $0.40)",
+            "gemini-2.0-flash-lite": "Gemini 2.0 Flash-Lite — Smallest, most cost-effective ($0.075 • $0.30)",
+        }
+        EMBEDDING_MODELS["Gemini"] = {
+            "gemini-embedding-001": "Gemini Embedding — Text embeddings for relatedness ($0.15)",
+        }
+
     if os.getenv("AWS_ACCESS_KEY_ID"):
         MODELS["AWS"] = {
             "anthropic.claude-3-7-sonnet": "Claude 3.7 Sonnet — Advanced reasoning for complex text tasks ($3 • $15)",
@@ -58,18 +71,6 @@ def check_api_key() -> bool:
         }
         EMBEDDING_MODELS["AWS"] = {
             "amazon.titan-embed-text-v2:0": "Titan Embed Text 2 — Large embedding model ($0.12)",
-        }
-    
-    if os.getenv("GEMINI_API_KEY"):
-        MODELS["Gemini"] = {
-            "gemini-2.5-pro": "Gemini 2.5 Pro — Most powerful thinking model with maximum response accuracy ($1.25 • $10)",
-            "gemini-2.5-flash": "Gemini 2.5 Flash — Best price-performance with adaptive thinking ($0.30 • $2.50)",
-            "gemini-2.5-flash-lite": "Gemini 2.5 Flash-Lite — Most cost-efficient for high throughput ($0.10 • $0.40)",
-            "gemini-2.0-flash": "Gemini 2.0 Flash — Balanced multimodal model for agents ($0.10 • $0.40)",
-            "gemini-2.0-flash-lite": "Gemini 2.0 Flash-Lite — Smallest, most cost-effective ($0.075 • $0.30)",
-        }
-        EMBEDDING_MODELS["Gemini"] = {
-            "gemini-embedding-001": "Gemini Embedding — Text embeddings for relatedness ($0.15)",
         }
 
     return True if MODELS else False
@@ -199,7 +200,7 @@ def build_interface(warning: str = None):
 
                 .note-text {
                     text-align: center !important;
-                }
+                }            
                 
                 .shadowbox {
                     background: var(--input-background-fill); !important;
@@ -241,24 +242,24 @@ def build_interface(warning: str = None):
                 with gr.Row():
                     with gr.Column(scale=1):
                         provider_dropdown = gr.Dropdown(
-                            choices=list(MODELS.keys()),
+                            choices=list(MODELS.keys()) if MODELS else [],
                             label="AI Provider",
                             value="OpenAI"
                             if "OpenAI" in MODELS
-                            else list(MODELS.keys())[0],
+                            else (list(MODELS.keys())[0] if MODELS else None),
                         )
                     with gr.Column(scale=2):
                         ie_dropdown = gr.Dropdown(
-                            choices=get_model_choices(provider_dropdown.value),
+                            choices=get_model_choices(provider_dropdown.value) if provider_dropdown.value else [],
                             label="Intelligence Extraction Model",
-                            value=get_model_choices(provider_dropdown.value)[0][1],
+                            value=get_model_choices(provider_dropdown.value)[0][1] if provider_dropdown.value and get_model_choices(provider_dropdown.value) else None,
                         )
 
                     with gr.Column(scale=2):
                         et_dropdown = gr.Dropdown(
-                            choices=get_model_choices(provider_dropdown.value),
+                            choices=get_model_choices(provider_dropdown.value) if provider_dropdown.value else [],
                             label="Entity Tagging Model",
-                            value=get_model_choices(provider_dropdown.value)[0][1],
+                            value=get_model_choices(provider_dropdown.value)[0][1] if provider_dropdown.value and get_model_choices(provider_dropdown.value) else None,
                         )
                 with gr.Row():
                     
@@ -266,11 +267,11 @@ def build_interface(warning: str = None):
                         ea_dropdown = gr.Dropdown(
                             choices=get_embedding_model_choices(
                                 provider_dropdown.value
-                            ),
+                            ) if provider_dropdown.value else [],
                             label="Entity Alignment Model",
                             value=get_embedding_model_choices(provider_dropdown.value)[
                                 0
-                            ][1],
+                            ][1] if provider_dropdown.value and get_embedding_model_choices(provider_dropdown.value) else None,
                         )
                     with gr.Column(scale=1):
                         similarity_slider = gr.Slider(
@@ -282,9 +283,9 @@ def build_interface(warning: str = None):
                         )
                     with gr.Column(scale=2):
                         lp_dropdown = gr.Dropdown(
-                            choices=get_model_choices(provider_dropdown.value),
+                            choices=get_model_choices(provider_dropdown.value) if provider_dropdown.value else [],
                             label="Link Prediction Model",
-                            value=get_model_choices(provider_dropdown.value)[0][1],
+                            value=get_model_choices(provider_dropdown.value)[0][1] if provider_dropdown.value and get_model_choices(provider_dropdown.value) else None,
                         )
                     
                 run_all_button = gr.Button("Run", variant="primary")
@@ -311,16 +312,33 @@ def build_interface(warning: str = None):
 
         def update_model_choices(
             provider,
-        ) -> tuple[gr.Dropdown, gr.Dropdown, gr.Dropdown]:
-            model_dropdown = gr.Dropdown(choices=get_model_choices(provider))
-            embedded_model_dropdown = gr.Dropdown(
-                choices=get_embedding_model_choices(provider)
+        ) -> tuple[gr.Dropdown, gr.Dropdown, gr.Dropdown, gr.Dropdown]:
+            model_choices = get_model_choices(provider)
+            embedding_choices = get_embedding_model_choices(provider)
+            
+            # Create dropdowns with updated choices and default values
+            ie_dropdown_update = gr.Dropdown(
+                choices=model_choices,
+                value=model_choices[0][1] if model_choices else None
             )
+            et_dropdown_update = gr.Dropdown(
+                choices=model_choices,
+                value=model_choices[0][1] if model_choices else None
+            )
+            ea_dropdown_update = gr.Dropdown(
+                choices=embedding_choices,
+                value=embedding_choices[0][1] if embedding_choices else None
+            )
+            lp_dropdown_update = gr.Dropdown(
+                choices=model_choices,
+                value=model_choices[0][1] if model_choices else None
+            )
+            
             return (
-                model_dropdown,
-                model_dropdown,
-                embedded_model_dropdown,
-                model_dropdown,
+                ie_dropdown_update,
+                et_dropdown_update,
+                ea_dropdown_update,
+                lp_dropdown_update,
             )
 
         # Connect buttons to their respective functions
@@ -355,11 +373,15 @@ def get_metrics_box(
 
 def get_model_choices(provider):
     """Get model choices with descriptions for the dropdown"""
+    if not provider or provider not in MODELS:
+        return []
     return [(desc, key) for key, desc in MODELS[provider].items()]
 
 
 def get_embedding_model_choices(provider):
     """Get model choices with descriptions for the dropdown"""
+    if not provider or provider not in EMBEDDING_MODELS:
+        return []
     return [(desc, key) for key, desc in EMBEDDING_MODELS[provider].items()]
 
 
@@ -388,7 +410,7 @@ def process_and_visualize(
         metrics_table = get_metrics_box(ie_metrics, et_metrics, ea_metrics, lp_metrics)
 
         return result, graph_fig, metrics_table
-    except Exception as e:
+    except Exception:
         return (
             result,
             None,
@@ -402,10 +424,10 @@ def clear_outputs():
 
 
 def main():
-    # Accept "text as an argument via command line
+    # Accept "text" as an argument via command line
     warning = None
     if not check_api_key():
-        warning = "⚠️ **Warning: OPENAI_API_KEY environment variable is not set in the .env file. The application will not function correctly.**"
+        warning = "⚠️   Warning: No API Keys Configured. Please provide one API key in the `.env` file from the supported providers.\n"
         print(warning)
 
     if len(sys.argv) > 1:
