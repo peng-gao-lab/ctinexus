@@ -176,9 +176,12 @@ cython_debug/
 output/*
 outputs/*
 
-#macOS
+# macOS
 .DS_Store
 
-#Gradio
+# Gradio
 .gradio/*
 app/.gradio/*
+
+# .vscode
+.vscode/*
