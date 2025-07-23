@@ -7,12 +7,20 @@ import time
 from functools import wraps
 
 import litellm
+import nltk
 import numpy as np
 import pandas as pd
 from jinja2 import Environment, FileSystemLoader, meta
 from nltk.corpus import stopwords
 from omegaconf import DictConfig
 from sklearn.feature_extraction.text import TfidfVectorizer
+
+# Download NLTK stopwords if not already present
+try:
+    stopwords.words("english")
+except LookupError:
+    print("Downloading NLTK stopwords...")
+    nltk.download("stopwords", quiet=True)
 
 logger = logging.getLogger(__name__)
 litellm.drop_params = True
