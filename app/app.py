@@ -59,6 +59,19 @@ def check_api_key() -> bool:
         EMBEDDING_MODELS["AWS"] = {
             "amazon.titan-embed-text-v2:0": "Titan Embed Text 2 — Large embedding model ($0.12)",
         }
+    
+    if os.getenv("GEMINI_API_KEY"):
+        MODELS["Gemini"] = {
+            "gemini-2.5-pro": "Gemini 2.5 Pro — Most powerful thinking model with maximum response accuracy ($1.25 • $10)",
+            "gemini-2.5-flash": "Gemini 2.5 Flash — Best price-performance with adaptive thinking ($0.30 • $2.50)",
+            "gemini-2.5-flash-lite": "Gemini 2.5 Flash-Lite — Most cost-efficient for high throughput ($0.10 • $0.40)",
+            "gemini-2.0-flash": "Gemini 2.0 Flash — Balanced multimodal model for agents ($0.10 • $0.40)",
+            "gemini-2.0-flash-lite": "Gemini 2.0 Flash-Lite — Smallest, most cost-effective ($0.075 • $0.30)",
+        }
+        EMBEDDING_MODELS["Gemini"] = {
+            "gemini-embedding-001": "Gemini Embedding — Text embeddings for relatedness ($0.15)",
+        }
+
     return True if MODELS else False
 
 

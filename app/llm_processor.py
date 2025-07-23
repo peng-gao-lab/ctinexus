@@ -215,6 +215,14 @@ class LLMCaller:
                     max_tokens=self.max_tokens,
                     response_format={"type": "json_object"},
                 )
+            elif "gemini" in model_id:
+                response = litellm.completion(
+                    model=f"gemini/{model_id}",
+                    messages=[{"role": "user", "content": self.prompt[-1]["content"]}],
+                    max_tokens=self.max_tokens,
+                    temperature=0.8,
+                    response_format={"type": "json_object"},
+                )
             elif "meta" in model_id:
                 response = litellm.completion(
                     model=model_id,

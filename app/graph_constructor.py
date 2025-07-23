@@ -133,8 +133,13 @@ class Merger:
     def get_embeddings(self, texts):
         """Get embeddings for multiple texts in a single API call"""
         startTime = time.time()
+        
+        embedding_model = self.config.embedding_model
+        if "gemini" in embedding_model:
+            embedding_model = f"gemini/{embedding_model}"
+        
         self.response = litellm.embedding(
-            model=self.config.embedding_model, input=texts
+            model=embedding_model, input=texts
         )
         self.usage = UsageCalculator(self.config, self.response).calculate()
         self.response_time = time.time() - startTime
