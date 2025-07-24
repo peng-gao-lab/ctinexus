@@ -1,36 +1,38 @@
-# Base configuration with common settings
-api_key: ${oc.env:OPENAI_API_KEY}  # Will be populated from environment variable 
+# =============================================================================
+#                       CTINexus Configuration
+# =============================================================================
 
-provider: OpenAI
-model: gpt-4.1 #default model
+# API Configuration
+api_key: ${oc.env:OPENAI_API_KEY}  # Populated from environment variable
 
-# Prompt setting
-merge_prompt_folder: app/prompts
+# Model Settings
+provider: OpenAI                              # AI provider (OpenAI, Gemini, AWS)
+model: gpt-4.1                               # Default model for text generation
+embedding_model: text-embedding-3-large      # Model for vector embeddings
+
+# Entity Alignment Configuration
+merge_prompt_folder: prompts
 merge_prompt_file: merge-IOC.jinja
 
-# LLM setting
-embedding_model: text-embedding-3-large
+# Similarity threshold for entity matching
+similarity_threshold: 0.6  # Range: 0.0-1.0, higher = more strict matching
 
-# Merging setting
-similarity_threshold: 0.6 #choose your similarity threshold
-
-# Prompt setting
-tag_prompt_folder: app/prompts
+# Entity Tagging Configuration
+tag_prompt_folder: prompts
 tag_prompt_file: et.jinja
 
-### demonstration setting
+# Demonstration Retrieval Settings
+# How similar examples are selected for few-shot learning
 retriever:
-  type: "kNN" #retriever type
-  permutation: asc #the permutation of the kNN
-shot: 3 #k of the kNN
+  type: "kNN"         # Retrieval method: "kNN" or "random"
+  permutation: asc    # Sort order for k-nearest neighbors
+shot: 3               # Number of examples to include (k in k-NN)
+demoSet: data/demo    # Directory containing demonstration examples
 
-### prompt setting
-ie_prompt_set: app/prompts #the folder stored the prompt templates 
-ie_templ: ie.jinja #used prompt template
+# Intelligence Extraction Configuration
+ie_prompt_set: prompts  # Directory containing prompt templates
+ie_templ: ie.jinja      # Template file for intelligence extraction
 
-## prompt constructor
-link_prompt_folder: app/prompts
+# Link Prediction Configuration
+link_prompt_folder: prompts
 link_prompt_file: link.jinja
-
-
-demoSet: app/data/demo

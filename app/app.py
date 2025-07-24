@@ -8,7 +8,7 @@ from cti_processor import PostProcessor, preprocessor
 from dotenv import load_dotenv
 from graph_constructor import Linker, Merger, create_graph_visualization
 from hydra import compose, initialize
-from llm_processor import LLMExtractor, LLMTagger
+from llm_processor import LLMExtractor, LLMTagger, resolve_path
 from omegaconf import DictConfig
 
 load_dotenv()
@@ -213,7 +213,7 @@ def build_interface(warning: str = None):
         """)
 
         gr.Image(
-            value="app/static/logo.png",
+            value=resolve_path("static", "logo.png"),
             width=100,
             height=100,
             show_label=False,

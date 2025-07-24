@@ -26,6 +26,22 @@ logger = logging.getLogger(__name__)
 litellm.drop_params = True
 
 
+# Define base directory
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+def resolve_path(*relative_path):
+    """
+    Resolve paths relative to the current module's location.
+    
+    Args:
+        *relative_path: Path components to join
+        
+    Returns:
+        str: Absolute path relative to this module's location
+    """
+    return os.path.join(BASE_DIR, *relative_path)
+
+
 def with_retry(max_attempts=5):
     """Decorator to handle retry logic for API calls"""
 
@@ -71,7 +87,8 @@ class LLMTagger:
         return result
 
     def generate_prompt(self, triples):
-        env = Environment(loader=FileSystemLoader(self.config.tag_prompt_folder))
+        tag_prompt_folder = self.config.tag_prompt_folder
+        env = Environment(loader=FileSystemLoader(resolve_path(tag_prompt_folder)))
         template_file = env.loader.get_source(env, self.config.tag_prompt_file)[0]
         template = env.get_template(self.config.tag_prompt_file)
         vars = meta.find_undeclared_variables(env.parse(template_file))
@@ -178,7 +195,8 @@ class LLMLinker:
         return LP
 
     def generate_prompt(self, main_node):
-        env = Environment(loader=FileSystemLoader(self.config.link_prompt_folder))
+        link_prompt_folder = self.config.link_prompt_folder
+        env = Environment(loader=FileSystemLoader(resolve_path(link_prompt_folder)))
         parsed_template = env.parse(
             env.loader.get_source(env, self.config.link_prompt_file)[0]
         )
@@ -319,14 +337,14 @@ class PromptConstructor:
 
     def generate_prompt(self) -> list[dict]:
         try:
-            if not self.config.ie_prompt_set or not os.path.isdir(
-                self.config.ie_prompt_set
-            ):
+            ie_prompt_set = self.config.ie_prompt_set
+            resolved_prompt_set = resolve_path(ie_prompt_set)
+            if not resolved_prompt_set or not os.path.isdir(resolved_prompt_set):
                 raise ValueError(
                     f"Invalid template directory: {self.config.ie_prompt_set}"
                 )
 
-            env = Environment(loader=FileSystemLoader(self.config.ie_prompt_set))
+            env = Environment(loader=FileSystemLoader(resolved_prompt_set))
             DymTemplate = self.templ
             template_source = env.loader.get_source(env, DymTemplate)[0]
             parsed_content = env.parse(template_source)
@@ -377,7 +395,7 @@ class UsageCalculator:
         self.model = config.model
 
     def calculate(self):
-        with open("app/config/cost.json", "r") as f:
+        with open(resolve_path("config", "cost.json"), "r") as f:
             data = json.load(f)
 
         if self.model not in data:
@@ -419,8 +437,11 @@ class DemoRetriever:
     def retrieveRandomDemo(self, k):
         documents = []
 
-        for CTI_folder in os.listdir(self.config.demo_set):
-            CTIfolderPath = os.path.join(self.config.demo_set, CTI_folder)
+        demo_path_parts = self.config.demoSet.split("/")
+        demo_path = resolve_path(*demo_path_parts)
+        
+        for CTI_folder in os.listdir(demo_path):
+            CTIfolderPath = os.path.join(demo_path, CTI_folder)
 
             for JSONfile in os.listdir(CTIfolderPath):
                 with open(os.path.join(CTIfolderPath, JSONfile), "r") as f:
@@ -458,8 +479,11 @@ class DemoRetriever:
 
         documents = []
 
-        for JSONfile in os.listdir(self.config.demoSet):
-            with open(os.path.join(self.config.demoSet, JSONfile), "r") as f:
+        demo_path_parts = self.config.demoSet.split("/")
+        demo_path = resolve_path(*demo_path_parts)
+
+        for JSONfile in os.listdir(demo_path):
+            with open(os.path.join(demo_path, JSONfile), "r") as f:
                 js = json.load(f)
                 documents.append((js["text"], JSONfile))
 
@@ -497,10 +521,13 @@ class DemoRetriever:
                 demoFileName = demo[0][1]
                 demoSimilarity = demo[1]
 
-                for JSONfile in os.listdir(self.config.demoSet):
+                demo_path_parts = self.config.demoSet.split("/")
+                demo_path = resolve_path(*demo_path_parts)
+
+                for JSONfile in os.listdir(demo_path):
                     if JSONfile == demoFileName:
                         with open(
-                            os.path.join(self.config.demoSet, JSONfile), "r"
+                            os.path.join(demo_path, JSONfile), "r"
                         ) as f:
                             js = json.load(f)
                             ConsturctedDemos.append(
