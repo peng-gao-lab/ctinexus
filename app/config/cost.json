@@ -111,14 +111,6 @@
         "input": 0.00000012,
         "output": 0
     },
-    "gemini-2.5-pro": {
-        "input": 0.00000125,
-        "output": 0.00001
-    },
-    "gemini-2.5-flash": {
-        "input": 0.0000003,
-        "output": 0.0000025
-    },
     "gemini-2.5-flash-lite": {
         "input": 0.0000001,
         "output": 0.0000004
