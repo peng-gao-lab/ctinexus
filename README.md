@@ -1,6 +1,6 @@
 <!-- # <p align=center>`CTINEXUS: Automatic Cyber Threat Intelligence Knowledge Graph Construction Using Large Language Models`</p>omit in toc -->
 <div align="center">
-  <img src="assets/logo!.png" alt="Logo" width="200">
+  <img src="app/static/logo.png" alt="Logo" width="200">
   <h1 align="center">Automatic Cyber Threat Intelligence Knowledge Graph Construction Using Large Language Models</h1>
 </div>
 
@@ -11,12 +11,16 @@
   <a href='https://ctinexus.github.io/' target='_blank'><img src='https://img.shields.io/badge/Project-Blog-turquoise'></a>
 </p>
 
-The repository of **CTINexus**, a novel framework leveraging optimized in-context learning (ICL) of large language models (LLMs) for data-efficient CTI knowledge extraction and high-quality cybersecurity knowledge graph (CSKG) construction. CTINexus requires neither extensive data nor parameter tuning and can adapt to various ontologies with minimal annotated examples.
+This is a fork of the [CTINexus demo](https://github.com/peng-gao-lab/CTINexus/) which converts it into a containerized micro-service as a proof-of-concept use case, allowing the user to submit text and return the processed framework results along with a visualization of the graph.  It uses [Gradio](https://www.gradio.app/) for the UI.  Please see their project [here](https://ctinexus.github.io/).
 <p align="center">
-  <img src="assets/overview.png" alt="framework" width="500"/>
+  <img src="app/static/webapp.png" alt="framework" width="500"/>
 </p>
 
 
+The repository of **CTINexus**, a novel framework leveraging optimized in-context learning (ICL) of large language models (LLMs) for data-efficient CTI knowledge extraction and high-quality cybersecurity knowledge graph (CSKG) construction. CTINexus requires neither extensive data nor parameter tuning and can adapt to various ontologies with minimal annotated examples.
+<p align="center">
+  <img src="app/static/overview.png" alt="framework" width="500"/>
+</p>
 
 ## News
 🌟 [2025/06/14] Community spotlight — Jeff’s [fork](https://github.com/eljeffeg/CTINexus) turns CTINexus into a containerized micro-service PoC with a Gradio UI. Submit text and instantly see the extracted intel and interactive graph!
@@ -74,7 +78,6 @@ pip install -r requirements.txt
 
 
 ## Citation
-We hope our work serves as a foundation for further LLM applications in the CTI analysis community. If you find it helpful for your research, please consider citing our paper! ❤️
 ```
 @inproceedings{cheng2025ctinexusautomaticcyberthreat,
       title={CTINexus: Automatic Cyber Threat Intelligence Knowledge Graph Construction Using Large Language Models}, 

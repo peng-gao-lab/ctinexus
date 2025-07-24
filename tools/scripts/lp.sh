@@ -1,1 +1,0 @@
-python LP/main.py

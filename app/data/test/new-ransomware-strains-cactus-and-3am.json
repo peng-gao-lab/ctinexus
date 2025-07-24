@@ -1,0 +1,247 @@
+{
+    "text": "In May 2023, Kroll Cyber Threat Intelligence analysts published their discoveries of a new ransomware variant referred to as CACTUS, which has been actively targeting large commercial entities since March 2023. The name CACTUS is derived from the filename found within the ransom note, cAcTuS.readme.txt, and is also self-declared within the note. Encrypted files carry the extension .cts1, although variations in the appended number have been observed across different incidents and victims. CACTUS uses a unique tactic by requiring a key for decrypting the binary, likely implemented to evade antivirus detection. This key is embedded within a file named ntuser.dat, loaded through a scheduled task. Kroll's research noted instances of data exfiltration and victim extortion over Tox, a peer-to-peer messaging service, but no known victim leak site was identified.In its operations, CACTUS demonstrates a consistent set of tactics, techniques, and procedures (TTPs). The initial exploit involves the exploitation of vulnerable VPN appliances, a prevalent method observed across multiple CACTUS incidents. Once inside the network, the threat actor conducts internal scouting using tools like SoftPerfect Network Scanner and PowerShell commands to enumerate endpoints, identify user accounts, and ping remote endpoints. To maintain persistence, CACTUS deploys various remote access methods, including legitimate tools like Splashtop, AnyDesk, and SuperOps RMM, along with malicious tools like Cobalt Strike and Chisel. The threat actor attempts to disable security software using custom scripts, such as TotalExec, and uninstall common antivirus software.",
+    "explicit_triplets": [
+        {
+            "subject": "Kroll Cyber Threat Intelligence analysts",
+            "relation": "published discoveries about",
+            "object": "CACTUS"
+        },
+        {
+            "subject": "CACTUS",
+            "relation": "is",
+            "object": "a ransomware variant"
+        },
+        {
+            "subject": "CACTUS",
+            "relation": "has been targeting",
+            "object": "large commercial entities"
+        },
+        {
+            "subject": "CACTUS",
+            "relation": "has been active since",
+            "object": "March 2023"
+        },
+        {
+            "subject": "Encrypted files",
+            "relation": "carry extension",
+            "object": ".cts1"
+        },
+        {
+            "subject": "CACTUS",
+            "relation": "requires a key for",
+            "object": "decrypting the binary"
+        },
+        {
+            "subject": "key",
+            "relation": "embedded within file",
+            "object": "ntuser.dat"
+        },
+        {
+            "subject": "CACTUS",
+            "relation": "performs",
+            "object": "data exfiltration"
+        },
+        {
+            "subject": "CACTUS",
+            "relation": "performs extortion via",
+            "object": "Tox"
+        },
+        {
+            "subject": "CACTUS",
+            "relation": "exploits",
+            "object": "vulnerable VPN appliances"
+        },
+        {
+            "subject": "CACTUS",
+            "relation": "uses tool for scouting",
+            "object": "SoftPerfect Network Scanner"
+        },
+        {
+            "subject": "CACTUS",
+            "relation": "uses tool for scouting",
+            "object": "PowerShell commands"
+        },
+        {
+            "subject": "CACTUS",
+            "relation": "deploys remote access methods",
+            "object": "Splashtop"
+        },
+        {
+            "subject": "CACTUS",
+            "relation": "deploys remote access methods",
+            "object": "AnyDesk"
+        },
+        {
+            "subject": "CACTUS",
+            "relation": "deploys remote access methods",
+            "object": "SuperOps RMM"
+        },
+        {
+            "subject": "CACTUS",
+            "relation": "deploys remote access methods",
+            "object": "Cobalt Strike"
+        },
+        {
+            "subject": "CACTUS",
+            "relation": "deploys remote access methods",
+            "object": "Chisel"
+        },
+        {
+            "subject": "CACTUS",
+            "relation": "disables security software using",
+            "object": "TotalExec"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Kroll Cyber Threat Intelligence analysts",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "CACTUS",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "a ransomware variant",
+            "entity_type": "Malware Characteristic:Variants",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "large commercial entities",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "March 2023",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Encrypted files",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": ".cts1",
+            "entity_type": "Malware Characteristic:Feature",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "decrypting the binary",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "key",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "ntuser.dat",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "data exfiltration",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "Tox",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "vulnerable VPN appliances",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "SoftPerfect Network Scanner",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "PowerShell commands",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 15,
+            "entity_name": "Splashtop",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 16,
+            "entity_name": "AnyDesk",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 17,
+            "entity_name": "SuperOps RMM",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 18,
+            "entity_name": "Cobalt Strike",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 19,
+            "entity_name": "Chisel",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 20,
+            "entity_name": "TotalExec",
+            "entity_type": "Tool",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 5,
+                "entity_text": "Encrypted files"
+            },
+            "relation": "are generated by",
+            "object": {
+                "entity_id": 1,
+                "entity_text": "CACTUS"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 9,
+                "entity_text": "ntuser.dat"
+            },
+            "relation": "is used by",
+            "object": {
+                "entity_id": 1,
+                "entity_text": "CACTUS"
+            }
+        }
+    ]
+}
