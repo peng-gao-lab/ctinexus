@@ -55,7 +55,7 @@ python app.py --input-file report.txt --model gpt-4o --embedding-model text-embe
 
 ### Fine-Grained Model Control
 
-The default models can be overriden with specific models for specific tasks in the pipeline:
+The default models can be overridden with specific models for specific tasks in the pipeline:
 
 | Option | Description |
 |--------|-------------|
