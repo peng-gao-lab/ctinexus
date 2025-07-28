@@ -440,14 +440,16 @@ def create_graph_visualization(result: dict) -> go.Figure:
             ),
             showlegend=True,
             hovermode="closest",
-            dragmode="pan",  # Set default drag mode to pan
-            margin=dict(b=20, l=5, r=5, t=40),
+            dragmode="pan",
+            margin=dict(b=10, l=5, r=5, t=20),
             xaxis=dict(
                 showgrid=False,
                 zeroline=False,
                 showticklabels=False,
                 showline=False,
                 range=[-1.1, 1.1],
+                anchor="free",
+                position=0.1,
             ),
             yaxis=dict(
                 showgrid=False,
@@ -459,9 +461,17 @@ def create_graph_visualization(result: dict) -> go.Figure:
             plot_bgcolor="#27272a",
             paper_bgcolor="#27272a",
             height=600,
-            width=800,
+            width=None,
+            autosize=True,
             legend=dict(
-                font=dict(color="white"), bgcolor="#27272a", bordercolor="#444444"
+                font=dict(color="white"),
+                bgcolor="#27272a",
+                bordercolor="#444444",
+                borderwidth=1,
+                x=1.05,
+                xanchor="left",
+                y=0.85,
+                yanchor="top"
             ),
             modebar=dict(bgcolor="#27272a", color="white", activecolor="#ff4444"),
         ),

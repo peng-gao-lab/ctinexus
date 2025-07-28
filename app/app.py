@@ -208,6 +208,23 @@ def build_interface(warning: str = None):
                     padding: 8px !important;
                     margin: 4px 0 !important;
                 }
+
+                #resizable-results {
+                    resize: both;
+                    overflow: auto;
+                    min-height: 200px;
+                    min-width: 300px;
+                    max-width: 100%;
+                }
+
+                #resizable-graph {
+                    resize: both;
+                    overflow: auto;
+                    min-height: 200px;
+                    min-width: 300px;
+                    max-width: 100%;
+                }
+
             </style>
         """)
 
@@ -302,11 +319,13 @@ def build_interface(warning: str = None):
                     interactive=False,
                     show_line_numbers=False,
                     elem_classes=["results-box"],
+                    elem_id="resizable-results",
                 )
             with gr.Column(scale=2):
                 graph_output = gr.Plot(
                     label="Entity Relationship Graph",
                     show_label=True,
+                    elem_id="resizable-graph",
                 )
 
         def update_model_choices(
