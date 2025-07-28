@@ -10,7 +10,7 @@
   <a href='https://ctinexus.github.io/' target='_blank'><img src='https://img.shields.io/badge/Project-Website-turquoise'></a>
 </p>
 
-**CTINexus** is a containerized web application that leverages optimized in-context learning (ICL) of large language models (LLMs) for automatic cyber threat intelligence (CTI) knowledge extraction and cybersecurity knowledge graph (CSKG) construction. 
+**CTINexus** is a framework that leverages optimized in-context learning (ICL) of large language models (LLMs) for automatic cyber threat intelligence (CTI) knowledge extraction and cybersecurity knowledge graph (CSKG) construction. 
 CTINexus adapts to various cybersecurity ontologies with minimal annotated examples and provides a user-friendly web interface for instant threat intelligence analysis. 
 
 <p align="center">
@@ -46,8 +46,8 @@ The framework automatically processes unstructured threat intelligence reports t
 ## Quick Start
 
 You can use CTINexus in two ways:
-- **🖥️ Web Interface**: User-friendly GUI for interactive analysis (follow the setup below)
 - **⚡ Command Line**: For automation and batch processing → **[📖 CLI Guide](app/docs/cli-guide.md)**
+- **🖥️ Web Interface**: User-friendly GUI for interactive analysis (follow the setup below)
 
 Both options support Docker and local installation.
 
@@ -163,6 +163,16 @@ Press `Ctrl+C` in the terminal to stop the application.
 
 ## Using CTINexus
 
+### ⚡ Command Line Interface (CLI)
+
+For automation, batch processing, or integration into existing workflows, use the CLI:
+
+```bash
+python app.py --input-file report.txt
+```
+
+**📖 [Complete CLI Documentation](app/docs/cli-guide.md)** - Detailed usage examples, model options, and integration guides.
+
 ### 🖥️ Web Interface (GUI)
 
 Once the application is running (either via Docker or locally):
@@ -183,15 +193,6 @@ Once the application is running (either via Docker or locally):
    - **Interactive Graph**: Network visualization of the knowledge graph
    - **Export Options**: Download results as JSON or graph images
 
-### ⚡ Command Line Interface (CLI)
-
-For automation, batch processing, or integration into existing workflows, use the CLI:
-
-```bash
-python app.py --input-file report.txt
-```
-
-**📖 [Complete CLI Documentation](app/docs/cli-guide.md)** - Detailed usage examples, model options, and integration guides.
 
 
 ## Citation
