@@ -45,7 +45,11 @@ The framework automatically processes unstructured threat intelligence reports t
 
 ## Quick Start
 
-You can use CTINexus by using our Docker image or running it locally.
+You can use CTINexus in two ways:
+- **🖥️ Web Interface**: User-friendly GUI for interactive analysis (follow the setup below)
+- **⚡ Command Line**: For automation and batch processing → **[📖 CLI Guide](app/docs/cli-guide.md)**
+
+Both options support Docker and local installation.
 
 ### Prerequisites
 
@@ -129,9 +133,9 @@ python -m venv .venv
 
 # Activate virtual environment
 # On macOS/Linux:
-source .env/bin/activate
+source .venv/bin/activate
 # On Windows:
-# ctinexus-env\Scripts\activate
+# .venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
@@ -159,6 +163,8 @@ Press `Ctrl+C` in the terminal to stop the application.
 
 ## Using CTINexus
 
+### 🖥️ Web Interface (GUI)
+
 Once the application is running (either via Docker or locally):
 
 1. **Open your browser** to the appropriate URL:
@@ -176,6 +182,16 @@ Once the application is running (either via Docker or locally):
    - **Relationships**: Discovered connections between entities
    - **Interactive Graph**: Network visualization of the knowledge graph
    - **Export Options**: Download results as JSON or graph images
+
+### ⚡ Command Line Interface (CLI)
+
+For automation, batch processing, or integration into existing workflows, use the CLI:
+
+```bash
+python app.py --input-file report.txt
+```
+
+**📖 [Complete CLI Documentation](app/docs/cli-guide.md)** - Detailed usage examples, model options, and integration guides.
 
 
 ## Citation
