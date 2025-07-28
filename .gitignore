@@ -185,3 +185,6 @@ app/.gradio/*
 
 # .vscode
 .vscode/*
+
+# Output directory
+app/output/
