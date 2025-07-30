@@ -10,4 +10,6 @@ COPY ./app/ .
 
 EXPOSE 8000
 
+EXPOSE 57623-57628
+
 CMD ["python3", "/app/app.py"]

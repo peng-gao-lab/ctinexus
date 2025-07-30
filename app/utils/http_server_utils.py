@@ -42,7 +42,7 @@ def find_free_port():
     if is_port_available(DEFAULT_PORT):
         return DEFAULT_PORT
 
-    for port in range(DEFAULT_PORT + 1, DEFAULT_PORT + 100):
+    for port in range(DEFAULT_PORT + 1, DEFAULT_PORT + 5):
         if is_port_available(port):
             return port
     
