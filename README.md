@@ -198,6 +198,14 @@ Once the application is running (either via Docker or locally):
    - **Export Options**: Download results as JSON or graph images
 
 
+## Contributing
+
+We warmly welcome contributions from the community! Whether you're interested in:
+- 🐛 **Fixing bugs** or adding new features
+- 📖 **Improving documentation** or adding examples  
+- 🎨 **UI/UX enhancements** for the web interface
+
+Please check out our **[Contributing Guide](CONTRIBUTING.md)** for detailed information on how to get started, development setup, and submission guidelines.
 
 ## Citation
 ```bibtex
