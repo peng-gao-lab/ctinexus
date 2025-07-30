@@ -146,10 +146,10 @@ Press `Ctrl+C` in the terminal to stop the application.
 
 ```bash
 # Build and start
-docker-compose up --build
+docker compose up --build
 
 # Or run in detached mode (runs in background)
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 ### Step 4: Access the Application
@@ -160,7 +160,7 @@ Open your browser and navigate to: **http://localhost:8000**
 
 ```bash
 # Stop the application
-docker-compose down
+docker compose down
 ```
 
 ---
