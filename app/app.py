@@ -9,8 +9,10 @@ from cti_processor import PostProcessor, preprocessor
 from dotenv import load_dotenv
 from graph_constructor import Linker, Merger, create_graph_visualization
 from hydra import compose, initialize
-from llm_processor import LLMExtractor, LLMTagger, resolve_path
+from llm_processor import LLMExtractor, LLMTagger
 from omegaconf import DictConfig
+from utils.http_server_utils import setup_http_server
+from utils.path_utils import resolve_path
 
 load_dotenv()
 
@@ -217,14 +219,6 @@ def build_interface(warning: str = None):
                     max-width: 100%;
                 }
 
-                #resizable-graph {
-                    resize: both;
-                    overflow: auto;
-                    min-height: 200px;
-                    min-width: 300px;
-                    max-width: 100%;
-                }
-
             </style>
         """)
 
@@ -322,10 +316,14 @@ def build_interface(warning: str = None):
                     elem_id="resizable-results",
                 )
             with gr.Column(scale=2):
-                graph_output = gr.Plot(
+                graph_output = gr.HTML(
                     label="Entity Relationship Graph",
-                    show_label=True,
-                    elem_id="resizable-graph",
+                    value="""
+                        <div style="text-align: center; margin-top: -20px;">
+                            <h2 style="margin-bottom: 0.5em;">Entity Relationship Graph</h2>
+                            <em>No graph to display yet. Click "Run" to generate a visualization.</em>
+                        </div>
+                    """,
                 )
 
         def update_model_choices(
@@ -417,9 +415,27 @@ def process_and_visualize(
     try:
         # Create visualization without progress tracking
         result_dict = json.loads(result)
-        graph_fig = create_graph_visualization(result_dict)
+        graph_url = create_graph_visualization(result_dict)
+        graph_html_content = f"""
+        <div style="text-align: center; padding: 10px; margin-top: -20px;">
+            <h2 style="margin-bottom: 0.5em;">Entity Relationship Graph</h2>
+            <em>Drag nodes • Scroll to zoom • Drag background to pan</em>
+        </div>
+        <div id="iframe-container"">
+            <iframe src="{graph_url}" 
+            width="100%" 
+            height="700"
+            frameborder="0"
+            scrolling="no"
+            style="display: block; clip-path: inset(13px 3px 5px 3px); overflow: hidden;">
+            </iframe>
+        </div>
+        <div style="text-align: center; ">
+            <a href="{graph_url}" target="_blank" style="color: #7c4dff; text-decoration: none;">
+            🚀 Open in New Tab
+            </a>
+        </div>"""
 
-        # Extract metrics
         ie_metrics = f"Model: {ie_model}<br>Time: {result_dict['IE']['response_time']:.2f}s<br>Cost: ${result_dict['IE']['model_usage']['total']['cost']:.6f}"
         et_metrics = f"Model: {et_model}<br>Time: {result_dict['ET']['response_time']:.2f}s<br>Cost: ${result_dict['ET']['model_usage']['total']['cost']:.6f}"
         ea_metrics = f"Model: {ea_model}<br>Time: {result_dict['EA']['response_time']:.2f}s<br>Cost: ${result_dict['EA']['model_usage']['total']['cost']:.6f}"
@@ -427,7 +443,7 @@ def process_and_visualize(
 
         metrics_table = get_metrics_box(ie_metrics, et_metrics, ea_metrics, lp_metrics)
 
-        return result, graph_fig, metrics_table
+        return result, graph_html_content, metrics_table
     except Exception:
         return (
             result,
@@ -643,4 +659,7 @@ def main():
 
 
 if __name__ == "__main__":
+    # HTTP server to serve pyvis files
+    setup_http_server()
+
     main()

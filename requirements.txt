@@ -9,6 +9,7 @@ omegaconf
 openai
 pandas
 plotly
+pyvis
 python-dotenv
 requests
 scikit-learn

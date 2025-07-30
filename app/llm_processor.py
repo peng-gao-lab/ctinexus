@@ -14,6 +14,7 @@ from jinja2 import Environment, FileSystemLoader, meta
 from nltk.corpus import stopwords
 from omegaconf import DictConfig
 from sklearn.feature_extraction.text import TfidfVectorizer
+from utils.path_utils import resolve_path
 
 # Download NLTK stopwords if not already present
 try:
@@ -24,22 +25,6 @@ except LookupError:
 
 logger = logging.getLogger(__name__)
 litellm.drop_params = True
-
-
-# Define base directory
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-def resolve_path(*relative_path):
-    """
-    Resolve paths relative to the current module's location.
-    
-    Args:
-        *relative_path: Path components to join
-        
-    Returns:
-        str: Absolute path relative to this module's location
-    """
-    return os.path.join(BASE_DIR, *relative_path)
 
 
 def with_retry(max_attempts=5):
@@ -127,7 +112,7 @@ class LLMLinker:
                 pred_sub = self.response_content["predicted_triple"]["subject"]
                 pred_obj = self.response_content["predicted_triple"]["object"]
                 pred_rel = self.response_content["predicted_triple"]["relation"]
-            except:
+            except Exception:
                 values = list(self.response_content.values())
                 pred_sub, pred_rel, pred_obj = values[0], values[1], values[2]
 
@@ -391,6 +376,7 @@ class ResponseParser:
 
 class UsageCalculator:
     def __init__(self, config, response) -> None:
+        self.config = config
         self.response = response
         self.model = config.model
 
@@ -564,7 +550,8 @@ def extract_json_from_response(response_text):
                 return json.loads(json_matches[-1].group())
             else:
                 print(response_text)
-        except:
+        except Exception as e:
+            print(f"Error extracting JSON: {e}")
             print(json_matches[-1].group())
     else:
         return dict(response_text)

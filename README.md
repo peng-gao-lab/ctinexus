@@ -34,9 +34,13 @@ The framework automatically processes unstructured threat intelligence reports t
 * **Link Prediction (LP)**: Predicts and adds missing relationships to complete the knowledge graph
 * **Graph Visualization**: Interactive network visualization of the constructed cybersecurity knowledge graph
 
+<p align="center">
+  <img src="app/static/webui.png" alt="CTINexus WebUI" width="500"/>
+</p>
+
 ## News
 
-🌟 [2024/07/24] CTINexus now features a containerized web application with an intuitive Gradio interface! Submit threat intelligence text and instantly visualize extracted knowledge graphs.
+🌟 [2024/07/29] CTINexus now features an intuitive Gradio interface! Submit threat intelligence text and instantly visualize extracted interactive graphs.
 
 🔥 [2025/04/21] We released the camera-ready paper on [arxiv](https://arxiv.org/pdf/2410.21060). 
 
@@ -55,8 +59,8 @@ Both options support Docker and local installation.
 
 - **API Key** from one of the supported providers: OpenAI, Gemini, AWS
 
-- **For Docker Setup Only**: [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) installed and running
 - **For Local Setup Only**: Python 3.11+ and pip
+- **For Docker Setup Only**: [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) installed and running
 
 <br>
 
@@ -90,34 +94,6 @@ AWS_REGION=us-east-1
 
 > **Note**: You only need to set up one provider, but you may configure multiple APIs if desired. Once configured, you can select models from any of your chosen providers.
 
----
-
-<a id="docker-setup"></a>
-
-## 🐳 Using Docker
-
-If you wish to use our Docker image and run the containerized app, proceed with the next steps. If you want to run without Docker, jump to [🐍 Using Local Setup](#local-setup)
-
-### Step 3: Launch with Docker
-
-```bash
-# Build and start
-docker-compose up --build
-
-# Or run in detached mode (runs in background)
-docker-compose up -d --build
-```
-
-### Step 4: Access the Application
-
-Open your browser and navigate to: **http://localhost:8000**
-
-### Step 5: Stop the Application
-
-```bash
-# Stop the application
-docker-compose down
-```
 
 ---
 
@@ -158,6 +134,34 @@ Open your browser and navigate to: **http://127.0.0.1:7860**
 ### Step 6: Stop the Application
 
 Press `Ctrl+C` in the terminal to stop the application.
+
+---
+
+<a id="docker-setup"></a>
+
+## 🐳 Using Docker
+
+
+### Step 3: Launch with Docker
+
+```bash
+# Build and start
+docker-compose up --build
+
+# Or run in detached mode (runs in background)
+docker-compose up -d --build
+```
+
+### Step 4: Access the Application
+
+Open your browser and navigate to: **http://localhost:8000**
+
+### Step 5: Stop the Application
+
+```bash
+# Stop the application
+docker-compose down
+```
 
 ---
 

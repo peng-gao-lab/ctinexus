@@ -3,10 +3,11 @@ from collections import defaultdict
 
 import litellm
 import networkx as nx
-import plotly.graph_objects as go
-from llm_processor import LLMLinker, UsageCalculator
+from llm_processor import LLMLinker, UsageCalculator, resolve_path
 from omegaconf import DictConfig
+from pyvis.network import Network
 from scipy.spatial.distance import cosine
+from utils.http_server_utils import get_current_port
 
 
 class Linker:
@@ -277,11 +278,12 @@ class Merger:
         self.js["EA"]["response_time"] = self.response_time
         return self.js
 
-
-def create_graph_visualization(result: dict) -> go.Figure:
-    """Create an interactive graph visualization using Plotly"""
+def create_graph_visualization(result: dict) -> str:
+    """Create an interactive graph visualization using Pyvis"""
     # Create a directed graph
     G = nx.DiGraph()
+
+    http_port = get_current_port()
 
     # Define colors for different entity types
     entity_colors = {
@@ -338,165 +340,111 @@ def create_graph_visualization(result: dict) -> go.Figure:
                 predicted=True,
             )
 
-    # Create the layout with better spacing
-    pos = nx.spring_layout(G, k=1, iterations=50)
+    # Create a Pyvis network
+    net = Network(
+        height="100vh",
+        width="100%",
+        bgcolor="#27272a",
+        font_color="white",
+        directed=True,
+    )
 
-    # Create edge traces for regular and predicted edges
-    regular_edges = [
-        (u, v) for u, v, d in G.edges(data=True) if not d.get("predicted", False)
-    ]
-    predicted_edges = [
-        (u, v) for u, v, d in G.edges(data=True) if d.get("predicted", False)
-    ]
+    net.set_options("""
+    {
+      "physics": {
+        "enabled": true,
+        "barnesHut": {
+            "gravitationalConstant": -500,
+            "springLength": 200,
+            "springConstant": 0,
+            "damping": 0.4
+        }
+      },
+      "edges": {
+        "smooth": {
+          "enabled": true,
+          "type": "dynamic",
+          "roundness": 0.5
+        },
+        "font": {
+          "size": 15,
+          "color": "#ffffff",
+          "strokeWidth": 1,
+          "strokeColor": "#000000"
+        }
+      },
+      "interaction": {
+        "dragNodes": true,
+        "dragView": true,
+        "zoomView": true,
+        "hover": true
+      },
+      "layout": {
+        "improvedLayout": true
+      }
+    }
+    """)
 
-    edge_traces = []
-
-    # Regular edges
-    if regular_edges:
-        edge_x = []
-        edge_y = []
-        edge_text = []
-        for u, v in regular_edges:
-            x0, y0 = pos[u]
-            x1, y1 = pos[v]
-            edge_x.extend([x0, x1, None])
-            edge_y.extend([y0, y1, None])
-            edge_text.append(G.edges[u, v].get("relation", ""))
-
-        edge_traces.append(
-            go.Scatter(
-                x=edge_x,
-                y=edge_y,
-                line=dict(width=1, color="#666666"),
-                hoverinfo="text",
-                text=edge_text,
-                mode="lines",
-                hoverlabel=dict(bgcolor="#27272a", font=dict(color="white")),
-                name="Regular Links",
-            )
+    # Add nodes to pyvis network
+    for node_id, node_attrs in G.nodes(data=True):
+        net.add_node(
+            node_id,
+            label=node_attrs["text"],
+            title=f"{node_attrs['text']}",
+            color=node_attrs["color"],
+            size=15 + len(G[node_id]) * 2,
         )
 
-    # Predicted edges
-    if predicted_edges:
-        edge_x = []
-        edge_y = []
-        edge_text = []
-        for u, v in predicted_edges:
-            x0, y0 = pos[u]
-            x1, y1 = pos[v]
-            edge_x.extend([x0, x1, None])
-            edge_y.extend([y0, y1, None])
-            edge_text.append(G.edges[u, v].get("relation", ""))
-
-        edge_traces.append(
-            go.Scatter(
-                x=edge_x,
-                y=edge_y,
-                line=dict(width=1, color="#ff4444"),
-                hoverinfo="text",
-                text=edge_text,
-                mode="lines",
-                hoverlabel=dict(bgcolor="#27272a", font=dict(color="white")),
-                name="Predicted Links",
-            )
+    # Add edges to pyvis network
+    for u, v, edge_attrs in G.edges(data=True):
+        net.add_edge(
+            u,
+            v,
+            label=edge_attrs["relation"],
+            title=edge_attrs["relation"],
+            color="#ff4444" if edge_attrs.get("predicted") else "#666666",
         )
 
-    # Create node trace
-    node_x = []
-    node_y = []
-    node_text = []
-    node_color = []
-    node_size = []
+    # Save the graph to the pyvis_files directory
+    timestamp = int(time.time() * 1000)
+    file_name = f"network_{timestamp}.html"
+    file_path = resolve_path("output", "pyvis_files", file_name)
 
-    for node in G.nodes(data=True):
-        x, y = pos[node[0]]
-        node_x.append(x)
-        node_y.append(y)
-        node_text.append(f"{node[1]['text']}<br>Type: {node[1]['type']}")
-        node_color.append(node[1]["color"])
-        # Size based on number of connections
-        node_size.append(15 + len(G[node[0]]) * 2)
+    try:
+        net.save_graph(file_path)
 
-    node_trace = go.Scatter(
-        x=node_x,
-        y=node_y,
-        mode="markers+text",
-        hoverinfo="text",
-        text=[node.split("<br>")[0] for node in node_text],
-        textposition="top center",
-        textfont=dict(color="white"),
-        marker=dict(
-            color=node_color, size=node_size, line=dict(width=2, color="#ffffff")
-        ),
-        name="Entities",
-    )
+        # Custom HTML/CSS for the legend
+        with open(file_path, "r") as f:
+            html_content = f.read()
 
-    # Create the figure with improved layout
-    fig = go.Figure(
-        data=edge_traces + [node_trace],
-        layout=go.Layout(
-            title=dict(
-                text="Entity Relationship Graph", font=dict(size=16, color="white")
-            ),
-            showlegend=True,
-            hovermode="closest",
-            dragmode="pan",
-            margin=dict(b=10, l=5, r=5, t=20),
-            xaxis=dict(
-                showgrid=False,
-                zeroline=False,
-                showticklabels=False,
-                showline=False,
-                range=[-1.1, 1.1],
-                anchor="free",
-                position=0.1,
-            ),
-            yaxis=dict(
-                showgrid=False,
-                zeroline=False,
-                showticklabels=False,
-                showline=False,
-                range=[-1.1, 1.1],
-            ),
-            plot_bgcolor="#27272a",
-            paper_bgcolor="#27272a",
-            height=600,
-            width=None,
-            autosize=True,
-            legend=dict(
-                font=dict(color="white"),
-                bgcolor="#27272a",
-                bordercolor="#444444",
-                borderwidth=1,
-                x=1.05,
-                xanchor="left",
-                y=0.85,
-                yanchor="top"
-            ),
-            modebar=dict(bgcolor="#27272a", color="white", activecolor="#ff4444"),
-        ),
-    )
+        legend_html = """
+        <div style="position: fixed; top: 50px; right: 20px; background-color: #27272a; color: white; padding: 15px; border-radius: 8px; border: 1px solid #444; max-width: 200px; font-size: 15px;">
+            <h3 style="margin-top: 0; font-size: 18px;">Legend</h3>
+            <h4 style="margin-bottom: 5px; font-size: 15px;">Node Types:</h4>
+            <ul style="list-style: none; padding: 0; margin-bottom: 15px;">
+        """
 
-    # Add legend for entity types
-    legend_items = []
-    for entity_type, color in entity_colors.items():
-        if entity_type != "default":
-            legend_items.append(
-                go.Scatter(
-                    x=[None],
-                    y=[None],
-                    mode="markers",
-                    marker=dict(size=10, color=color),
-                    name=entity_type,
-                    showlegend=True,
-                )
-            )
+        for entity_type, color in entity_colors.items():
+            if entity_type != "default":
+                legend_html += f"<li style='margin-bottom: 5px;'><span style='display: inline-block; width: 15px; height: 15px; background-color: {color}; margin-right: 10px; border-radius: 50%;'></span>{entity_type}</li>"
 
-    fig.add_traces(legend_items)
+        legend_html += """
+            </ul>
+            <br>
+            <h4 style="margin-bottom: 5px; font-size: 15px;">Edge Types:</h4>
+            <ul style="list-style: none; padding: 0;">
+            <li style='margin-bottom: 5px;'><span style='display: inline-block; width: 20px; height: 2px; background-color: #94a3b8; margin-right: 10px;'></span>Extracted</li>
+            <li style='margin-bottom: 5px;'><span style='display: inline-block; width: 20px; height: 3px; background: repeating-linear-gradient(to right, #ff6b6b 0px, #ff6b6b 5px, transparent 5px, transparent 10px); margin-right: 10px;'></span>Predicted</li>
+            </ul>
+        </div>
+        """
 
-    # Configure the modebar (toolbar) buttons
-    fig.update_layout(
-        modebar_add=["zoom", "pan", "zoomIn", "zoomOut", "resetScale", "resetView"]
-    )
+        # Inject the legend HTML into the Pyvis graph HTML
+        html_content = html_content.replace("</body>", legend_html + "</body>")
+        with open(file_path, "w") as f:
+            f.write(html_content)
 
-    return fig
+    except Exception as e:
+        print(f"Error saving graph: {e}")
+
+    return f"http://localhost:{http_port}/{file_name}"
