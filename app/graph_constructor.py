@@ -110,7 +110,17 @@ class Linker:
                         return node
 
     def get_topic_node(self, subgraphs):
+        if not subgraphs:
+            return {
+                "entity_id": -1,
+                "entity_text": "",
+                "mention_text": "",
+                "mention_class": "default",
+                "mention_merged": []
+            }
+            
         max_node_num = 0
+        main_subgraph = subgraphs[0]
 
         for subgraph in subgraphs:
             if len(subgraph) > max_node_num:

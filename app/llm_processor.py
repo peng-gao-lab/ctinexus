@@ -269,9 +269,11 @@ class LLMCaller:
             elif model_id.startswith(("llama", "mistral", "mixtral", "qwen", "phi3", "deepseek", "gemma")):
                 ollama_base_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 
+                improved_prompt = self.prompt[-1]["content"] + "\n\nIMPORTANT: output should be a valid JSON object with no extra text or description."
+
                 response = litellm.completion(
                     model=f"ollama/{model_id}",
-                    messages=[{"role": "user", "content": self.prompt[-1]["content"]}],
+                    messages=[{"role": "user", "content": improved_prompt}],
                     max_tokens=self.max_tokens,
                     temperature=0.8,
                     api_base=ollama_base_url,
