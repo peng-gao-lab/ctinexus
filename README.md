@@ -96,7 +96,7 @@ AWS_REGION=us-east-1
 OLLAMA_BASE_URL=http://localhost:11434
 ```
 
-> **Note**: You only need to set up one provider, but you may configure multiple APIs if desired. Once configured, you can select models from any of your chosen providers.
+> **Note**: You only need to set up one provider, but you may configure multiple APIs if desired. Once configured, you can select models from any of your chosen providers. If you are using Ollama, see the detailed [Ollama Guide](app/docs/ollama-guide.md).
 
 
 ---
