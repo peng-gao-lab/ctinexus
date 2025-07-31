@@ -1,3 +1,4 @@
+import os
 import time
 from collections import defaultdict
 
@@ -135,13 +136,21 @@ class Merger:
         """Get embeddings for multiple texts in a single API call"""
         startTime = time.time()
         
+        api_base_url = None
         embedding_model = self.config.embedding_model
+
         if "gemini" in embedding_model:
             embedding_model = f"gemini/{embedding_model}"
-        
+        elif any(ollama_embed in embedding_model for ollama_embed in ["nomic-embed", "mxbai-embed", "all-minilm", "snowflake-arctic-embed"]):
+            api_base_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+            embedding_model = f"ollama/{embedding_model}"
+
         self.response = litellm.embedding(
-            model=embedding_model, input=texts
+            model=embedding_model,
+            input=texts,
+            api_base=api_base_url
         )
+        
         self.usage = UsageCalculator(self.config, self.response).calculate()
         self.response_time = time.time() - startTime
         return [item["embedding"] for item in self.response["data"]]

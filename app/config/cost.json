@@ -126,5 +126,61 @@
     "gemini-embedding-001": {
         "input": 0.00000015,
         "output": 0
+    },
+    "llama3.1:8b": {
+        "input": 0,
+        "output": 0
+    },
+    "llama3.1:70b": {
+        "input": 0,
+        "output": 0
+    },
+    "llama3:8b": {
+        "input": 0,
+        "output": 0
+    },
+    "mistral:7b": {
+        "input": 0,
+        "output": 0
+    },
+    "mixtral:8x7b": {
+        "input": 0,
+        "output": 0
+    },
+    "qwen2.5:7b": {
+        "input": 0,
+        "output": 0
+    },
+    "qwen2.5:14b": {
+        "input": 0,
+        "output": 0
+    },
+    "phi3:14b": {
+        "input": 0,
+        "output": 0
+    },
+    "gemma2:9b": {
+        "input": 0,
+        "output": 0
+    },
+    "gemma2:27b": {
+        "input": 0,
+        "output": 0
+    },
+    "nomic-embed-text": {
+        "input": 0,
+        "output": 0
+    },
+    "mxbai-embed-large": {
+        "input": 0,
+        "output": 0
+    },
+    "all-minilm": {
+        "input": 0,
+        "output": 0
+    },
+    "snowflake-arctic-embed": {
+        "input": 0,
+        "output": 0
     }
 }

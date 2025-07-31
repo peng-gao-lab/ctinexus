@@ -53,6 +53,12 @@ python app.py --input-file report.txt --model gpt-4o --embedding-model text-embe
 - `deepseek.r1-v1:0`, `mistral.pixtral-large-2502-v1:0`
 - Meta Llama models: `meta.llama3-1-8b-instruct-v1:0`, etc.
 
+**Ollama Models:**
+- `llama3.1:8b`, `llama3.1:70b`, `llama3:8b` (Llama models)
+- `mistral:7b`, `mixtral:8x7b` (Mistral models)
+- `qwen2.5:7b`, `qwen2.5:14b` (Multilingual models)
+- `phi3:14b`, `gemma2:9b`, `gemma2:27b` (Other open models)
+
 ### Fine-Grained Model Control
 
 The default models can be overridden with specific models for specific tasks in the pipeline:
@@ -104,6 +110,12 @@ python app.py -i report.txt --provider Gemini
 
 # Use AWS Claude
 python app.py -i report.txt --provider AWS --model anthropic.claude-3-5-sonnet
+
+# Use Ollama (local models)
+python app.py -i report.txt --provider Ollama --model qwen2.5:7b --embedding-model nomic-embed-text
+
+# Use Ollama with default models
+python app.py -i report.txt --provider Ollama
 ```
 
 ### Advanced Model Configuration
@@ -146,6 +158,9 @@ GEMINI_API_KEY=your_gemini_api_key_here
 AWS_ACCESS_KEY_ID=your_aws_access_key
 AWS_SECRET_ACCESS_KEY=your_aws_secret_key
 AWS_REGION=us-east-1
+
+# For Ollama, set to the default (http://localhost:11434) or your custom URL.
+OLLAMA_BASE_URL=http://localhost:11434
 ```
 
 You only need to configure one provider, but multiple providers can be set up for flexibility.
