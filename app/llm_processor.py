@@ -266,7 +266,7 @@ class LLMCaller:
                     temperature=0.8,
                     top_p=0.9,
                 )
-            elif any(ollama_model in model_id for ollama_model in ["llama", "mistral", "mixtral", "qwen", "phi3", "deepseek", "gemma"]):
+            elif model_id.startswith(("llama", "mistral", "mixtral", "qwen", "phi3", "deepseek", "gemma")):
                 ollama_base_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 
                 response = litellm.completion(
