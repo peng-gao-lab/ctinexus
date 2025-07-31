@@ -64,6 +64,17 @@ class LLMTagger:
             self.response.choices[0].message.content
         )
 
+        # Safety check: ensure response_content has required keys
+        if not self.response_content or not isinstance(self.response_content, dict):
+            self.response_content = {"tagged_triples": []}
+        
+        if "tagged_triples" not in self.response_content:
+            # Try alternative key names that models might use
+            if "triplets" in self.response_content:
+                self.response_content["tagged_triples"] = self.response_content["triplets"]
+            else:
+                self.response_content["tagged_triples"] = []
+
         result["ET"] = {}
         result["ET"]["typed_triplets"] = self.response_content["tagged_triples"]
         result["ET"]["response_time"] = self.response_time
@@ -108,13 +119,26 @@ class LLMLinker:
                 self.llm_response.choices[0].message.content
             )
 
-            try:
-                pred_sub = self.response_content["predicted_triple"]["subject"]
-                pred_obj = self.response_content["predicted_triple"]["object"]
-                pred_rel = self.response_content["predicted_triple"]["relation"]
-            except Exception:
-                values = list(self.response_content.values())
-                pred_sub, pred_rel, pred_obj = values[0], values[1], values[2]
+            # Safety check and extract predicted triple information
+            if not self.response_content or not isinstance(self.response_content, dict):
+                print("Warning: Invalid response from LLM for link prediction")
+                pred_sub, pred_rel, pred_obj = "unknown", "unknown", "unknown"
+            else:
+                try:
+                    if "predicted_triple" in self.response_content:
+                        pred_sub = self.response_content["predicted_triple"]["subject"]
+                        pred_obj = self.response_content["predicted_triple"]["object"]
+                        pred_rel = self.response_content["predicted_triple"]["relation"]
+                    else:
+                        # Try to extract from flat structure or list of values
+                        values = list(self.response_content.values())
+                        if len(values) >= 3:
+                            pred_sub, pred_rel, pred_obj = values[0], values[1], values[2]
+                        else:
+                            pred_sub, pred_rel, pred_obj = "unknown", "unknown", "unknown"
+                except Exception as e:
+                    print(f"Error extracting predicted triple: {e}")
+                    pred_sub, pred_rel, pred_obj = "unknown", "unknown", "unknown"
 
             if (
                 pred_sub == main_node["entity_text"]
@@ -242,6 +266,18 @@ class LLMCaller:
                     temperature=0.8,
                     top_p=0.9,
                 )
+            elif model_id.startswith(("llama", "mistral", "mixtral", "qwen", "phi3", "deepseek", "gemma")):
+                ollama_base_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+
+                improved_prompt = self.prompt[-1]["content"] + "\n\nIMPORTANT: output should be a valid JSON object with no extra text or description."
+
+                response = litellm.completion(
+                    model=f"ollama/{model_id}",
+                    messages=[{"role": "user", "content": improved_prompt}],
+                    max_tokens=self.max_tokens,
+                    temperature=0.8,
+                    api_base=ollama_base_url,
+                )
             else:
                 response = litellm.completion(
                     model=model_id,
@@ -363,6 +399,13 @@ class ResponseParser:
             self.llm_response.choices[0].message.content
         )
 
+        # Safety check: ensure response_content is valid and has triplets
+        if not response_content or not isinstance(response_content, dict):
+            response_content = {"triplets": []}
+        
+        if "triplets" not in response_content:
+            response_content["triplets"] = []
+
         self.output = {
             "CTI": self.query,
             "IE": response_content,
@@ -394,20 +437,48 @@ class UsageCalculator:
         oprice = data[self.model]["output"] if self.model in data else 0
         usageDict = {}
         usageDict["model"] = self.model
-        usageDict["input"] = {
-            "tokens": self.response.usage.prompt_tokens,
-            "cost": iprice * self.response.usage.prompt_tokens,
-        }
-        usageDict["output"] = {
-            "tokens": self.response.usage.completion_tokens,
-            "cost": oprice * self.response.usage.completion_tokens,
-        }
-        usageDict["total"] = {
-            "tokens": self.response.usage.prompt_tokens
-            + self.response.usage.completion_tokens,
-            "cost": iprice * self.response.usage.prompt_tokens
-            + oprice * self.response.usage.completion_tokens,
-        }
+
+        # Handle different response formats
+        if hasattr(self.response, 'usage'):
+            # OpenAI format with .usage attribute
+            usageDict["input"] = {
+                "tokens": self.response.usage.prompt_tokens,
+                "cost": iprice * self.response.usage.prompt_tokens,
+            }
+            usageDict["output"] = {
+                "tokens": self.response.usage.completion_tokens,
+                "cost": oprice * self.response.usage.completion_tokens,
+            }
+            usageDict["total"] = {
+                "tokens": self.response.usage.prompt_tokens
+                + self.response.usage.completion_tokens,
+                "cost": iprice * self.response.usage.prompt_tokens
+                + oprice * self.response.usage.completion_tokens,
+            }
+        elif isinstance(self.response, dict) and 'usage' in self.response:
+            # Dictionary format with usage key
+            usage = self.response['usage']
+            prompt_tokens = usage.get('prompt_tokens', 0)
+            completion_tokens = usage.get('completion_tokens', 0)
+            
+            usageDict["input"] = {
+                "tokens": prompt_tokens,
+                "cost": iprice * prompt_tokens,
+            }
+            usageDict["output"] = {
+                "tokens": completion_tokens,
+                "cost": oprice * completion_tokens,
+            }
+            usageDict["total"] = {
+                "tokens": prompt_tokens + completion_tokens,
+                "cost": iprice * prompt_tokens + oprice * completion_tokens,
+            }
+        else:
+            # Fallback for unknown formats or missing usage info
+            logger.warning("Unknown response format for usage calculation, setting tokens to 0")
+            usageDict["input"] = {"tokens": 0, "cost": 0}
+            usageDict["output"] = {"tokens": 0, "cost": 0}
+            usageDict["total"] = {"tokens": 0, "cost": 0}
 
         return usageDict
 
@@ -538,20 +609,60 @@ class DemoRetriever:
 
 def extract_json_from_response(response_text):
     if isinstance(response_text, str):
+        cleaned_text = response_text.strip()
+        
         try:
-            return json.loads(response_text)
+            return json.loads(cleaned_text)
         except (json.JSONDecodeError, TypeError):
             pass
+        
         json_matches = list(
-            re.finditer(r"\{[\s\S]*\}", response_text.replace("\n", ""))
+            re.finditer(r"\{[\s\S]*\}", cleaned_text.replace("\n", " "))
         )
-        try:
-            if json_matches:
-                return json.loads(json_matches[-1].group())
-            else:
-                print(response_text)
-        except Exception as e:
-            print(f"Error extracting JSON: {e}")
-            print(json_matches[-1].group())
+        
+        if json_matches:
+            try:
+                json_text = json_matches[-1].group()
+                try:
+                    return json.loads(json_text)
+                except json.JSONDecodeError:
+                    # Try to fix single quotes to double quotes
+                    fixed_json = json_text.replace("'", '"')
+                    try:
+                        return json.loads(fixed_json)
+                    except json.JSONDecodeError:
+                        # Remove any trailing commas and fix common issues
+                        fixed_json = re.sub(r',(\s*[}\]])', r'\1', fixed_json)
+                        fixed_json = re.sub(r'([{,]\s*)(\w+)(\s*):', r'\1"\2"\3:', fixed_json)
+                        return json.loads(fixed_json)
+                        
+            except Exception as e:
+                print(f"Error extracting JSON from match: {e}")
+                print(f"JSON text: {json_matches[-1].group()}")
+        
+        # Try to parse as triplets list format
+        triplet_patterns = [
+            r"\{'subject':\s*'([^']*)',\s*'relation':\s*'([^']*)',\s*'object':\s*'([^']*)'\}",
+            r'\{"subject":\s*"([^"]*)",\s*"relation":\s*"([^"]*)",\s*"object":\s*"([^"]*)"\}',
+            r"'subject':\s*'([^']*)',\s*'relation':\s*'([^']*)',\s*'object':\s*'([^']*)'",
+            r'"subject":\s*"([^"]*)",\s*"relation":\s*"([^"]*)",\s*"object":\s*"([^"]*)"'
+        ]
+        
+        for pattern in triplet_patterns:
+            triplet_matches = re.findall(pattern, cleaned_text)
+            if triplet_matches:
+                # Convert to expected format
+                triplets = []
+                for match in triplet_matches:
+                    subject, relation, obj = match
+                    triplets.append({
+                        "subject": subject.strip(),
+                        "relation": relation.strip(),
+                        "object": obj.strip()
+                    })
+                return {"triplets": triplets}
+        
+        print(f"Failed to parse response, raw text: {response_text}")
+        return {"triplets": []}
     else:
         return dict(response_text)

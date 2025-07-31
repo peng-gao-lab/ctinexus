@@ -57,7 +57,7 @@ Both options support Docker and local installation.
 
 ### Prerequisites
 
-- **API Key** from one of the supported providers: OpenAI, Gemini, AWS
+- **API Key** from one of the supported providers: OpenAI, Gemini, AWS, or **Ollama** (local, free)
 
 - **For Local Setup Only**: Python 3.11+ and pip
 - **For Docker Setup Only**: [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) installed and running
@@ -90,6 +90,10 @@ GEMINI_API_KEY=your_gemini_api_key_here
 AWS_ACCESS_KEY_ID=your_aws_access_key
 AWS_SECRET_ACCESS_KEY=your_aws_secret_key
 AWS_REGION=us-east-1
+
+# Ollama Configuration (for local models)
+# If Ollama running on custom port, make sure to set that.
+OLLAMA_BASE_URL=http://localhost:11434
 ```
 
 > **Note**: You only need to set up one provider, but you may configure multiple APIs if desired. Once configured, you can select models from any of your chosen providers.

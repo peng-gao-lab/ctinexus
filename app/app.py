@@ -74,6 +74,26 @@ def check_api_key() -> bool:
             "amazon.titan-embed-text-v2:0": "Titan Embed Text 2 — Large embedding model ($0.12)",
         }
 
+    if os.getenv("OLLAMA_BASE_URL"):
+        MODELS["Ollama"] = {
+            "llama3.1:8b": "Llama 3.1 8B — Balanced performance for general use (Free)",
+            "llama3.1:70b": "Llama 3.1 70B — High-performance model for complex tasks (Free)",
+            "llama3:8b": "Llama 3 8B — Reliable model for general purpose tasks (Free)",
+            "mistral:7b": "Mistral 7B — Efficient model with good reasoning (Free)",
+            "mixtral:8x7b": "Mixtral 8x7B — Mixture of experts model (Free)",
+            "qwen2.5:7b": "Qwen2.5 7B — Chinese-optimized multilingual model (Free)",
+            "qwen2.5:14b": "Qwen2.5 14B — Larger Chinese-optimized model (Free)",
+            "phi3:14b": "Phi-3 14B — Microsoft's mid-size model (Free)",
+            "gemma2:9b": "Gemma 2 9B — Google's open model (Free)",
+            "gemma2:27b": "Gemma 2 27B — Google's larger open model (Free)",
+        }
+        EMBEDDING_MODELS["Ollama"] = {
+            "nomic-embed-text": "Nomic Embed Text — High-quality text embeddings (Free)",
+            "mxbai-embed-large": "MixedBread AI Large — Advanced embedding model (Free)",
+            "all-minilm": "All-MiniLM-L6-v2 — Compact embedding model (Free)",
+            "snowflake-arctic-embed": "Snowflake Arctic Embed — Retrieval-optimized embeddings (Free)",
+        }
+
     return True if MODELS else False
 
 
@@ -477,7 +497,7 @@ def create_argument_parser():
     parser.add_argument(
         "--provider",
         type=str,
-        help="AI provider to use: OpenAI, Gemini, or AWS (auto-detected if not specified)"
+        help="AI provider to use: OpenAI, Gemini, AWS, or Ollama (auto-detected if not specified)"
     )
     parser.add_argument(
         "--model",
@@ -537,6 +557,10 @@ def get_default_models_for_provider(provider):
         "AWS": {
             "model": "anthropic.claude-3-5-sonnet",
             "embedding_model": "amazon.titan-embed-text-v2:0"
+        },
+        "Ollama": {
+            "model": "llama3.1:8b",
+            "embedding_model": "nomic-embed-text"
         }
     }
     return defaults.get(provider, {})

@@ -53,7 +53,8 @@ Good documentation is key to a successful project. If you find areas in our docu
 4. **Configure environment variables:**
    ```bash
    cp .env.example .env
-   # Edit .env with your API keys
+   # Edit .env with your API keys (OpenAI, Gemini, AWS)
+   # OR set up Ollama for local models
    ```
 
 5. **Create a Branch:** Create a new branch for your work:
