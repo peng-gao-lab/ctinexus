@@ -125,7 +125,7 @@ def run_link_prediction(config: DictConfig, result) -> dict:
 
 
 def get_model_provider(model, embedding_model):
-    # For custom models provided by selecting "Other" in the dropdown
+    # If the model is in the format "provider/model"
     if model and "/" in model:
         return model.split("/")[0]
 
@@ -674,11 +674,11 @@ def run_cmd_pipeline(args):
     base_model = args.model or defaults.get("model")
     base_embedding_model = args.embedding_model or defaults.get("embedding_model")
     
-    ie_model = args.ie_model or base_model
-    et_model = args.et_model or base_model
-    ea_model = args.ea_model or base_embedding_model
-    lp_model = args.lp_model or base_model
-    
+    ie_model = f"{provider}/{args.ie_model or base_model}"
+    et_model = f"{provider}/{args.et_model or base_model}"
+    ea_model = f"{provider}/{args.ea_model or base_embedding_model}"
+    lp_model = f"{provider}/{args.lp_model or base_model}"
+
     print(f"Running CTINexus with {provider} provider...")
     print(f"IE: {ie_model}, ET: {et_model}, EA: {ea_model}, LP: {lp_model}")
     
