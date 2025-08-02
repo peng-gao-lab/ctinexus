@@ -191,7 +191,7 @@ Once the application is running (either via Docker or locally):
 
 2. **Paste threat intelligence text** into the input area (e.g., security reports, vulnerability descriptions, incident reports)
 
-3. **Select your preferred AI model** from the dropdown
+3. **Select your preferred AI model** from the dropdown menu. If your desired model is not listed, select the "Other" option and provide the exact model name as specified by your chosen provider.
 
 4. **Click "Run"** to analyze the text
 

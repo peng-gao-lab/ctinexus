@@ -124,15 +124,29 @@ def run_link_prediction(config: DictConfig, result) -> dict:
     return Linker(config).call(result)
 
 
-def get_model_provider(model):
+def get_model_provider(model, embedding_model):
+    # For custom models provided by selecting "Other" in the dropdown
+    if model and "/" in model:
+        return model.split("/")[0]
+
+    if embedding_model and "/" in embedding_model:
+        return embedding_model.split("/")[0]
+    
     for provider, models in MODELS.items():
         if model in models:
+            return provider
+    
+    for provider, models in EMBEDDING_MODELS.items():
+        if embedding_model in models:
             return provider
     return None
 
 
 def get_config(model: str = None, embedding_model: str = None, similarity_threshold: float = 0.6) -> DictConfig:
-    provider = get_model_provider(model)
+    provider = get_model_provider(model, embedding_model)
+    model = model.split("/")[-1] if model else None
+    embedding_model = embedding_model.split("/")[-1] if embedding_model else None
+    
     with initialize(version_base="1.2", config_path="config"):
         overrides = []
         if model:
@@ -280,14 +294,14 @@ def build_interface(warning: str = None):
                         )
                     with gr.Column(scale=2):
                         ie_dropdown = gr.Dropdown(
-                            choices=get_model_choices(provider_dropdown.value) if provider_dropdown.value else [],
+                            choices=get_model_choices(provider_dropdown.value) + [("Other", "Other")] if provider_dropdown.value else [],
                             label="Intelligence Extraction Model",
                             value=get_model_choices(provider_dropdown.value)[0][1] if provider_dropdown.value and get_model_choices(provider_dropdown.value) else None,
                         )
 
                     with gr.Column(scale=2):
                         et_dropdown = gr.Dropdown(
-                            choices=get_model_choices(provider_dropdown.value) if provider_dropdown.value else [],
+                            choices=get_model_choices(provider_dropdown.value) + [("Other", "Other")] if provider_dropdown.value else [],
                             label="Entity Tagging Model",
                             value=get_model_choices(provider_dropdown.value)[0][1] if provider_dropdown.value and get_model_choices(provider_dropdown.value) else None,
                         )
@@ -297,7 +311,7 @@ def build_interface(warning: str = None):
                         ea_dropdown = gr.Dropdown(
                             choices=get_embedding_model_choices(
                                 provider_dropdown.value
-                            ) if provider_dropdown.value else [],
+                            ) + [("Other", "Other")] if provider_dropdown.value else [],
                             label="Entity Alignment Model",
                             value=get_embedding_model_choices(provider_dropdown.value)[
                                 0
@@ -313,11 +327,55 @@ def build_interface(warning: str = None):
                         )
                     with gr.Column(scale=2):
                         lp_dropdown = gr.Dropdown(
-                            choices=get_model_choices(provider_dropdown.value) if provider_dropdown.value else [],
+                            choices=get_model_choices(provider_dropdown.value) + [("Other", "Other")] if provider_dropdown.value else [],
                             label="Link Prediction Model",
                             value=get_model_choices(provider_dropdown.value)[0][1] if provider_dropdown.value and get_model_choices(provider_dropdown.value) else None,
                         )
-                    
+
+                # Custom model input fields
+                with gr.Row():
+                    with gr.Column(scale=1):
+                        custom_model_input = gr.Textbox(
+                            label="Custom Model (if 'Other' is selected)",
+                            placeholder="Enter custom model name...",
+                            visible=False,
+                        )
+                    with gr.Column(scale=1):
+                        custom_embedding_model_input = gr.Textbox(
+                            label="Custom Embedding Model (if 'Other' is selected)",
+                            placeholder="Enter custom embedding model name...",
+                            visible=False,
+                        )
+
+                def toggle_custom_model_inputs(ie_value, et_value, ea_value, lp_value):
+                    show_custom_model = any(value == "Other" for value in [ie_value, et_value, lp_value])
+                    show_custom_embedding_model = ea_value == "Other"
+                    return gr.update(visible=show_custom_model), gr.update(visible=show_custom_embedding_model)
+
+                ie_dropdown.change(
+                    fn=toggle_custom_model_inputs,
+                    inputs=[ie_dropdown, et_dropdown, ea_dropdown, lp_dropdown],
+                    outputs=[custom_model_input, custom_embedding_model_input],
+                )
+
+                et_dropdown.change(
+                    fn=toggle_custom_model_inputs,
+                    inputs=[ie_dropdown, et_dropdown, ea_dropdown, lp_dropdown],
+                    outputs=[custom_model_input, custom_embedding_model_input],
+                )
+
+                ea_dropdown.change(
+                    fn=toggle_custom_model_inputs,
+                    inputs=[ie_dropdown, et_dropdown, ea_dropdown, lp_dropdown],
+                    outputs=[custom_model_input, custom_embedding_model_input],
+                )
+
+                lp_dropdown.change(
+                    fn=toggle_custom_model_inputs,
+                    inputs=[ie_dropdown, et_dropdown, ea_dropdown, lp_dropdown],
+                    outputs=[custom_model_input, custom_embedding_model_input],
+                )
+
                 run_all_button = gr.Button("Run", variant="primary")
         with gr.Row():
             metrics_table = gr.Markdown(
@@ -349,8 +407,8 @@ def build_interface(warning: str = None):
         def update_model_choices(
             provider,
         ) -> tuple[gr.Dropdown, gr.Dropdown, gr.Dropdown, gr.Dropdown]:
-            model_choices = get_model_choices(provider)
-            embedding_choices = get_embedding_model_choices(provider)
+            model_choices = get_model_choices(provider) + [("Other", "Other")]
+            embedding_choices = get_embedding_model_choices(provider) + [("Other", "Other")]
             
             # Create dropdowns with updated choices and default values
             ie_dropdown_update = gr.Dropdown(
@@ -390,7 +448,7 @@ def build_interface(warning: str = None):
             outputs=[results_box, graph_output, metrics_table],
         ).then(
             fn=process_and_visualize,
-            inputs=[text_input, ie_dropdown, et_dropdown, ea_dropdown, lp_dropdown, similarity_slider],
+            inputs=[text_input, ie_dropdown, et_dropdown, ea_dropdown, lp_dropdown, similarity_slider, provider_dropdown, custom_model_input, custom_embedding_model_input],
             outputs=[results_box, graph_output, metrics_table],
         )
 
@@ -422,8 +480,17 @@ def get_embedding_model_choices(provider):
 
 
 def process_and_visualize(
-    text, ie_model, et_model, ea_model, lp_model, similarity_threshold, progress=gr.Progress(track_tqdm=False)
+    text, ie_model, et_model, ea_model, lp_model, similarity_threshold, provider_dropdown=None, custom_model_input=None, custom_embedding_model_input=None, progress=gr.Progress(track_tqdm=False)
 ):
+    # Apply custom model only to dropdowns where 'Other' is selected
+    custom_model = f"{provider_dropdown}/{custom_model_input}" if provider_dropdown else custom_model_input
+    custom_embedding_model = f"{provider_dropdown}/{custom_embedding_model_input}" if provider_dropdown else custom_embedding_model_input
+
+    ie_model = custom_model if ie_model == "Other" else ie_model
+    et_model = custom_model if et_model == "Other" else et_model
+    lp_model = custom_model if lp_model == "Other" else lp_model
+    ea_model = custom_embedding_model if ea_model == "Other" else ea_model
+
     # Run pipeline with progress tracking
     result = run_pipeline(text, ie_model, et_model, ea_model, lp_model, similarity_threshold, progress)
     if result.startswith("Error:"):

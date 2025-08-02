@@ -147,11 +147,12 @@ class Merger:
         startTime = time.time()
         
         api_base_url = None
+        provider = self.config.provider.lower()
         embedding_model = self.config.embedding_model
 
-        if "gemini" in embedding_model:
+        if provider == "gemini":
             embedding_model = f"gemini/{embedding_model}"
-        elif any(ollama_embed in embedding_model for ollama_embed in ["nomic-embed", "mxbai-embed", "all-minilm", "snowflake-arctic-embed"]):
+        elif provider == "ollama":
             api_base_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
             embedding_model = f"ollama/{embedding_model}"
 

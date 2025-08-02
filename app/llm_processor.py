@@ -235,10 +235,11 @@ class LLMCaller:
     def query_llm(self):
         """Query LLM using litellm"""
         try:
+            provider = self.config.provider.lower()
             model_id = self.config.model
 
             # Format request based on model type
-            if "anthropic" in model_id:
+            if provider == "anthropic":
                 messages = [
                     {"role": msg["role"], "content": msg["content"]}
                     for msg in self.prompt
@@ -250,7 +251,7 @@ class LLMCaller:
                     max_tokens=self.max_tokens,
                     response_format={"type": "json_object"},
                 )
-            elif "gemini" in model_id:
+            elif provider == "gemini":
                 response = litellm.completion(
                     model=f"gemini/{model_id}",
                     messages=[{"role": "user", "content": self.prompt[-1]["content"]}],
@@ -258,7 +259,7 @@ class LLMCaller:
                     temperature=0.8,
                     response_format={"type": "json_object"},
                 )
-            elif "meta" in model_id:
+            elif provider == "meta":
                 response = litellm.completion(
                     model=model_id,
                     messages=[{"role": "user", "content": self.prompt[-1]["content"]}],
@@ -266,7 +267,7 @@ class LLMCaller:
                     temperature=0.8,
                     top_p=0.9,
                 )
-            elif model_id.startswith(("llama", "mistral", "mixtral", "qwen", "phi3", "deepseek", "gemma")):
+            elif provider == "ollama":
                 ollama_base_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 
                 improved_prompt = self.prompt[-1]["content"] + "\n\nIMPORTANT: output should be a valid JSON object with no extra text or description."
@@ -431,7 +432,6 @@ class UsageCalculator:
             logger.error(
                 f"Model {self.model} not found in cost.json. Setting cost to 0."
             )
-            print(data)
 
         iprice = data[self.model]["input"] if self.model in data else 0
         oprice = data[self.model]["output"] if self.model in data else 0
