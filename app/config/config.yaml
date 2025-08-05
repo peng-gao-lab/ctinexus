@@ -10,8 +10,6 @@ provider: OpenAI                              # AI provider (OpenAI, Gemini, AWS
 model: gpt-4.1                               # Default model for text generation
 embedding_model: text-embedding-3-large      # Model for vector embeddings
 
-# Entity Alignment Configuration
-merge_prompt_folder: prompts
 
 # Similarity threshold for entity matching
 similarity_threshold: 0.6  # Range: 0.0-1.0, higher = more strict matching
