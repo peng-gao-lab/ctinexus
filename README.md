@@ -50,7 +50,7 @@ The framework automatically processes unstructured threat intelligence reports t
 ## Quick Start
 
 You can use CTINexus in two ways:
-- **⚡ Command Line**: For automation and batch processing → **[📖 CLI Guide](app/docs/cli-guide.md)**
+- **⚡ Command Line**: For automation and batch processing → **[📖 CLI Guide](docs/cli-guide.md)**
 - **🖥️ Web Interface**: User-friendly GUI for interactive analysis (follow the setup below)
 
 Both options support Docker and local installation.
@@ -96,7 +96,7 @@ AWS_REGION=us-east-1
 OLLAMA_BASE_URL=http://localhost:11434
 ```
 
-> **Note**: You only need to set up one provider, but you may configure multiple APIs if desired. Once configured, you can select models from any of your chosen providers. If you are using Ollama, see the detailed [Ollama Guide](app/docs/ollama-guide.md).
+> **Note**: You only need to set up one provider, but you may configure multiple APIs if desired. Once configured, you can select models from any of your chosen providers. If you are using Ollama, see the detailed [Ollama Guide](docs/ollama-guide.md).
 
 
 ---
@@ -179,7 +179,7 @@ For automation, batch processing, or integration into existing workflows, use th
 python app.py --input-file report.txt
 ```
 
-**📖 [Complete CLI Documentation](app/docs/cli-guide.md)** - Detailed usage examples, model options, and integration guides.
+**📖 [Complete CLI Documentation](docs/cli-guide.md)** - Detailed usage examples, model options, and integration guides.
 
 ### 🖥️ Web Interface (GUI)
 
