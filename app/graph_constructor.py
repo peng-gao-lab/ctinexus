@@ -467,4 +467,4 @@ def create_graph_visualization(result: dict) -> str:
     except Exception as e:
         print(f"Error saving graph: {e}")
 
-    return f"http://localhost:{http_port}/{file_name}"
+    return f"http://localhost:{http_port}/{file_name}", file_path

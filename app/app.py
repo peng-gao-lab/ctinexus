@@ -1,8 +1,10 @@
 import argparse
+import json
 import os
 import sys
 import traceback
 
+from graph_constructor import create_graph_visualization
 from utils.gradio_utils import build_interface, run_pipeline
 from utils.http_server_utils import setup_http_server
 from utils.model_utils import (
@@ -186,6 +188,12 @@ def run_cmd_pipeline(args):
             print(f"Error writing output file: {e}")
             print(result)
             sys.exit(1)
+
+        # Create Entity Relation Graph
+        result_dict = json.loads(result)
+        _, filepath = create_graph_visualization(result_dict)
+        print(f"Entity Relation Graph: {filepath}")
+
         
     except Exception as e:
         print(f"Error: {e}")

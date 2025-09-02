@@ -149,7 +149,7 @@ def process_and_visualize(
     try:
         # Create visualization without progress tracking
         result_dict = json.loads(result)
-        graph_url = create_graph_visualization(result_dict)
+        graph_url, _ = create_graph_visualization(result_dict)
         graph_html_content = f"""
         <div style="text-align: center; padding: 10px; margin-top: -20px;">
             <h2 style="margin-bottom: 0.5em;">Entity Relationship Graph</h2>
