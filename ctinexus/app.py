@@ -26,10 +26,12 @@ load_dotenv()
 
 # Set up logging
 logger = logging.getLogger(__name__)
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(levelname)s: %(message)s'
-)
+
+def setup_logging():
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(levelname)s: %(message)s'
+    )
 
 def create_argument_parser():
     parser = argparse.ArgumentParser(
@@ -229,6 +231,8 @@ def run_cmd_pipeline(args):
 
 
 def main():
+    setup_logging()
+    
     # HTTP server to serve pyvis files
     setup_http_server()
 
