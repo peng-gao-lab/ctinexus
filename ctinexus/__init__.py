@@ -59,17 +59,17 @@ def process_cti_report(
 	if isinstance(result, str) and result.startswith("Error:"):
 		raise RuntimeError(result)
 
+	# Create Entity Relation Graph
+	result_dict = json.loads(result)
+	_, graph_filepath = create_graph_visualization(result_dict)
+	result_dict["entity_relation_graph"] = graph_filepath
+
 	# Write output if requested
 	if output:
 		output_dir = os.path.dirname(output)
 		if output_dir:
 			os.makedirs(output_dir, exist_ok=True)
 		with open(output, 'w', encoding='utf-8') as f:
-			f.write(result)
-
-	# Create Entity Relation Graph
-	result_dict = json.loads(result)
-	_, graph_filepath = create_graph_visualization(result_dict)
-	result_dict["entity_relation_graph"] = graph_filepath
+			json.dump(result_dict, f, indent=4)
 
 	return result_dict
