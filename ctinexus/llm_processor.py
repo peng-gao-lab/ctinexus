@@ -16,14 +16,15 @@ from omegaconf import DictConfig
 from sklearn.feature_extraction.text import TfidfVectorizer
 from ctinexus.utils.path_utils import resolve_path
 
+logger = logging.getLogger(__name__)
+
 # Download NLTK stopwords if not already present
 try:
     stopwords.words("english")
 except LookupError:
-    print("Downloading NLTK stopwords...")
+    logger.info("Downloading NLTK stopwords...")
     nltk.download("stopwords", quiet=True)
 
-logger = logging.getLogger(__name__)
 litellm.drop_params = True
 
 
@@ -121,7 +122,7 @@ class LLMLinker:
 
             # Safety check and extract predicted triple information
             if not self.response_content or not isinstance(self.response_content, dict):
-                print("Warning: Invalid response from LLM for link prediction")
+                logger.warning("Invalid response from LLM for link prediction")
                 pred_sub, pred_rel, pred_obj = "unknown", "unknown", "unknown"
             else:
                 try:
@@ -137,7 +138,7 @@ class LLMLinker:
                         else:
                             pred_sub, pred_rel, pred_obj = "unknown", "unknown", "unknown"
                 except Exception as e:
-                    print(f"Error extracting predicted triple: {e}")
+                    logger.error(f"Error extracting predicted triple: {e}")
                     pred_sub, pred_rel, pred_obj = "unknown", "unknown", "unknown"
 
             if (
@@ -159,10 +160,9 @@ class LLMLinker:
                     "mention_text": main_node["entity_text"],
                 }
             else:
-                print(
-                    "Error: The predicted subject and object do not match the unvisited subject and topic entity, the LLM produce hallucination!"
-                )
-                print(f"Hallucinated in text: {self.js['text']}")
+                logger.error("The predicted subject and object do not match the unvisited subject and topic entity, the LLM produce hallucination!")
+                logger.error(f"Hallucinated in text: {self.js['text']}")
+
                 new_sub = {
                     "entity_id": "hallucination",
                     "mention_text": "hallucination",
@@ -602,9 +602,7 @@ class DemoRetriever:
             return self.retrieveRandomDemo(self.config.shot)
 
         else:
-            print(
-                'Invalid retriever type. Please choose between "kNN", "random", and "fixed".'
-            )
+            logger.error('Invalid retriever type. Please choose between "kNN", "random", and "fixed".')
 
 
 def extract_json_from_response(response_text):
@@ -637,8 +635,8 @@ def extract_json_from_response(response_text):
                         return json.loads(fixed_json)
                         
             except Exception as e:
-                print(f"Error extracting JSON from match: {e}")
-                print(f"JSON text: {json_matches[-1].group()}")
+                logger.error(f"Error extracting JSON from match: {e}")
+                logger.debug(f"JSON text: {json_matches[-1].group()}")
         
         # Try to parse as triplets list format
         triplet_patterns = [
@@ -662,7 +660,7 @@ def extract_json_from_response(response_text):
                     })
                 return {"triplets": triplets}
         
-        print(f"Failed to parse response, raw text: {response_text}")
+        logger.warning(f"Failed to parse response, raw text: {response_text}")
         return {"triplets": []}
     else:
         return dict(response_text)

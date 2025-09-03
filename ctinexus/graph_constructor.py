@@ -1,5 +1,6 @@
 import os
 import time
+import logging
 from collections import defaultdict
 
 import litellm
@@ -10,6 +11,8 @@ from scipy.spatial.distance import cosine
 
 from ctinexus.llm_processor import LLMLinker, UsageCalculator
 from ctinexus.utils.http_server_utils import get_current_port
+
+logger = logging.getLogger(__name__)
 
 
 class Linker:
@@ -39,7 +42,7 @@ class Linker:
         for i, subgraph in enumerate(self.subgraphs):
             main_node_entity_id = self.get_main_node(subgraph)
             main_node = self.get_node(main_node_entity_id)
-            print(f"subgraph {i}: main node: {main_node['entity_text']}")
+            logger.info(f"subgraph {i}: main node: {main_node['entity_text']}")
             self.main_nodes.append(main_node)
 
         self.topic_node = self.get_topic_node(self.subgraphs)
@@ -468,6 +471,6 @@ def create_graph_visualization(result: dict) -> str:
             f.write(html_content)
 
     except Exception as e:
-        print(f"Error saving graph: {e}")
+        logger.error(f"Error saving graph: {e}")
 
     return f"http://localhost:{http_port}/{file_name}", file_path

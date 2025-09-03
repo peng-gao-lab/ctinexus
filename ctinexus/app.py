@@ -5,6 +5,7 @@ import sys
 import os
 import json
 import traceback
+import logging
 from dotenv import load_dotenv
 import importlib.metadata
 
@@ -22,6 +23,13 @@ from ctinexus.utils.model_utils import (
 )
 
 load_dotenv()
+
+# Set up logging
+logger = logging.getLogger(__name__)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(levelname)s: %(message)s'
+)
 
 def create_argument_parser():
     parser = argparse.ArgumentParser(
@@ -124,16 +132,16 @@ def run_cmd_pipeline(args):
             with open(args.input_file, 'r', encoding='utf-8') as f:
                 text = f.read().strip()
         except FileNotFoundError:
-            print(f"Error: Input file '{args.input_file}' not found")
+            logger.error(f"Input file '{args.input_file}' not found")
             sys.exit(1)
         except Exception as e:
-            print(f"Error reading input file: {e}")
+            logger.error(f"Error reading input file: {e}")
             sys.exit(1)
     else:
         text = args.text
     
     if not text:
-        print("Error: No input text provided")
+        logger.error("No input text provided")
         sys.exit(1)
     
     provider = args.provider
@@ -142,7 +150,7 @@ def run_cmd_pipeline(args):
     if provider:
         provider_matched = next((p for p in available_providers if provider.lower() == p.lower()), None)
         if not provider_matched:
-            print(f"Error: Provider '{provider}' not available. Available providers: {available_providers}")
+            logger.error(f"Provider '{provider}' not available. Available providers: {available_providers}")
             sys.exit(1)
         provider = provider_matched
     else:
@@ -150,7 +158,7 @@ def run_cmd_pipeline(args):
         if available_providers:
             provider = available_providers[0]
         else:
-            print("Error: No API keys configured")
+            logger.error("No API keys configured")
             sys.exit(1)
     
     defaults = get_default_models_for_provider(provider)
@@ -164,8 +172,8 @@ def run_cmd_pipeline(args):
     ea_model = f"{provider}/{args.ea_model or base_embedding_model}"
     lp_model = f"{provider}/{args.lp_model or base_model}"
 
-    print(f"Running CTINexus with {provider} provider...")
-    print(f"IE: {ie_model}, ET: {et_model}, EA: {ea_model}, LP: {lp_model}")
+    logger.info(f"Running CTINexus with {provider} provider...")
+    logger.info(f"IE: {ie_model}, ET: {et_model}, EA: {ea_model}, LP: {lp_model}")
     
     try:
         result = run_pipeline(
@@ -178,7 +186,7 @@ def run_cmd_pipeline(args):
         )
         
         if result.startswith("Error:"):
-            print(result)
+            logger.error(result)
             sys.exit(1)
 
         # Determine output file
@@ -202,25 +210,28 @@ def run_cmd_pipeline(args):
         try:
             with open(output_file, 'w', encoding='utf-8') as f:
                 f.write(result)
-            print(f"Results written to: {output_file}")
+            logger.info(f"Results written to: {output_file}")
         except Exception as e:
-            print(f"Error writing output file: {e}")
-            print(result)
+            logger.error(f"Error writing output file: {e}")
+            logger.error(result)
             sys.exit(1)
 
         # Create Entity Relation Graph
         result_dict = json.loads(result)
         _, filepath = create_graph_visualization(result_dict)
-        print(f"Entity Relation Graph: {filepath}")
+        logger.info(f"Entity Relation Graph: {filepath}")
 
         
     except Exception as e:
-        print(f"Error: {e}")
+        logger.error(f"Error: {e}")
         traceback.print_exc()
         sys.exit(1)
 
 
 def main():
+    # HTTP server to serve pyvis files
+    setup_http_server()
+
     parser = create_argument_parser()
     args = parser.parse_args()
 
@@ -233,19 +244,17 @@ def main():
         warning = None
         if not api_keys_available:
             warning = "⚠️   Warning: No API Keys Configured. Please provide one API key in the `.env` file from the supported providers.\n"
-            print(warning)
+            logger.warning(warning.strip())
         build_interface(warning)
     else:
         # Command line mode
         if not api_keys_available:
-            print("⚠️   Warning: No API Keys Configured. Please provide one API key in the `.env` file from the supported providers.\n")
+            logger.warning("No API Keys Configured. Please provide one API key in the `.env` file from the supported providers.")
             sys.exit(1)
         
         run_cmd_pipeline(args)
 
 
 if __name__ == "__main__":
-    # HTTP server to serve pyvis files
-    setup_http_server()
 
     main()

@@ -2,9 +2,12 @@ import os
 import socket
 import time
 import threading
+import logging
 import http.server
 import socketserver
 from .path_utils import resolve_path
+
+logger = logging.getLogger(__name__)
 
 HTTP_SERVER = None
 HTTP_PORT = None
@@ -33,7 +36,7 @@ def cleanup_old_files(directory: str):
                 if os.path.getmtime(filepath) < current_time - 1800:
                     os.remove(filepath)
     except Exception as e:
-        print(f"Cleanup error: {e}")
+        logger.error(f"Cleanup error: {e}")
 
 
 def find_free_port():
@@ -98,7 +101,7 @@ def setup_http_server():
         with socketserver.TCPServer(("0.0.0.0", HTTP_PORT), NetworkHTTPRequestHandler) as httpd:
             HTTP_SERVER = httpd
             HTTP_PORT = httpd.server_address[1]
-            print(f"📡 Network file server running on http://0.0.0.0:{HTTP_PORT}")
+            logger.info(f"Network file server running on http://0.0.0.0:{HTTP_PORT}")
             httpd.serve_forever()
 
     server_thread = threading.Thread(target=start_server, daemon=True)
