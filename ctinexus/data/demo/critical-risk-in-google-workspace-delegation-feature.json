@@ -1,0 +1,167 @@
+{
+    "text": "Unit 42 researchers discovered a security risk in the Google Workspace (formerly known as G Suite) domain-wide delegation feature. We exposed an unexpected way to gain access to the Google Workspace domain data from Google Cloud Platform (GCP). We found that a GCP identity with the necessary permission can generate an access token to a delegated user. A malicious insider or an external attacker with stolen credentials can use this access token to impersonate Google Workspace users, granting unauthorized access to their data or to perform operations on their behalf.",
+    "explicit_triplets": [
+        {
+            "subject": "Unit 42",
+            "relation": "discovered",
+            "object": "a security risk in Google Workspace domain-wide delegation feature"
+        },
+        {
+            "subject": "Google Workspace",
+            "relation": "formerly known as",
+            "object": "G Suite"
+        },
+        {
+            "subject": "Unit 42",
+            "relation": "exposed",
+            "object": "an unexpected way to gain access to the Google Workspace domain data from Google Cloud Platform (GCP)"
+        },
+        {
+            "subject": "GCP identity",
+            "relation": "can generate",
+            "object": "an access token to a delegated user"
+        },
+        {
+            "subject": "A malicious insider",
+            "relation": "can use",
+            "object": "access token to impersonate Google Workspace users"
+        },
+        {
+            "subject": "An external attacker",
+            "relation": "can use",
+            "object": "access token to impersonate Google Workspace users"
+        },
+        {
+            "subject": "access token",
+            "relation": "grants",
+            "object": "unauthorized access to Google Workspace users' data"
+        },
+        {
+            "subject": "access token",
+            "relation": "grants permission to perform",
+            "object": "operations on behalf of Google Workspace users"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Unit 42",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "a security risk in Google Workspace domain-wide delegation feature",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "G Suite",
+            "entity_type": "Tool",
+            "mentions": [
+                "Google Workspace"
+            ]
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "an unexpected way to gain access to the Google Workspace domain data from Google Cloud Platform (GCP)",
+            "entity_type": "Exploit Target",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "GCP identity",
+            "entity_type": "Account",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "an access token to a delegated user",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "A malicious insider",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "An external attacker",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "access token to impersonate Google Workspace users",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "access token",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "unauthorized access to Google Workspace users' data",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "operations on behalf of Google Workspace users",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 0,
+                "entity_text": "Unit 42"
+            },
+            "relation": "discovered a security risk in",
+            "object": {
+                "entity_id": 2,
+                "entity_text": "G Suite"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 4,
+                "entity_text": "GCP identity"
+            },
+            "relation": "was investigated by",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Unit 42"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 6,
+                "entity_text": "A malicious insider"
+            },
+            "relation": "was discovered by",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Unit 42"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 8,
+                "entity_text": "access token"
+            },
+            "relation": "was discovered by",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Unit 42"
+            }
+        }
+    ]
+}

@@ -1,0 +1,153 @@
+{
+    "text": "Microsoft Threat Intelligence continues to track and disrupt malicious activity attributed to a Russian state-sponsored actor we track as Star Blizzard (formerly SEABORGIUM, also known as COLDRIVER and Callisto Group). Star Blizzard has improved their detection evasion capabilities since 2022 while remaining focused on email credential theft against the same targets. Star Blizzard, whose activities we assess to have historically supported both espionage and cyber influence objectives, continues to prolifically target individuals and organizations involved in international affairs, defense, and logistics support to Ukraine, as well as academia, information security companies, and other entities aligning with Russian state interests. Microsoft continues to refine and deploy protections against Star Blizzard's evolving spear-phishing tactics.",
+    "explicit_triplets": [
+        {
+            "subject": "Microsoft Threat Intelligence",
+            "relation": "tracks",
+            "object": "Star Blizzard"
+        },
+        {
+            "subject": "Star Blizzard",
+            "relation": "is also known as",
+            "object": "SEABORGIUM"
+        },
+        {
+            "subject": "Star Blizzard",
+            "relation": "is also known as",
+            "object": "COLDRIVER"
+        },
+        {
+            "subject": "Star Blizzard",
+            "relation": "is also known as",
+            "object": "Callisto Group"
+        },
+        {
+            "subject": "Star Blizzard",
+            "relation": "improved",
+            "object": "detection evasion capabilities"
+        },
+        {
+            "subject": "Star Blizzard",
+            "relation": "remains focused on",
+            "object": "email credential theft"
+        },
+        {
+            "subject": "Star Blizzard",
+            "relation": "targets",
+            "object": "individuals and organizations involved in international affairs, defense, and logistics support to Ukraine"
+        },
+        {
+            "subject": "Star Blizzard",
+            "relation": "targets",
+            "object": "academia"
+        },
+        {
+            "subject": "Star Blizzard",
+            "relation": "targets",
+            "object": "information security companies"
+        },
+        {
+            "subject": "Star Blizzard",
+            "relation": "targets",
+            "object": "entities aligning with Russian state interests"
+        },
+        {
+            "subject": "Microsoft",
+            "relation": "refines and deploys protections against",
+            "object": "Star Blizzard's evolving spear-phishing tactics"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Microsoft Threat Intelligence",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "Star Blizzard",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "SEABORGIUM",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "COLDRIVER",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Callisto Group",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "detection evasion capabilities",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "email credential theft",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "individuals and organizations involved in international affairs, defense, and logistics support to Ukraine",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "academia",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "information security companies",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "entities aligning with Russian state interests",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "Microsoft",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "Star Blizzard's evolving spear-phishing tactics",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 11,
+                "entity_text": "Microsoft"
+            },
+            "relation": "tracks and disrupts malicious activity of",
+            "object": {
+                "entity_id": 1,
+                "entity_text": "Star Blizzard"
+            }
+        }
+    ]
+}

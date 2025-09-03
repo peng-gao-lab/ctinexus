@@ -66,7 +66,7 @@ Good documentation is key to a successful project. If you find areas in our docu
 
 7. **Test your changes:** Ensure your changes work correctly:
    ```bash
-   python app/app.py
+   python ctinexus/app.py
    ```
 
 8. **Commit Changes:** Commit your changes with a descriptive commit message. Use a category to indicate the type of change. Common categories include:

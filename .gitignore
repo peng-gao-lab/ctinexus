@@ -181,10 +181,11 @@ outputs/*
 
 # Gradio
 .gradio/*
-app/.gradio/*
+ctinexus/.gradio/*
 
 # .vscode
 .vscode/*
 
 # Output directory
-app/output/
+**/ctinexus_output/
+ctinexus/output/*

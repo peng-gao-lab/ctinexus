@@ -1,0 +1,152 @@
+{
+    "text": "We found samples that show how malicious actors are using Discord as part of a campaign involving malicious spam emails that eventually end in an AveMaria or AgentTesla malware infection. We first observed the use of malicious spam to deliver these malware families in 2019 \u2014 however, the addition of Discord as part of its attack routine is relatively recent. The malicious emails are typically either postal delivery notifications or invoices with an included DHL or TNT-themed attachment. These emails come with embedded links \u2014 either in the images or the text \u2014 that point to a Discord URL with the following format: hxxps://cdn[.]discordapp[.]com/attachments/{ChannelID}/{AttachmentID}/example[.]exe. These URLs are used to host AveMaria and AgentTesla, which will then infect the users' machines once they click on the executable.",
+    "explicit_triplets": [
+        {
+            "subject": "malicious actors",
+            "relation": "are using",
+            "object": "Discord"
+        },
+        {
+            "subject": "malicious actors",
+            "relation": "conduct",
+            "object": "malicious spam emails"
+        },
+        {
+            "subject": "malicious spam emails",
+            "relation": "result in",
+            "object": "AveMaria malware infection"
+        },
+        {
+            "subject": "malicious spam emails",
+            "relation": "result in",
+            "object": "AgentTesla malware infection"
+        },
+        {
+            "subject": "malicious spam emails",
+            "relation": "deliver",
+            "object": "AveMaria"
+        },
+        {
+            "subject": "malicious spam emails",
+            "relation": "deliver",
+            "object": "AgentTesla"
+        },
+        {
+            "subject": "malicious spam emails",
+            "relation": "include attachments themed as",
+            "object": "DHL"
+        },
+        {
+            "subject": "malicious spam emails",
+            "relation": "include attachments themed as",
+            "object": "TNT"
+        },
+        {
+            "subject": "embedded links",
+            "relation": "point to",
+            "object": "Discord URL"
+        },
+        {
+            "subject": "Discord URL",
+            "relation": "hosts",
+            "object": "AveMaria"
+        },
+        {
+            "subject": "Discord URL",
+            "relation": "hosts",
+            "object": "AgentTesla"
+        },
+        {
+            "subject": "AveMaria",
+            "relation": "infects",
+            "object": "users' machines"
+        },
+        {
+            "subject": "AgentTesla",
+            "relation": "infects",
+            "object": "users' machines"
+        },
+        {
+            "subject": "malicious spam emails",
+            "relation": "first observed in",
+            "object": "2019"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "malicious actors",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "Discord",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "malicious spam emails",
+            "entity_type": "Indicator:Email",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "AveMaria malware infection",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "AveMaria",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "AgentTesla",
+            "entity_type": "Malware",
+            "mentions": [
+                "AgentTesla malware infection"
+            ]
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "DHL",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "TNT",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "embedded links",
+            "entity_type": "Indicator:URL",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "Discord URL",
+            "entity_type": "Indicator:URL",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "users' machines",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "2019",
+            "entity_type": "Time",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

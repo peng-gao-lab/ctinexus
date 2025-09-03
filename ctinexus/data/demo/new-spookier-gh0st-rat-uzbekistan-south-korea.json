@@ -1,0 +1,208 @@
+{
+    "text": "A new variant of the infamous Gh0st RAT malware has been identified in recent attacks targeting South Koreans and the Ministry of Foreign Affairs in Uzbekistan. The Chinese group C.Rufus Security Team first released Gh0st RAT on the open Web in March 2008. Remarkably, it's still in use today, particularly in and around China, albeit in modified forms. Since late August, for instance, a group with strong Chinese links has been distributing a modified Gh0st RAT deemed SugarGh0st RAT. According to research from Cisco Talos, this threat actor drops the variant via JavaScript-laced Windows shortcuts, while distracting targets with customized decoy documents. The four samples of SugarGh0st, likely delivered via phishing, arrive on targeted machines as archives embedded with Windows LNK shortcut files. The LNKs hide malicious JavaScript which, upon opening, drops a decoy document - targeted for Korean or Uzbek government audiences - and the payload. Like its progenitor - the Chinese origin remote access Trojan, first released to the public in March 2008 - SugarGh0st is a clean, multitooled espionage machine. A 32-bit dynamic link library (DLL) written in C++, it begins by collecting system data, then opens up the door to full remote access capabilities. Attackers can use SugarGh0st to retrieve any information they might desire about their compromised machine, or start, terminate, or delete the processes it's running. They can use it to find, exfiltrate, and delete files, and erase any event logs to mask the resulting forensic evidence. The backdoor comes fitted with a keylogger, a screenshotter, a means of accessing the device's camera, and plenty of other useful functions for manipulating the mouse, performing native Windows operation, or simply running arbitrary commands.",
+    "explicit_triplets": [
+        {
+            "subject": "Gh0st RAT",
+            "relation": "targets",
+            "object": "South Koreans"
+        },
+        {
+            "subject": "Gh0st RAT",
+            "relation": "targets",
+            "object": "Ministry of Foreign Affairs in Uzbekistan"
+        },
+        {
+            "subject": "C.Rufus Security Team",
+            "relation": "released",
+            "object": "Gh0st RAT"
+        },
+        {
+            "subject": "Gh0st RAT",
+            "relation": "was released in",
+            "object": "March 2008"
+        },
+        {
+            "subject": "SugarGh0st RAT",
+            "relation": "is distributed by",
+            "object": "group with strong Chinese links"
+        },
+        {
+            "subject": "SugarGh0st RAT",
+            "relation": "is dropped via",
+            "object": "JavaScript-laced Windows shortcuts"
+        },
+        {
+            "subject": "SugarGh0st RAT",
+            "relation": "is likely delivered via",
+            "object": "phishing"
+        },
+        {
+            "subject": "SugarGh0st RAT",
+            "relation": "is delivered on",
+            "object": "machines as archives embedded with Windows LNK shortcut files"
+        },
+        {
+            "subject": "SugarGh0st RAT",
+            "relation": "targets",
+            "object": "Korean or Uzbek government audiences"
+        },
+        {
+            "subject": "SugarGh0st RAT",
+            "relation": "collects",
+            "object": "system data"
+        },
+        {
+            "subject": "SugarGh0st RAT",
+            "relation": "provides",
+            "object": "full remote access capabilities"
+        },
+        {
+            "subject": "SugarGh0st RAT",
+            "relation": "features",
+            "object": "keylogger"
+        },
+        {
+            "subject": "SugarGh0st RAT",
+            "relation": "features",
+            "object": "screenshotter"
+        },
+        {
+            "subject": "SugarGh0st RAT",
+            "relation": "can access",
+            "object": "device's camera"
+        },
+        {
+            "subject": "SugarGh0st RAT",
+            "relation": "can perform",
+            "object": "native Windows operation"
+        },
+        {
+            "subject": "SugarGh0st RAT",
+            "relation": "can execute",
+            "object": "arbitrary commands"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Gh0st RAT",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "South Koreans",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "Ministry of Foreign Affairs in Uzbekistan",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "C.Rufus Security Team",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "March 2008",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "SugarGh0st RAT",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "group with strong Chinese links",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "JavaScript-laced Windows shortcuts",
+            "entity_type": "Malware Characteristic:Payload",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "phishing",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "machines as archives embedded with Windows LNK shortcut files",
+            "entity_type": "Malware Characteristic:Payload",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "Korean or Uzbek government audiences",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "system data",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "full remote access capabilities",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "keylogger",
+            "entity_type": "Malware Characteristic:Feature",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "screenshotter",
+            "entity_type": "Malware Characteristic:Feature",
+            "mentions": []
+        },
+        {
+            "entity_id": 15,
+            "entity_name": "device's camera",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 16,
+            "entity_name": "native Windows operation",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 17,
+            "entity_name": "arbitrary commands",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 5,
+                "entity_text": "SugarGh0st RAT"
+            },
+            "relation": "is a modified variant of",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Gh0st RAT"
+            }
+        }
+    ]
+}

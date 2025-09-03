@@ -1,0 +1,34 @@
+# =============================================================================
+#                       CTINexus Configuration
+# =============================================================================
+
+# API Configuration
+api_key: ${oc.env:OPENAI_API_KEY}  # Populated from environment variable
+
+# Model Settings
+provider: OpenAI                              # AI provider (OpenAI, Gemini, AWS)
+model: gpt-4.1                               # Default model for text generation
+embedding_model: text-embedding-3-large      # Model for vector embeddings
+
+# Similarity threshold for entity matching
+similarity_threshold: 0.6  # Range: 0.0-1.0, higher = more strict matching
+
+# Entity Tagging Configuration
+tag_prompt_folder: prompts
+tag_prompt_file: et.jinja
+
+# Demonstration Retrieval Settings
+# How similar examples are selected for few-shot learning
+retriever:
+  type: "kNN"         # Retrieval method: "kNN" or "random"
+  permutation: asc    # Sort order for k-nearest neighbors
+shot: 3               # Number of examples to include (k in k-NN)
+demoSet: data/demo    # Directory containing demonstration examples
+
+# Intelligence Extraction Configuration
+ie_prompt_set: prompts  # Directory containing prompt templates
+ie_templ: ie.jinja      # Template file for intelligence extraction
+
+# Link Prediction Configuration
+link_prompt_folder: prompts
+link_prompt_file: link.jinja

@@ -1,0 +1,166 @@
+{
+    "text": "Cybersecurity researchers have discovered a new Apple macOS backdoor called SpectralBlur that overlaps with a known malware family that has been attributed to North Korean threat actors. SpectralBlur is a moderately capable backdoor that can upload/download files, run a shell, update its configuration, delete files, hibernate, or sleep, based on commands issued from the [command-and-control server]. The malware shares similarities with KANDYKORN (aka SockRacket), an advanced implant that functions as a remote access trojan capable of taking control of a compromised host. It's worth noting that the KANDYKORN activity also intersects with another campaign orchestrated by the Lazarus sub-group known as BlueNoroff (aka TA444) which culminates in the deployment of a backdoor referred to as RustBucket and a late-stage payload dubbed ObjCShellz. In recent months, the threat actor has been observed combining disparate pieces of these two infection chains, leveraging RustBucket droppers to deliver KANDYKORN.The latest findings are another sign that North Korean threat actors are increasingly setting their sights on macOS to infiltrate high-value targets, particularly those within the cryptocurrency and the blockchain industries.",
+    "explicit_triplets": [
+        {
+            "subject": "Cybersecurity researchers",
+            "relation": "discovered",
+            "object": "SpectralBlur"
+        },
+        {
+            "subject": "SpectralBlur",
+            "relation": "is a backdoor for",
+            "object": "Apple macOS"
+        },
+        {
+            "subject": "SpectralBlur",
+            "relation": "overlaps with",
+            "object": "a known malware family"
+        },
+        {
+            "subject": "a known malware family",
+            "relation": "attributed to",
+            "object": "North Korean threat actors"
+        },
+        {
+            "subject": "SpectralBlur",
+            "relation": "shares similarities with",
+            "object": "KANDYKORN"
+        },
+        {
+            "subject": "KANDYKORN",
+            "relation": "is also known as",
+            "object": "SockRacket"
+        },
+        {
+            "subject": "KANDYKORN",
+            "relation": "functions as",
+            "object": "remote access trojan"
+        },
+        {
+            "subject": "KANDYKORN activity",
+            "relation": "intersects with",
+            "object": "campaign orchestrated by Lazarus sub-group BlueNoroff"
+        },
+        {
+            "subject": "BlueNoroff",
+            "relation": "is also known as",
+            "object": "TA444"
+        },
+        {
+            "subject": "BlueNoroff",
+            "relation": "deploys",
+            "object": "RustBucket"
+        },
+        {
+            "subject": "BlueNoroff",
+            "relation": "deploys",
+            "object": "ObjCShellz"
+        },
+        {
+            "subject": "RustBucket droppers",
+            "relation": "deliver",
+            "object": "KANDYKORN"
+        },
+        {
+            "subject": "North Korean threat actors",
+            "relation": "are targeting",
+            "object": "Apple macOS"
+        },
+        {
+            "subject": "North Korean threat actors",
+            "relation": "target",
+            "object": "cryptocurrency and blockchain industries"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Cybersecurity researchers",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "SpectralBlur",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "Apple macOS",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "a known malware family",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "North Korean threat actors",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "KANDYKORN",
+            "entity_type": "Malware",
+            "mentions": [
+                "KANDYKORN activity"
+            ]
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "SockRacket",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "remote access trojan",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "campaign orchestrated by Lazarus sub-group BlueNoroff",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "BlueNoroff",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "TA444",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "RustBucket",
+            "entity_type": "Malware",
+            "mentions": [
+                "RustBucket droppers"
+            ]
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "ObjCShellz",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "cryptocurrency and blockchain industries",
+            "entity_type": "Organization",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

@@ -1,0 +1,167 @@
+{
+    "text": "In June 2023, Google\u2019s Threat Analysis Group (TAG) discovered an in-the-wild 0-day exploit targeting Zimbra Collaboration, an email server many organizations use to host their email. Since discovering the 0-day, now patched as CVE-2023-37580, TAG has observed four different groups exploiting the same bug to steal email data, user credentials, and authentication tokens. Most of this activity occurred after the initial fix became public on Github. CVE-2023-37580 is a reflected cross-site scripting (XSS) vulnerability. XSS is a web application vulnerability that allows malicious scripts to be injected into another website. In this case, there was a vulnerability in Zimbra that injected the parameter within the URL directly into the webpage, causing the script to be executed. ",
+    "explicit_triplets": [
+        {
+            "subject": "Google's Threat Analysis Group (TAG)",
+            "relation": "discovered",
+            "object": "an in-the-wild 0-day exploit"
+        },
+        {
+            "subject": "an in-the-wild 0-day exploit",
+            "relation": "targets",
+            "object": "Zimbra Collaboration"
+        },
+        {
+            "subject": "in-the-wild 0-day exploit",
+            "relation": "was discovered in",
+            "object": "June 2023"
+        },
+        {
+            "subject": "Zimbra Collaboration",
+            "relation": "is used by",
+            "object": "organizations"
+        },
+        {
+            "subject": "0-day",
+            "relation": "patched as",
+            "object": "CVE-2023-37580"
+        },
+        {
+            "subject": "four different groups",
+            "relation": "exploited",
+            "object": "CVE-2023-37580"
+        },
+        {
+            "subject": "CVE-2023-37580",
+            "relation": "used to steal",
+            "object": "email data"
+        },
+        {
+            "subject": "CVE-2023-37580",
+            "relation": "used to steal",
+            "object": "user credentials"
+        },
+        {
+            "subject": "CVE-2023-37580",
+            "relation": "used to steal",
+            "object": "authentication tokens"
+        },
+        {
+            "subject": "CVE-2023-37580",
+            "relation": "is",
+            "object": "a reflected cross-site scripting (XSS) vulnerability"
+        },
+        {
+            "subject": "XSS",
+            "relation": "allows injection of",
+            "object": "malicious scripts"
+        },
+        {
+            "subject": "malicious scripts",
+            "relation": "are injected into",
+            "object": "webpage"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Google's Threat Analysis Group (TAG)",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "an in-the-wild 0-day exploit",
+            "entity_type": "Exploit Target",
+            "mentions": [
+                "in-the-wild 0-day exploit",
+                "0-day"
+            ]
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "Zimbra Collaboration",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "June 2023",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "organizations",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "CVE-2023-37580",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "four different groups",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "email data",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "user credentials",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "authentication tokens",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "a reflected cross-site scripting (XSS) vulnerability",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "XSS",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "malicious scripts",
+            "entity_type": "Malware Characteristic:Payload",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "webpage",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 12,
+                "entity_text": "malicious scripts"
+            },
+            "relation": "are injected through",
+            "object": {
+                "entity_id": 5,
+                "entity_text": "CVE-2023-37580"
+            }
+        }
+    ]
+}

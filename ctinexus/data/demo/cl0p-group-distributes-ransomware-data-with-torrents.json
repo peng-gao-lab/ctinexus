@@ -1,0 +1,98 @@
+{
+    "text": "The CL0P ransomware group recently began using torrents to distribute victim data after a successful campaign stealing data from thousands of companies. We'll cover the reason for this shift in methodology and what this means for visibility to the outside world. CL0P has been one of the ransomware groups most actively posting data about their victims on leak sites tracked by Unit 42 (second only to LockBit in 2023). Unit 42 consultants have recently observed CL0P in about 10 incident response cases.",
+    "explicit_triplets": [
+        {
+            "subject": "CL0P ransomware group",
+            "relation": "began using",
+            "object": "torrents to distribute victim data"
+        },
+        {
+            "subject": "CL0P ransomware group",
+            "relation": "conducted",
+            "object": "successful campaign stealing data"
+        },
+        {
+            "subject": "CL0P ransomware group",
+            "relation": "targeted",
+            "object": "thousands of companies"
+        },
+        {
+            "subject": "CL0P ransomware group",
+            "relation": "actively posting data about",
+            "object": "victims on leak sites"
+        },
+        {
+            "subject": "CL0P ransomware group",
+            "relation": "tracked by",
+            "object": "Unit 42"
+        },
+        {
+            "subject": "Unit 42 consultants",
+            "relation": "observed",
+            "object": "CL0P ransomware group"
+        },
+        {
+            "subject": "Unit 42 consultants",
+            "relation": "observed CL0P in",
+            "object": "about 10 incident response cases"
+        },
+        {
+            "subject": "LockBit",
+            "relation": "actively posting data about",
+            "object": "victims on leak sites"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "CL0P ransomware group",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "torrents to distribute victim data",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "successful campaign stealing data",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "thousands of companies",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "victims on leak sites",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Unit 42 consultants",
+            "entity_type": "Organization",
+            "mentions": [
+                "Unit 42"
+            ]
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "about 10 incident response cases",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "LockBit",
+            "entity_type": "Attacker",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

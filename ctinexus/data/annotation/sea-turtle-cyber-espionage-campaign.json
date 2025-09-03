@@ -1,0 +1,113 @@
+{
+    "text": "Sea Turtle, also known by the names Cosmic Wolf, Marbled Dust (formerly Silicon), Teal Kurma, and UNC1326, was first documented by Cisco Talos in April 2019, detailing state-sponsored attacks targeting public and private entities in the Middle East and North Africa. Activities associated with the group are believed to have been ongoing since January 2017, primarily leveraging DNS hijacking to redirect prospective targets attempting to query a specific domain to an actor-controlled server capable of harvesting their credentials. Then last month, the adversary was revealed to be using a simple reverse TCP shell for Linux (and Unix) systems called SnappyTCP in attacks carried out between 2021 and 2023, according to the PricewaterhouseCoopers (PwC) Threat Intelligence team. The web shell is a simple reverse TCP shell for Linux/Unix that has basic [command-and-control] capabilities, and is also likely used for establishing persistence",
+    "explicit_triplets": [
+        {
+            "subject": "Threat Actor",
+            "relation": "is known as",
+            "object": "Sea Turtle"
+        },
+        {
+            "subject": "Sea Turtle",
+            "relation": "was first documented in",
+            "object": "April 2019"
+        },
+        {
+            "subject": "Sea Turtle",
+            "relation": "targets",
+            "object": "public and private entities in the Middle East and North Africa"
+        },
+        {
+            "subject": "Sea Turtle",
+            "relation": "leverages",
+            "object": "DNS hijacking"
+        },
+        {
+            "subject": "Sea Turtle",
+            "relation": "uses",
+            "object": "SnappyTCP"
+        },
+        {
+            "subject": "SnappyTCP",
+            "relation": "targets",
+            "object": "Linux"
+        },
+        {
+            "subject": "SnappyTCP",
+            "relation": "targets",
+            "object": "Unix"
+        },
+        {
+            "subject": "SnappyTCP",
+            "relation": "was used between",
+            "object": "2021 and 2023"
+        },
+        {
+            "subject": "Sea Turtle",
+            "relation": "has been active since",
+            "object": "January 2017"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Threat Actor",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "Sea Turtle",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "April 2019",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "public and private entities in the Middle East and North Africa",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "DNS hijacking",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "SnappyTCP",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Linux",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "Unix",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "2021 and 2023",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "January 2017",
+            "entity_type": "Time",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

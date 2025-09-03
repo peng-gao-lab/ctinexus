@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ctinexus"
+version = "0.0.1.8"
+description = "CTINexus: A framework for data-efficient cyber threat intelligence extraction and knowledge graph construction using LLMs."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE.txt"}
+
+authors = [
+    { name = "Saimon Tsegai", email = "49simoney@gmail.com" },
+    { name = "Yutong Cheng" , email = "yutongcheng@vt.edu"}
+]
+
+dependencies = [
+    "gradio",
+    "hydra-core",
+    "jinja2",
+    "litellm",
+    "networkx",
+    "nltk",
+    "omegaconf",
+    "pandas",
+    "pyvis",
+    "python-dotenv",
+    "scikit-learn",
+    "scipy"
+]
+
+[project.scripts]
+ctinexus = "ctinexus.app:main"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+namespaces = false

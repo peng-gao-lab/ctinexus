@@ -1,0 +1,142 @@
+{
+    "text": "The recent iOS 14.8 update fixes a zero-day, zero-click exploit for a vulnerability affecting every mobile iOS device. The flaw, dubbed FORCEDENTRY (CVE-2021-30860), resided in Apple's iMessage and, according to a report by The Citizen Lab, was used to push NSO Group's Pegasus spyware to mobile iOS devices dating back to as far as February 2021. Pegasus has been around for some years now but has been back in the spotlight recently following reports from both The Citizen Lab and Amnesty International about the spyware targeting journalists, activists, and others. One of the main concerns with FORCEDENTRY is that it can be used in what is called a zero-click attack, meaning it requires no user interaction. An attacker exploiting the flaw only needs the Apple ID of a device in order to silently compromise it",
+    "explicit_triplets": [
+        {
+            "subject": "iOS 14.8 update",
+            "relation": "fixes",
+            "object": "a zero-day, zero-click exploit"
+        },
+        {
+            "subject": "a zero-day, zero-click exploit",
+            "relation": "affects",
+            "object": "mobile iOS device"
+        },
+        {
+            "subject": "FORCEDENTRY (CVE-2021-30860)",
+            "relation": "resided in",
+            "object": "Apple's iMessage"
+        },
+        {
+            "subject": "FORCEDENTRY (CVE-2021-30860)",
+            "relation": "used to push",
+            "object": "NSO Group's Pegasus spyware"
+        },
+        {
+            "subject": "NSO Group's Pegasus spyware",
+            "relation": "targeted",
+            "object": "journalists"
+        },
+        {
+            "subject": "NSO Group's Pegasus spyware",
+            "relation": "targeted",
+            "object": "activists"
+        },
+        {
+            "subject": "FORCEDENTRY (CVE-2021-30860)",
+            "relation": "was used since",
+            "object": "February 2021"
+        },
+        {
+            "subject": "FORCEDENTRY (CVE-2021-30860)",
+            "relation": "can be used in",
+            "object": "a zero-click attack"
+        },
+        {
+            "subject": "attacker",
+            "relation": "only needs",
+            "object": "Apple ID"
+        },
+        {
+            "subject": "attacker",
+            "relation": "can silently compromise",
+            "object": "mobile iOS device"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "iOS 14.8 update",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "a zero-day, zero-click exploit",
+            "entity_type": "Exploit Target",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "mobile iOS device",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "FORCEDENTRY (CVE-2021-30860)",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Apple's iMessage",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "NSO Group's Pegasus spyware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "journalists",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "activists",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "February 2021",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "a zero-click attack",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "attacker",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "Apple ID",
+            "entity_type": "Credential",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 3,
+                "entity_text": "FORCEDENTRY (CVE-2021-30860)"
+            },
+            "relation": "is an example of",
+            "object": {
+                "entity_id": 1,
+                "entity_text": "a zero-day, zero-click exploit"
+            }
+        }
+    ]
+}

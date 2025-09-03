@@ -1,0 +1,147 @@
+{
+    "text": "The threat actor known as UAC-0050 is leveraging phishing attacks to distribute Remcos RAT using new strategies to evade detection from security software. The group's weapon of choice is Remcos RAT, a notorious malware for remote surveillance and control, which has been at the forefront of its espionage arsenal. However, in their latest operational twist, the UAC-0050 group has integrated a pipe method for interprocess communication, showcasing their advanced adaptability. UAC-0050, active since 2020, has a history of targeting Ukrainian and Polish entities via social engineering campaigns that impersonate legitimate organizations to trick recipients into opening malicious attachments. In February 2023, the Computer Emergency Response Team of Ukraine (CERT-UA) attributed the adversary to a phishing campaign designed to deliver Remcos RAT.",
+    "explicit_triplets": [
+        {
+            "subject": "Threat Actor UAC-0050",
+            "relation": "leverages",
+            "object": "phishing attacks"
+        },
+        {
+            "subject": "phishing attacks",
+            "relation": "distribute",
+            "object": "Remcos RAT"
+        },
+        {
+            "subject": "Threat Actor UAC-0050",
+            "relation": "uses",
+            "object": "Remcos RAT"
+        },
+        {
+            "subject": "Remcos RAT",
+            "relation": "is malware type",
+            "object": "Malware for remote surveillance and control"
+        },
+        {
+            "subject": "Threat Actor UAC-0050",
+            "relation": "integrated",
+            "object": "pipe method for interprocess communication"
+        },
+        {
+            "subject": "Threat Actor UAC-0050",
+            "relation": "active since",
+            "object": "2020"
+        },
+        {
+            "subject": "Threat Actor UAC-0050",
+            "relation": "targets",
+            "object": "Ukrainian and Polish entities"
+        },
+        {
+            "subject": "Threat Actor UAC-0050",
+            "relation": "uses",
+            "object": "social engineering campaigns"
+        },
+        {
+            "subject": "social engineering campaigns",
+            "relation": "impersonate",
+            "object": "legitimate organizations"
+        },
+        {
+            "subject": "CERT-UA",
+            "relation": "attributed",
+            "object": "phishing campaign designed to deliver Remcos RAT"
+        },
+        {
+            "subject": "CERT-UA",
+            "relation": "attributed adversary in",
+            "object": "February 2023"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Threat Actor UAC-0050",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "phishing attacks",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "Remcos RAT",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "Malware for remote surveillance and control",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "pipe method for interprocess communication",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "2020",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Ukrainian and Polish entities",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "social engineering campaigns",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "legitimate organizations",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "CERT-UA",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "phishing campaign designed to deliver Remcos RAT",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "February 2023",
+            "entity_type": "Time",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 9,
+                "entity_text": "CERT-UA"
+            },
+            "relation": "attributed phishing campaign to",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Threat Actor UAC-0050"
+            }
+        }
+    ]
+}

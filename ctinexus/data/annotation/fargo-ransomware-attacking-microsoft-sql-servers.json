@@ -1,0 +1,218 @@
+{
+    "text": "Vulnerable Microsoft SQL servers are currently being targeted by threat actors and infected with FARGO ransomware (also known as Mallox and TargetCompany). Microsoft's SQL servers hold data for internet services and apps. A disruption  to these databases by FARGO could cause severe issues for businesses. In February 2022, the threat actors behind FARGO attacks dropped Cobalt Strike beacons, and by July 2022, they were hijacking vulnerable Microsoft SQL servers to steal bandwidth for their own proxy services. The latest FARGO attacks blackmail database owners into paying the demanded ransom. If the owners refuse to pay the ransom, the threat actors threaten to expose their stolen files on Telegram. FARGO is one of the most popular ransomware strains that focuses on Microsoft SQL servers. The ransomware infection starts by using powershell.exe and cmd.exe to download a .NET file to a compromised machine. After the payload fetches additional malware, a .BAT file terminates certain processes and services. To ensure that businesses can't recover their data, FARGO executes the recovery deactivation command and kills processes prior to initiating encryption. Once encryption is complete, FARGO renames locked files using the '.Fargo3' extension and generates a ransom note titled 'RECOVERY FILES.txt'. The threat actors expect the demanded ransom to be paid in Bitcoin. Database servers are often compromised via brute-force, and if a threat actor is able to use brute-force in their attack, it's likely due to their target having weak credentials. The threat actor may also try to attack a database server by exploiting well-known and unpatched vulnerabilities. It's important that organizations keep their devices updated with the latest security patches and maintain strong passwords.",
+    "explicit_triplets": [
+        {
+            "subject": "Microsoft SQL servers",
+            "relation": "are targeted by",
+            "object": "threat actors"
+        },
+        {
+            "subject": "Microsoft SQL servers",
+            "relation": "are infected with",
+            "object": "FARGO ransomware"
+        },
+        {
+            "subject": "FARGO ransomware",
+            "relation": "is also known as",
+            "object": "Mallox and TargetCompany"
+        },
+        {
+            "subject": "threat actors",
+            "relation": "dropped",
+            "object": "Cobalt Strike beacons"
+        },
+        {
+            "subject": "threat actors",
+            "relation": "hijacked",
+            "object": "vulnerable Microsoft SQL servers"
+        },
+        {
+            "subject": "threat actors",
+            "relation": "steal bandwidth for",
+            "object": "proxy services"
+        },
+        {
+            "subject": "FARGO ransomware",
+            "relation": "blackmails",
+            "object": "database owners"
+        },
+        {
+            "subject": "threat actors",
+            "relation": "threaten to expose",
+            "object": "stolen files on Telegram"
+        },
+        {
+            "subject": "FARGO ransomware",
+            "relation": "focuses on",
+            "object": "Microsoft SQL servers"
+        },
+        {
+            "subject": "FARGO ransomware",
+            "relation": "uses",
+            "object": "powershell.exe and cmd.exe"
+        },
+        {
+            "subject": "powershell.exe and cmd.exe",
+            "relation": "download",
+            "object": ".NET file"
+        },
+        {
+            "subject": ".BAT file",
+            "relation": "terminates",
+            "object": "processes and services"
+        },
+        {
+            "subject": "FARGO ransomware",
+            "relation": "executes",
+            "object": "recovery deactivation command"
+        },
+        {
+            "subject": "FARGO ransomware",
+            "relation": "kills",
+            "object": "processes"
+        },
+        {
+            "subject": "FARGO ransomware",
+            "relation": "renames locked files to",
+            "object": ".Fargo3 extension"
+        },
+        {
+            "subject": "FARGO ransomware",
+            "relation": "generates",
+            "object": "RECOVERY FILES.txt"
+        },
+        {
+            "subject": "threat actors",
+            "relation": "expect ransom payment in",
+            "object": "Bitcoin"
+        },
+        {
+            "subject": "Database servers",
+            "relation": "are compromised via",
+            "object": "brute-force"
+        },
+        {
+            "subject": "threat actor",
+            "relation": "exploits",
+            "object": "unpatched vulnerabilities"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Microsoft SQL servers",
+            "entity_type": "Infrastructure",
+            "mentions": [
+                "Database servers",
+                "vulnerable Microsoft SQL servers"
+            ]
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "threat actors",
+            "entity_type": "Attacker",
+            "mentions": [
+                "threat actor"
+            ]
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "FARGO ransomware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "Mallox and TargetCompany",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Cobalt Strike beacons",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "proxy services",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "database owners",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "stolen files on Telegram",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "powershell.exe and cmd.exe",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": ".NET file",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": ".BAT file",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "recovery deactivation command",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "processes",
+            "entity_type": "Infrastructure",
+            "mentions": [
+                "processes and services"
+            ]
+        },
+        {
+            "entity_id": 13,
+            "entity_name": ".Fargo3 extension",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "RECOVERY FILES.txt",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 15,
+            "entity_name": "Bitcoin",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 16,
+            "entity_name": "brute-force",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 17,
+            "entity_name": "unpatched vulnerabilities",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

@@ -1,0 +1,176 @@
+{
+    "text": "United States organizations within the financial sector are currently being attacked by a recently discovered ransomware operation named, Yanluowang. The ransomware operation is highly experienced with ransomware-as-a-service (RaaS) and could be linked to veteran RaaS groups, Fivehands and Thieflock. Although the group is primarily focused on attacking organizations within the financial sector, they have also targeted companies in manufacturing, IT services, consultancy, and engineering. Let's take a look at Yanluowang's techniques, tactics, and how they may be connected to Fivehands and Thieflock. In October 2021, Symantec's Threat Hunter Team, a division of Broadcom Software, discovered that Yanluowang ransomware was actively being used by a threat actor who was seen attacking U.S. corporations since at least August 2021. What was interesting about the attack was that many of the tools, tactics, and procedures (TTPs) used were previously used by ransomware threat actor, Thieflock. Most analysts assumed that the threat actor using Yanluowang must be an affiliate of Thieflock who shifted allegiances. Although Yanluowang attempted to attack a large organization in October 2021 by deploying ransomware, they were not successful due to the ransomware being somewhat underdeveloped. According to Symantec, their Threat Hunter Team initially discovered the use of AdFind, a legitimate command-line Active Directory query tool, on the undisclosed target's network. Ransomware attackers often use AdFind as a reconnaissance tool. The tool also equipped attackers with resources that they needed for lateral movement by way of Active Directory. Days after discovering the suspicious use of AdFind, attackers attempted to deploy Yanluowang ransomware.",
+    "explicit_triplets": [
+        {
+            "subject": "Yanluowang",
+            "relation": "is attacking",
+            "object": "United States organizations within the financial sector"
+        },
+        {
+            "subject": "Yanluowang",
+            "relation": "could be linked to",
+            "object": "Fivehands"
+        },
+        {
+            "subject": "Yanluowang",
+            "relation": "could be linked to",
+            "object": "Thieflock"
+        },
+        {
+            "subject": "Yanluowang",
+            "relation": "targeted",
+            "object": "companies in manufacturing, IT services, consultancy, and engineering"
+        },
+        {
+            "subject": "Symantec's Threat Hunter Team",
+            "relation": "discovered ransomware in",
+            "object": "October 2021"
+        },
+        {
+            "subject": "Threat Actor",
+            "relation": "attacked",
+            "object": "U.S. corporations"
+        },
+        {
+            "subject": "Threat Actor",
+            "relation": "used",
+            "object": "Yanluowang"
+        },
+        {
+            "subject": "Threat Actor",
+            "relation": "previously used TTPs from",
+            "object": "Thieflock"
+        },
+        {
+            "subject": "Yanluowang",
+            "relation": "attempted to attack",
+            "object": "a large organization"
+        },
+        {
+            "subject": "Yanluowang",
+            "relation": "failed deployment due to",
+            "object": "the ransomware being somewhat underdeveloped"
+        },
+        {
+            "subject": "Yanluowang",
+            "relation": "used",
+            "object": "AdFind"
+        },
+        {
+            "subject": "AdFind",
+            "relation": "is used for",
+            "object": "reconnaissance"
+        },
+        {
+            "subject": "AdFind",
+            "relation": "enables",
+            "object": "lateral movement via Active Directory"
+        },
+        {
+            "subject": "Threat Actor",
+            "relation": "attempted to deploy",
+            "object": "Yanluowang ransomware"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Yanluowang",
+            "entity_type": "Malware",
+            "mentions": [
+                "Yanluowang ransomware"
+            ]
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "United States organizations within the financial sector",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "Fivehands",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "Thieflock",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "companies in manufacturing, IT services, consultancy, and engineering",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Symantec's Threat Hunter Team",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "October 2021",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "Threat Actor",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "U.S. corporations",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "a large organization",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "the ransomware being somewhat underdeveloped",
+            "entity_type": "Malware Characteristic:Feature",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "AdFind",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "reconnaissance",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "lateral movement via Active Directory",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 5,
+                "entity_text": "Symantec's Threat Hunter Team"
+            },
+            "relation": "discovered",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Yanluowang"
+            }
+        }
+    ]
+}

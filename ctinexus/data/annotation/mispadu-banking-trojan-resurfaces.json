@@ -1,0 +1,115 @@
+{
+    "text": "Recent spam campaigns leading to URSA/Mispadu banking trojan (detected by Trend Micro as TrojanSpy.Win32.MISPADU.THIADBO) have been uncovered, as reported by malware analyst Pedro Tavares in a Twitter post and by Seguranca Informatica in a blog post. Mispadu malware steals credentials from users' systems. This attack targets systems with Spanish and Portuguese as system languages. It is also likely that they have targets similar to previous Mispadu attacks where users from Mexico, Spain, Portugal, and other nearby regions were targeted. This behavior is in line with past Mispadu schemes, such as the one where spam emails for fake discount coupons were used as bait.",
+    "explicit_triplets": [
+        {
+            "subject": "URSA/Mispadu banking trojan",
+            "relation": "is detected as",
+            "object": "TrojanSpy.Win32.MISPADU.THIADBO"
+        },
+        {
+            "subject": "Pedro Tavares",
+            "relation": "reported",
+            "object": "URSA/Mispadu banking trojan"
+        },
+        {
+            "subject": "Seguranca Informatica",
+            "relation": "reported",
+            "object": "URSA/Mispadu banking trojan"
+        },
+        {
+            "subject": "Mispadu malware",
+            "relation": "steals",
+            "object": "credentials from users' systems"
+        },
+        {
+            "subject": "URSA/Mispadu banking trojan",
+            "relation": "targets",
+            "object": "systems with Spanish and Portuguese as system languages"
+        },
+        {
+            "subject": "URSA/Mispadu banking trojan",
+            "relation": "targets users from",
+            "object": "Mexico"
+        },
+        {
+            "subject": "URSA/Mispadu banking trojan",
+            "relation": "targets users from",
+            "object": "Spain"
+        },
+        {
+            "subject": "URSA/Mispadu banking trojan",
+            "relation": "targets users from",
+            "object": "Portugal"
+        },
+        {
+            "subject": "URSA/Mispadu banking trojan",
+            "relation": "used bait",
+            "object": "spam emails for fake discount coupons"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "URSA/Mispadu banking trojan",
+            "entity_type": "Malware",
+            "mentions": [
+                "Mispadu malware"
+            ]
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "TrojanSpy.Win32.MISPADU.THIADBO",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "Pedro Tavares",
+            "entity_type": "This entity cannot be classified into any of the existing types",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "Seguranca Informatica",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "credentials from users' systems",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "systems with Spanish and Portuguese as system languages",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Mexico",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "Spain",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "Portugal",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "spam emails for fake discount coupons",
+            "entity_type": "Indicator:Email",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

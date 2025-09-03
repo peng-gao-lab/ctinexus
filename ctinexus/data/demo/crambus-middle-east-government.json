@@ -1,0 +1,208 @@
+{
+    "text": "The Iranian Crambus espionage group (aka OilRig, APT34) staged an eight-month-long intrusion against a government in the Middle East between February and September 2023. During the compromise, the attackers stole files and passwords and, in one case, installed a PowerShell backdoor (dubbed PowerExchange) that was used to monitor incoming mails sent from an Exchange Server in order to execute commands sent by the attackers in the form of emails, and surreptitiously forwarded results  to the attackers. Malicious activity occurred on at least 12 computers and there is evidence that the attackers deployed backdoors and keyloggers on dozens more. In addition to deploying malware, the attackers made frequent use of the publicly available network administration tool Plink to configure port-forwarding rules on compromised machines, enabling remote access via the Remote Desktop Protocol (RDP). There is also evidence the attackers modified Windows firewall rules in order to enable remote access.",
+    "explicit_triplets": [
+        {
+            "subject": "Crambus",
+            "relation": "is also known as",
+            "object": "OilRig"
+        },
+        {
+            "subject": "Crambus",
+            "relation": "is also known as",
+            "object": "APT34"
+        },
+        {
+            "subject": "Crambus",
+            "relation": "staged an intrusion against",
+            "object": "a government in the Middle East"
+        },
+        {
+            "subject": "Crambus",
+            "relation": "staged an intrusion from",
+            "object": "February 2023"
+        },
+        {
+            "subject": "Crambus",
+            "relation": "staged an intrusion until",
+            "object": "September 2023"
+        },
+        {
+            "subject": "attackers",
+            "relation": "stole",
+            "object": "files"
+        },
+        {
+            "subject": "attackers",
+            "relation": "stole",
+            "object": "passwords"
+        },
+        {
+            "subject": "attackers",
+            "relation": "installed",
+            "object": "PowerExchange"
+        },
+        {
+            "subject": "PowerExchange",
+            "relation": "is a type of",
+            "object": "PowerShell backdoor"
+        },
+        {
+            "subject": "PowerExchange",
+            "relation": "used to monitor",
+            "object": "incoming mails sent from an Exchange Server"
+        },
+        {
+            "subject": "attackers",
+            "relation": "deployed malware on",
+            "object": "12 computers"
+        },
+        {
+            "subject": "attackers",
+            "relation": "deployed",
+            "object": "backdoors"
+        },
+        {
+            "subject": "attackers",
+            "relation": "deployed",
+            "object": "keyloggers"
+        },
+        {
+            "subject": "attackers",
+            "relation": "used",
+            "object": "Plink"
+        },
+        {
+            "subject": "Plink",
+            "relation": "enables",
+            "object": "remote access via Remote Desktop Protocol (RDP)"
+        },
+        {
+            "subject": "attackers",
+            "relation": "modified",
+            "object": "Windows firewall rules"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Crambus",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "OilRig",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "APT34",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "a government in the Middle East",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "February 2023",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "September 2023",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "attackers",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "files",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "passwords",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "PowerExchange",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "PowerShell backdoor",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "incoming mails sent from an Exchange Server",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "12 computers",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "backdoors",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "keyloggers",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 15,
+            "entity_name": "Plink",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 16,
+            "entity_name": "remote access via Remote Desktop Protocol (RDP)",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 17,
+            "entity_name": "Windows firewall rules",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 0,
+                "entity_text": "Crambus"
+            },
+            "relation": "is identified as",
+            "object": {
+                "entity_id": 6,
+                "entity_text": "attackers"
+            }
+        }
+    ]
+}

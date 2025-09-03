@@ -1,0 +1,252 @@
+{
+    "text": "Security researchers have spotted a recent increase in attacks involving a sophisticated new variant of Jupyter, an information stealer that has been targeting users of Chrome, Edge, and Firefox browsers since at least 2020. The malware, also referred to as Yellow Cockatoo, Solarmarker, and Polazert, can backdoor machines and harvest a variety of credential information, including computer name, the user's admin privileges, cookies, Web data, browser password manager information, and other sensitive data from victim systems - such as logins for crypto-wallets and remote access apps. Researchers from VMware's Carbon Black managed detection and response (MDR) service recently observed the new version of the malware leveraging PowerShell command modifications and legitimate-looking, digitally signed payloads, infecting a steadily rising number of systems since late October. Morphisec and BlackBerry \u2014 two other vendors that have previously tracked Jupyter \u2014 have identified the malware as capable of functioning as a full-fledged backdoor. They have described its capabilities as including support for command and control (C2) communications, acting as a dropper and loader for other malware, hollowing shell code to evade detection, and executing PowerShell scripts and commands. BlackBerry has reported observing Jupyter also targeting crypto-wallets, such as Ethereum Wallet, MyMonero Wallet, and Atomic Wallet, in addition to accessing OpenVPN, Remote Desktop Protocol, and other remote access applications.",
+    "explicit_triplets": [
+        {
+            "subject": "Jupyter",
+            "relation": "targets",
+            "object": "Chrome, Edge, and Firefox browsers"
+        },
+        {
+            "subject": "Jupyter",
+            "relation": "is also referred to as",
+            "object": "Yellow Cockatoo"
+        },
+        {
+            "subject": "Jupyter",
+            "relation": "is also referred to as",
+            "object": "Solarmarker"
+        },
+        {
+            "subject": "Jupyter",
+            "relation": "is also referred to as",
+            "object": "Polazert"
+        },
+        {
+            "subject": "Jupyter",
+            "relation": "can steal",
+            "object": "credential information"
+        },
+        {
+            "subject": "credential information",
+            "relation": "includes",
+            "object": "browser password manager information"
+        },
+        {
+            "subject": "credential information",
+            "relation": "includes logins for",
+            "object": "crypto-wallets"
+        },
+        {
+            "subject": "credential information",
+            "relation": "includes logins for",
+            "object": "remote access apps"
+        },
+        {
+            "subject": "Jupyter",
+            "relation": "leverages",
+            "object": "PowerShell command modifications"
+        },
+        {
+            "subject": "Jupyter",
+            "relation": "uses",
+            "object": "legitimate-looking, digitally signed payloads"
+        },
+        {
+            "subject": "Jupyter",
+            "relation": "infected systems since",
+            "object": "late October"
+        },
+        {
+            "subject": "Morphisec",
+            "relation": "identified",
+            "object": "Jupyter"
+        },
+        {
+            "subject": "BlackBerry",
+            "relation": "identified",
+            "object": "Jupyter"
+        },
+        {
+            "subject": "Jupyter",
+            "relation": "functions as",
+            "object": "a full-fledged backdoor"
+        },
+        {
+            "subject": "Jupyter",
+            "relation": "supports",
+            "object": "command and control (C2) communications"
+        },
+        {
+            "subject": "Jupyter",
+            "relation": "acts as",
+            "object": "dropper and loader for other malware"
+        },
+        {
+            "subject": "Jupyter",
+            "relation": "executes",
+            "object": "PowerShell scripts and commands"
+        },
+        {
+            "subject": "Jupyter",
+            "relation": "targets",
+            "object": "Ethereum Wallet"
+        },
+        {
+            "subject": "Jupyter",
+            "relation": "targets",
+            "object": "MyMonero Wallet"
+        },
+        {
+            "subject": "Jupyter",
+            "relation": "targets",
+            "object": "Atomic Wallet"
+        },
+        {
+            "subject": "Jupyter",
+            "relation": "accesses",
+            "object": "OpenVPN"
+        },
+        {
+            "subject": "Jupyter",
+            "relation": "accesses",
+            "object": "Remote Desktop Protocol"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Jupyter",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "Chrome, Edge, and Firefox browsers",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "Yellow Cockatoo",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "Solarmarker",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Polazert",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "credential information",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "browser password manager information",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "crypto-wallets",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "remote access apps",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "legitimate-looking, digitally signed payloads",
+            "entity_type": "Malware Characteristic:Payload",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "late October",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "Morphisec",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "BlackBerry",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "a full-fledged backdoor",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 15,
+            "entity_name": "command and control (C2) communications",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 16,
+            "entity_name": "dropper and loader for other malware",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "PowerShell scripts and commands",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": [
+                "PowerShell command modifications"
+            ]
+        },
+        {
+            "entity_id": 17,
+            "entity_name": "Ethereum Wallet",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 18,
+            "entity_name": "MyMonero Wallet",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 19,
+            "entity_name": "Atomic Wallet",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 20,
+            "entity_name": "OpenVPN",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 21,
+            "entity_name": "Remote Desktop Protocol",
+            "entity_type": "Tool",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

@@ -1,0 +1,287 @@
+{
+    "text": "Mallox ransomware specifically targets computers running Microsoft Windows. This ransomware was first observed in June 2021 and is known for exploiting unsecured MS-SQL servers as a penetration vector to compromise victims' networks. The ransomware's targeted industries are manufacturing, professional and legal services, and wholesale and retail. The ransomware operators claim that their victims include worldwide organizations. According to Lior Rochberger, a senior security researcher at Palo Alto Networks, Mallox's sudden increase in activity is attributed to the deliberate actions taken by the group's leaders to expand Mallox's operations. Rochberger stated that group appeared to focus more on recruiting affiliates at the beginning of 2023. This shift in strategy explains the significant increase observed this year. Recently, researchers from Unit 42 have noticed a significant increase in Mallox ransomware activity, with a surge of almost 174% compared to 2022. This increase is primarily due to Mallox using vulnerable MS-SQL (CVE-2020-0618 and CVE-2019-1068) servers to spread the ransomware. Unit 42 also observed Mallox using tactics such as brute force, data exfiltration, and the use of network scanning tools. Researchers have also reported that the group has attempted to distribute Mallox via phishing emails - suggesting affiliates may be involved. Once the threat actors gain access, they use the command line and PowerShell to download the Mallox ransomware payload from a remote server. Like other ransomware groups, the initial payload tries to deactivate any services that might hinder data encryption on the targeted system. Also, it tries to erase shadow copies, making data recovery more challenging after encryption. The malware also attempts to eliminate all event logs, utilizing a commonly used Microsoft command utility to try and complicate forensic analysis. Like CryptNet, the threat actors behind Mallox use the double extortion method - stealing data before encrypting it. They also have a data leak site where they leak the data of victims that refuse to pay or negotiate its ransom demands. Victims negotiate with the threat actors by using a private key to authenticate themselves. As previously stated, the ransomware operators claim to have breached hundreds of organizations worldwide. Unit 42 stated that their telemetry indicates at least dozens of potential Mallox victims. In 2022, Mallox ransomware was discovered to be a variant of the TargetCompany ransomware strain.",
+    "explicit_triplets": [
+        {
+            "subject": "Mallox ransomware",
+            "relation": "targets",
+            "object": "Microsoft Windows"
+        },
+        {
+            "subject": "Mallox ransomware",
+            "relation": "was first observed in",
+            "object": "June 2021"
+        },
+        {
+            "subject": "Mallox ransomware",
+            "relation": "exploits",
+            "object": "unsecured MS-SQL servers"
+        },
+        {
+            "subject": "Mallox ransomware",
+            "relation": "targets",
+            "object": "manufacturing"
+        },
+        {
+            "subject": "Mallox ransomware",
+            "relation": "targets",
+            "object": "professional and legal services"
+        },
+        {
+            "subject": "Mallox ransomware",
+            "relation": "targets",
+            "object": "wholesale and retail"
+        },
+        {
+            "subject": "Mallox ransomware operators",
+            "relation": "claim victims include",
+            "object": "worldwide organizations"
+        },
+        {
+            "subject": "Mallox ransomware",
+            "relation": "uses",
+            "object": "vulnerable MS-SQL (CVE-2020-0618 and CVE-2019-1068)"
+        },
+        {
+            "subject": "Mallox ransomware",
+            "relation": "uses",
+            "object": "brute force"
+        },
+        {
+            "subject": "Mallox ransomware",
+            "relation": "uses",
+            "object": "data exfiltration"
+        },
+        {
+            "subject": "Mallox ransomware",
+            "relation": "uses",
+            "object": "network scanning tools"
+        },
+        {
+            "subject": "Mallox ransomware",
+            "relation": "distributed via",
+            "object": "phishing emails"
+        },
+        {
+            "subject": "Threat Actor",
+            "relation": "uses",
+            "object": "command line"
+        },
+        {
+            "subject": "Threat Actor",
+            "relation": "uses",
+            "object": "PowerShell"
+        },
+        {
+            "subject": "Threat Actor",
+            "relation": "downloads",
+            "object": "Mallox ransomware payload"
+        },
+        {
+            "subject": "Mallox ransomware",
+            "relation": "tries to deactivate",
+            "object": "services that hinder data encryption"
+        },
+        {
+            "subject": "Mallox ransomware",
+            "relation": "erases",
+            "object": "shadow copies"
+        },
+        {
+            "subject": "Mallox ransomware",
+            "relation": "eliminates",
+            "object": "event logs"
+        },
+        {
+            "subject": "Mallox ransomware",
+            "relation": "uses",
+            "object": "double extortion method"
+        },
+        {
+            "subject": "Mallox ransomware operators",
+            "relation": "have breached",
+            "object": "hundreds of organizations worldwide"
+        },
+        {
+            "subject": "Unit 42",
+            "relation": "observed",
+            "object": "Mallox ransomware"
+        },
+        {
+            "subject": "Mallox ransomware",
+            "relation": "is a variant of",
+            "object": "TargetCompany ransomware"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Mallox ransomware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "Microsoft Windows",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "June 2021",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "unsecured MS-SQL servers",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "manufacturing",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "professional and legal services",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "wholesale and retail",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "Mallox ransomware operators",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "worldwide organizations",
+            "entity_type": "Organization",
+            "mentions": [
+                "hundreds of organizations worldwide"
+            ]
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "vulnerable MS-SQL (CVE-2020-0618 and CVE-2019-1068)",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "brute force",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "data exfiltration",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "network scanning tools",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "phishing emails",
+            "entity_type": "Indicator:Email",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "Threat Actor",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 15,
+            "entity_name": "command line",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 16,
+            "entity_name": "PowerShell",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 17,
+            "entity_name": "Mallox ransomware payload",
+            "entity_type": "Malware Characteristic:Payload",
+            "mentions": []
+        },
+        {
+            "entity_id": 18,
+            "entity_name": "services that hinder data encryption",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 19,
+            "entity_name": "shadow copies",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 20,
+            "entity_name": "event logs",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 21,
+            "entity_name": "double extortion method",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 22,
+            "entity_name": "Unit 42",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 23,
+            "entity_name": "TargetCompany ransomware",
+            "entity_type": "Malware Characteristic:Variants",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 7,
+                "entity_text": "Mallox ransomware operators"
+            },
+            "relation": "operate",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Mallox ransomware"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 14,
+                "entity_text": "Threat Actor"
+            },
+            "relation": "operates",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Mallox ransomware"
+            }
+        }
+    ]
+}

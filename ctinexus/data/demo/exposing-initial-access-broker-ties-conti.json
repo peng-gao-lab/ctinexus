@@ -1,0 +1,146 @@
+{
+    "text": "In early September 2021, Threat Analysis Group (TAG) observed a financially motivated threat actor we refer to as EXOTIC LILY, exploiting a 0day in Microsoft MSHTML (CVE-2021-40444). Investigating this group's activity, we determined they are an Initial Access Broker (IAB) who appear to be working with the Russian cyber crime gang known as FIN12 (Mandiant, FireEye) / WIZARD SPIDER (CrowdStrike). Initial access brokers are the opportunistic locksmiths of the security world, and it\u2019s a full-time job. These groups specialize in breaching a target in order to open the doors-or the Windows-to the malicious actor with the highest bid. EXOTIC LILY is a resourceful, financially motivated group whose activities appear to be closely linked with data exfiltration and deployment of human-operated ransomware such as Conti and Diavol. At the peak of EXOTIC LILY\u2019s activity, we estimate they were sending more than 5,000 emails a day, to as many as 650 targeted organizations globally. Up until November 2021, the group seemed to be targeting specific industries such as IT, cybersecurity and healthcare, but as of late we have seen them attacking a wide variety of organizations and industries, with less specific focus.",
+    "explicit_triplets": [
+        {
+            "subject": "Threat Actor EXOTIC LILY",
+            "relation": "exploited",
+            "object": "CVE-2021-40444"
+        },
+        {
+            "subject": "CVE-2021-40444",
+            "relation": "affects",
+            "object": "Microsoft MSHTML"
+        },
+        {
+            "subject": "Threat Actor EXOTIC LILY",
+            "relation": "is working with",
+            "object": "Threat Actor FIN12"
+        },
+        {
+            "subject": "Threat Actor EXOTIC LILY",
+            "relation": "is working with",
+            "object": "Threat Actor WIZARD SPIDER"
+        },
+        {
+            "subject": "Threat Actor EXOTIC LILY",
+            "relation": "specializes in",
+            "object": "Attack Pattern Initial Access"
+        },
+        {
+            "subject": "Threat Actor EXOTIC LILY",
+            "relation": "linked to deployment of",
+            "object": "Malware Conti"
+        },
+        {
+            "subject": "Threat Actor EXOTIC LILY",
+            "relation": "linked to deployment of",
+            "object": "Malware Diavol"
+        },
+        {
+            "subject": "Threat Actor EXOTIC LILY",
+            "relation": "targeted",
+            "object": "Orginzation IT"
+        },
+        {
+            "subject": "Threat Actor EXOTIC LILY",
+            "relation": "targeted",
+            "object": "Orginzation cybersecurity"
+        },
+        {
+            "subject": "Threat Actor EXOTIC LILY",
+            "relation": "targeted",
+            "object": "Orginzation healthcare"
+        },
+        {
+            "subject": "Threat Actor EXOTIC LILY",
+            "relation": "targeted",
+            "object": "650 targeted organizations globally"
+        },
+        {
+            "subject": "Threat Actor EXOTIC LILY",
+            "relation": "sent phishing emails in",
+            "object": "September 2021"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Threat Actor EXOTIC LILY",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "CVE-2021-40444",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "Microsoft MSHTML",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "Threat Actor FIN12",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Threat Actor WIZARD SPIDER",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Attack Pattern Initial Access",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Malware Conti",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "Malware Diavol",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "Orginzation IT",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "Orginzation cybersecurity",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "Orginzation healthcare",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "650 targeted organizations globally",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "September 2021",
+            "entity_type": "Time",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

@@ -1,0 +1,136 @@
+{
+    "text": "RansomExx is a ransomware variant that debuted as Defray777 in 2018. It made a name for itself in 2020, after it was used in widely reported attacks on government agencies, manufacturers, and other such high-profile only months apart. By then, it was dubbed RansomEXX after the string \u201cransom.exx\u201d was found in its binary. In 2020, the group also started a leak site for publishing stolen data.Today, RansomEXX remains an active name among other ransomware variants like LockBit and Conti. Like other groups, the one running RansomEXX appears to have no qualms about publishing data stolen from its targets. It has also published information stolen from government agencies \u2014 a recent case was an attack on a Scottish mental health charity in March 2022, where they published 12GB worth of data that included the personal information and even credit card details of the charity's volunteers.",
+    "explicit_triplets": [
+        {
+            "subject": "RansomExx",
+            "relation": "is a variant of",
+            "object": "ransomware"
+        },
+        {
+            "subject": "RansomExx",
+            "relation": "debuted as",
+            "object": "Defray777"
+        },
+        {
+            "subject": "RansomExx",
+            "relation": "was first observed in",
+            "object": "2018"
+        },
+        {
+            "subject": "RansomExx",
+            "relation": "targeted",
+            "object": "government agencies"
+        },
+        {
+            "subject": "RansomExx",
+            "relation": "targeted",
+            "object": "manufacturers"
+        },
+        {
+            "subject": "RansomExx",
+            "relation": "started",
+            "object": "a leak site"
+        },
+        {
+            "subject": "a leak site",
+            "relation": "publishes",
+            "object": "stolen data"
+        },
+        {
+            "subject": "RansomExx",
+            "relation": "is active alongside other ransomware variants like",
+            "object": "LockBit"
+        },
+        {
+            "subject": "RansomExx",
+            "relation": "is active alongside other ransomware variants like",
+            "object": "Conti"
+        },
+        {
+            "subject": "RansomExx",
+            "relation": "published stolen data from",
+            "object": "government agencies"
+        },
+        {
+            "subject": "RansomExx",
+            "relation": "attacked",
+            "object": "a Scottish mental health charity"
+        },
+        {
+            "subject": "a Scottish mental health charity",
+            "relation": "was attacked in",
+            "object": "March 2022"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "RansomExx",
+            "entity_type": "Malware",
+            "mentions": [
+                "ransomware"
+            ]
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "Defray777",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "2018",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "government agencies",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "manufacturers",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "a leak site",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "stolen data",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "LockBit",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "Conti",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "a Scottish mental health charity",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "March 2022",
+            "entity_type": "Time",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

@@ -80,11 +80,11 @@ The default models can be overridden with specific models for specific tasks in 
 
 | Option | Short | Description |
 |--------|-------|-------------|
-| `--output FILE` | `-o` | Output file path (default: organized in app/output/ directory) |
+| `--output FILE` | `-o` | Output file path (default: organized in ctinexus/output/ directory) |
 
 **Default output behavior:**
-- For a file input: `app/output/<input_file>_output.json`
-- For a text input: `app/output/output.json`
+- For a file input: `ctinexus/output/<input_file>_output.json`
+- For a text input: `ctinexus/output/output.json`
 - Custom output: Uses the exact path provided by user
 
 ## Usage Examples
@@ -135,9 +135,9 @@ python app.py -i report.txt --model gpt-4o --similarity-threshold 0.8
 ### Output Control
 
 ```bash
-# Use organized default output (saves to app/output/)
+# Use organized default output (saves to ctinexus/output/)
 python app.py -i report.txt --model gpt-4o
-# Creates: app/output/report_output.json
+# Creates: ctinexus/output/report_output.json
 
 # Specify custom output file
 python app.py -i report.txt --output analysis_results.json

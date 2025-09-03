@@ -1,0 +1,170 @@
+{
+    "text": "A new Go-based malware loader called JinxLoader is being used by threat actors to deliver next-stage payloads such as Formbook and its successor XLoader. The malware pays homage to League of Legends character Jinx, featuring the character on its ad poster and [command-and-control] login panel. The attacks begin with phishing emails impersonating Abu Dhabi National Oil Company (ADNOC), urging recipients to open password-protected RAR archive attachments that, upon opening, drop the JinxLoader executable, which subsequently acts as a gateway for Formbook or XLoader. It also comes amid a surge in campaigns distributing DarkGate and PikaBot, along with a threat actor known as TA544 (aka Narwal Spider) leveraging new variants of loader malware called IDAT Loader to deploy Remcos RAT or SystemBC malware. What's more, the threat actors behind the Meduza Stealer have released an updated version of the malware (version 2.2) on the dark web with expanded support for browser-based cryptocurrency wallets and an improved credit card (CC) grabber.",
+    "explicit_triplets": [
+        {
+            "subject": "JinxLoader",
+            "relation": "is a",
+            "object": "Malware"
+        },
+        {
+            "subject": "threat actors",
+            "relation": "using",
+            "object": "JinxLoader"
+        },
+        {
+            "subject": "JinxLoader",
+            "relation": "delivers",
+            "object": "Formbook"
+        },
+        {
+            "subject": "JinxLoader",
+            "relation": "delivers",
+            "object": "XLoader"
+        },
+        {
+            "subject": "phishing emails",
+            "relation": "impersonate",
+            "object": "Abu Dhabi National Oil Company (ADNOC)"
+        },
+        {
+            "subject": "phishing emails",
+            "relation": "contain",
+            "object": "password-protected RAR archive attachments"
+        },
+        {
+            "subject": "password-protected RAR archive attachments",
+            "relation": "drop",
+            "object": "JinxLoader"
+        },
+        {
+            "subject": "TA544",
+            "relation": "leverages",
+            "object": "IDAT Loader"
+        },
+        {
+            "subject": "IDAT Loader",
+            "relation": "deploys",
+            "object": "Remcos RAT"
+        },
+        {
+            "subject": "IDAT Loader",
+            "relation": "deploys",
+            "object": "SystemBC malware"
+        },
+        {
+            "subject": "Meduza Stealer",
+            "relation": "released",
+            "object": "updated version 2.2"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "JinxLoader",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "Malware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "threat actors",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "Formbook",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "XLoader",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "phishing emails",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Abu Dhabi National Oil Company (ADNOC)",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "password-protected RAR archive attachments",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "TA544",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "IDAT Loader",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "Remcos RAT",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "SystemBC malware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "Meduza Stealer",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "updated version 2.2",
+            "entity_type": "Malware Characteristic:Variants",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 9,
+                "entity_text": "IDAT Loader"
+            },
+            "relation": "is distinct from",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "JinxLoader"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 12,
+                "entity_text": "Meduza Stealer"
+            },
+            "relation": "has no direct relation with",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "JinxLoader"
+            }
+        }
+    ]
+}

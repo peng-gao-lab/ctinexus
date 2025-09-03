@@ -1,0 +1,87 @@
+{
+    "text": "A threat actor known for repeatedly targeting organizations in Ukraine with the RemcosRAT remote surveillance and control tool is back at it again, this time with a new tactic for transferring data without triggering endpoint detection and response systems. The adversary, tracked as UNC-0050, is focused on Ukrainian government entities in its latest campaign. Researchers at Uptycs who spotted it said the attacks may be politically motivated, with the goal of collecting specific intelligence from Ukrainian government agencies. While the possibility of state sponsorship remains speculative, the group's activities pose an undeniable risk, especially to government sectors reliant on Windows systems,",
+    "explicit_triplets": [
+        {
+            "subject": "Threat Actor",
+            "relation": "is known for targeting",
+            "object": "organizations in Ukraine"
+        },
+        {
+            "subject": "Threat Actor",
+            "relation": "uses",
+            "object": "RemcosRAT"
+        },
+        {
+            "subject": "Threat Actor",
+            "relation": "uses new tactic for",
+            "object": "transferring data without triggering endpoint detection and response systems"
+        },
+        {
+            "subject": "Threat Actor",
+            "relation": "is tracked as",
+            "object": "UNC-0050"
+        },
+        {
+            "subject": "UNC-0050",
+            "relation": "focuses on",
+            "object": "Ukrainian government entities"
+        },
+        {
+            "subject": "UNC-0050",
+            "relation": "may be motivated by",
+            "object": "collecting specific intelligence from Ukrainian government agencies"
+        },
+        {
+            "subject": "UNC-0050",
+            "relation": "poses risk to",
+            "object": "government sectors reliant on Windows systems"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Threat Actor",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "organizations in Ukraine",
+            "entity_type": "Organization",
+            "mentions": [
+                "Ukrainian government entities"
+            ]
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "RemcosRAT",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "transferring data without triggering endpoint detection and response systems",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "UNC-0050",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "collecting specific intelligence from Ukrainian government agencies",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "government sectors reliant on Windows systems",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

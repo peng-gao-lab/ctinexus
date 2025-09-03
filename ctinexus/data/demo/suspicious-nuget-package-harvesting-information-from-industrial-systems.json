@@ -1,0 +1,124 @@
+{
+    "text": "A suspicious NuGet package designed to harvest data from industrial systems appears to be targeting developers who use technology from Chinese company Bozhon, ReversingLabs reports. Named SqzrFramework480 and published on the NuGet repository in January 2024, the package is a .NET library responsible for calibrating robotic movement settings, managing and creating GUIs, initializing and configuring machine vision libraries, and more.However, it can also harvest various types of information from different types of industrial systems, including cameras and robotic arms, can take screenshots, send ping packets, and open sockets for data transfer. \u201cNone of those behaviors are resolutely malicious. However, when taken together, they raise alarms. For example, we can assume that the screenshots that are being taken are sent to the remote server via the open socket. The ping serves as a heartbeat check to see if the exfiltration server is alive,\u201d ReversingLabs notes. The function that takes screenshots, which is not explicitly declared in the code, operates in a continuous loop if successful, capturing the primary screen every minute and sending the information to a remote IP address, via the opened socket.",
+    "explicit_triplets": [
+        {
+            "subject": "SqzrFramework480",
+            "relation": "targets",
+            "object": "developers"
+        },
+        {
+            "subject": "SqzrFramework480",
+            "relation": "was published in",
+            "object": "January 2024"
+        },
+        {
+            "subject": "SqzrFramework480",
+            "relation": "harvests information from",
+            "object": "industrial systems"
+        },
+        {
+            "subject": "industrial systems",
+            "relation": "include",
+            "object": "cameras and robotic arms"
+        },
+        {
+            "subject": "SqzrFramework480",
+            "relation": "takes",
+            "object": "screenshots"
+        },
+        {
+            "subject": "SqzrFramework480",
+            "relation": "sends",
+            "object": "ping packets"
+        },
+        {
+            "subject": "SqzrFramework480",
+            "relation": "opens",
+            "object": "sockets for data transfer"
+        },
+        {
+            "subject": "screenshots",
+            "relation": "sent to",
+            "object": "remote server"
+        },
+        {
+            "subject": "ping packets",
+            "relation": "serve as",
+            "object": "heartbeat check"
+        },
+        {
+            "subject": "screenshots",
+            "relation": "captured every",
+            "object": "minute"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "SqzrFramework480",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "developers",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "January 2024",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "industrial systems",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "cameras and robotic arms",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "screenshots",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "ping packets",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "sockets for data transfer",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "remote server",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "heartbeat check",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "minute",
+            "entity_type": "Time",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

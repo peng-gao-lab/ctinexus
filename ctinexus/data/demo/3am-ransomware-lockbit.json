@@ -1,0 +1,102 @@
+{
+    "text": "A new ransomware family calling itself 3AM has emerged. To date, the ransomware has only been used in a limited fashion. Symantec's Threat Hunter Team, part of Broadcom, has seen it used in a single attack by a ransomware affiliate that attempted to deploy LockBit on a target's network and then switched to 3AM when LockBit was blocked. 3AM is written in Rust and appears to be a completely new malware family. The ransomware attempts to stop multiple services on the infected computer before it begins encrypting files. Once encryption is complete, it attempts to delete Volume Shadow (VSS) copies. It is still unclear whether its authors have any links to known cybercrime organizations. ",
+    "explicit_triplets": [
+        {
+            "subject": "3AM",
+            "relation": "is",
+            "object": "ransomware"
+        },
+        {
+            "subject": "Symantec's Threat Hunter Team",
+            "relation": "observed",
+            "object": "a ransomware affiliate"
+        },
+        {
+            "subject": "a ransomware affiliate",
+            "relation": "attempted to deploy",
+            "object": "LockBit"
+        },
+        {
+            "subject": "a ransomware affiliate",
+            "relation": "switched to",
+            "object": "3AM"
+        },
+        {
+            "subject": "3AM",
+            "relation": "is written in",
+            "object": "Rust"
+        },
+        {
+            "subject": "3AM",
+            "relation": "attempts to stop",
+            "object": "multiple services"
+        },
+        {
+            "subject": "3AM",
+            "relation": "encrypts",
+            "object": "files"
+        },
+        {
+            "subject": "3AM",
+            "relation": "attempts to delete",
+            "object": "Volume Shadow (VSS) copies"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "3AM",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "ransomware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "Symantec's Threat Hunter Team",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "a ransomware affiliate",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "LockBit",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Rust",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "multiple services",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "files",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "Volume Shadow (VSS) copies",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

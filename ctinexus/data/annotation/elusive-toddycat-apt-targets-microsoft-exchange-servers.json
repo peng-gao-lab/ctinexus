@@ -1,0 +1,158 @@
+{
+    "text": "An advanced persistent threat (APT) group, dubbed ToddyCat, is believed behind a series of attacks targeting Microsoft Exchange servers of high-profile government and military installations in Asia and Europe. The campaigns, according to researchers, began in December 2020, and have been largely poorly understood in their complexity until now. The first wave of attacks exclusively targeted Microsoft Exchange Servers, which were compromised with Samurai, a sophisticated passive backdoor that usually works on ports 80 and 443. The APT leverages two passive backdoors within the Exchange Server environment with malware called Samurai and Ninja, which researchers say are used by the adversaries to take complete control of the victim\u2019s hardware and network.",
+    "explicit_triplets": [
+        {
+            "subject": "Threat Actor",
+            "relation": "is dubbed",
+            "object": "ToddyCat"
+        },
+        {
+            "subject": "ToddyCat",
+            "relation": "is behind",
+            "object": "series of attacks targeting Microsoft Exchange servers"
+        },
+        {
+            "subject": "series of attacks targeting Microsoft Exchange servers",
+            "relation": "target",
+            "object": "government and military installations"
+        },
+        {
+            "subject": "government and military installations",
+            "relation": "are located in",
+            "object": "Asia and Europe"
+        },
+        {
+            "subject": "campaigns",
+            "relation": "began in",
+            "object": "December 2020"
+        },
+        {
+            "subject": "first wave of attacks",
+            "relation": "targeted",
+            "object": "Microsoft Exchange Servers"
+        },
+        {
+            "subject": "Microsoft Exchange Servers",
+            "relation": "were compromised with",
+            "object": "Samurai"
+        },
+        {
+            "subject": "Samurai",
+            "relation": "is classified as",
+            "object": "Malware"
+        },
+        {
+            "subject": "ToddyCat",
+            "relation": "leverages",
+            "object": "Samurai"
+        },
+        {
+            "subject": "ToddyCat",
+            "relation": "leverages",
+            "object": "Ninja"
+        },
+        {
+            "subject": "Ninja",
+            "relation": "is classified as",
+            "object": "Malware"
+        },
+        {
+            "subject": "Samurai",
+            "relation": "works on",
+            "object": "ports 80 and 443"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Threat Actor",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "ToddyCat",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "series of attacks targeting Microsoft Exchange servers",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "government and military installations",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Asia and Europe",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "campaigns",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "December 2020",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "first wave of attacks",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "Microsoft Exchange Servers",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "Samurai",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "Malware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "Ninja",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "ports 80 and 443",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 5,
+                "entity_text": "campaigns"
+            },
+            "relation": "leveraged",
+            "object": {
+                "entity_id": 9,
+                "entity_text": "Samurai"
+            }
+        }
+    ]
+}

@@ -1,0 +1,144 @@
+{
+    "text": "Attackers can exploit a critical Bluetooth security vulnerability that's been lurking largely unnoticed for years on macOS, iOS, Android, and Linux device platforms. The keystroke injection vulnerability allows an attacker to control the targeted device as if they were attached by a Bluetooth keyboard, performing various functions remotely depending on the endpoint. Tracked as CVE-2023-45866, the flaw exists in how in the Bluetooth protocol is implemented on various platforms. It works by tricking the Bluetooth host state-machine into pairing with a fake keyboard without user confirmation. The vulnerability enables an attacker to pair an emulated Bluetooth keyboard with a victim's phone or computer, implementing the keyboard as a Python script that runs on a Linux computer. The attacker can then inject keystrokes, typing on the target device as if they were a Bluetooth keyboard legitimately attached to the target.",
+    "explicit_triplets": [
+        {
+            "subject": "Attackers",
+            "relation": "can exploit",
+            "object": "a critical Bluetooth security vulnerability"
+        },
+        {
+            "subject": "a critical Bluetooth security vulnerability",
+            "relation": "affects",
+            "object": "macOS"
+        },
+        {
+            "subject": "a critical Bluetooth security vulnerability",
+            "relation": "affects",
+            "object": "iOS"
+        },
+        {
+            "subject": "a critical Bluetooth security vulnerability",
+            "relation": "affects",
+            "object": "Android"
+        },
+        {
+            "subject": "a critical Bluetooth security vulnerability",
+            "relation": "affects",
+            "object": "Linux"
+        },
+        {
+            "subject": "keystroke injection vulnerability",
+            "relation": "allows",
+            "object": "an attacker to control the targeted device"
+        },
+        {
+            "subject": "keystroke injection vulnerability",
+            "relation": "is tracked as",
+            "object": "CVE-2023-45866"
+        },
+        {
+            "subject": "CVE-2023-45866",
+            "relation": "exists in",
+            "object": "Bluetooth protocol implementation"
+        },
+        {
+            "subject": "CVE-2023-45866",
+            "relation": "enables",
+            "object": "an attacker to pair an emulated Bluetooth keyboard with a victim's phone or computer"
+        },
+        {
+            "subject": "an attacker",
+            "relation": "can inject",
+            "object": "keystrokes"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Attackers",
+            "entity_type": "Attacker",
+            "mentions": [
+                "an attacker"
+            ]
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "a critical Bluetooth security vulnerability",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "macOS",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "iOS",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Android",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Linux",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "keystroke injection vulnerability",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "an attacker to control the targeted device",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "CVE-2023-45866",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "Bluetooth protocol implementation",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "an attacker to pair an emulated Bluetooth keyboard with a victim's phone or computer",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "keystrokes",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 8,
+                "entity_text": "CVE-2023-45866"
+            },
+            "relation": "is identified as",
+            "object": {
+                "entity_id": 1,
+                "entity_text": "a critical Bluetooth security vulnerability"
+            }
+        }
+    ]
+}
