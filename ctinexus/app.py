@@ -232,9 +232,6 @@ def run_cmd_pipeline(args):
 
 def main():
     setup_logging()
-    
-    # HTTP server to serve pyvis files
-    setup_http_server()
 
     parser = create_argument_parser()
     args = parser.parse_args()
@@ -242,6 +239,9 @@ def main():
     api_keys_available = check_api_key()
 
     run_gui = not args.text and not args.input_file
+
+    # HTTP server to serve pyvis files
+    setup_http_server()
     
     if run_gui:
         # GUI mode
@@ -260,5 +260,4 @@ def main():
 
 
 if __name__ == "__main__":
-
     main()

@@ -41,15 +41,15 @@ OLLAMA_BASE_URL=
 
 ```bash
 # Use default Ollama models
-python app.py -i report.txt --provider Ollama
+ctinexus -i report.txt --provider Ollama
 
 # Specify custom models
-python app.py -i report.txt --provider Ollama --model llama3.1:70b --embedding-model nomic-embed-text
+ctinexus -i report.txt --provider Ollama --model llama3.1:70b --embedding-model nomic-embed-text
 ```
 
 ### Web Interface
 
-1. Start the web interface: `python app.py`
+1. Start the web interface: `ctinexus`
 2. Select "Ollama" as provider in the dropdown
 3. Choose your preferred models
 4. Process CTI text
