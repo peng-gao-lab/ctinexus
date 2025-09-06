@@ -42,7 +42,7 @@ class Linker:
         for i, subgraph in enumerate(self.subgraphs):
             main_node_entity_id = self.get_main_node(subgraph)
             main_node = self.get_node(main_node_entity_id)
-            logger.info(f"subgraph {i}: main node: {main_node['entity_text']}")
+            logger.debug(f"subgraph {i}: main node: {main_node['entity_text']}")
             self.main_nodes.append(main_node)
 
         self.topic_node = self.get_topic_node(self.subgraphs)

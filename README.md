@@ -97,6 +97,8 @@ result = process_cti_report(
 
 # Access results
 print(f"Graph:", result["entity_relation_graph"])
+# Outputs the html file with the graph visualization.
+# Open the html file on your browser to see the results.
 ```
 
 ### Parameters
@@ -107,7 +109,7 @@ print(f"Graph:", result["entity_relation_graph"])
 - `embedding_model` (str, optional): Model for embeddings
 - `ie_model`, `et_model`, `ea_model`, `lp_model` (str, optional): Specific models for each pipeline component
 - `similarity_threshold` (float, default 0.6): Threshold for entity similarity matching
-- `output` (str, optional): File path to save JSON results (includes graph path)
+- `output` (str, optional): File path to save JSON results
 
 ### Return Value
 

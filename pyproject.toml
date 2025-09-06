@@ -12,7 +12,7 @@ license = {file = "LICENSE.txt"}
 
 authors = [
     { name = "Saimon Tsegai", email = "49simoney@gmail.com" },
-    { name = "Yutong Cheng" , email = "yutongcheng@vt.edu"}
+    { name = "Yutong Cheng", email = "yutongcheng@vt.edu" }
 ]
 
 dependencies = [

@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 try:
     stopwords.words("english")
 except LookupError:
-    logger.info("Downloading NLTK stopwords...")
+    logger.debug("Downloading NLTK stopwords...")
     nltk.download("stopwords", quiet=True)
 
 litellm.drop_params = True
@@ -40,7 +40,7 @@ def with_retry(max_attempts=5):
                 except Exception as e:
                     logger.error("Error in attempt %d: %s", attempt + 1, str(e))
                     if attempt < max_attempts - 1:
-                        logger.info("Retrying...")
+                        logger.debug("Retrying...")
                     else:
                         logger.error("Maximum retries reached. Exiting...")
                         raise e

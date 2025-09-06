@@ -25,13 +25,28 @@ from ctinexus.utils.model_utils import (
 load_dotenv()
 
 # Set up logging
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("ctinexus")
 
-def setup_logging():
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(levelname)s: %(message)s'
-    )
+def setup_logging(verbose=False):
+    logger.handlers.clear()
+
+    handler = logging.StreamHandler()
+    formatter = logging.Formatter('%(levelname)s: %(message)s')
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+
+    if verbose:
+        logger.setLevel(logging.DEBUG)
+    else:
+        logger.setLevel(logging.INFO)
+
+    # Prevent propagation to root logger (no third-party logs)
+    logger.propagate = False
+
+    # Globally disable all third-party logging
+    logging.getLogger().handlers.clear()
+    logging.getLogger().setLevel(logging.CRITICAL + 1)
+
 
 def create_argument_parser():
     parser = argparse.ArgumentParser(
@@ -101,6 +116,11 @@ def create_argument_parser():
         "--output", "-o",
         type=str,
         help="Output file path (if not specified, saves to ctinexus/output/ directory)"
+    )
+    parser.add_argument(
+        "--verbose", "-V",
+        action="store_true",
+        help="Enable verbose logging"
     )
     
     return parser
@@ -174,8 +194,8 @@ def run_cmd_pipeline(args):
     ea_model = f"{provider}/{args.ea_model or base_embedding_model}"
     lp_model = f"{provider}/{args.lp_model or base_model}"
 
-    logger.info(f"Running CTINexus with {provider} provider...")
-    logger.info(f"IE: {ie_model}, ET: {et_model}, EA: {ea_model}, LP: {lp_model}")
+    logger.debug(f"Running CTINexus with {provider} provider...")
+    logger.debug(f"IE: {ie_model}, ET: {et_model}, EA: {ea_model}, LP: {lp_model}")
     
     try:
         result = run_pipeline(
@@ -231,8 +251,6 @@ def run_cmd_pipeline(args):
 
 
 def main():
-    setup_logging()
-
     parser = create_argument_parser()
     args = parser.parse_args()
 
@@ -242,6 +260,7 @@ def main():
 
     # HTTP server to serve pyvis files
     setup_http_server()
+    setup_logging(verbose=args.verbose)
     
     if run_gui:
         # GUI mode

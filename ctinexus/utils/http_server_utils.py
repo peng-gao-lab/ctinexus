@@ -101,7 +101,7 @@ def setup_http_server():
         with socketserver.TCPServer(("0.0.0.0", HTTP_PORT), NetworkHTTPRequestHandler) as httpd:
             HTTP_SERVER = httpd
             HTTP_PORT = httpd.server_address[1]
-            logger.info(f"Network file server running on http://0.0.0.0:{HTTP_PORT}")
+            logger.debug(f"Network file server running on http://0.0.0.0:{HTTP_PORT}")
             httpd.serve_forever()
 
     server_thread = threading.Thread(target=start_server, daemon=True)
