@@ -171,8 +171,8 @@ source .venv/bin/activate
 # On Windows:
 # .venv\Scripts\activate
 
-# Install dependencies
-pip install -r requirements.txt
+# Install package
+pip install -e .
 ```
 
 ### Step 4: Run the Application
