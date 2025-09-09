@@ -160,8 +160,8 @@ class LLMLinker:
                     "mention_text": main_node["entity_text"],
                 }
             else:
-                logger.error("The predicted subject and object do not match the unvisited subject and topic entity, the LLM produce hallucination!")
-                logger.error(f"Hallucinated in text: {self.js['text']}")
+                logger.debug("The predicted subject and object do not match the unvisited subject and topic entity, the LLM produce hallucination!")
+                logger.debug(f"Hallucinated in text: {self.js['text']}")
 
                 new_sub = {
                     "entity_id": "hallucination",

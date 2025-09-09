@@ -1,4 +1,3 @@
-
 import os
 import json
 from .app import get_default_models_for_provider
@@ -20,8 +19,26 @@ def process_cti_report(
 	output: str = None
 ) -> dict:
 	"""
-	Process a CTI report and return results as a dict.
-	Optionally writes output to file and returns the result dict.
+	Process a Cyber Threat Intelligence (CTI) report and return the results as a dictionary.
+
+	This function processes a CTI report using various language models and embedding models for information extraction,
+	entity typing, entity alignment, and link prediction. It also generates an entity-relation graph
+	visualization and optionally writes the results to a specified output file.
+
+	Args:
+		text (str): The raw text of the CTI report to process.
+		provider (str, optional): The name of the model provider. Defaults to the first available provider.
+		model (str, optional): The base model to use for processing. Defaults to the provider's default model.
+		embedding_model (str, optional): The embedding model to use. Defaults to the provider's default embedding model.
+		ie_model (str, optional): The information extraction model to use. Defaults to the base model.
+		et_model (str, optional): The entity typing model to use. Defaults to the base model.
+		ea_model (str, optional): The entity alignment model to use. Defaults to the embedding model.
+		lp_model (str, optional): The link prediction model to use. Defaults to the base model.
+		similarity_threshold (float, optional): The threshold for similarity in entity alignment. Defaults to 0.6.
+		output (str, optional): The file path to write the output JSON. If not provided, results are not saved to a file.
+
+	Returns:
+		dict: A dictionary containing the processed results, including the entity-relation graph file path.
 	"""
 	api_keys_available = check_api_key()
 	if not api_keys_available:

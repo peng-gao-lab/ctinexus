@@ -214,29 +214,16 @@ def run_cmd_pipeline(args):
         # Determine output file
         if args.output:
             output_file = args.output
-        elif args.input_file:
-            # Use input filename with _output.json
-            input_basename = os.path.basename(args.input_file)
-            base_name = os.path.splitext(input_basename)[0]
-            output_dir = os.path.join(os.getcwd(), "ctinexus_output")
+            output_dir = os.path.dirname(output_file)
             os.makedirs(output_dir, exist_ok=True)
-            output_file = os.path.join(output_dir, f"{base_name}_output.json")
-        else:
-            output_dir = os.path.join(os.getcwd(), "ctinexus_output")
-            os.makedirs(output_dir, exist_ok=True)
-            output_file = os.path.join(output_dir, "output.json")
-
-        output_dir = os.path.dirname(output_file)
-        os.makedirs(output_dir, exist_ok=True)
-            
-        try:
-            with open(output_file, 'w', encoding='utf-8') as f:
-                f.write(result)
-            logger.info(f"Results written to: {output_file}")
-        except Exception as e:
-            logger.error(f"Error writing output file: {e}")
-            logger.error(result)
-            sys.exit(1)
+            try:
+                with open(output_file, 'w', encoding='utf-8') as f:
+                    f.write(result)
+                logger.debug(f"Results written to: {output_file}")
+            except Exception as e:
+                logger.error(f"Error writing output file: {e}")
+                logger.error(result)
+                sys.exit(1)
 
         # Create Entity Relation Graph
         result_dict = json.loads(result)
