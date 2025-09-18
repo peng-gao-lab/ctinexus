@@ -83,6 +83,9 @@ Before using CTINexus, you need to configure API keys. Create a `.env` file in y
 
 ```python
 from ctinexus import process_cti_report
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Example usage
 text = "Your CTI text here"
