@@ -211,11 +211,13 @@ def run_cmd_pipeline(args):
             logger.error(result)
             sys.exit(1)
 
-        # Determine output file
+        # Save to file if output path specified
         if args.output:
             output_file = args.output
             output_dir = os.path.dirname(output_file)
-            os.makedirs(output_dir, exist_ok=True)
+            if output_dir:
+                os.makedirs(output_dir, exist_ok=True)
+
             try:
                 with open(output_file, 'w', encoding='utf-8') as f:
                     f.write(result)
