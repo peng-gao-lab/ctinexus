@@ -429,7 +429,7 @@ class UsageCalculator:
             data = json.load(f)
 
         if self.model not in data:
-            logger.error(
+            logger.warning(
                 f"Model {self.model} not found in cost.json. Setting cost to 0."
             )
 
