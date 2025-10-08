@@ -50,6 +50,6 @@ ctinexus -i report.txt --provider Ollama --model llama3.1:70b --embedding-model 
 ### Web Interface
 
 1. Start the web interface: `ctinexus`
-2. Select "Ollama" as provider in the dropdown
-3. Choose your preferred models
-4. Process CTI text
+1. Select "Ollama" as provider in the dropdown
+1. Choose your preferred models
+1. Process CTI text

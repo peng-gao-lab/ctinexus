@@ -21,32 +21,35 @@ ctinexus --input-file report.txt --model gpt-4o --embedding-model text-embedding
 
 ### Input Options
 
-| Option | Short | Description |
-|--------|-------|-------------|
-| `--text TEXT` | `-t` | Input threat intelligence text to process directly |
-| `--input-file FILE` | `-i` | Path to file containing threat intelligence text |
+| Option              | Short | Description                                        |
+| ------------------- | ----- | -------------------------------------------------- |
+| `--text TEXT`       | `-t`  | Input threat intelligence text to process directly |
+| `--input-file FILE` | `-i`  | Path to file containing threat intelligence text   |
 
 **Note**: `--text` and `--input-file` are mutually exclusive - use one or the other.
 
 ### Model Selection
 
-| Option | Description | Example |
-|--------|-------------|---------|
-| `--provider` | AI provider to use (auto-detected if not specified) | `--provider OpenAI` |
-| `--model` | Model to use for all text processing steps | `--model gpt-4o` |
-| `--embedding-model` | Embedding model for entity alignment | `--embedding-model text-embedding-3-large` |
+| Option              | Description                                         | Example                                    |
+| ------------------- | --------------------------------------------------- | ------------------------------------------ |
+| `--provider`        | AI provider to use (auto-detected if not specified) | `--provider OpenAI`                        |
+| `--model`           | Model to use for all text processing steps          | `--model gpt-4o`                           |
+| `--embedding-model` | Embedding model for entity alignment                | `--embedding-model text-embedding-3-large` |
 
 #### Provider-Specific Models
 
 **OpenAI Models:**
+
 - `o4-mini`, `o3-mini`, `o3`, `o3-pro` (Reasoning models)
 - `gpt-4.1`, `gpt-4o`, `gpt-4`, `gpt-4-turbo` (GPT models)
 - `gpt-4.1-mini`, `gpt-4o-mini`, `gpt-4.1-nano` (Smaller models)
 
 **Gemini Models:**
+
 - `gemini-2.5-flash-lite`, `gemini-2.0-flash`, `gemini-2.0-flash-lite`
 
 **AWS Models:**
+
 - `anthropic.claude-3-7-sonnet`, `anthropic.claude-3-5-sonnet`
 - `anthropic.claude-3-5-haiku`, `anthropic.claude-3-haiku`
 - `amazon.nova-micro-v1:0`, `amazon.nova-lite-v1:0`, `amazon.nova-pro-v1:0`
@@ -54,6 +57,7 @@ ctinexus --input-file report.txt --model gpt-4o --embedding-model text-embedding
 - Meta Llama models: `meta.llama3-1-8b-instruct-v1:0`, etc.
 
 **Ollama Models:**
+
 - `llama3.1:8b`, `llama3.1:70b`, `llama3:8b` (Llama models)
 - `mistral:7b`, `mixtral:8x7b` (Mistral models)
 - `qwen2.5:7b`, `qwen2.5:14b` (Multilingual models)
@@ -63,26 +67,27 @@ ctinexus --input-file report.txt --model gpt-4o --embedding-model text-embedding
 
 The default models can be overridden with specific models for specific tasks in the pipeline:
 
-| Option | Description |
-|--------|-------------|
-| `--ie-model` | Override model for Intelligence Extraction |
-| `--et-model` | Override model for Entity Tagging |
+| Option       | Description                                   |
+| ------------ | --------------------------------------------- |
+| `--ie-model` | Override model for Intelligence Extraction    |
+| `--et-model` | Override model for Entity Tagging             |
 | `--ea-model` | Override embedding model for Entity Alignment |
-| `--lp-model` | Override model for Link Prediction |
+| `--lp-model` | Override model for Link Prediction            |
 
 ### Pipeline Configuration
 
-| Option | Default | Description |
-|--------|---------|-------------|
-| `--similarity-threshold` | 0.6 | Similarity threshold for entity alignment (0.0-1.0) |
+| Option                   | Default | Description                                         |
+| ------------------------ | ------- | --------------------------------------------------- |
+| `--similarity-threshold` | 0.6     | Similarity threshold for entity alignment (0.0-1.0) |
 
 ### Output Options
 
-| Option | Short | Description |
-|--------|-------|-------------|
-| `--output FILE` | `-o` | Output file path (default: organized in ctinexus/output/ directory) |
+| Option          | Short | Description                                                         |
+| --------------- | ----- | ------------------------------------------------------------------- |
+| `--output FILE` | `-o`  | Output file path (default: organized in ctinexus/output/ directory) |
 
 **Default output behavior:**
+
 - For a file input: `ctinexus/output/<input_file>_output.json`
 - For a text input: `ctinexus/output/output.json`
 - Custom output: Uses the exact path provided by user

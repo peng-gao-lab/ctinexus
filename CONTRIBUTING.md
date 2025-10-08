@@ -4,7 +4,7 @@ Thank you for your interest in contributing to CTINexus! We welcome contribution
 
 ## How to Contribute
 
-### 🐛  Reporting Bugs
+### 🐛 Reporting Bugs
 
 If you find a bug, please open an issue on our GitHub repository. Provide as much information as possible, including:
 
@@ -35,41 +35,60 @@ Good documentation is key to a successful project. If you find areas in our docu
 
 1. **Fork the Repository:** Fork the [repository](https://github.com/peng-gao-lab/CTINexus) to your own GitHub account.
 
-2. **Clone the Fork:** Clone your fork to your local machine:
+1. **Clone the Fork:** Clone your fork to your local machine:
+
    ```bash
    git clone https://github.com/YOUR-USERNAME/CTINexus
    cd CTINexus
    ```
 
-3. **Create a virtual environment and install dependencies:**
+1. **Create a virtual environment and install dependencies:**
+
    ```bash
    python -m venv .venv
    source .venv/bin/activate  # On macOS/Linux
    # .venv\Scripts\activate    # On Windows
-   
-   pip install -r requirements.txt
+
+   pip install -e ".[dev]"
    ```
 
-4. **Configure environment variables:**
+1. **Set up pre-commit hooks:**
+
+   ```bash
+   pre-commit install
+   ```
+
+   This installs git hooks that automatically run code quality checks before each commit.
+
+1. **Configure environment variables:**
+
    ```bash
    cp .env.example .env
    # Edit .env with your API keys (OpenAI, Gemini, AWS)
    # OR set up Ollama for local models
    ```
 
-5. **Create a Branch:** Create a new branch for your work:
+1. **Create a Branch:** Create a new branch for your work:
+
    ```bash
    git checkout -b feature-name
    ```
 
-6. **Make Changes:** Make your changes in your branch.
+1. **Make Changes:** Make your changes in your branch.
 
-7. **Test your changes:** Ensure your changes work correctly:
+1. **Format and Lint your code:** Before committing, ensure your code follows our style guidelines:
+
    ```bash
-   python ctinexus/app.py
+   pre-commit run --all-files
    ```
 
-8. **Commit Changes:** Commit your changes with a descriptive commit message. Use a category to indicate the type of change. Common categories include:
+1. **Test your changes:** Ensure your changes work correctly:
+
+   ```bash
+   ctinexus
+   ```
+
+1. **Commit Changes:** Commit your changes with a descriptive commit message. Use a category to indicate the type of change. Common categories include:
 
 - `feat`: New feature
 - `fix`: Bug fix
@@ -79,19 +98,31 @@ Good documentation is key to a successful project. If you find areas in our docu
 - `chore`: Maintenance tasks
 
 Example:
+
 ```bash
 git commit -m "feat: add support for new AI provider"
 ```
 
+If pre-commit hooks are installed, they will automatically run when you commit. If any checks fail, fix the issues and commit again.
 
-9. **Push to Fork:** Push your changes to your forked repository:
-   ```bash
-   git push origin feature-name
-   ```
+11. **Push to Fork:** Push your changes to your forked repository:
+
+```bash
+git push origin feature-name
+```
 
 10. **Open a Pull Request:** Open a pull request from your fork to the main repository. Include a detailed description of your changes and any related issues.
 
-## Code Style
+## Automated Checks
+
+When you open a pull request, GitHub Actions will automatically run code quality checks. These checks must pass before your PR can be merged. If they fail:
+
+1. Review the error messages in the GitHub Actions log
+1. Run the checks locally: `ruff check . --fix && ruff format .`
+1. Commit and push the fixes
+1. The checks will run again automatically
+
+## Code Quality & Style
 
 Please follow the code style used in the project. We use [PEP 8](https://www.python.org/dev/peps/pep-0008/) for Python code.
 

@@ -1,6 +1,6 @@
+import logging
 import os
 import time
-import logging
 from collections import defaultdict
 
 import litellm
@@ -16,365 +16,350 @@ logger = logging.getLogger(__name__)
 
 
 class Linker:
-    def __init__(self, config: DictConfig):
-        self.config = config
-        self.graph = {}
+	def __init__(self, config: DictConfig):
+		self.config = config
+		self.graph = {}
 
-    def call(self, result: dict) -> dict:
-        self.js = result
-        self.aligned_triplets = self.js["EA"]["aligned_triplets"]
+	def call(self, result: dict) -> dict:
+		self.js = result
+		self.aligned_triplets = self.js["EA"]["aligned_triplets"]
 
-        for triplet in self.aligned_triplets:
-            subject_entity_id = triplet["subject"]["entity_id"]
-            object_entity_id = triplet["object"]["entity_id"]
+		for triplet in self.aligned_triplets:
+			subject_entity_id = triplet["subject"]["entity_id"]
+			object_entity_id = triplet["object"]["entity_id"]
 
-            if subject_entity_id not in self.graph:
-                self.graph[subject_entity_id] = []
-            if object_entity_id not in self.graph:
-                self.graph[object_entity_id] = []
+			if subject_entity_id not in self.graph:
+				self.graph[subject_entity_id] = []
+			if object_entity_id not in self.graph:
+				self.graph[object_entity_id] = []
 
-            self.graph[subject_entity_id].append(object_entity_id)
-            self.graph[object_entity_id].append(subject_entity_id)
+			self.graph[subject_entity_id].append(object_entity_id)
+			self.graph[object_entity_id].append(subject_entity_id)
 
-        self.subgraphs = self.find_disconnected_subgraphs()
-        self.main_nodes = []
+		self.subgraphs = self.find_disconnected_subgraphs()
+		self.main_nodes = []
 
-        for i, subgraph in enumerate(self.subgraphs):
-            main_node_entity_id = self.get_main_node(subgraph)
-            main_node = self.get_node(main_node_entity_id)
-            logger.debug(f"subgraph {i}: main node: {main_node['entity_text']}")
-            self.main_nodes.append(main_node)
+		for i, subgraph in enumerate(self.subgraphs):
+			main_node_entity_id = self.get_main_node(subgraph)
+			main_node = self.get_node(main_node_entity_id)
+			logger.debug(f"subgraph {i}: main node: {main_node['entity_text']}")
+			self.main_nodes.append(main_node)
 
-        self.topic_node = self.get_topic_node(self.subgraphs)
-        self.main_nodes = [
-            node
-            for node in self.main_nodes
-            if node["entity_id"] != self.topic_node["entity_id"]
-        ]
-        self.js["LP"] = LLMLinker(self).link()
-        self.js["LP"]["topic_node"] = self.topic_node
-        self.js["LP"]["main_nodes"] = self.main_nodes
-        self.js["LP"]["subgraphs"] = [list(subgraph) for subgraph in self.subgraphs]
-        self.js["LP"]["subgraph_num"] = len(self.subgraphs)
+		self.topic_node = self.get_topic_node(self.subgraphs)
+		self.main_nodes = [node for node in self.main_nodes if node["entity_id"] != self.topic_node["entity_id"]]
+		self.js["LP"] = LLMLinker(self).link()
+		self.js["LP"]["topic_node"] = self.topic_node
+		self.js["LP"]["main_nodes"] = self.main_nodes
+		self.js["LP"]["subgraphs"] = [list(subgraph) for subgraph in self.subgraphs]
+		self.js["LP"]["subgraph_num"] = len(self.subgraphs)
 
-        return self.js
+		return self.js
 
-    def find_disconnected_subgraphs(self):
-        self.visited = set()
-        subgraphs = []
+	def find_disconnected_subgraphs(self):
+		self.visited = set()
+		subgraphs = []
 
-        for start_node in self.graph.keys():
-            if start_node not in self.visited:
-                current_subgraph = set()
-                self.dfs_collect(start_node, current_subgraph)
-                subgraphs.append(current_subgraph)
+		for start_node in self.graph.keys():
+			if start_node not in self.visited:
+				current_subgraph = set()
+				self.dfs_collect(start_node, current_subgraph)
+				subgraphs.append(current_subgraph)
 
-        return subgraphs
+		return subgraphs
 
-    def dfs_collect(self, node, current_subgraph):
-        if node in self.visited:
-            return
+	def dfs_collect(self, node, current_subgraph):
+		if node in self.visited:
+			return
 
-        self.visited.add(node)
-        current_subgraph.add(node)
+		self.visited.add(node)
+		current_subgraph.add(node)
 
-        for neighbour in self.graph[node]:
-            self.dfs_collect(neighbour, current_subgraph)
+		for neighbour in self.graph[node]:
+			self.dfs_collect(neighbour, current_subgraph)
 
-    def get_main_node(self, subgraph):
-        outdegrees = defaultdict(int)
-        self.directed_graph = {}
+	def get_main_node(self, subgraph):
+		outdegrees = defaultdict(int)
+		self.directed_graph = {}
 
-        for triplet in self.aligned_triplets:
-            subject_entity_id = triplet["subject"]["entity_id"]
-            object_entity_id = triplet["object"]["entity_id"]
+		for triplet in self.aligned_triplets:
+			subject_entity_id = triplet["subject"]["entity_id"]
+			object_entity_id = triplet["object"]["entity_id"]
 
-            if subject_entity_id not in self.directed_graph:
-                self.directed_graph[subject_entity_id] = []
+			if subject_entity_id not in self.directed_graph:
+				self.directed_graph[subject_entity_id] = []
 
-            self.directed_graph[subject_entity_id].append(object_entity_id)
-            outdegrees[subject_entity_id] += 1
-            outdegrees[object_entity_id] += 1
+			self.directed_graph[subject_entity_id].append(object_entity_id)
+			outdegrees[subject_entity_id] += 1
+			outdegrees[object_entity_id] += 1
 
-        max_outdegree = 0
-        main_node = None
+		max_outdegree = 0
+		main_node = None
 
-        for node in subgraph:
-            if outdegrees[node] > max_outdegree:
-                max_outdegree = outdegrees[node]
-                main_node = node
+		for node in subgraph:
+			if outdegrees[node] > max_outdegree:
+				max_outdegree = outdegrees[node]
+				main_node = node
 
-        return main_node
+		return main_node
 
-    def get_node(self, entity_id):
-        for triplet in self.aligned_triplets:
-            for key, node in triplet.items():
-                if key in ["subject", "object"]:
-                    if node["entity_id"] == entity_id:
-                        return node
+	def get_node(self, entity_id):
+		for triplet in self.aligned_triplets:
+			for key, node in triplet.items():
+				if key in ["subject", "object"]:
+					if node["entity_id"] == entity_id:
+						return node
 
-    def get_topic_node(self, subgraphs):
-        if not subgraphs:
-            return {
-                "entity_id": -1,
-                "entity_text": "",
-                "mention_text": "",
-                "mention_class": "default",
-                "mention_merged": []
-            }
-            
-        max_node_num = 0
-        main_subgraph = subgraphs[0]
+	def get_topic_node(self, subgraphs):
+		if not subgraphs:
+			return {
+				"entity_id": -1,
+				"entity_text": "",
+				"mention_text": "",
+				"mention_class": "default",
+				"mention_merged": [],
+			}
 
-        for subgraph in subgraphs:
-            if len(subgraph) > max_node_num:
-                max_node_num = len(subgraph)
-                main_subgraph = subgraph
+		max_node_num = 0
+		main_subgraph = subgraphs[0]
 
-        return self.get_node(self.get_main_node(main_subgraph))
+		for subgraph in subgraphs:
+			if len(subgraph) > max_node_num:
+				max_node_num = len(subgraph)
+				main_subgraph = subgraph
+
+		return self.get_node(self.get_main_node(main_subgraph))
 
 
 class Merger:
-    def __init__(self, config: DictConfig):
-        self.config = config
-        self.node_dict = {}  # key is mention_id, value is a list of nodes
-        self.class_dict = {}  # key is mention_class, value is a set of mention_ids
-        self.entity_dict = {}  # key is entity_id, value is a set of mention_ids
-        self.emb_dict = {}  # key is mention_id, value is the embedding of the mention
-        self.entity_id = 0
-        self.usage = {}
-        self.response_time = 0
-        self.response = {}
+	def __init__(self, config: DictConfig):
+		self.config = config
+		self.node_dict = {}  # key is mention_id, value is a list of nodes
+		self.class_dict = {}  # key is mention_class, value is a set of mention_ids
+		self.entity_dict = {}  # key is entity_id, value is a set of mention_ids
+		self.emb_dict = {}  # key is mention_id, value is the embedding of the mention
+		self.entity_id = 0
+		self.usage = {}
+		self.response_time = 0
+		self.response = {}
 
-    def get_embeddings(self, texts):
-        """Get embeddings for multiple texts in a single API call"""
-        startTime = time.time()
-        
-        api_base_url = None
-        provider = self.config.provider.lower()
-        embedding_model = self.config.embedding_model
+	def get_embeddings(self, texts):
+		"""Get embeddings for multiple texts in a single API call"""
+		startTime = time.time()
 
-        if provider == "gemini":
-            embedding_model = f"gemini/{embedding_model}"
-        elif provider == "ollama":
-            api_base_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
-            embedding_model = f"ollama/{embedding_model}"
+		api_base_url = None
+		provider = self.config.provider.lower()
+		embedding_model = self.config.embedding_model
 
-        self.response = litellm.embedding(
-            model=embedding_model,
-            input=texts,
-            api_base=api_base_url
-        )
-        
-        self.usage = UsageCalculator(self.config, self.response).calculate()
-        self.response_time = time.time() - startTime
-        return [item["embedding"] for item in self.response["data"]]
+		if provider == "gemini":
+			embedding_model = f"gemini/{embedding_model}"
+		elif provider == "ollama":
+			api_base_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+			embedding_model = f"ollama/{embedding_model}"
 
-    def calculate_similarity(self, node1, node2):
-        """Calculate the cosine similarity between two nodes based on their embeddings."""
+		self.response = litellm.embedding(model=embedding_model, input=texts, api_base=api_base_url)
 
-        emb1 = self.emb_dict[node1]
-        emb2 = self.emb_dict[node2]
-        # Calculate cosine similarity
-        similarity = 1 - cosine(emb1, emb2)
-        return similarity
+		self.usage = UsageCalculator(self.config, self.response).calculate()
+		self.response_time = time.time() - startTime
+		return [item["embedding"] for item in self.response["data"]]
 
-    def get_entity_text(self, cluster):
-        m_freq = {}  # key is mention_id, value is the frequency of the mention
-        for m_id in cluster:
-            m_freq[m_id] = len(self.node_dict[m_id])
-        # sort the mention_id by frequency
-        sorted_m_freq = sorted(m_freq.items(), key=lambda x: x[1], reverse=True)
-        # get the mention_id with the highest frequency
-        mention_id = sorted_m_freq[0][0]
-        # get the mention_text of the mention_id
-        mention_text = self.node_dict[mention_id][0]["mention_text"]
-        return mention_text
+	def calculate_similarity(self, node1, node2):
+		"""Calculate the cosine similarity between two nodes based on their embeddings."""
 
-    def retrieve_node_list(self, m_id) -> list:
-        """Retrieve the list of nodes with the given mention_id from the JSON data."""
+		emb1 = self.emb_dict[node1]
+		emb2 = self.emb_dict[node2]
+		# Calculate cosine similarity
+		similarity = 1 - cosine(emb1, emb2)
+		return similarity
 
-        if m_id in self.node_dict:
-            return self.node_dict[m_id]
+	def get_entity_text(self, cluster):
+		m_freq = {}  # key is mention_id, value is the frequency of the mention
+		for m_id in cluster:
+			m_freq[m_id] = len(self.node_dict[m_id])
+		# sort the mention_id by frequency
+		sorted_m_freq = sorted(m_freq.items(), key=lambda x: x[1], reverse=True)
+		# get the mention_id with the highest frequency
+		mention_id = sorted_m_freq[0][0]
+		# get the mention_text of the mention_id
+		mention_text = self.node_dict[mention_id][0]["mention_text"]
+		return mention_text
 
-        else:
-            raise ValueError(f"Node with mention_id {m_id} not found in the JSON data.")
+	def retrieve_node_list(self, m_id) -> list:
+		"""Retrieve the list of nodes with the given mention_id from the JSON data."""
 
-    def update_class_dict(self, node):
-        """Update the class dictionary with the mention class and its mention_id."""
+		if m_id in self.node_dict:
+			return self.node_dict[m_id]
 
-        if node["mention_class"] not in self.class_dict:
-            self.class_dict[node["mention_class"]] = set()
+		else:
+			raise ValueError(f"Node with mention_id {m_id} not found in the JSON data.")
 
-        self.class_dict[node["mention_class"]].add(node["mention_id"])
+	def update_class_dict(self, node):
+		"""Update the class dictionary with the mention class and its mention_id."""
 
-    def call(self, result: dict) -> dict:
-        self.js = result
+		if node["mention_class"] not in self.class_dict:
+			self.class_dict[node["mention_class"]] = set()
 
-        for triple in self.js["EA"]["aligned_triplets"]:
-            for key, node in triple.items():
-                if key in ["subject", "object"]:
-                    if node["mention_id"] not in self.node_dict:
-                        self.node_dict[node["mention_id"]] = []
-                    self.node_dict[node["mention_id"]].append(node)
+		self.class_dict[node["mention_class"]].add(node["mention_id"])
 
-        texts_to_embed = []
-        mention_ids = []
-        for key, node_list in self.node_dict.items():
-            if key not in self.emb_dict:
-                texts_to_embed.append(node_list[0]["mention_text"])
-                mention_ids.append(key)
+	def call(self, result: dict) -> dict:
+		self.js = result
 
-        # Get embeddings in batch if there are texts to embed
-        if texts_to_embed:
-            embeddings = self.get_embeddings(texts_to_embed)
-            for mention_id, embedding in zip(mention_ids, embeddings):
-                self.emb_dict[mention_id] = embedding
+		for triple in self.js["EA"]["aligned_triplets"]:
+			for key, node in triple.items():
+				if key in ["subject", "object"]:
+					if node["mention_id"] not in self.node_dict:
+						self.node_dict[node["mention_id"]] = []
+					self.node_dict[node["mention_id"]].append(node)
 
-        for triple in self.js["EA"]["aligned_triplets"]:
-            for key, node in triple.items():
-                if key in ["subject", "object"]:
-                    self.update_class_dict(node)
+		texts_to_embed = []
+		mention_ids = []
+		for key, node_list in self.node_dict.items():
+			if key not in self.emb_dict:
+				texts_to_embed.append(node_list[0]["mention_text"])
+				mention_ids.append(key)
 
-        for mention_class, grouped_nodes in self.class_dict.items():
-            if len(grouped_nodes) == 1:
-                node_list = self.retrieve_node_list(next(iter(grouped_nodes)))
+		# Get embeddings in batch if there are texts to embed
+		if texts_to_embed:
+			embeddings = self.get_embeddings(texts_to_embed)
+			for mention_id, embedding in zip(mention_ids, embeddings):
+				self.emb_dict[mention_id] = embedding
 
-                for node in node_list:
-                    node["entity_id"] = self.entity_id
-                    node["mention_merged"] = []
-                    node["entity_text"] = node["mention_text"]
+		for triple in self.js["EA"]["aligned_triplets"]:
+			for key, node in triple.items():
+				if key in ["subject", "object"]:
+					self.update_class_dict(node)
 
-                self.entity_id += 1
+		for mention_class, grouped_nodes in self.class_dict.items():
+			if len(grouped_nodes) == 1:
+				node_list = self.retrieve_node_list(next(iter(grouped_nodes)))
 
-            elif len(grouped_nodes) > 1:
-                clusters = {}  # key is mention_id, value is a set of merged mention_ids
-                node_pairs = [
-                    (node1, node2)
-                    for i, node1 in enumerate(grouped_nodes)
-                    for node2 in list(grouped_nodes)[i + 1 :]
-                ]
+				for node in node_list:
+					node["entity_id"] = self.entity_id
+					node["mention_merged"] = []
+					node["entity_text"] = node["mention_text"]
 
-                for node1, node2 in node_pairs:
-                    if node1 not in clusters:
-                        clusters[node1] = set()
+				self.entity_id += 1
 
-                    if node2 not in clusters:
-                        clusters[node2] = set()
+			elif len(grouped_nodes) > 1:
+				clusters = {}  # key is mention_id, value is a set of merged mention_ids
+				node_pairs = [
+					(node1, node2) for i, node1 in enumerate(grouped_nodes) for node2 in list(grouped_nodes)[i + 1 :]
+				]
 
-                    similarity = self.calculate_similarity(node1, node2)
+				for node1, node2 in node_pairs:
+					if node1 not in clusters:
+						clusters[node1] = set()
 
-                    if similarity >= self.config.similarity_threshold:
-                        clusters[node1].add(node2)
-                        clusters[node2].add(node1)
+					if node2 not in clusters:
+						clusters[node2] = set()
 
-                unique_clusters = []
+					similarity = self.calculate_similarity(node1, node2)
 
-                for m_id, merged_ids in clusters.items():
-                    temp_cluster = set(merged_ids)
-                    temp_cluster.add(m_id)
+					if similarity >= self.config.similarity_threshold:
+						clusters[node1].add(node2)
+						clusters[node2].add(node1)
 
-                    if temp_cluster not in unique_clusters:
-                        unique_clusters.append(temp_cluster)
+				unique_clusters = []
 
-                for cluster in unique_clusters:
-                    entity_id = self.entity_id
-                    self.entity_id += 1
-                    entity_text = self.get_entity_text(cluster)
-                    mention_merged = [
-                        self.node_dict[m_id][0]["mention_text"] for m_id in cluster
-                    ]
+				for m_id, merged_ids in clusters.items():
+					temp_cluster = set(merged_ids)
+					temp_cluster.add(m_id)
 
-                    for m_id in cluster:
-                        node_list = self.retrieve_node_list(m_id)
+					if temp_cluster not in unique_clusters:
+						unique_clusters.append(temp_cluster)
 
-                        for node in node_list:
-                            node["entity_id"] = entity_id
-                            node["mention_merged"] = [
-                                m_text
-                                for m_text in mention_merged
-                                if m_text != node["mention_text"]
-                            ]
-                            node["entity_text"] = entity_text
+				for cluster in unique_clusters:
+					entity_id = self.entity_id
+					self.entity_id += 1
+					entity_text = self.get_entity_text(cluster)
+					mention_merged = [self.node_dict[m_id][0]["mention_text"] for m_id in cluster]
 
-        self.js["EA"]["entity_num"] = self.entity_id
-        self.js["EA"]["model_usage"] = self.usage
-        self.js["EA"]["response_time"] = self.response_time
-        return self.js
+					for m_id in cluster:
+						node_list = self.retrieve_node_list(m_id)
+
+						for node in node_list:
+							node["entity_id"] = entity_id
+							node["mention_merged"] = [
+								m_text for m_text in mention_merged if m_text != node["mention_text"]
+							]
+							node["entity_text"] = entity_text
+
+		self.js["EA"]["entity_num"] = self.entity_id
+		self.js["EA"]["model_usage"] = self.usage
+		self.js["EA"]["response_time"] = self.response_time
+		return self.js
+
 
 def create_graph_visualization(result: dict) -> str:
-    """Create an interactive graph visualization using Pyvis"""
-    # Create a directed graph
-    G = nx.DiGraph()
+	"""Create an interactive graph visualization using Pyvis"""
+	# Create a directed graph
+	G = nx.DiGraph()
 
-    http_port = get_current_port()
+	http_port = get_current_port()
 
-    # Define colors for different entity types
-    entity_colors = {
-        "Malware": "#ff4444",  # Bright Red
-        "Tool": "#44ff44",  # Bright Green
-        "Event": "#4444ff",  # Bright Blue
-        "Organization": "#ffaa44",  # Bright Orange
-        "Time": "#aa44ff",  # Bright Purple
-        "Information": "#44ffff",  # Bright Cyan
-        "Indicator": "#ff44ff",  # Bright Magenta
-        "Indicator:File": "#ff44ff",  # Bright Magenta
-        "default": "#aaaaaa",  # Light Gray
-    }
+	# Define colors for different entity types
+	entity_colors = {
+		"Malware": "#ff4444",  # Bright Red
+		"Tool": "#44ff44",  # Bright Green
+		"Event": "#4444ff",  # Bright Blue
+		"Organization": "#ffaa44",  # Bright Orange
+		"Time": "#aa44ff",  # Bright Purple
+		"Information": "#44ffff",  # Bright Cyan
+		"Indicator": "#ff44ff",  # Bright Magenta
+		"Indicator:File": "#ff44ff",  # Bright Magenta
+		"default": "#aaaaaa",  # Light Gray
+	}
 
-    # Add nodes and edges from the aligned triplets
-    if "EA" in result and "aligned_triplets" in result["EA"]:
-        for triplet in result["EA"]["aligned_triplets"]:
-            # Add subject node
-            subject = triplet.get("subject", {})
-            G.add_node(
-                subject.get("entity_id"),
-                text=subject.get("entity_text", ""),
-                type=subject.get("mention_class", "default"),
-                color=entity_colors.get(
-                    subject.get("mention_class", "default"), entity_colors["default"]
-                ),
-            )
+	# Add nodes and edges from the aligned triplets
+	if "EA" in result and "aligned_triplets" in result["EA"]:
+		for triplet in result["EA"]["aligned_triplets"]:
+			# Add subject node
+			subject = triplet.get("subject", {})
+			G.add_node(
+				subject.get("entity_id"),
+				text=subject.get("entity_text", ""),
+				type=subject.get("mention_class", "default"),
+				color=entity_colors.get(subject.get("mention_class", "default"), entity_colors["default"]),
+			)
 
-            # Add object node
-            object_node = triplet.get("object", {})
-            G.add_node(
-                object_node.get("entity_id"),
-                text=object_node.get("entity_text", ""),
-                type=object_node.get("mention_class", "default"),
-                color=entity_colors.get(
-                    object_node.get("mention_class", "default"),
-                    entity_colors["default"],
-                ),
-            )
+			# Add object node
+			object_node = triplet.get("object", {})
+			G.add_node(
+				object_node.get("entity_id"),
+				text=object_node.get("entity_text", ""),
+				type=object_node.get("mention_class", "default"),
+				color=entity_colors.get(
+					object_node.get("mention_class", "default"),
+					entity_colors["default"],
+				),
+			)
 
-            # Add edge with relation
-            G.add_edge(
-                subject.get("entity_id"),
-                object_node.get("entity_id"),
-                relation=triplet.get("relation", ""),
-            )
+			# Add edge with relation
+			G.add_edge(
+				subject.get("entity_id"),
+				object_node.get("entity_id"),
+				relation=triplet.get("relation", ""),
+			)
 
-    # Add predicted links if available
-    if "LP" in result and "predicted_links" in result["LP"]:
-        for link in result["LP"]["predicted_links"]:
-            G.add_edge(
-                link.get("subject", {}).get("entity_id"),
-                link.get("object", {}).get("entity_id"),
-                relation=link.get("relation", ""),
-                predicted=True,
-            )
+	# Add predicted links if available
+	if "LP" in result and "predicted_links" in result["LP"]:
+		for link in result["LP"]["predicted_links"]:
+			G.add_edge(
+				link.get("subject", {}).get("entity_id"),
+				link.get("object", {}).get("entity_id"),
+				relation=link.get("relation", ""),
+				predicted=True,
+			)
 
-    # Create a Pyvis network
-    net = Network(
-        height="100vh",
-        width="100%",
-        bgcolor="#27272a",
-        font_color="white",
-        directed=True,
-    )
+	# Create a Pyvis network
+	net = Network(
+		height="100vh",
+		width="100%",
+		bgcolor="#27272a",
+		font_color="white",
+		directed=True,
+	)
 
-    net.set_options("""
+	net.set_options("""
     {
       "physics": {
         "enabled": true,
@@ -410,52 +395,52 @@ def create_graph_visualization(result: dict) -> str:
     }
     """)
 
-    # Add nodes to pyvis network
-    for node_id, node_attrs in G.nodes(data=True):
-        net.add_node(
-            node_id,
-            label=node_attrs.get("text", ""),
-            title=f"{node_attrs.get('text', '')}",
-            color=node_attrs.get("color", "#aaaaaa"),
-            size=15 + len(G[node_id]) * 2,
-        )
+	# Add nodes to pyvis network
+	for node_id, node_attrs in G.nodes(data=True):
+		net.add_node(
+			node_id,
+			label=node_attrs.get("text", ""),
+			title=f"{node_attrs.get('text', '')}",
+			color=node_attrs.get("color", "#aaaaaa"),
+			size=15 + len(G[node_id]) * 2,
+		)
 
-    # Add edges to pyvis network
-    for u, v, edge_attrs in G.edges(data=True):
-        net.add_edge(
-            u,
-            v,
-            label=edge_attrs.get("relation", ""),
-            title=edge_attrs.get("relation", ""),
-            color="#ff4444" if edge_attrs.get("predicted") else "#666666",
-        )
+	# Add edges to pyvis network
+	for u, v, edge_attrs in G.edges(data=True):
+		net.add_edge(
+			u,
+			v,
+			label=edge_attrs.get("relation", ""),
+			title=edge_attrs.get("relation", ""),
+			color="#ff4444" if edge_attrs.get("predicted") else "#666666",
+		)
 
-    # Save the graph to the pyvis_files directory
-    timestamp = int(time.time() * 1000)
-    file_name = f"network_{timestamp}.html"
-    output_dir = os.path.join(os.getcwd(), "ctinexus_output")
-    os.makedirs(output_dir, exist_ok=True)
-    file_path = os.path.join(output_dir, file_name)
+	# Save the graph to the pyvis_files directory
+	timestamp = int(time.time() * 1000)
+	file_name = f"network_{timestamp}.html"
+	output_dir = os.path.join(os.getcwd(), "ctinexus_output")
+	os.makedirs(output_dir, exist_ok=True)
+	file_path = os.path.join(output_dir, file_name)
 
-    try:
-        net.save_graph(file_path)
+	try:
+		net.save_graph(file_path)
 
-        # Custom HTML/CSS for the legend
-        with open(file_path, "r") as f:
-            html_content = f.read()
+		# Custom HTML/CSS for the legend
+		with open(file_path, "r") as f:
+			html_content = f.read()
 
-        legend_html = """
+		legend_html = """
         <div style="position: fixed; top: 50px; right: 20px; background-color: #27272a; color: white; padding: 15px; border-radius: 8px; border: 1px solid #444; max-width: 200px; font-size: 15px;">
             <h3 style="margin-top: 0; font-size: 18px;">Legend</h3>
             <h4 style="margin-bottom: 5px; font-size: 15px;">Node Types:</h4>
             <ul style="list-style: none; padding: 0; margin-bottom: 15px;">
         """
 
-        for entity_type, color in entity_colors.items():
-            if entity_type != "default":
-                legend_html += f"<li style='margin-bottom: 5px;'><span style='display: inline-block; width: 15px; height: 15px; background-color: {color}; margin-right: 10px; border-radius: 50%;'></span>{entity_type}</li>"
+		for entity_type, color in entity_colors.items():
+			if entity_type != "default":
+				legend_html += f"<li style='margin-bottom: 5px;'><span style='display: inline-block; width: 15px; height: 15px; background-color: {color}; margin-right: 10px; border-radius: 50%;'></span>{entity_type}</li>"
 
-        legend_html += """
+		legend_html += """
             </ul>
             <br>
             <h4 style="margin-bottom: 5px; font-size: 15px;">Edge Types:</h4>
@@ -466,12 +451,12 @@ def create_graph_visualization(result: dict) -> str:
         </div>
         """
 
-        # Inject the legend HTML into the Pyvis graph HTML
-        html_content = html_content.replace("</body>", legend_html + "</body>")
-        with open(file_path, "w") as f:
-            f.write(html_content)
+		# Inject the legend HTML into the Pyvis graph HTML
+		html_content = html_content.replace("</body>", legend_html + "</body>")
+		with open(file_path, "w") as f:
+			f.write(html_content)
 
-    except Exception as e:
-        logger.error(f"Error saving graph: {e}")
+	except Exception as e:
+		logger.error(f"Error saving graph: {e}")
 
-    return f"http://localhost:{http_port}/{file_name}", file_path
+	return f"http://localhost:{http_port}/{file_name}", file_path

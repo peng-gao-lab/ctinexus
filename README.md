@@ -6,12 +6,12 @@
 <p align="center">
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-lavender.svg" alt="License: MIT"></a>
   <a href='https://github.com/peng-gao-lab/CTINexus'><img src='https://img.shields.io/badge/Project-Github-pink'></a>
-  <a href='https://arxiv.org/abs/2410.21060'><img src='https://img.shields.io/badge/Paper-Arxiv-crimson'></a>  
+  <a href='https://arxiv.org/abs/2410.21060'><img src='https://img.shields.io/badge/Paper-Arxiv-crimson'></a>
   <a href='https://ctinexus.github.io/' target='_blank'><img src='https://img.shields.io/badge/Project-Website-turquoise'></a>
 </p>
 
-**CTINexus** is a framework that leverages optimized in-context learning (ICL) of large language models (LLMs) for automatic cyber threat intelligence (CTI) knowledge extraction and cybersecurity knowledge graph (CSKG) construction. 
-CTINexus adapts to various cybersecurity ontologies with minimal annotated examples and provides a user-friendly web interface for instant threat intelligence analysis. 
+**CTINexus** is a framework that leverages optimized in-context learning (ICL) of large language models (LLMs) for automatic cyber threat intelligence (CTI) knowledge extraction and cybersecurity knowledge graph (CSKG) construction.
+CTINexus adapts to various cybersecurity ontologies with minimal annotated examples and provides a user-friendly web interface for instant threat intelligence analysis.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/peng-gao-lab/CTINexus/feat/package-release/ctinexus/static/overview.png" alt="CTINexus Framework Overview" width="500"/>
@@ -20,19 +20,20 @@ CTINexus adapts to various cybersecurity ontologies with minimal annotated examp
 ### What CTINexus Does
 
 The framework automatically processes unstructured threat intelligence reports to:
+
 - **Extract cybersecurity entities** (malware, vulnerabilities, tactics, IOCs)
-- **Identify relationships** between security concepts  
+- **Identify relationships** between security concepts
 - **Construct knowledge graphs** with interactive visualizations
 - **Require minimal configuration** - no extensive data or parameter tuning needed
 
 ### Core Components
 
-* **Intelligence Extraction (IE)**: Automatically extracts cybersecurity entities and relationships from unstructured text using optimized prompt construction and demonstration retrieval
-* **Hierarchical Entity Alignment**: Canonicalizes extracted knowledge and removes redundancy through:
-   * **Entity Typing (ET)**: Groups mentions of the same semantic type
-   * **Entity Merging (EM)**: Merges mentions referring to the same entity with IOC (Indicator of Compromise) protection
-* **Link Prediction (LP)**: Predicts and adds missing relationships to complete the knowledge graph
-* **Graph Visualization**: Interactive network visualization of the constructed cybersecurity knowledge graph
+- **Intelligence Extraction (IE)**: Automatically extracts cybersecurity entities and relationships from unstructured text using optimized prompt construction and demonstration retrieval
+- **Hierarchical Entity Alignment**: Canonicalizes extracted knowledge and removes redundancy through:
+  - **Entity Typing (ET)**: Groups mentions of the same semantic type
+  - **Entity Merging (EM)**: Merges mentions referring to the same entity with IOC (Indicator of Compromise) protection
+- **Link Prediction (LP)**: Predicts and adds missing relationships to complete the knowledge graph
+- **Graph Visualization**: Interactive network visualization of the constructed cybersecurity knowledge graph
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/peng-gao-lab/CTINexus/feat/package-release/ctinexus/static/webui.png" alt="CTINexus WebUI" width="500"/>
@@ -44,14 +45,14 @@ The framework automatically processes unstructured threat intelligence reports t
 
 🌟 [2025/07/29] CTINexus now features an intuitive Gradio interface! Submit threat intelligence text and instantly visualize extracted interactive graphs.
 
-🔥 [2025/04/21] We released the camera-ready paper on [arxiv](https://arxiv.org/pdf/2410.21060). 
+🔥 [2025/04/21] We released the camera-ready paper on [arxiv](https://arxiv.org/pdf/2410.21060).
 
 🔥 [2025/02/12] CTINexus is accepted at 2025 IEEE European Symposium on Security and Privacy ([Euro S&P](https://eurosp2025.ieee-security.org/index.html)).
-
 
 ## Quick Start
 
 You can use CTINexus in three ways:
+
 - **📦 Python Package**: Python package for easy integration
 - **⚡ Command Line**: For automation and batch processing → **[📖 CLI Guide](docs/cli-guide.md)**
 - **🖥️ Web Interface**: User-friendly GUI for interactive analysis (follow the setup below)
@@ -129,7 +130,6 @@ Returns a dictionary containing the complete CTI analysis results:
   - `predicted_links`: Additional predicted relationships between entities
 - `entity_relation_graph`: File path to the interactive HTML visualization
 
-
 ---
 
 <a id="local-setup"></a>
@@ -186,7 +186,7 @@ ctinexus
 
 ### Step 5: Access the Application
 
-Open your browser and navigate to: **http://127.0.0.1:7860** 
+Open your browser and navigate to: **http://127.0.0.1:7860**
 
 Use `Ctrl+C` in the terminal to stop the application.
 
@@ -255,35 +255,38 @@ ctinexus --input-file report.txt
 Once the application is running:
 
 1. **Open your browser** to the appropriate URL:
+
    - Docker: `http://localhost:8000`
    - Local: `http://127.0.0.1:7860`
 
-2. **Paste threat intelligence text** into the input area
+1. **Paste threat intelligence text** into the input area
 
-3. **Select your preferred AI model** from the dropdown
+1. **Select your preferred AI model** from the dropdown
 
-4. **Click "Run"** to analyze the text
+1. **Click "Run"** to analyze the text
 
-5. **View results**:
+1. **View results**:
+
    - **Extracted Entities**: Identified cybersecurity entities
    - **Relationships**: Discovered connections between entities
    - **Interactive Graph**: Network visualization
    - **Export Options**: Download results as JSON or images
 
-
 ## Contributing
 
 We warmly welcome contributions from the community! Whether you're interested in:
+
 - 🐛 **Fixing bugs** or adding new features
-- 📖 **Improving documentation** or adding examples  
+- 📖 **Improving documentation** or adding examples
 - 🎨 **UI/UX enhancements** for the web interface
 
 Please check out our **[Contributing Guide](CONTRIBUTING.md)** for detailed information on how to get started, development setup, and submission guidelines.
 
 ## Citation
+
 ```bibtex
 @inproceedings{cheng2025ctinexusautomaticcyberthreat,
-      title={CTINexus: Automatic Cyber Threat Intelligence Knowledge Graph Construction Using Large Language Models}, 
+      title={CTINexus: Automatic Cyber Threat Intelligence Knowledge Graph Construction Using Large Language Models},
       author={Yutong Cheng and Osama Bajaber and Saimon Amanuel Tsegai and Dawn Song and Peng Gao},
       booktitle={2025 IEEE European Symposium on Security and Privacy (EuroS\&P)},
       year={2025},
@@ -292,5 +295,6 @@ Please check out our **[Contributing Guide](CONTRIBUTING.md)** for detailed info
 ```
 
 ## License
-The source code is licensed under the [MIT](LICENSE.txt) License. 
+
+The source code is licensed under the [MIT](LICENSE.txt) License.
 We warmly welcome industry collaboration. If you’re interested in building on CTINexus or exploring joint initiatives, please email yutongcheng@vt.edu or saimon.tsegai@vt.edu, we’d be happy to set up a brief call to discuss ideas.

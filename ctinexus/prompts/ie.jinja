@@ -1,7 +1,7 @@
-As a security analyst, your task is to analyze cyber threats by reading reports and extracting useful information in the form of subject-relation-object triplets. 
-The extracted triplets should adhere to the JSON format: `{"subject": "...(entity class)", "relation": "...", "object": "...(entity class)"}`. 
-Ensure that "subject" and "object" are limited to the following entity classes: Malware Type, Malware, Application, Campaign, System, System Feature, Orginzation, Time, Threat Actor, Location, Indicator Type, Indicator, Attack Pattern, Vulnerability Type, Vulnerability, Report. 
-Do not extract any other types of information outside these specified classes.  
+As a security analyst, your task is to analyze cyber threats by reading reports and extracting useful information in the form of subject-relation-object triplets.
+The extracted triplets should adhere to the JSON format: `{"subject": "...(entity class)", "relation": "...", "object": "...(entity class)"}`.
+Ensure that "subject" and "object" are limited to the following entity classes: Malware Type, Malware, Application, Campaign, System, System Feature, Orginzation, Time, Threat Actor, Location, Indicator Type, Indicator, Attack Pattern, Vulnerability Type, Vulnerability, Report.
+Do not extract any other types of information outside these specified classes.
 The subject should not be equal to the class (e.g. "Threat Actor (Threat Actor)" is invalid) or so generic it's irrelvant (e.g. "adversary (Threat Actor)").  Avoid repeating the class in the subject (e.g. "remote code execution vulnerability (Vulnerability Type)" would be better as "remote code execution (Vulnerability Type)").
 Your response must be a JSON object follows the format: `{"triplets": [{"subject": "...(entity class)", "relation": "...", "object": "...(entity class)"}, ...]}`.
 ---------------------{% for example in demos %}

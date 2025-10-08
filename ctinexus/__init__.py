@@ -1,9 +1,10 @@
-import os
 import json
+import os
+
 from .app import get_default_models_for_provider
-from .utils.model_utils import MODELS, check_api_key
-from .utils.gradio_utils import run_pipeline
 from .graph_constructor import create_graph_visualization
+from .utils.gradio_utils import run_pipeline
+from .utils.model_utils import MODELS, check_api_key
 
 
 def process_cti_report(
@@ -16,7 +17,7 @@ def process_cti_report(
 	ea_model: str = None,
 	lp_model: str = None,
 	similarity_threshold: float = 0.6,
-	output: str = None
+	output: str = None,
 ) -> dict:
 	"""
 	Process a Cyber Threat Intelligence (CTI) report and return the results as a dictionary.
@@ -42,7 +43,9 @@ def process_cti_report(
 	"""
 	api_keys_available = check_api_key()
 	if not api_keys_available:
-		raise RuntimeError("No API Keys Configured. Please provide one API key in the `.env` file from the supported providers.")
+		raise RuntimeError(
+			"No API Keys Configured. Please provide one API key in the `.env` file from the supported providers."
+		)
 
 	available_providers = list(MODELS.keys())
 	if provider:
@@ -71,7 +74,7 @@ def process_cti_report(
 		et_model=et_model_full,
 		ea_model=ea_model_full,
 		lp_model=lp_model_full,
-		similarity_threshold=similarity_threshold
+		similarity_threshold=similarity_threshold,
 	)
 	if isinstance(result, str) and result.startswith("Error:"):
 		raise RuntimeError(result)
@@ -86,7 +89,7 @@ def process_cti_report(
 		output_dir = os.path.dirname(output)
 		if output_dir:
 			os.makedirs(output_dir, exist_ok=True)
-		with open(output, 'w', encoding='utf-8') as f:
+		with open(output, "w", encoding="utf-8") as f:
 			json.dump(result_dict, f, indent=4)
 
 	return result_dict
