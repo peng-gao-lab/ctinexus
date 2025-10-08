@@ -23,6 +23,7 @@ from ctinexus.utils.model_utils import (
 )
 
 load_dotenv()
+load_dotenv(os.path.join(os.getcwd(), '.env'))
 
 # Set up logging
 logger = logging.getLogger("ctinexus")
@@ -255,13 +256,16 @@ def main():
         # GUI mode
         warning = None
         if not api_keys_available:
-            warning = "⚠️   Warning: No API Keys Configured. Please provide one API key in the `.env` file from the supported providers.\n"
+            warning = ("No API Keys Configured. Please provide one API key in the `.env` file.\n"
+                        "Or use export OPENAI_API_KEY='...' command to set it. Supported providers are OpenAI, Gemini, AWS, and Ollama.")
             logger.warning(warning.strip())
         build_interface(warning)
     else:
         # Command line mode
         if not api_keys_available:
-            logger.warning("No API Keys Configured. Please provide one API key in the `.env` file from the supported providers.")
+            warning = ("No API Keys Configured. Please provide one API key in the `.env` file.\n"
+                        "Or use export OPENAI_API_KEY='...' command to set it. Supported providers are OpenAI, Gemini, AWS, and Ollama.")
+            logger.warning(warning.strip())
             sys.exit(1)
         
         run_cmd_pipeline(args)
