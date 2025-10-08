@@ -1,0 +1,137 @@
+{
+    "text": "Apple is urging macOS, iPhone and iPad users immediately to install respective updates this week that includes fixes for two zero-days under active attack. The patches are for vulnerabilities that allow attackers to execute arbitrary code and ultimately take over devices. Patches are available for effected devices running iOS 15.6.1 and macOS Monterey 12.5.1. Patches address two flaws, which basically impact any Apple device that can run either iOS 15 or the Monterey version of its desktop OS, according to security updates released by Apple Wednesday. One of the flaws is a kernel bug (CVE-2022-32894), which is present both in iOS and macOS. According to Apple it is an \u201cout-of-bounds write issue [that] was addressed with improved bounds checking.\u201d The vulnerability allows an application to execute arbitrary code with kernel privileges, according to Apple, which, in usual vague fashion, said there is a report that it \u201cmay have been actively exploited.\u201d",
+    "explicit_triplets": [
+        {
+            "subject": "Apple",
+            "relation": "is urging",
+            "object": "macOS, iPhone and iPad users"
+        },
+        {
+            "subject": "attackers",
+            "relation": "can execute",
+            "object": "arbitrary code"
+        },
+        {
+            "subject": "Patches",
+            "relation": "are available for",
+            "object": "devices running iOS 15.6.1 and macOS Monterey 12.5.1"
+        },
+        {
+            "subject": "CVE-2022-32894",
+            "relation": "is present in",
+            "object": "iOS"
+        },
+        {
+            "subject": "CVE-2022-32894",
+            "relation": "is present in",
+            "object": "macOS"
+        },
+        {
+            "subject": "CVE-2022-32894",
+            "relation": "allows",
+            "object": "application to execute arbitrary code with kernel privileges"
+        },
+        {
+            "subject": "Apple",
+            "relation": "addressed",
+            "object": "CVE-2022-32894"
+        },
+        {
+            "subject": "Apple",
+            "relation": "released patches on",
+            "object": "Wednesday"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Apple",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "macOS, iPhone and iPad users",
+            "entity_type": "Account",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "attackers",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "arbitrary code",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Patches",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "devices running iOS 15.6.1 and macOS Monterey 12.5.1",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "CVE-2022-32894",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "iOS",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "macOS",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "application to execute arbitrary code with kernel privileges",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "Wednesday",
+            "entity_type": "Time",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 6,
+                "entity_text": "CVE-2022-32894"
+            },
+            "relation": "allows execution of",
+            "object": {
+                "entity_id": 3,
+                "entity_text": "arbitrary code"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 5,
+                "entity_text": "devices running iOS 15.6.1 and macOS Monterey 12.5.1"
+            },
+            "relation": "are affected by",
+            "object": {
+                "entity_id": 6,
+                "entity_text": "CVE-2022-32894"
+            }
+        }
+    ]
+}

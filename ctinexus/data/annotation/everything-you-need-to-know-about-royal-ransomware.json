@@ -1,0 +1,219 @@
+{
+    "text": "After emerging in January 2022, Royal ransomware is a ransomware strain that is being distributed by ransomware threat actors from previous operations. Initially, Microsoft attributed the distribution of Royal ransomware to DEV-0569 - a temporary name given by the tech company. Now, researchers are stating that the threat actors behind Royal ransomware have officially branded themselves with the name Royal (the name left behind in recent ransomware notes) and they are primarily focused on targeting entities within the U.S. The ransomware operation uses unusual techniques to breach networks before encrypting them with malware and demanding ransom payments. Some Royal ransomware campaigns distribute the malware via malicious attachments, and some distribute the malware via malicious advertisements. Although Royal is a newer ransomware operation, researchers believe the threat actors behind it are very experienced due to evidence of previously seen tactics and techniques. In September 2022, the operators behind Royal ransomware began ramping up their malicious activities. They were observed by our technology partner, AdvIntel, utilizing other ransomware operation's encryptors, such as BlackCat. By November 2022, Royal took responsibility for a ransomware attack on one of the United Kingdom's most popular racing circuits - Silverstone Circuit. The attack held up dozens of Formula One races and motorcycle events. Details regarding the attack were not disclosed, but Emsisoft threat analyst Brett Callow stated that because Royal's ransomware is secure, its encryption cannot be broken. Callow also stated that unlike current ransomware groups, Royal uses multiple ransomware types and uses the .Royal extension for encrypted files rather than using randomly generated extensions.",
+    "explicit_triplets": [
+        {
+            "subject": "Royal ransomware",
+            "relation": "emerged in",
+            "object": "January 2022"
+        },
+        {
+            "subject": "Microsoft",
+            "relation": "attributed the distribution of",
+            "object": "Royal ransomware"
+        },
+        {
+            "subject": "Royal ransomware",
+            "relation": "was initially attributed to",
+            "object": "DEV-0569"
+        },
+        {
+            "subject": "Threat Actor",
+            "relation": "officially branded themselves as",
+            "object": "Royal"
+        },
+        {
+            "subject": "Royal ransomware",
+            "relation": "primarily targets",
+            "object": "entities within the U.S."
+        },
+        {
+            "subject": "Royal ransomware",
+            "relation": "is distributed via",
+            "object": "malicious attachments"
+        },
+        {
+            "subject": "Royal ransomware",
+            "relation": "is distributed via",
+            "object": "malicious advertisements"
+        },
+        {
+            "subject": "Royal ransomware",
+            "relation": "uses",
+            "object": "unusual techniques to breach networks"
+        },
+        {
+            "subject": "Threat Actor",
+            "relation": "utilized other ransomware encryptors",
+            "object": "BlackCat"
+        },
+        {
+            "subject": "Royal ransomware",
+            "relation": "began ramping up malicious activities in",
+            "object": "September 2022"
+        },
+        {
+            "subject": "Royal ransomware",
+            "relation": "took responsibility for ransomware attack on",
+            "object": "Silverstone Circuit"
+        },
+        {
+            "subject": "Silverstone Circuit",
+            "relation": "is located in",
+            "object": "United Kingdom"
+        },
+        {
+            "subject": "Royal ransomware",
+            "relation": "affected events at",
+            "object": "Silverstone Circuit"
+        },
+        {
+            "subject": "Brett Callow",
+            "relation": "is a threat analyst at",
+            "object": "Emsisoft"
+        },
+        {
+            "subject": "Royal ransomware",
+            "relation": "uses",
+            "object": ".Royal extension for encrypted files"
+        },
+        {
+            "subject": "Royal ransomware",
+            "relation": "uses",
+            "object": "multiple ransomware types"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Royal ransomware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "January 2022",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "Microsoft",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "DEV-0569",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Threat Actor",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Royal",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "entities within the U.S.",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "malicious attachments",
+            "entity_type": "Malware Characteristic:Payload",
+            "mentions": []
+        },
+        {
+            "entity_id": 17,
+            "entity_name": "malicious advertisements",
+            "entity_type": "Malware Characteristic:Payload",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "unusual techniques to breach networks",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "BlackCat",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "September 2022",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "Silverstone Circuit",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "United Kingdom",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "Brett Callow",
+            "entity_type": "This entity cannot be classified into any of the existing types",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "Emsisoft",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 15,
+            "entity_name": ".Royal extension for encrypted files",
+            "entity_type": "Malware Characteristic:Feature",
+            "mentions": []
+        },
+        {
+            "entity_id": 16,
+            "entity_name": "multiple ransomware types",
+            "entity_type": "Malware Characteristic:Variants",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 4,
+                "entity_text": "Threat Actor"
+            },
+            "relation": "is responsible for",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Royal ransomware"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 14,
+                "entity_text": "Emsisoft"
+            },
+            "relation": "analyzed",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Royal ransomware"
+            }
+        }
+    ]
+}

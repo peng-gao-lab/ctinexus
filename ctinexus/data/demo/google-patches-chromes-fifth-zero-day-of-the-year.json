@@ -1,0 +1,139 @@
+{
+    "text": "Google has patched the fifth actively exploited zero-day vulnerability discovered in Chrome this year as one in a series of fixes included in a stable channel update released Wednesday. The bug, tracked as CVE-2022-2856 and rated as high on the Common Vulnerability Scoring System (CVSS), is associated with \u201cinsufficient validation of untrusted input in Intents,\u201d according to the advisory posted by Google. Google credits Ashley Shen and Christian Resell of its Google Threat Analysis Group (TAG) for reporting the zero-day bug, which could allow for arbitrary code execution, on July 19. The advisory also unveiled 10 other patches for various other Chrome issues.",
+    "explicit_triplets": [
+        {
+            "subject": "Google",
+            "relation": "patched",
+            "object": "the fifth actively exploited zero-day vulnerability"
+        },
+        {
+            "subject": "the fifth actively exploited zero-day vulnerability",
+            "relation": "is tracked as",
+            "object": "CVE-2022-2856"
+        },
+        {
+            "subject": "CVE-2022-2856",
+            "relation": "is rated",
+            "object": "high on the Common Vulnerability Scoring System (CVSS)"
+        },
+        {
+            "subject": "CVE-2022-2856",
+            "relation": "is associated with",
+            "object": "insufficient validation of untrusted input in Intents"
+        },
+        {
+            "subject": "Google",
+            "relation": "credits",
+            "object": "Ashley Shen"
+        },
+        {
+            "subject": "Google",
+            "relation": "credits",
+            "object": "Christian Resell"
+        },
+        {
+            "subject": "Ashley Shen",
+            "relation": "reported",
+            "object": "CVE-2022-2856"
+        },
+        {
+            "subject": "Christian Resell",
+            "relation": "reported",
+            "object": "CVE-2022-2856"
+        },
+        {
+            "subject": "CVE-2022-2856",
+            "relation": "could allow",
+            "object": "arbitrary code execution"
+        },
+        {
+            "subject": "Google",
+            "relation": "released",
+            "object": "10 other patches for various other Chrome issues"
+        },
+        {
+            "subject": "Google",
+            "relation": "released the patch on",
+            "object": "Wednesday"
+        },
+        {
+            "subject": "Ashley Shen",
+            "relation": "reported CVE-2022-2856 on",
+            "object": "July 19"
+        },
+        {
+            "subject": "Christian Resell",
+            "relation": "reported CVE-2022-2856 on",
+            "object": "July 19"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Google",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "the fifth actively exploited zero-day vulnerability",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "CVE-2022-2856",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "high on the Common Vulnerability Scoring System (CVSS)",
+            "entity_type": "Malware Characteristic:Feature",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "insufficient validation of untrusted input in Intents",
+            "entity_type": "Malware Characteristic:Feature",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Ashley Shen",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Christian Resell",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "arbitrary code execution",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "10 other patches for various other Chrome issues",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "Wednesday",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "July 19",
+            "entity_type": "Time",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

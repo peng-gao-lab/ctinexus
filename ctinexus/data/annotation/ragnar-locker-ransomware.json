@@ -1,0 +1,175 @@
+{
+    "text": "Although Ragnar Locker was discovered by the FBI in April 2020, the group has actually been active since December 2019. Ragnar Locker is both the name of the ransomware group and the name of the ransomware. The gang works as a part of a ransomware family, which means they are associated with several ransomware variants or threat actor groups. Ragnar Locker is known for using the double extortion tactic, which involves threat actors exfiltrating sensitive data, then triggering the encryption attack, and ultimately threatening to leak the data if the demanded ransom isn't paid. To avoid prevention and detection, the threat actor frequently changes their obfuscation techniques. Ragnar Locker initiates their attacks by compromising the networks of companies through RDP service - using brute force to guess passwords or using stolen credentials purchased on the dark web. After compromising their target's network, the threat actor elevates their privileges by exploiting CVE-2017-0213 found in Windows COM Aggregate Marshaler. According to Microsoft, CVE-2017-0213 is an elevation of privilege that allows attackers to run arbitrary code with elevated privileges. To exploit the vulnerability, the attacker runs a specially crafted application.",
+    "explicit_triplets": [
+        {
+            "subject": "Ragnar Locker",
+            "relation": "discovered by",
+            "object": "FBI"
+        },
+        {
+            "subject": "Ragnar Locker",
+            "relation": "discovered in",
+            "object": "April 2020"
+        },
+        {
+            "subject": "Ragnar Locker",
+            "relation": "active since",
+            "object": "December 2019"
+        },
+        {
+            "subject": "Ragnar Locker",
+            "relation": "uses",
+            "object": "double extortion tactic"
+        },
+        {
+            "subject": "double extortion tactic",
+            "relation": "involves",
+            "object": "exfiltrating sensitive data"
+        },
+        {
+            "subject": "double extortion tactic",
+            "relation": "involves",
+            "object": "encryption attack"
+        },
+        {
+            "subject": "Ragnar Locker",
+            "relation": "frequently changes",
+            "object": "obfuscation techniques"
+        },
+        {
+            "subject": "Ragnar Locker",
+            "relation": "compromises networks through",
+            "object": "RDP service"
+        },
+        {
+            "subject": "Ragnar Locker",
+            "relation": "uses",
+            "object": "stolen credentials purchased on the dark web"
+        },
+        {
+            "subject": "Ragnar Locker",
+            "relation": "elevates privileges by exploiting",
+            "object": "CVE-2017-0213"
+        },
+        {
+            "subject": "CVE-2017-0213",
+            "relation": "found in",
+            "object": "Windows COM Aggregate Marshaler"
+        },
+        {
+            "subject": "CVE-2017-0213",
+            "relation": "allows attackers to run",
+            "object": "arbitrary code with elevated privileges"
+        },
+        {
+            "subject": "attacker",
+            "relation": "runs",
+            "object": "a specially crafted application"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Ragnar Locker",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "FBI",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "April 2020",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "December 2019",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "double extortion tactic",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "exfiltrating sensitive data",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "encryption attack",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "obfuscation techniques",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "RDP service",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "stolen credentials purchased on the dark web",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "CVE-2017-0213",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "Windows COM Aggregate Marshaler",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "arbitrary code with elevated privileges",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "attacker",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "a specially crafted application",
+            "entity_type": "Malware",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 13,
+                "entity_text": "attacker"
+            },
+            "relation": "uses",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Ragnar Locker"
+            }
+        }
+    ]
+}

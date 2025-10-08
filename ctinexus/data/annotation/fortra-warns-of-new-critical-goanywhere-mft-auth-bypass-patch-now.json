@@ -1,0 +1,241 @@
+{
+    "text": "In early 2023, it was revealed that the Clop ransomware gang had breached 130 companies and organizations by leveraging a critical remote code execution flaw in GoAnywhere MFT. The flaw is tracked as CVE-2023-0669 and had been exploited as a zero-day vulnerability since January 18, 2023. Fortra discovered its exploitation on February 3, 2023, and released patches three days later. Unfortunately, the damage had already been done, with Clop conducting widespread data theft attacks that impacted organizations worldwide, causing data leaks, reputational damage, and operational disruptions. Some notable victims of those attacks include Crown Resorts, CHS, Hatch Bank, Rubrik, the City of Toronto, Hitachi Energy, Procter & Gamble, and Saks Fifth Avenue.",
+    "explicit_triplets": [
+        {
+            "subject": "Clop ransomware gang",
+            "relation": "breached",
+            "object": "130 companies and organizations"
+        },
+        {
+            "subject": "Clop ransomware gang",
+            "relation": "leveraged",
+            "object": "critical remote code execution flaw in GoAnywhere MFT"
+        },
+        {
+            "subject": "critical remote code execution flaw in GoAnywhere MFT",
+            "relation": "is tracked as",
+            "object": "CVE-2023-0669"
+        },
+        {
+            "subject": "CVE-2023-0669",
+            "relation": "had been exploited since",
+            "object": "January 18, 2023"
+        },
+        {
+            "subject": "Fortra",
+            "relation": "discovered exploitation of",
+            "object": "CVE-2023-0669"
+        },
+        {
+            "subject": "Fortra",
+            "relation": "released patches at",
+            "object": "February 6, 2023"
+        },
+        {
+            "subject": "Clop",
+            "relation": "conducted",
+            "object": "widespread data theft attacks"
+        },
+        {
+            "subject": "widespread data theft attacks",
+            "relation": "impacted",
+            "object": "organizations worldwide"
+        },
+        {
+            "subject": "widespread data theft attacks",
+            "relation": "caused",
+            "object": "data leaks"
+        },
+        {
+            "subject": "widespread data theft attacks",
+            "relation": "caused",
+            "object": "reputational damage"
+        },
+        {
+            "subject": "widespread data theft attacks",
+            "relation": "caused",
+            "object": "operational disruptions"
+        },
+        {
+            "subject": "Clop ransomware gang",
+            "relation": "attacked",
+            "object": "Crown Resorts"
+        },
+        {
+            "subject": "Clop ransomware gang",
+            "relation": "attacked",
+            "object": "CHS"
+        },
+        {
+            "subject": "Clop ransomware gang",
+            "relation": "attacked",
+            "object": "Hatch Bank"
+        },
+        {
+            "subject": "Clop ransomware gang",
+            "relation": "attacked",
+            "object": "Rubrik"
+        },
+        {
+            "subject": "Clop ransomware gang",
+            "relation": "attacked",
+            "object": "the City of Toronto"
+        },
+        {
+            "subject": "Clop ransomware gang",
+            "relation": "attacked",
+            "object": "Hitachi Energy"
+        },
+        {
+            "subject": "Clop ransomware gang",
+            "relation": "attacked",
+            "object": "Procter & Gamble"
+        },
+        {
+            "subject": "Clop ransomware gang",
+            "relation": "attacked",
+            "object": "Saks Fifth Avenue"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Clop ransomware gang",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "130 companies and organizations",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "critical remote code execution flaw in GoAnywhere MFT",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "CVE-2023-0669",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "January 18, 2023",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Fortra",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "February 6, 2023",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "Clop",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "widespread data theft attacks",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "organizations worldwide",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "data leaks",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "reputational damage",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "operational disruptions",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "Crown Resorts",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "CHS",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 15,
+            "entity_name": "Hatch Bank",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 16,
+            "entity_name": "Rubrik",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 17,
+            "entity_name": "the City of Toronto",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 18,
+            "entity_name": "Hitachi Energy",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 19,
+            "entity_name": "Procter & Gamble",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 20,
+            "entity_name": "Saks Fifth Avenue",
+            "entity_type": "Organization",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 8,
+                "entity_text": "widespread data theft attacks"
+            },
+            "relation": "were conducted by",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Clop ransomware gang"
+            }
+        }
+    ]
+}

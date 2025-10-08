@@ -1,0 +1,179 @@
+{
+    "text": "Unit 42 recently discovered a malware campaign targeting Portuguese speakers, which aims to redirect cryptocurrency away from legitimate users\u2019 wallets and into wallets controlled by threat actors instead. To do this, the campaign uses a type of malware known as a cryptocurrency clipper, which monitors the victim\u2019s clipboard for signs that a cryptocurrency wallet address is being copied. The malware, which we call CryptoClippy, seeks to replace the user\u2019s actual wallet address with the threat actor\u2019s, causing the user to inadvertently send cryptocurrency to the threat actor. Unit 42 Managed Threat Hunting found victims across manufacturing, IT services, and real estate industries, though they likely impacted the personal wallet addresses of someone using their work machine. To deliver the malware to users\u2019 computers, threat actors in this campaign used both Google Ads and traffic distribution systems (TDS) to redirect victims to malicious domains that are impersonating the legitimate WhatsApp Web application. They use this to ensure victims are real users, and also that they\u2019re Portuguese speakers. For users who are sent to malicious domains, the threat attempts to trick them into downloading malicious files, including either .zip or .exe files, that lead to the final payload.",
+    "explicit_triplets": [
+        {
+            "subject": "Unit 42",
+            "relation": "discovered",
+            "object": "a malware campaign"
+        },
+        {
+            "subject": "a malware campaign",
+            "relation": "targets",
+            "object": "Portuguese speakers"
+        },
+        {
+            "subject": "cryptocurrency clipper",
+            "relation": "is a type of",
+            "object": "Malware Type"
+        },
+        {
+            "subject": "CryptoClippy",
+            "relation": "is named by",
+            "object": "Unit 42"
+        },
+        {
+            "subject": "CryptoClippy",
+            "relation": "monitors",
+            "object": "the victim's clipboard"
+        },
+        {
+            "subject": "CryptoClippy",
+            "relation": "replaces",
+            "object": "the user's actual wallet address"
+        },
+        {
+            "subject": "CryptoClippy",
+            "relation": "redirects cryptocurrency to",
+            "object": "Threat Actor"
+        },
+        {
+            "subject": "CryptoClippy",
+            "relation": "affects",
+            "object": "manufacturing, IT services, and real estate industries"
+        },
+        {
+            "subject": "Threat Actor",
+            "relation": "uses",
+            "object": "Google Ads"
+        },
+        {
+            "subject": "Threat Actor",
+            "relation": "uses",
+            "object": "traffic distribution systems (TDS)"
+        },
+        {
+            "subject": "threat actors",
+            "relation": "redirect victims to",
+            "object": "malicious domains"
+        },
+        {
+            "subject": "malicious domains",
+            "relation": "impersonate",
+            "object": "WhatsApp Web application"
+        },
+        {
+            "subject": "malicious files",
+            "relation": "include",
+            "object": ".zip or .exe files"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Unit 42",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "a malware campaign",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "Portuguese speakers",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Malware Type",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "CryptoClippy",
+            "entity_type": "Malware",
+            "mentions": [
+                "cryptocurrency clipper"
+            ]
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "the victim's clipboard",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "the user's actual wallet address",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "Threat Actor",
+            "entity_type": "Attacker",
+            "mentions": [
+                "threat actors"
+            ]
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "manufacturing, IT services, and real estate industries",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "Google Ads",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "traffic distribution systems (TDS)",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "malicious domains",
+            "entity_type": "Indicator:Domain",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "WhatsApp Web application",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "malicious files",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": ".zip or .exe files",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 14,
+                "entity_text": ".zip or .exe files"
+            },
+            "relation": "deliver",
+            "object": {
+                "entity_id": 3,
+                "entity_text": "CryptoClippy"
+            }
+        }
+    ]
+}

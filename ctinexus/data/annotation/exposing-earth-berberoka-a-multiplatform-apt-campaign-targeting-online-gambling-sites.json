@@ -1,0 +1,147 @@
+{
+    "text": "We have discovered an advanced persistent threat (APT) group that primarily targets online gambling sites. This group, which we have dubbed Earth Berberoka (aka GamblingPuppet), uses old yet upgraded malware families that have been attributed to Chinese-speaking actors, including PlugX and Gh0st RAT. It also uses a brand-new multistage malware family, which we have dubbed PuppetLoader. The malware families used by Earth Berberoka are multiplatform, targeting the Windows, Linux, and macOS operating systems.",
+    "explicit_triplets": [
+        {
+            "subject": "Earth Berberoka",
+            "relation": "primarily targets",
+            "object": "online gambling sites"
+        },
+        {
+            "subject": "Earth Berberoka",
+            "relation": "uses",
+            "object": "PlugX"
+        },
+        {
+            "subject": "Earth Berberoka",
+            "relation": "uses",
+            "object": "Gh0st RAT"
+        },
+        {
+            "subject": "PlugX",
+            "relation": "attributed to",
+            "object": "Chinese-speaking actors"
+        },
+        {
+            "subject": "Gh0st RAT",
+            "relation": "attributed to",
+            "object": "Chinese-speaking actors"
+        },
+        {
+            "subject": "Earth Berberoka",
+            "relation": "uses",
+            "object": "PuppetLoader"
+        },
+        {
+            "subject": "PuppetLoader",
+            "relation": "is a",
+            "object": "multistage malware family"
+        },
+        {
+            "subject": "malware families used by Earth Berberoka",
+            "relation": "target",
+            "object": "Windows"
+        },
+        {
+            "subject": "malware families used by Earth Berberoka",
+            "relation": "target",
+            "object": "Linux"
+        },
+        {
+            "subject": "malware families used by Earth Berberoka",
+            "relation": "target",
+            "object": "macOS"
+        },
+        {
+            "subject": "Earth Berberoka",
+            "relation": "is also known as",
+            "object": "GamblingPuppet"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Earth Berberoka",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "online gambling sites",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "PlugX",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "Gh0st RAT",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Chinese-speaking actors",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "PuppetLoader",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "multistage malware family",
+            "entity_type": "Malware Characteristic:Feature",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "malware families used by Earth Berberoka",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "Windows",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "Linux",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "macOS",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "GamblingPuppet",
+            "entity_type": "Attacker",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 7,
+                "entity_text": "malware families used by Earth Berberoka"
+            },
+            "relation": "are used by",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Earth Berberoka"
+            }
+        }
+    ]
+}

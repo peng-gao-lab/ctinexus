@@ -1,0 +1,100 @@
+{
+    "text": "Microsoft is urging users to patch a zero-day vulnerability dubbed Dogwalk that is actively being exploited in the wild. The bug (CVE-2022-34713) is tied to a Microsoft Windows Support Diagnostic Tool and allows a remote attacker to execute code on a vulnerable system. The warning is part of a massive August Patch Tuesday update that included 121 flaws, 17 of which were critical and 101 carrying a Common Vulnerability Scoring System rating of Important. Microsoft states that CVE-2022-34713 is a \u201cvariant of\u201d Dogwalk, but different. Microsoft scored the vulnerability as Important and warns that the exploitation of the bug can only be preformed by an adversary with physical access to a vulnerable computer.",
+    "explicit_triplets": [
+        {
+            "subject": "Microsoft",
+            "relation": "urging users to patch",
+            "object": "zero-day vulnerability dubbed Dogwalk"
+        },
+        {
+            "subject": "zero-day vulnerability dubbed Dogwalk",
+            "relation": "is actively being exploited by",
+            "object": "attackers"
+        },
+        {
+            "subject": "CVE-2022-34713",
+            "relation": "is tied to",
+            "object": "Microsoft Windows Support Diagnostic Tool"
+        },
+        {
+            "subject": "CVE-2022-34713",
+            "relation": "allows",
+            "object": "remote attacker to execute code on a vulnerable system"
+        },
+        {
+            "subject": "Microsoft",
+            "relation": "scored",
+            "object": "CVE-2022-34713 as Important"
+        },
+        {
+            "subject": "adversary",
+            "relation": "can exploit",
+            "object": "CVE-2022-34713 with physical access to a vulnerable computer"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Microsoft",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "zero-day vulnerability dubbed Dogwalk",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "attackers",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "CVE-2022-34713",
+            "entity_type": "Vulnerability",
+            "mentions": [
+                "CVE-2022-34713 with physical access to a vulnerable computer"
+            ]
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Microsoft Windows Support Diagnostic Tool",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "remote attacker to execute code on a vulnerable system",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "CVE-2022-34713 as Important",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "adversary",
+            "entity_type": "Attacker",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 3,
+                "entity_text": "CVE-2022-34713"
+            },
+            "relation": "is a variant of",
+            "object": {
+                "entity_id": 1,
+                "entity_text": "zero-day vulnerability dubbed Dogwalk"
+            }
+        }
+    ]
+}

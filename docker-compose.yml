@@ -16,7 +16,7 @@ services:
     networks:
       - ctinexus_network
     volumes:
-      - ./app:/app
+      - .:/app
 
 networks:
   ctinexus_network:

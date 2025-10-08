@@ -1,0 +1,146 @@
+{
+    "text": "Today, Microsoft Threat Intelligence is sharing updated details about techniques of a threat actor formerly tracked as DEV-0586\u2014a distinct Russian state-sponsored threat actor that has now been elevated to the name Cadet Blizzard. Microsoft assesses that Cadet Blizzard operations are associated with the Russian General Staff Main Intelligence Directorate (GRU) but are separate from other known and more established GRU-affiliated groups such as Forest Blizzard (STRONTIUM) and Seashell Blizzard (IRIDIUM). While Microsoft constantly tracks a number of activity groups with varying degrees of Russian government affiliation, the emergence of a novel GRU affiliated actor, particularly one which has conducted destructive cyber operations likely supporting broader military objectives in Ukraine, is a notable development in the Russian cyber threat landscape. A month before Russia invaded Ukraine, Cadet Blizzard foreshadowed future destructive activity when it created and deployed WhisperGate, a destructive capability that wipes Master Boot Records (MBRs), against Ukrainian government organizations. Cadet Blizzard is also linked to the defacements of several Ukrainian organization websites, as well as multiple operations, including the hack-and-leak forum known as \u201cFree Civilian\u201d.",
+    "explicit_triplets": [
+        {
+            "subject": "Microsoft Threat Intelligence",
+            "relation": "is sharing updated details about",
+            "object": "Cadet Blizzard"
+        },
+        {
+            "subject": "Cadet Blizzard",
+            "relation": "was formerly tracked as",
+            "object": "DEV-0586"
+        },
+        {
+            "subject": "Cadet Blizzard",
+            "relation": "is associated with",
+            "object": "Russian General Staff Main Intelligence Directorate (GRU)"
+        },
+        {
+            "subject": "Cadet Blizzard",
+            "relation": "is separate from",
+            "object": "Forest Blizzard (STRONTIUM)"
+        },
+        {
+            "subject": "Cadet Blizzard",
+            "relation": "is separate from",
+            "object": "Seashell Blizzard (IRIDIUM)"
+        },
+        {
+            "subject": "Cadet Blizzard",
+            "relation": "conducted destructive cyber operations supporting",
+            "object": "broader military objectives in Ukraine"
+        },
+        {
+            "subject": "Cadet Blizzard",
+            "relation": "created and deployed",
+            "object": "WhisperGate"
+        },
+        {
+            "subject": "WhisperGate",
+            "relation": "wipes",
+            "object": "Master Boot Records (MBRs)"
+        },
+        {
+            "subject": "WhisperGate",
+            "relation": "was deployed against",
+            "object": "Ukrainian government organizations"
+        },
+        {
+            "subject": "Cadet Blizzard",
+            "relation": "is linked to defacements of",
+            "object": "Ukrainian organization websites"
+        },
+        {
+            "subject": "Cadet Blizzard",
+            "relation": "is linked to",
+            "object": "hack-and-leak forum known as \"Free Civilian\""
+        },
+        {
+            "subject": "Cadet Blizzard",
+            "relation": "foreshadowed future destructive activity",
+            "object": "a month before Russia invaded Ukraine"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Microsoft Threat Intelligence",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "Cadet Blizzard",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "DEV-0586",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "Russian General Staff Main Intelligence Directorate (GRU)",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Forest Blizzard (STRONTIUM)",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Seashell Blizzard (IRIDIUM)",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "broader military objectives in Ukraine",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "WhisperGate",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "Master Boot Records (MBRs)",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "Ukrainian government organizations",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "Ukrainian organization websites",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "hack-and-leak forum known as \"Free Civilian\"",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "a month before Russia invaded Ukraine",
+            "entity_type": "Time",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

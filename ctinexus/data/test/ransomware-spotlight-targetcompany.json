@@ -1,0 +1,201 @@
+{
+    "text": "In an interview in January 2023, threat actors behind TargetCompany clarified that each major update of the ransomware entailed a change in the encryption algorithm and different decryptor characteristics. These are accompanied by a change in file name extensions, hence the evolution of names by which the ransomware group is known. We will discuss this evolution further in our blog entry. TargetCompany's earlier variants provided a \u201c.onion\u201d contact site for negotiations and dropped ransom notes named How to decrypt files.txt. Meanwhile, later variants of the TargetCompany ransomware no longer use the name of the targeted enterprise as file name extensions. In mid- to late 2022, the group was given the name\u202fFargo due to the extension that it added to its encrypted files in that period. Other extensions used by the ransomware group include \u201c.mallox,\u201d and \u201c.xollam.\u201d These later variants were observed using a combination of Chacha20, Curve 25519, and AES-128 algorithms to encrypt the victim's files. The ransomware group eventually established a data leak site under the name Mallox, and later variants dropped ransom notes as HOW TO RECOVER!!.txt.",
+    "explicit_triplets": [
+        {
+            "subject": "threat actors",
+            "relation": "clarified the updates of",
+            "object": "TargetCompany ransomware"
+        },
+        {
+            "subject": "TargetCompany ransomware",
+            "relation": "changed",
+            "object": "encryption algorithm and decryptor characteristics"
+        },
+        {
+            "subject": "TargetCompany ransomware",
+            "relation": "changed",
+            "object": "file name extensions"
+        },
+        {
+            "subject": "TargetCompany ransomware",
+            "relation": "provided",
+            "object": "a \u201c.onion\u201d contact site"
+        },
+        {
+            "subject": "TargetCompany ransomware",
+            "relation": "dropped",
+            "object": "ransom notes named How to decrypt files.txt"
+        },
+        {
+            "subject": "TargetCompany ransomware",
+            "relation": "used",
+            "object": "the targeted enterprise name as file name extensions"
+        },
+        {
+            "subject": "TargetCompany ransomware",
+            "relation": "was known as",
+            "object": "Fargo"
+        },
+        {
+            "subject": "TargetCompany ransomware",
+            "relation": "added",
+            "object": "extensions to encrypted files"
+        },
+        {
+            "subject": "TargetCompany ransomware",
+            "relation": "used extensions",
+            "object": ".mallox"
+        },
+        {
+            "subject": "TargetCompany ransomware",
+            "relation": "used extensions",
+            "object": ".xollam"
+        },
+        {
+            "subject": "TargetCompany ransomware",
+            "relation": "used algorithms",
+            "object": "Chacha20"
+        },
+        {
+            "subject": "TargetCompany ransomware",
+            "relation": "used algorithms",
+            "object": "Curve 25519"
+        },
+        {
+            "subject": "TargetCompany ransomware",
+            "relation": "used algorithms",
+            "object": "AES-128"
+        },
+        {
+            "subject": "TargetCompany ransomware",
+            "relation": "established",
+            "object": "a data leak site named Mallox"
+        },
+        {
+            "subject": "TargetCompany ransomware",
+            "relation": "dropped",
+            "object": "ransom notes HOW TO RECOVER!!.txt"
+        },
+        {
+            "subject": "threat actors",
+            "relation": "clarified updates in",
+            "object": "January 2023"
+        },
+        {
+            "subject": "TargetCompany ransomware",
+            "relation": "named Fargo in",
+            "object": "mid- to late 2022"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "threat actors",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "TargetCompany ransomware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "encryption algorithm and decryptor characteristics",
+            "entity_type": "Malware Characteristic:Feature",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "file name extensions",
+            "entity_type": "Malware Characteristic:Feature",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "a \".onion\" contact site",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "ransom notes named How to decrypt files.txt",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "the targeted enterprise name as file name extensions",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "Fargo",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "extensions to encrypted files",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": ".mallox",
+            "entity_type": "Malware Characteristic:Feature",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": ".xollam",
+            "entity_type": "Malware Characteristic:Feature",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "Chacha20",
+            "entity_type": "Malware Characteristic:Feature",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "Curve 25519",
+            "entity_type": "Malware Characteristic:Feature",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "AES-128",
+            "entity_type": "Malware Characteristic:Feature",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "a data leak site named Mallox",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 15,
+            "entity_name": "ransom notes HOW TO RECOVER!!.txt",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 16,
+            "entity_name": "January 2023",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 17,
+            "entity_name": "mid- to late 2022",
+            "entity_type": "Time",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

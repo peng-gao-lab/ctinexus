@@ -1,0 +1,133 @@
+{
+    "text": "Researchers this week disclosed details on two security vulnerabilities in Microsoft Outlook that, when chained together, give attackers a way to execute arbitrary code on affected systems without any user interaction. Unusually, both of them can be triggered using a sound file. One of the flaws, tracked as CVE-2023-35384, is actually the second patch bypass that researchers at Akamai have uncovered for a critical privilege escalation vulnerability in Outlook that Microsoft first patched in March. The second flaw that Akamai disclosed this week (CVE-2023-36710) is a remote code execution (RCE) vulnerability in a feature of Windows Media Foundation, and it has to do with how Windows parses sound files.",
+    "explicit_triplets": [
+        {
+            "subject": "Researchers",
+            "relation": "disclosed",
+            "object": "two security vulnerabilities in Microsoft Outlook"
+        },
+        {
+            "subject": "two security vulnerabilities in Microsoft Outlook",
+            "relation": "give attackers a way to execute",
+            "object": "arbitrary code on affected systems"
+        },
+        {
+            "subject": "two security vulnerabilities in Microsoft Outlook",
+            "relation": "can be triggered using",
+            "object": "a sound file"
+        },
+        {
+            "subject": "CVE-2023-35384",
+            "relation": "is a patch bypass for",
+            "object": "a critical privilege escalation vulnerability in Outlook"
+        },
+        {
+            "subject": "Microsoft",
+            "relation": "patched",
+            "object": "a critical privilege escalation vulnerability in Outlook"
+        },
+        {
+            "subject": "Microsoft",
+            "relation": "patched vulnerability in",
+            "object": "March"
+        },
+        {
+            "subject": "CVE-2023-36710",
+            "relation": "is classified as",
+            "object": "remote code execution (RCE) vulnerability"
+        },
+        {
+            "subject": "CVE-2023-36710",
+            "relation": "affects",
+            "object": "Windows Media Foundation"
+        },
+        {
+            "subject": "CVE-2023-36710",
+            "relation": "is related to",
+            "object": "how Windows parses sound files"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Researchers",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "two security vulnerabilities in Microsoft Outlook",
+            "entity_type": "Vulnerability",
+            "mentions": [
+                "a critical privilege escalation vulnerability in Outlook"
+            ]
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "arbitrary code on affected systems",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "a sound file",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "CVE-2023-35384",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Microsoft",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "March",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "CVE-2023-36710",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "remote code execution (RCE) vulnerability",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "Windows Media Foundation",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "how Windows parses sound files",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 7,
+                "entity_text": "CVE-2023-36710"
+            },
+            "relation": "is one of",
+            "object": {
+                "entity_id": 1,
+                "entity_text": "two security vulnerabilities in Microsoft Outlook"
+            }
+        }
+    ]
+}

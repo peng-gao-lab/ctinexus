@@ -1,0 +1,142 @@
+{
+    "text": "Microsoft warned Friday night that some of its corporate email accounts were breached and data stolen by a Russian state-sponsored hacking group known as Midnight Blizzard. The company detected the attack on January 12th, with Microsoft's investigation ultimately determining that the attack was conducted by Russian threat actors known more commonly as Nobelium or APT29. Microsoft says the threat actors breached their systems in November 2023 when they conducted a password spray attack to access a legacy non-production test tenant account. Microsoft says the breached email accounts included members of Microsoft's leadership team and employees in the cybersecurity and legal departments, from which the hackers stole emails and attachments.",
+    "explicit_triplets": [
+        {
+            "subject": "Midnight Blizzard",
+            "relation": "is known as",
+            "object": "Nobelium"
+        },
+        {
+            "subject": "Midnight Blizzard",
+            "relation": "is known as",
+            "object": "APT29"
+        },
+        {
+            "subject": "Microsoft",
+            "relation": "detected attack on",
+            "object": "January 12th"
+        },
+        {
+            "subject": "Midnight Blizzard",
+            "relation": "is associated with",
+            "object": "Russia"
+        },
+        {
+            "subject": "Midnight Blizzard",
+            "relation": "breached",
+            "object": "Microsoft's corporate email accounts"
+        },
+        {
+            "subject": "Midnight Blizzard",
+            "relation": "conducted",
+            "object": "password spray attack"
+        },
+        {
+            "subject": "password spray attack",
+            "relation": "targeted",
+            "object": "legacy non-production test tenant account"
+        },
+        {
+            "subject": "Microsoft's corporate email accounts",
+            "relation": "include",
+            "object": "members of Microsoft's leadership team"
+        },
+        {
+            "subject": "Microsoft's corporate email accounts",
+            "relation": "include",
+            "object": "employees in the cybersecurity department"
+        },
+        {
+            "subject": "Microsoft's corporate email accounts",
+            "relation": "include",
+            "object": "employees in the legal department"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Midnight Blizzard",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "Nobelium",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "APT29",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "Microsoft",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "January 12th",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Russia",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Microsoft's corporate email accounts",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "password spray attack",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "legacy non-production test tenant account",
+            "entity_type": "Account",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "members of Microsoft's leadership team",
+            "entity_type": "Account",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "employees in the cybersecurity department",
+            "entity_type": "Account",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "employees in the legal department",
+            "entity_type": "Account",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 4,
+                "entity_text": "January 12th"
+            },
+            "relation": "is the date Microsoft detected attack by",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Midnight Blizzard"
+            }
+        }
+    ]
+}

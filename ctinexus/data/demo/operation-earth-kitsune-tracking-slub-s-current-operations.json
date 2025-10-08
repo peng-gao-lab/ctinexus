@@ -1,0 +1,137 @@
+{
+    "text": "We found Operation Earth Kitsune using a total of five C&C servers, seven samples, and four new bugs, aiming to compromise websites to host malware. We initiated our investigation after noticing that the Korean American National Coordinating Council (KANCC) website was redirecting visitors to the Hanseattle website. Users who accessed the said site were redirected to a weaponized version of a proof of concept (POC) for the CVE-2019-5782 Google Chrome vulnerability published in the chromium tracking system. Digging deeper, we discovered that the attack does not only involve a weaponized version of the mentioned Chrome exploit; the exploit was infecting the victim machine with three separate malware samples.",
+    "explicit_triplets": [
+        {
+            "subject": "Operation Earth Kitsune",
+            "relation": "using",
+            "object": "five C&C servers"
+        },
+        {
+            "subject": "Operation Earth Kitsune",
+            "relation": "using",
+            "object": "seven samples"
+        },
+        {
+            "subject": "Operation Earth Kitsune",
+            "relation": "using",
+            "object": "four new bugs"
+        },
+        {
+            "subject": "Operation Earth Kitsune",
+            "relation": "aiming to compromise",
+            "object": "websites"
+        },
+        {
+            "subject": "Korean American National Coordinating Council (KANCC)",
+            "relation": "website was redirecting visitors to",
+            "object": "Hanseattle website"
+        },
+        {
+            "subject": "Hanseattle website",
+            "relation": "redirected users to",
+            "object": "weaponized version of CVE-2019-5782"
+        },
+        {
+            "subject": "weaponized version of CVE-2019-5782",
+            "relation": "infecting victim machine with",
+            "object": "three separate malware samples"
+        },
+        {
+            "subject": "CVE-2019-5782",
+            "relation": "is a vulnerability in",
+            "object": "Google Chrome"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Operation Earth Kitsune",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "five C&C servers",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "seven samples",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "four new bugs",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "websites",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Korean American National Coordinating Council (KANCC)",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Hanseattle website",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "weaponized version of CVE-2019-5782",
+            "entity_type": "Exploit Target",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "three separate malware samples",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "CVE-2019-5782",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "Google Chrome",
+            "entity_type": "Tool",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 6,
+                "entity_text": "Hanseattle website"
+            },
+            "relation": "is used by",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Operation Earth Kitsune"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 0,
+                "entity_text": "Operation Earth Kitsune"
+            },
+            "relation": "exploited",
+            "object": {
+                "entity_id": 9,
+                "entity_text": "CVE-2019-5782"
+            }
+        }
+    ]
+}

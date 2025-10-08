@@ -1,0 +1,148 @@
+{
+    "text": "Recently, our Unit 42 incident response team was engaged in a Black Basta breach response that uncovered several tools and malware samples on the victim's machines, including GootLoader malware, Brute Ratel C4 red-teaming tool and an older PlugX malware sample. The PlugX malware stood out to us as this variant infects any attached removable USB media devices such as floppy, thumb or flash drives and any additional systems the USB is later plugged into. This PlugX malware also hides actor files in a USB device using a novel technique that works even on the most recent Windows operating systems (OS) at the time of writing this post. This means the malicious files can only be viewed on a Unix-like (*nix) OS or by mounting the USB device in a forensic tool. We also discovered a similar variant of PlugX in VirusTotal that infects USB devices and copies all Adobe PDF and Microsoft Word files from the host. It places these copies in a hidden folder on the USB device that is created by the malware. PlugX is a second-stage implant used not only by multiple groups with a Chinese nexus but also by several cybercrime groups. It has been around for over a decade and has been observed in some high-profile cyberattacks, including the U.S. Government Office of Personnel Management (OPM) breach in 2015. It is a modular malware framework, supporting an evolving set of capabilities throughout the years.",
+    "explicit_triplets": [
+        {
+            "subject": "Unit 42 incident response team",
+            "relation": "was engaged in",
+            "object": "Black Basta breach response"
+        },
+        {
+            "subject": "Black Basta breach response",
+            "relation": "uncovered",
+            "object": "GootLoader malware"
+        },
+        {
+            "subject": "Black Basta breach response",
+            "relation": "uncovered",
+            "object": "Brute Ratel C4 red-teaming tool"
+        },
+        {
+            "subject": "Black Basta breach response",
+            "relation": "uncovered",
+            "object": "PlugX malware"
+        },
+        {
+            "subject": "PlugX malware",
+            "relation": "infects",
+            "object": "removable USB media devices"
+        },
+        {
+            "subject": "PlugX malware",
+            "relation": "hides actor files on",
+            "object": "USB device"
+        },
+        {
+            "subject": "PlugX malware",
+            "relation": "infects",
+            "object": "Windows operating systems"
+        },
+        {
+            "subject": "PlugX malware",
+            "relation": "infects",
+            "object": "USB devices"
+        },
+        {
+            "subject": "PlugX malware",
+            "relation": "copies",
+            "object": "Adobe PDF files"
+        },
+        {
+            "subject": "PlugX malware",
+            "relation": "copies",
+            "object": "Microsoft Word files"
+        },
+        {
+            "subject": "PlugX malware",
+            "relation": "used by",
+            "object": "multiple groups with a Chinese nexus"
+        },
+        {
+            "subject": "PlugX malware",
+            "relation": "used by",
+            "object": "several cybercrime groups"
+        },
+        {
+            "subject": "PlugX malware",
+            "relation": "was observed in",
+            "object": "U.S. Government Office of Personnel Management (OPM) breach in 2015"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Unit 42 incident response team",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "Black Basta breach response",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "GootLoader malware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "Brute Ratel C4 red-teaming tool",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "PlugX malware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "USB device",
+            "entity_type": "Infrastructure",
+            "mentions": [
+                "removable USB media devices",
+                "USB devices"
+            ]
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Windows operating systems",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "Adobe PDF files",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "Microsoft Word files",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "multiple groups with a Chinese nexus",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "several cybercrime groups",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "U.S. Government Office of Personnel Management (OPM) breach in 2015",
+            "entity_type": "Event",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

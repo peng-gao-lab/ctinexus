@@ -1,0 +1,109 @@
+{
+    "text": "Since at least August, attackers have been exploiting CVE-2023-4966 (aka CitrixBleed), a 7.5 high-severity vulnerability affecting Citrix Systems' NetScaler ADC and Gateway networking products. Even after it was brought to light in October, many organizations have struggled to comprehensively shore up their systems. One such organization appears to be Comcast Xfinity. On Monday, the cable giant disclosed a CitrixBleed-enabled breach of its customer data, including usernames and hashed passwords, and, for some, names, contact information, last four digits of Social Security numbers, dates of birth, and security questions and answers.",
+    "explicit_triplets": [
+        {
+            "subject": "attackers",
+            "relation": "have been exploiting",
+            "object": "CVE-2023-4966"
+        },
+        {
+            "subject": "CVE-2023-4966",
+            "relation": "is known as",
+            "object": "CitrixBleed"
+        },
+        {
+            "subject": "CVE-2023-4966",
+            "relation": "affects",
+            "object": "Citrix Systems' NetScaler ADC and Gateway networking products"
+        },
+        {
+            "subject": "CVE-2023-4966",
+            "relation": "has been exploited since",
+            "object": "August"
+        },
+        {
+            "subject": "CVE-2023-4966",
+            "relation": "was disclosed in",
+            "object": "October"
+        },
+        {
+            "subject": "Comcast Xfinity",
+            "relation": "experienced",
+            "object": "a CitrixBleed-enabled breach"
+        },
+        {
+            "subject": "a CitrixBleed-enabled breach",
+            "relation": "compromised",
+            "object": "customer data"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "attackers",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "CVE-2023-4966",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "CitrixBleed",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "Citrix Systems' NetScaler ADC and Gateway networking products",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "August",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "October",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Comcast Xfinity",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "a CitrixBleed-enabled breach",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "customer data",
+            "entity_type": "Information",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 7,
+                "entity_text": "a CitrixBleed-enabled breach"
+            },
+            "relation": "was enabled by",
+            "object": {
+                "entity_id": 1,
+                "entity_text": "CVE-2023-4966"
+            }
+        }
+    ]
+}

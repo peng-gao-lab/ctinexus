@@ -1,0 +1,153 @@
+{
+    "text": "The Budworm advanced persistent threat (APT) group continues to actively develop its toolset. Most recently, the Threat Hunter Team in Symantec, part of Broadcom, discovered Budworm using an updated version of one of its key tools to target a Middle Eastern telecommunications organization and an Asian government. Both attacks occurred in August 2023. Budworm (aka LuckyMouse, Emissary Panda, APT27) deployed a previously unseen variant of its SysUpdate backdoor (SysUpdate DLL inicore_v2.3.30.dll). SysUpdate is exclusively used by Budworm. As well as its custom malware, Budworm also used a variety of living-off-the-land and publicly available tools in these attacks. It appears the activity by the group may have been stopped early in the attack chain as the only malicious activity seen on infected machines is credential harvesting.",
+    "explicit_triplets": [
+        {
+            "subject": "Budworm",
+            "relation": "targeted",
+            "object": "a Middle Eastern telecommunications organization"
+        },
+        {
+            "subject": "Budworm",
+            "relation": "targeted",
+            "object": "an Asian government"
+        },
+        {
+            "subject": "Budworm",
+            "relation": "used",
+            "object": "SysUpdate backdoor"
+        },
+        {
+            "subject": "SysUpdate backdoor",
+            "relation": "is variant of",
+            "object": "SysUpdate DLL inicore_v2.3.30.dll"
+        },
+        {
+            "subject": "SysUpdate",
+            "relation": "is exclusively used by",
+            "object": "Budworm"
+        },
+        {
+            "subject": "Budworm",
+            "relation": "used",
+            "object": "custom malware"
+        },
+        {
+            "subject": "Budworm",
+            "relation": "used",
+            "object": "living-off-the-land and publicly available tools"
+        },
+        {
+            "subject": "attacks",
+            "relation": "occurred in",
+            "object": "August 2023"
+        },
+        {
+            "subject": "Budworm",
+            "relation": "is also known as",
+            "object": "LuckyMouse"
+        },
+        {
+            "subject": "Budworm",
+            "relation": "is also known as",
+            "object": "Emissary Panda"
+        },
+        {
+            "subject": "Budworm",
+            "relation": "is also known as",
+            "object": "APT27"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Budworm",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "a Middle Eastern telecommunications organization",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "an Asian government",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "SysUpdate backdoor",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "SysUpdate DLL inicore_v2.3.30.dll",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "SysUpdate",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "custom malware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "living-off-the-land and publicly available tools",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "attacks",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "August 2023",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "LuckyMouse",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "Emissary Panda",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "APT27",
+            "entity_type": "Attacker",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 8,
+                "entity_text": "attacks"
+            },
+            "relation": "were conducted by",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Budworm"
+            }
+        }
+    ]
+}

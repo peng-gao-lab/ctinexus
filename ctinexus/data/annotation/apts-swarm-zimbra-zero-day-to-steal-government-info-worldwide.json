@@ -1,0 +1,231 @@
+{
+    "text": "At least four separate cyberattack groups have used a former zero-day security vulnerability in the Zimbra Collaboration Suite (ZCS) to steal email data, user credentials, and authentication tokens from government organizations globally.ZCS is an email server, calendaring, and chat and video platform, used by thousands of companies and hundreds of millions of individuals, according to the Zimbra website. Its client organizations are as diverse as the Japan Advanced Institute of Science and Technology, Germany's Max Planck Institute, and Gunung Sewu, a top business incubator in Southeast Asia. The bug (CVE-2023-37580) is a reflected cross-site scripting (XSS) vulnerability in the Zimbra email server that was patched on July 25, with a hotfix rolling out to its public GitHub repository on July 5. According to a report by Google's Threat Analysis Group (TAG) shared with Dark Reading, the zero-day exploitation started in June, before Zimbra offered remediation.",
+    "explicit_triplets": [
+        {
+            "subject": "four separate cyberattack groups",
+            "relation": "have used",
+            "object": "zero-day security vulnerability in Zimbra Collaboration Suite (ZCS)"
+        },
+        {
+            "subject": "zero-day security vulnerability in Zimbra Collaboration Suite (ZCS)",
+            "relation": "is identified as",
+            "object": "CVE-2023-37580"
+        },
+        {
+            "subject": "four separate cyberattack groups",
+            "relation": "stole",
+            "object": "email data"
+        },
+        {
+            "subject": "four separate cyberattack groups",
+            "relation": "stole",
+            "object": "user credentials"
+        },
+        {
+            "subject": "four separate cyberattack groups",
+            "relation": "stole",
+            "object": "authentication tokens"
+        },
+        {
+            "subject": "government organizations",
+            "relation": "are targeted by",
+            "object": "four separate cyberattack groups"
+        },
+        {
+            "subject": "Zimbra Collaboration Suite (ZCS)",
+            "relation": "is used by",
+            "object": "Japan Advanced Institute of Science and Technology"
+        },
+        {
+            "subject": "Zimbra Collaboration Suite (ZCS)",
+            "relation": "is used by",
+            "object": "Max Planck Institute"
+        },
+        {
+            "subject": "Zimbra Collaboration Suite (ZCS)",
+            "relation": "is used by",
+            "object": "Gunung Sewu"
+        },
+        {
+            "subject": "Gunung Sewu",
+            "relation": "is located in",
+            "object": "Southeast Asia"
+        },
+        {
+            "subject": "CVE-2023-37580",
+            "relation": "is classified as",
+            "object": "reflected cross-site scripting (XSS) vulnerability"
+        },
+        {
+            "subject": "CVE-2023-37580",
+            "relation": "affects",
+            "object": "Zimbra email server"
+        },
+        {
+            "subject": "CVE-2023-37580",
+            "relation": "was patched on",
+            "object": "July 25"
+        },
+        {
+            "subject": "hotfix for CVE-2023-37580",
+            "relation": "was rolled out on",
+            "object": "July 5"
+        },
+        {
+            "subject": "zero-day exploitation",
+            "relation": "started in",
+            "object": "June"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "four separate cyberattack groups",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "zero-day security vulnerability in Zimbra Collaboration Suite (ZCS)",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "CVE-2023-37580",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "email data",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "user credentials",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "authentication tokens",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "government organizations",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "Zimbra Collaboration Suite (ZCS)",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "Japan Advanced Institute of Science and Technology",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "Max Planck Institute",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "Gunung Sewu",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "Southeast Asia",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "reflected cross-site scripting (XSS) vulnerability",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "Zimbra email server",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "July 25",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 15,
+            "entity_name": "hotfix for CVE-2023-37580",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 16,
+            "entity_name": "July 5",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 17,
+            "entity_name": "zero-day exploitation",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 18,
+            "entity_name": "June",
+            "entity_type": "Time",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 0,
+                "entity_text": "four separate cyberattack groups"
+            },
+            "relation": "exploited vulnerability in",
+            "object": {
+                "entity_id": 7,
+                "entity_text": "Zimbra Collaboration Suite (ZCS)"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 15,
+                "entity_text": "hotfix for CVE-2023-37580"
+            },
+            "relation": "was issued in response to exploitation by",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "four separate cyberattack groups"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 0,
+                "entity_text": "four separate cyberattack groups"
+            },
+            "relation": "started exploitation in",
+            "object": {
+                "entity_id": 18,
+                "entity_text": "June"
+            }
+        }
+    ]
+}

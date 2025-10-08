@@ -1,0 +1,149 @@
+{
+    "text": "First observed in mid-November 2021 by researchers from the MalwareHunterTeam, BlackCat (aka AlphaVM, AlphaV, or ALPHV) swiftly gained notoriety for being the first major professional ransomware family to be written in Rust, a cross-platform language that enables malicious actors to customize malware with ease for different operating systems like Windows and Linux, thus affording a wide range of enterprise environments. Since then, BlackCat ransomware has frequently made the headlines for its successive attacks on high-profile targets and its use of triple extortion which has endowed the group with a distinct competitive edge over other RaaS operators. Aside from exposing exfiltrated data, ransomware actors that use triple extortion threaten to launch distributed denial-of-service (DDoS) attacks on their victims' infrastructure to coerce them to pay the ransom.",
+    "explicit_triplets": [
+        {
+            "subject": "BlackCat ransomware",
+            "relation": "was first observed in",
+            "object": "mid-November 2021"
+        },
+        {
+            "subject": "MalwareHunterTeam",
+            "relation": "observed",
+            "object": "BlackCat ransomware"
+        },
+        {
+            "subject": "BlackCat ransomware",
+            "relation": "is also known as",
+            "object": "AlphaVM"
+        },
+        {
+            "subject": "BlackCat ransomware",
+            "relation": "is also known as",
+            "object": "AlphaV"
+        },
+        {
+            "subject": "BlackCat ransomware",
+            "relation": "is also known as",
+            "object": "ALPHV"
+        },
+        {
+            "subject": "BlackCat ransomware",
+            "relation": "is written in",
+            "object": "Rust"
+        },
+        {
+            "subject": "Rust",
+            "relation": "enables malware customization for",
+            "object": "Operating System"
+        },
+        {
+            "subject": "BlackCat ransomware",
+            "relation": "targets",
+            "object": "Windows"
+        },
+        {
+            "subject": "BlackCat ransomware",
+            "relation": "targets",
+            "object": "Linux"
+        },
+        {
+            "subject": "BlackCat ransomware",
+            "relation": "uses",
+            "object": "triple extortion"
+        },
+        {
+            "subject": "ransomware actors",
+            "relation": "threaten to launch",
+            "object": "distributed denial-of-service (DDoS) attacks"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "BlackCat ransomware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "mid-November 2021",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "MalwareHunterTeam",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "AlphaVM",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "ALPHV",
+            "entity_type": "Malware",
+            "mentions": [
+                "AlphaV"
+            ]
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Rust",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Operating System",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "Windows",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "Linux",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "triple extortion",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "ransomware actors",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "distributed denial-of-service (DDoS) attacks",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 10,
+                "entity_text": "ransomware actors"
+            },
+            "relation": "use",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "BlackCat ransomware"
+            }
+        }
+    ]
+}

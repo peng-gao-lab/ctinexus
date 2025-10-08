@@ -1,0 +1,183 @@
+{
+    "text": "Cuba ransomware first appeared in 2019 but remained relatively unnoticed until November 2021, when they reportedly targeted a minimum of 49 organizations across various sectors. The sectors included government, healthcare, information technology, manufacturing, and finance. During this time, Cuba ransomware operators were infiltrating networks by encrypting files using the '.cuba' extension. Over the years, the ransom demands from Cuba totals at least $145 million, and the group has successfully collected at least $60 million in ransom payments. By 2022, the threat actors had expanded their tactics, techniques, and procedures (TTPs), leading security researchers to suggest a potential connection between Cuba ransomware actors, RomCom Remote Access Trojan (RAT) actors, and Industrial Spy ransomware actors. This month, Cuba garnered attention when they took responsibility for a cyberattack on The Philadelphia Inquirer.",
+    "explicit_triplets": [
+        {
+            "subject": "Cuba ransomware",
+            "relation": "first appeared in",
+            "object": "2019"
+        },
+        {
+            "subject": "Cuba ransomware",
+            "relation": "reportedly targeted",
+            "object": "49 organizations"
+        },
+        {
+            "subject": "49 organizations",
+            "relation": "included sectors",
+            "object": "government"
+        },
+        {
+            "subject": "49 organizations",
+            "relation": "included sectors",
+            "object": "healthcare"
+        },
+        {
+            "subject": "49 organizations",
+            "relation": "included sectors",
+            "object": "information technology"
+        },
+        {
+            "subject": "49 organizations",
+            "relation": "included sectors",
+            "object": "manufacturing"
+        },
+        {
+            "subject": "49 organizations",
+            "relation": "included sectors",
+            "object": "finance"
+        },
+        {
+            "subject": "Cuba ransomware operators",
+            "relation": "infiltrated networks by",
+            "object": "encrypting files using the '.cuba' extension"
+        },
+        {
+            "subject": "Cuba ransomware",
+            "relation": "demanded ransom totals at least",
+            "object": "$145 million"
+        },
+        {
+            "subject": "Cuba ransomware",
+            "relation": "collected ransom payments totaling at least",
+            "object": "$60 million"
+        },
+        {
+            "subject": "Cuba ransomware actors",
+            "relation": "potentially connected to",
+            "object": "RomCom Remote Access Trojan (RAT) actors"
+        },
+        {
+            "subject": "Cuba ransomware actors",
+            "relation": "potentially connected to",
+            "object": "Industrial Spy ransomware actors"
+        },
+        {
+            "subject": "Cuba ransomware",
+            "relation": "took responsibility for",
+            "object": "a cyberattack on The Philadelphia Inquirer"
+        },
+        {
+            "subject": "a cyberattack on The Philadelphia Inquirer",
+            "relation": "occurred in",
+            "object": "This month"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Cuba ransomware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "2019",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "49 organizations",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "government",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "healthcare",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "information technology",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "manufacturing",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "finance",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "encrypting files using the '.cuba' extension",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "$145 million",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "$60 million",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "Cuba ransomware actors",
+            "entity_type": "Attacker",
+            "mentions": [
+                "Industrial Spy ransomware actors",
+                "Cuba ransomware operators"
+            ]
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "RomCom Remote Access Trojan (RAT) actors",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "a cyberattack on The Philadelphia Inquirer",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "This month",
+            "entity_type": "Time",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 8,
+                "entity_text": "Cuba ransomware actors"
+            },
+            "relation": "targeted",
+            "object": {
+                "entity_id": 2,
+                "entity_text": "49 organizations"
+            }
+        }
+    ]
+}

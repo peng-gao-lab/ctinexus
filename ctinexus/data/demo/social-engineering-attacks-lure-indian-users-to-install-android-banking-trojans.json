@@ -1,0 +1,102 @@
+{
+    "text": "We discovered a recent WhatsApp phishing campaign through our telemetry that led to banking trojan activity. In this campaign, the attacker shares a malicious APK file through WhatsApp with a message asking users to enter sensitive information in the app. The widely circulated fake banking message states \u201cYour [redacted] BANK Account will be Blocked Today please update your PANCARD immediately open [redacted]-Bank.apk for update your PANCARD. Thank You.\u201d and includes a APK file named [redacted]-BANK[.]apk. Upon investigation, we discovered that the APK file was malicious and interacting with it installs a fraudulent application on the victim device. The installed app impersonates a legitimate bank located in India and disguises itself as the bank's official Know Your Customer (KYC) application to trick users into submitting their sensitive information, despite this particular banking organization not being affiliated with an official KYC-related app. This information is then sent to a command and control (C2) server, as well as to the attacker's hard-coded phone number used in SMS functionality.",
+    "explicit_triplets": [
+        {
+            "subject": "attacker",
+            "relation": "shares",
+            "object": "malicious APK file"
+        },
+        {
+            "subject": "malicious APK file",
+            "relation": "distributed through",
+            "object": "WhatsApp"
+        },
+        {
+            "subject": "malicious APK file",
+            "relation": "installs",
+            "object": "fraudulent application"
+        },
+        {
+            "subject": "fraudulent application",
+            "relation": "impersonates",
+            "object": "legitimate bank located in India"
+        },
+        {
+            "subject": "fraudulent application",
+            "relation": "disguises as",
+            "object": "bank's official Know Your Customer (KYC) application"
+        },
+        {
+            "subject": "fraudulent application",
+            "relation": "tricks users into submitting",
+            "object": "sensitive information"
+        },
+        {
+            "subject": "sensitive information",
+            "relation": "sent to",
+            "object": "command and control (C2) server"
+        },
+        {
+            "subject": "sensitive information",
+            "relation": "sent to",
+            "object": "attacker's hard-coded phone number"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "attacker",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "malicious APK file",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "WhatsApp",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "fraudulent application",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "legitimate bank located in India",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "bank's official Know Your Customer (KYC) application",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "sensitive information",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "command and control (C2) server",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "attacker's hard-coded phone number",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

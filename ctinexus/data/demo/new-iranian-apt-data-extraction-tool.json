@@ -1,0 +1,170 @@
+{
+    "text": "As part of TAG's mission to counter serious threats to Google and our users, we've analyzed a range of persistent threats including APT35 and Charming Kitten, an Iranian government-backed group that regularly targets high risk users. For years, we have been countering this group\u2019s efforts to hijack accounts, deploy malware, and their use of novel techniques to conduct espionage aligned with the interests of the Iranian government. Now, we\u2019re shining light on a new tool of theirs. In December 2021, TAG discovered a novel Charming Kitten tool, named HYPERSCRAPE, used to steal user data from Gmail, Yahoo!, and Microsoft Outlook accounts. The attacker runs HYPERSCRAPE on their own machine to download victims\u2019 inboxes using previously acquired credentials. We have seen it deployed against fewer than two dozen accounts located in Iran. The oldest known sample is from 2020, and the tool is still under active development. We have taken actions to re-secure these accounts and have notified the victims through our Government Backed Attacker Warnings.",
+    "explicit_triplets": [
+        {
+            "subject": "APT35",
+            "relation": "is known as",
+            "object": "Charming Kitten"
+        },
+        {
+            "subject": "Charming Kitten",
+            "relation": "is backed by",
+            "object": "Iranian government"
+        },
+        {
+            "subject": "Charming Kitten",
+            "relation": "targets",
+            "object": "high risk users"
+        },
+        {
+            "subject": "Charming Kitten",
+            "relation": "conducts",
+            "object": "espionage"
+        },
+        {
+            "subject": "Charming Kitten",
+            "relation": "uses",
+            "object": "HYPERSCRAPE"
+        },
+        {
+            "subject": "HYPERSCRAPE",
+            "relation": "steals",
+            "object": "user data"
+        },
+        {
+            "subject": "HYPERSCRAPE",
+            "relation": "targets",
+            "object": "Gmail, Yahoo!, and Microsoft Outlook accounts"
+        },
+        {
+            "subject": "attacker",
+            "relation": "runs",
+            "object": "HYPERSCRAPE"
+        },
+        {
+            "subject": "victims",
+            "relation": "were located in",
+            "object": "Iran"
+        },
+        {
+            "subject": "oldest known sample",
+            "relation": "is from",
+            "object": "2020"
+        },
+        {
+            "subject": "Google",
+            "relation": "notified",
+            "object": "victims"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "APT35",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "Charming Kitten",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "Iranian government",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "high risk users",
+            "entity_type": "Account",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "espionage",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "HYPERSCRAPE",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "user data",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "Gmail, Yahoo!, and Microsoft Outlook accounts",
+            "entity_type": "Account",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "attacker",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "victims",
+            "entity_type": "Account",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "Iran",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "oldest known sample",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "2020",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "Google",
+            "entity_type": "Organization",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 9,
+                "entity_text": "victims"
+            },
+            "relation": "were targeted by",
+            "object": {
+                "entity_id": 1,
+                "entity_text": "Charming Kitten"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 11,
+                "entity_text": "oldest known sample"
+            },
+            "relation": "is associated with",
+            "object": {
+                "entity_id": 1,
+                "entity_text": "Charming Kitten"
+            }
+        }
+    ]
+}

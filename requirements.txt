@@ -1,4 +1,3 @@
-boto3
 gradio
 hydra-core
 jinja2
@@ -6,11 +5,8 @@ litellm
 networkx
 nltk
 omegaconf
-openai
 pandas
-plotly
 pyvis
 python-dotenv
-requests
 scikit-learn
 scipy

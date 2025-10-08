@@ -1,0 +1,181 @@
+{
+    "text": "A novel multistage remote access trojan (RAT) that\u2019s been active since April 2020 is exploiting known vulnerabilities to target popular SOHO routers from Cisco Systems, Netgear, Asus and others. The malware, dubbed ZuoRAT, can access the local LAN, capture packets being transmitted on the device and stage man-in-the-middle attacks through DNS and HTTPS hijacking, according to researchers from Lumen Technologies\u2019 threat-intelligence arm Black Lotus Labs. The ability to not only hop on a LAN from a SOHO device and then stage further attacks suggests that the RAT may be the work of a state-sponsored actor.",
+    "explicit_triplets": [
+        {
+            "subject": "A novel multistage remote access trojan (RAT)",
+            "relation": "has been active since",
+            "object": "April 2020"
+        },
+        {
+            "subject": "A novel multistage remote access trojan (RAT)",
+            "relation": "is exploiting",
+            "object": "known vulnerabilities"
+        },
+        {
+            "subject": "known vulnerabilities",
+            "relation": "target",
+            "object": "popular SOHO routers"
+        },
+        {
+            "subject": "popular SOHO routers",
+            "relation": "are from",
+            "object": "Cisco Systems"
+        },
+        {
+            "subject": "popular SOHO routers",
+            "relation": "are from",
+            "object": "Netgear"
+        },
+        {
+            "subject": "popular SOHO routers",
+            "relation": "are from",
+            "object": "Asus"
+        },
+        {
+            "subject": "The malware",
+            "relation": "is dubbed",
+            "object": "ZuoRAT"
+        },
+        {
+            "subject": "ZuoRAT",
+            "relation": "can access",
+            "object": "the local LAN"
+        },
+        {
+            "subject": "ZuoRAT",
+            "relation": "can capture",
+            "object": "packets being transmitted on the device"
+        },
+        {
+            "subject": "ZuoRAT",
+            "relation": "can stage",
+            "object": "man-in-the-middle attacks through DNS and HTTPS hijacking"
+        },
+        {
+            "subject": "ZuoRAT",
+            "relation": "may be the work of",
+            "object": "a state-sponsored actor"
+        },
+        {
+            "subject": "Lumen Technologies",
+            "relation": "has threat-intelligence arm",
+            "object": "Black Lotus Labs"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "A novel multistage remote access trojan (RAT)",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "April 2020",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "known vulnerabilities",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "popular SOHO routers",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Cisco Systems",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Netgear",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Asus",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "The malware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "ZuoRAT",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "the local LAN",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "packets being transmitted on the device",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "man-in-the-middle attacks through DNS and HTTPS hijacking",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "a state-sponsored actor",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "Lumen Technologies",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "Black Lotus Labs",
+            "entity_type": "Organization",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 8,
+                "entity_text": "ZuoRAT"
+            },
+            "relation": "targets",
+            "object": {
+                "entity_id": 3,
+                "entity_text": "popular SOHO routers"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 13,
+                "entity_text": "Lumen Technologies"
+            },
+            "relation": "researched vulnerabilities in",
+            "object": {
+                "entity_id": 3,
+                "entity_text": "popular SOHO routers"
+            }
+        }
+    ]
+}

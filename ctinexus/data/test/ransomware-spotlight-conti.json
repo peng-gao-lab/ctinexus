@@ -1,0 +1,225 @@
+{
+    "text": "Conti can arrive in the system through BazarLoader, which is delivered via phishing emails containing a Google Drive link that downloads the malware.Alternatively, the ransomware can arrive via exploiting the the FortiGate firewall vulnerabilities CVE-2018-13379 and CVE-2018-13374. After successfully exploiting the application, the ransomware deploys Cobalt Strike to gain a foothold on the system. Conti can also arrive as a result of the exploitation of the ProxyShell Microsoft Exchange vulnerabilities. The Conti group uses tools such as Whoami, Nltest, and Net. These tools give the operators information about where they are in the system, and what rights and permissions they have. Since the operators employ double extortion tactics, they actively look for files to exfiltrate in the discovery stage. The threat actors use tools such as ShareFinder to identify the shares needed for exfiltration and ransomware deployment. Although the group mostly relies on finding the domain admin credentials to gain full access to the domain, they may also use a couple of exploits like Zerologon (CVE-2020-1472) and PrintNightmare (CVE-2021-1675), to elevate their privilege and further strengthen their foothold in the network.",
+    "explicit_triplets": [
+        {
+            "subject": "Conti",
+            "relation": "can arrive via",
+            "object": "BazarLoader"
+        },
+        {
+            "subject": "BazarLoader",
+            "relation": "is delivered via",
+            "object": "phishing emails"
+        },
+        {
+            "subject": "phishing emails",
+            "relation": "contain",
+            "object": "Google Drive link"
+        },
+        {
+            "subject": "Google Drive link",
+            "relation": "downloads",
+            "object": "malware"
+        },
+        {
+            "subject": "Conti",
+            "relation": "can arrive via exploiting",
+            "object": "CVE-2018-13379"
+        },
+        {
+            "subject": "Conti",
+            "relation": "can arrive via exploiting",
+            "object": "CVE-2018-13374"
+        },
+        {
+            "subject": "Conti",
+            "relation": "deploys",
+            "object": "Cobalt Strike"
+        },
+        {
+            "subject": "Conti",
+            "relation": "can arrive via exploiting",
+            "object": "ProxyShell Microsoft Exchange vulnerabilities"
+        },
+        {
+            "subject": "Conti group",
+            "relation": "uses",
+            "object": "Whoami"
+        },
+        {
+            "subject": "Conti group",
+            "relation": "uses",
+            "object": "Nltest"
+        },
+        {
+            "subject": "Conti group",
+            "relation": "uses",
+            "object": "Net"
+        },
+        {
+            "subject": "Conti group",
+            "relation": "use tactics for",
+            "object": "double extortion"
+        },
+        {
+            "subject": "threat actors",
+            "relation": "use",
+            "object": "ShareFinder"
+        },
+        {
+            "subject": "Conti group",
+            "relation": "relies on finding",
+            "object": "domain admin credentials"
+        },
+        {
+            "subject": "Conti group",
+            "relation": "may use to elevate privilege",
+            "object": "Zerologon (CVE-2020-1472)"
+        },
+        {
+            "subject": "Conti group",
+            "relation": "may use to elevate privilege",
+            "object": "PrintNightmare (CVE-2021-1675)"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Conti",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "BazarLoader",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "phishing emails",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "Google Drive link",
+            "entity_type": "Indicator:URL",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "malware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "CVE-2018-13379",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "CVE-2018-13374",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "Cobalt Strike",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "ProxyShell Microsoft Exchange vulnerabilities",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "Conti group",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "Whoami",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "Nltest",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "Net",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "double extortion",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "threat actors",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 15,
+            "entity_name": "ShareFinder",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 16,
+            "entity_name": "domain admin credentials",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 17,
+            "entity_name": "Zerologon (CVE-2020-1472)",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 18,
+            "entity_name": "PrintNightmare (CVE-2021-1675)",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 9,
+                "entity_text": "Conti group"
+            },
+            "relation": "operates",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Conti"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 14,
+                "entity_text": "threat actors"
+            },
+            "relation": "operate",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Conti"
+            }
+        }
+    ]
+}

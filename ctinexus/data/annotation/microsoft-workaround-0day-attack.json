@@ -1,0 +1,146 @@
+{
+    "text": "Microsoft has released a workaround for a zero-day flaw that was initially flagged in April and that attackers already have used to target organizations in Russia and Tibet, researchers said. The remote control execution (RCE) flaw, tracked as CVE-2022-3019, is associated with the Microsoft Support Diagnostic Tool (MSDT), which, ironically, itself collects information about bugs in the company\u2019s products and reports to Microsoft Support. If successfully exploited, attackers can install programs, view, change or delete data, or create new accounts in the context allowed by the user\u2019s rights, the company said. A remote code execution vulnerability exists when MSDT is called using the URL protocol from a calling application such as Word,\u201d Microsoft explained in its guidance on the Microsoft Security Response Center. \u201cAn attacker who successfully exploits this vulnerability can run arbitrary code with the privileges of the calling application.",
+    "explicit_triplets": [
+        {
+            "subject": "Microsoft",
+            "relation": "released workaround for",
+            "object": "zero-day flaw CVE-2022-3019"
+        },
+        {
+            "subject": "attackers",
+            "relation": "have used",
+            "object": "zero-day flaw CVE-2022-3019"
+        },
+        {
+            "subject": "attackers",
+            "relation": "targeted",
+            "object": "organizations in Russia"
+        },
+        {
+            "subject": "attackers",
+            "relation": "targeted",
+            "object": "organizations in Tibet"
+        },
+        {
+            "subject": "CVE-2022-3019",
+            "relation": "is associated with",
+            "object": "Microsoft Support Diagnostic Tool (MSDT)"
+        },
+        {
+            "subject": "attackers",
+            "relation": "can install",
+            "object": "programs"
+        },
+        {
+            "subject": "attackers",
+            "relation": "can view, change or delete",
+            "object": "data"
+        },
+        {
+            "subject": "attackers",
+            "relation": "can create",
+            "object": "new accounts"
+        },
+        {
+            "subject": "Remote code execution vulnerability",
+            "relation": "exists when called from",
+            "object": "Application Word"
+        },
+        {
+            "subject": "attacker",
+            "relation": "can run",
+            "object": "arbitrary code"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Microsoft",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "zero-day flaw CVE-2022-3019",
+            "entity_type": "Vulnerability",
+            "mentions": [
+                "CVE-2022-3019"
+            ]
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "attackers",
+            "entity_type": "Attacker",
+            "mentions": [
+                "attacker"
+            ]
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "organizations in Russia",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "organizations in Tibet",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Microsoft Support Diagnostic Tool (MSDT)",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "programs",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "data",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "new accounts",
+            "entity_type": "Account",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "Remote code execution vulnerability",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "Application Word",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "arbitrary code",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 9,
+                "entity_text": "Remote code execution vulnerability"
+            },
+            "relation": "is exploited by",
+            "object": {
+                "entity_id": 2,
+                "entity_text": "attackers"
+            }
+        }
+    ]
+}

@@ -1,0 +1,175 @@
+{
+    "text": "Iranian espionage group Seedworm (aka Muddywater) has been targeting organizations operating in the telecommunications sector in Egypt, Sudan, and Tanzania. Seedworm has been active since at least 2017, and has targeted organizations in many countries, though it is most strongly associated with attacks on organizations in the Middle East. It has been publicly stated that Seedworm is a cyberespionage group that is believed to be a subordinate part of Iran's Ministry of Intelligence and Security (MOIS). The attackers used a variety of tools in this activity, which occurred in November 2023, including leveraging the MuddyC2Go infrastructure, which was recently discovered and documented by Deep Instinct. Researchers on Symantec's Threat Hunter Team, part of Broadcom, found a MuddyC2Go PowerShell launcher in the activity we investigated. The attackers also use the SimpleHelp remote access tool and Venom Proxy, which have previously been associated with Seedworm activity, as well as using a custom keylogging tool, and other publicly available and living-off-the-land tools.",
+    "explicit_triplets": [
+        {
+            "subject": "Threat Actor Seedworm",
+            "relation": "targets",
+            "object": "organizations operating in the telecommunications sector"
+        },
+        {
+            "subject": "organizations operating in the telecommunications sector",
+            "relation": "are located in",
+            "object": "Egypt, Sudan, and Tanzania"
+        },
+        {
+            "subject": "Threat Actor Seedworm",
+            "relation": "has been active since",
+            "object": "2017"
+        },
+        {
+            "subject": "Threat Actor Seedworm",
+            "relation": "strongly associated with attacks in",
+            "object": "Middle East"
+        },
+        {
+            "subject": "Threat Actor Seedworm",
+            "relation": "is subordinate to",
+            "object": "Iran's Ministry of Intelligence and Security (MOIS)"
+        },
+        {
+            "subject": "Seedworm attackers",
+            "relation": "used tools in activity during",
+            "object": "November 2023"
+        },
+        {
+            "subject": "Seedworm attackers",
+            "relation": "leveraged infrastructure",
+            "object": "MuddyC2Go"
+        },
+        {
+            "subject": "MuddyC2Go",
+            "relation": "was discovered by",
+            "object": "Deep Instinct"
+        },
+        {
+            "subject": "Symantec's Threat Hunter Team",
+            "relation": "discovered",
+            "object": "MuddyC2Go PowerShell launcher"
+        },
+        {
+            "subject": "Seedworm attackers",
+            "relation": "use",
+            "object": "SimpleHelp remote access tool"
+        },
+        {
+            "subject": "Seedworm attackers",
+            "relation": "use",
+            "object": "Venom Proxy"
+        },
+        {
+            "subject": "Venom Proxy",
+            "relation": "previously associated with",
+            "object": "Threat Actor Seedworm"
+        },
+        {
+            "subject": "Seedworm attackers",
+            "relation": "use",
+            "object": "custom keylogging tool"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Threat Actor Seedworm",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "organizations operating in the telecommunications sector",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "Egypt, Sudan, and Tanzania",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "2017",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Middle East",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Iran's Ministry of Intelligence and Security (MOIS)",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Seedworm attackers",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "November 2023",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "MuddyC2Go",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "Deep Instinct",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "Symantec's Threat Hunter Team",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "MuddyC2Go PowerShell launcher",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "SimpleHelp remote access tool",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "Venom Proxy",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "custom keylogging tool",
+            "entity_type": "Malware",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 11,
+                "entity_text": "MuddyC2Go PowerShell launcher"
+            },
+            "relation": "is used by",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Threat Actor Seedworm"
+            }
+        }
+    ]
+}

@@ -1,0 +1,164 @@
+{
+    "text": "ChromeLoader may seem on the surface like a run-of-the-mill browser hijacker that merely redirects victims to advertisement websites. However, its use of PowerShell could pose a greater risk by leading to further and advanced malicious activity, such as the propagation of ransomware or spyware or theft of browser-session data. Researchers are warning of the potential for ChromeLoader-which has seen a resurgence in activity recently-to pose a more sophisticated threat than typical malvertisers do, according to two separate blog posts by Malwarebytes Labs and Red Canary. ChromeLoader is a pervasive and persistent browser hijacker that eventually manifests as a browser extension, modifying victims\u2019 Chrome settings and redirecting user traffic to advertisement websites. On Windows machines, victims become infected with the malware through ISO files that poses as a cracked video game or pirated films or TV programs.",
+    "explicit_triplets": [
+        {
+            "subject": "ChromeLoader",
+            "relation": "uses",
+            "object": "PowerShell"
+        },
+        {
+            "subject": "ChromeLoader",
+            "relation": "could propagate",
+            "object": "ransomware"
+        },
+        {
+            "subject": "ChromeLoader",
+            "relation": "could propagate",
+            "object": "spyware"
+        },
+        {
+            "subject": "ChromeLoader",
+            "relation": "could propagate",
+            "object": "theft of browser-session data"
+        },
+        {
+            "subject": "ChromeLoader",
+            "relation": "is classified as",
+            "object": "browser hijacker"
+        },
+        {
+            "subject": "ChromeLoader",
+            "relation": "manifests as",
+            "object": "a browser extension"
+        },
+        {
+            "subject": "ChromeLoader",
+            "relation": "modifies",
+            "object": "victims' Chrome settings"
+        },
+        {
+            "subject": "ChromeLoader",
+            "relation": "redirects",
+            "object": "user traffic to advertisement websites"
+        },
+        {
+            "subject": "victims",
+            "relation": "become infected via",
+            "object": "ISO files"
+        },
+        {
+            "subject": "ISO files",
+            "relation": "pose as",
+            "object": "a cracked video game"
+        },
+        {
+            "subject": "ISO files",
+            "relation": "pose as",
+            "object": "pirated films or TV programs"
+        },
+        {
+            "subject": "ChromeLoader",
+            "relation": "observed resurgence in activity",
+            "object": "recently"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "ChromeLoader",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "PowerShell",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "ransomware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "spyware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "theft of browser-session data",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "browser hijacker",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "a browser extension",
+            "entity_type": "Malware Characteristic:Variants",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "victims' Chrome settings",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "user traffic to advertisement websites",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "victims",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "ISO files",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "a cracked video game",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "pirated films or TV programs",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "recently",
+            "entity_type": "Time",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 10,
+                "entity_text": "ISO files"
+            },
+            "relation": "are used to infect with",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "ChromeLoader"
+            }
+        }
+    ]
+}

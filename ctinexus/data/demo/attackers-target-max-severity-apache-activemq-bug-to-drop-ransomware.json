@@ -1,0 +1,189 @@
+{
+    "text": "More than 3,000 Internet-accessible Apache ActiveMQ Servers are exposed to a critical remote code execution vulnerability that an attacker has begun actively targeting to drop ransomware. The Apache Software Foundation (ASF) disclosed the vulnerability, tracked as CVE-2023-46604, on Oct. 27. The bug allows a remote attacker with access to an ActiveMQ message broker to execute arbitrary commands on affected systems. Proof-of-concept exploit code and full details of the vulnerability are publicly available, meaning that threat actors have both the means and the information to launch attacks against the vulnerability. Researchers at Rapid7 reported observing exploit activity targeting the flaw at two customer locations, starting the same day that ASF disclosed the threat. In both instances, the adversary attempted to deploy ransomware binaries on target systems in an effort to ransom the victim organizations. They described both targeted organizations as running outdated versions of Apache ActiveMQ. The researchers attributed the malicious activity to the HelloKitty ransomware family, based on the ransom note and other attack attributes. HelloKitty ransomware has been percolating in the wild since at least 2020. Its operators have tended to favor double-extortion attacks in which they have not just encrypted the data but also stolen it as additional leverage for extracting a ransom from victims. The HelloKitty ransomware attacks leveraging the ActiveMQ flaw appeared somewhat rudimentary. In one of the attacks, the threat actor made more than a half dozen attempts to encrypt the data, prompting the researchers to label to threat actor as 'clumsy' in their report.",
+    "explicit_triplets": [
+        {
+            "subject": "Apache ActiveMQ Servers",
+            "relation": "are exposed to",
+            "object": "remote code execution vulnerability CVE-2023-46604"
+        },
+        {
+            "subject": "Apache Software Foundation (ASF)",
+            "relation": "disclosed",
+            "object": "CVE-2023-46604"
+        },
+        {
+            "subject": "CVE-2023-46604",
+            "relation": "allows",
+            "object": "remote attacker to execute arbitrary commands"
+        },
+        {
+            "subject": "Researchers at Rapid7",
+            "relation": "reported",
+            "object": "exploit activity targeting CVE-2023-46604"
+        },
+        {
+            "subject": "exploit activity targeting CVE-2023-46604",
+            "relation": "was observed on",
+            "object": "Oct. 27"
+        },
+        {
+            "subject": "Threat Actor",
+            "relation": "attempted to deploy",
+            "object": "ransomware binaries"
+        },
+        {
+            "subject": "Threat Actor",
+            "relation": "targeted",
+            "object": "organizations running outdated versions of Apache ActiveMQ"
+        },
+        {
+            "subject": "malicious activity",
+            "relation": "was attributed to",
+            "object": "HelloKitty ransomware"
+        },
+        {
+            "subject": "HelloKitty ransomware",
+            "relation": "has been active since",
+            "object": "2020"
+        },
+        {
+            "subject": "HelloKitty ransomware",
+            "relation": "favors",
+            "object": "double-extortion attacks"
+        },
+        {
+            "subject": "HelloKitty ransomware attacks",
+            "relation": "leveraged",
+            "object": "CVE-2023-46604"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Apache ActiveMQ Servers",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "Apache Software Foundation (ASF)",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "CVE-2023-46604",
+            "entity_type": "Vulnerability",
+            "mentions": [
+                "remote code execution vulnerability CVE-2023-46604"
+            ]
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "remote attacker to execute arbitrary commands",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Researchers at Rapid7",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "exploit activity targeting CVE-2023-46604",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Oct. 27",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "Threat Actor",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "ransomware binaries",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "organizations running outdated versions of Apache ActiveMQ",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "malicious activity",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "HelloKitty ransomware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "2020",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "double-extortion attacks",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "HelloKitty ransomware attacks",
+            "entity_type": "Event",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 5,
+                "entity_text": "exploit activity targeting CVE-2023-46604"
+            },
+            "relation": "targets",
+            "object": {
+                "entity_id": 1,
+                "entity_text": "CVE-2023-46604"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 7,
+                "entity_text": "Threat Actor"
+            },
+            "relation": "actively exploited",
+            "object": {
+                "entity_id": 1,
+                "entity_text": "CVE-2023-46604"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 11,
+                "entity_text": "HelloKitty ransomware"
+            },
+            "relation": "actively exploits",
+            "object": {
+                "entity_id": 1,
+                "entity_text": "CVE-2023-46604"
+            }
+        }
+    ]
+}

@@ -1,0 +1,164 @@
+{
+    "text": "A new zero-day security flaw has been discovered in Apache OfBiz, an open-source Enterprise Resource Planning (ERP) system that could be exploited to bypass authentication protections.The vulnerability, tracked as CVE-2023-51467, resides in the login functionality and is the result of an incomplete patch for another critical vulnerability (CVE-2023-49070, CVSS score: 9.8) that was released earlier this month. CVE-2023-49070 refers to a pre-authenticated remote code execution flaw impacting versions prior to 18.12.10 that, when successfully exploited, could allow threat actors to gain full control over the server and siphon sensitive data. It is caused due to a deprecated XML-RPC component within Apache OFBiz. CVE-2023-51467 could be triggered using empty and invalid USERNAME and PASSWORD parameters in an HTTP request to return an authentication success message, effectively circumventing the protection and enabling a threat actor to access otherwise unauthorized internal resources.",
+    "explicit_triplets": [
+        {
+            "subject": "A zero-day security flaw",
+            "relation": "has been discovered in",
+            "object": "Apache OfBiz"
+        },
+        {
+            "subject": "The vulnerability",
+            "relation": "is tracked as",
+            "object": "CVE-2023-51467"
+        },
+        {
+            "subject": "CVE-2023-51467",
+            "relation": "resides in",
+            "object": "the login functionality"
+        },
+        {
+            "subject": "CVE-2023-51467",
+            "relation": "is the result of incomplete patch for",
+            "object": "CVE-2023-49070"
+        },
+        {
+            "subject": "CVE-2023-49070",
+            "relation": "is rated with",
+            "object": "CVSS score: 9.8"
+        },
+        {
+            "subject": "CVE-2023-49070",
+            "relation": "impacts",
+            "object": "versions prior to 18.12.10"
+        },
+        {
+            "subject": "Threat actors",
+            "relation": "could exploit",
+            "object": "CVE-2023-49070"
+        },
+        {
+            "subject": "CVE-2023-49070",
+            "relation": "caused by",
+            "object": "a deprecated XML-RPC component within Apache OFBiz"
+        },
+        {
+            "subject": "CVE-2023-51467",
+            "relation": "could be triggered using",
+            "object": "empty and invalid USERNAME and PASSWORD parameters in an HTTP request"
+        },
+        {
+            "subject": "CVE-2023-51467",
+            "relation": "enables",
+            "object": "a threat actor to access unauthorized internal resources"
+        },
+        {
+            "subject": "Threat actors",
+            "relation": "could gain control over",
+            "object": "the server"
+        },
+        {
+            "subject": "Threat actors",
+            "relation": "could siphon",
+            "object": "sensitive data"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "A zero-day security flaw",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "Apache OfBiz",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "The vulnerability",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "CVE-2023-51467",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "the login functionality",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "CVE-2023-49070",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "CVSS score: 9.8",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "versions prior to 18.12.10",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "Threat actors",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "a deprecated XML-RPC component within Apache OFBiz",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "empty and invalid USERNAME and PASSWORD parameters in an HTTP request",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "a threat actor to access unauthorized internal resources",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "the server",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "sensitive data",
+            "entity_type": "Information",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 3,
+                "entity_text": "CVE-2023-51467"
+            },
+            "relation": "is a vulnerability in",
+            "object": {
+                "entity_id": 1,
+                "entity_text": "Apache OfBiz"
+            }
+        }
+    ]
+}

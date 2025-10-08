@@ -1,0 +1,9 @@
+include LICENSE.txt
+include README.md
+include pyproject.toml
+
+recursive-include ctinexus/config *.yaml *.json
+recursive-include ctinexus/prompts *.jinja
+recursive-include ctinexus/data *.json
+recursive-include ctinexus/static *.png
+recursive-include docs/ *.md

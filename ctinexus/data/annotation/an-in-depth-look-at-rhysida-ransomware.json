@@ -1,0 +1,269 @@
+{
+    "text": "Rhysida ransomware came to public attention in May 2023. The group has been associated with several significant breaches, including an attack on the Chilean Army where they leaked stolen documents on their data leak site. The threat actor was also linked to an attack on Prospect Medical Holdings, impacting 17 hospitals and 166 clinics across the U.S. Following this attack, the U.S. Department of Health and Human Services (HC3) classified Rhysida as a substantial threat to the healthcare sector. Rhysida typically gains access to a victim's system through phishing tactics, followed by the use of Cobalt Strike for lateral movement within the system. Additionally, the threat actors use PsExec to deploy both PowerShell scripts and the Rhysida ransomware payload. The PowerShell script, known as g.ps1 and identified as Trojan.PS1.SILENTKILL.A, serves various purposes for the threat actors, including terminating antivirus processes and services, erasing shadow copies, altering remote desktop protocol (RDP) configurations, and modifying the active directory (AD) password. Notably, during the execution of the script (g.ps1), it appears that the threat actors updated it, ultimately leading to a PowerShell version of Rhysida ransomware. Rhysida uses a 4096-bit RSA key and AES-CTR for file encryption. After successfully encrypting files, it appends the .rhysida extension to them and deposits a ransom note named CriticalBreachDetected.pdf.",
+    "explicit_triplets": [
+        {
+            "subject": "Rhysida ransomware",
+            "relation": "came to public attention in",
+            "object": "May 2023"
+        },
+        {
+            "subject": "Rhysida ransomware",
+            "relation": "associated with",
+            "object": "attack on the Chilean Army"
+        },
+        {
+            "subject": "Rhysida ransomware",
+            "relation": "associated with",
+            "object": "attack on Prospect Medical Holdings"
+        },
+        {
+            "subject": "attack on Prospect Medical Holdings",
+            "relation": "impacted",
+            "object": "hospitals and clinics across the U.S."
+        },
+        {
+            "subject": "U.S. Department of Health and Human Services (HC3)",
+            "relation": "classified",
+            "object": "Rhysida as a substantial threat to the healthcare sector"
+        },
+        {
+            "subject": "Rhysida ransomware",
+            "relation": "gains access through",
+            "object": "phishing tactics"
+        },
+        {
+            "subject": "Rhysida ransomware",
+            "relation": "uses",
+            "object": "Cobalt Strike"
+        },
+        {
+            "subject": "Rhysida ransomware",
+            "relation": "uses",
+            "object": "PsExec"
+        },
+        {
+            "subject": "PsExec",
+            "relation": "deploys",
+            "object": "PowerShell scripts"
+        },
+        {
+            "subject": "PsExec",
+            "relation": "deploys",
+            "object": "Rhysida ransomware payload"
+        },
+        {
+            "subject": "PowerShell scripts",
+            "relation": "identified as",
+            "object": "Trojan.PS1.SILENTKILL.A"
+        },
+        {
+            "subject": "Trojan.PS1.SILENTKILL.A",
+            "relation": "terminates",
+            "object": "antivirus processes and services"
+        },
+        {
+            "subject": "Trojan.PS1.SILENTKILL.A",
+            "relation": "erases",
+            "object": "shadow copies"
+        },
+        {
+            "subject": "Trojan.PS1.SILENTKILL.A",
+            "relation": "alters",
+            "object": "remote desktop protocol (RDP) configurations"
+        },
+        {
+            "subject": "Trojan.PS1.SILENTKILL.A",
+            "relation": "modifies",
+            "object": "active directory (AD) password"
+        },
+        {
+            "subject": "Threat Actor",
+            "relation": "updated",
+            "object": "the script (g.ps1)"
+        },
+        {
+            "subject": "Rhysida ransomware",
+            "relation": "uses",
+            "object": "4096-bit RSA key"
+        },
+        {
+            "subject": "Rhysida ransomware",
+            "relation": "uses",
+            "object": "AES-CTR"
+        },
+        {
+            "subject": "Rhysida ransomware",
+            "relation": "appends",
+            "object": ".rhysida extension"
+        },
+        {
+            "subject": "Rhysida ransomware",
+            "relation": "deposits",
+            "object": "ransom note named CriticalBreachDetected.pdf"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Rhysida ransomware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "May 2023",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "attack on the Chilean Army",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "attack on Prospect Medical Holdings",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "hospitals and clinics across the U.S.",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "U.S. Department of Health and Human Services (HC3)",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Rhysida as a substantial threat to the healthcare sector",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "phishing tactics",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "Cobalt Strike",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "PsExec",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "PowerShell scripts",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "Rhysida ransomware payload",
+            "entity_type": "Malware Characteristic:Payload",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "Trojan.PS1.SILENTKILL.A",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "antivirus processes and services",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "shadow copies",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 15,
+            "entity_name": "remote desktop protocol (RDP) configurations",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 16,
+            "entity_name": "active directory (AD) password",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 17,
+            "entity_name": "Threat Actor",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 18,
+            "entity_name": "the script (g.ps1)",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 19,
+            "entity_name": "4096-bit RSA key",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 20,
+            "entity_name": "AES-CTR",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 21,
+            "entity_name": ".rhysida extension",
+            "entity_type": "Malware Characteristic:Feature",
+            "mentions": []
+        },
+        {
+            "entity_id": 22,
+            "entity_name": "ransom note named CriticalBreachDetected.pdf",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 5,
+                "entity_text": "U.S. Department of Health and Human Services (HC3)"
+            },
+            "relation": "classified as substantial threat",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Rhysida ransomware"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 17,
+                "entity_text": "Threat Actor"
+            },
+            "relation": "deploys",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Rhysida ransomware"
+            }
+        }
+    ]
+}

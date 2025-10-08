@@ -1,0 +1,94 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ctinexus"
+version = "0.1.0"
+description = "CTINexus: A framework for data-efficient cyber threat intelligence extraction and knowledge graph construction using LLMs."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE.txt"}
+
+authors = [
+    { name = "Saimon Tsegai", email = "49simoney@gmail.com" },
+    { name = "Yutong Cheng", email = "yutongcheng@vt.edu" }
+]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Security",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "gradio",
+    "hydra-core",
+    "jinja2",
+    "litellm",
+    "networkx",
+    "nltk",
+    "omegaconf",
+    "pandas",
+    "pyvis",
+    "python-dotenv",
+    "scikit-learn",
+    "scipy"
+]
+
+[project.urls]
+Repository = "https://github.com/peng-gao-lab/CTINexus"
+Homepage = "https://ctinexus.github.io"
+
+[project.scripts]
+ctinexus = "ctinexus.app:main"
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.8.0",
+    "pre-commit>=4.0.0"
+]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+namespaces = false
+
+# ===== Ruff Configuration =====
+[tool.ruff]
+line-length = 120
+fix = true
+target-version = "py310"
+
+exclude = [
+    ".git",
+    ".venv",
+    ".vscode",
+    "__pycache__",
+    "*.egg-info",
+    "build",
+    "dist",
+    "venv",
+    "ctinexus_output",
+]
+
+[tool.ruff.lint]
+select = ["ASYNC", "E", "F", "FAST", "I", "PLE"]
+ignore = ["ASYNC109", "E101", "E402", "E501", "F841", "E731", "W291"]
+unfixable = ["E101", "E402", "E501", "F841", "E731"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "tab"
+line-ending = "lf"
+skip-magic-trailing-comma = false
+docstring-code-format = true
+
+[tool.ruff.lint.isort]
+known-first-party = ["ctinexus"]

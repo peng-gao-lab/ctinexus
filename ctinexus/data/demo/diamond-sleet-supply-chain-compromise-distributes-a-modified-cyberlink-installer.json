@@ -1,0 +1,212 @@
+{
+    "text": "Microsoft Threat Intelligence has uncovered a supply chain attack by the North Korea-based threat actor Diamond Sleet (ZINC) involving a malicious variant of an application developed by CyberLink Corp., a software company that develops multimedia software products. This malicious file is a legitimate CyberLink application installer that has been modified to include malicious code that downloads, decrypts, and loads a second-stage payload. The file, which was signed using a valid certificate issued to CyberLink Corp., is hosted on legitimate update infrastructure owned by CyberLink and includes checks to limit the time window for execution and evade detection by security products. Thus far, the malicious activity has impacted over 100 devices in multiple countries, including Japan, Taiwan, Canada, and the United States.",
+    "explicit_triplets": [
+        {
+            "subject": "Microsoft Threat Intelligence",
+            "relation": "uncovered",
+            "object": "a supply chain attack"
+        },
+        {
+            "subject": "Diamond Sleet (ZINC)",
+            "relation": "is based in",
+            "object": "North Korea"
+        },
+        {
+            "subject": "Diamond Sleet (ZINC)",
+            "relation": "conducted",
+            "object": "a supply chain attack"
+        },
+        {
+            "subject": "supply chain attack",
+            "relation": "involves",
+            "object": "a malicious variant of an application"
+        },
+        {
+            "subject": "CyberLink Corp.",
+            "relation": "develops",
+            "object": "multimedia software products"
+        },
+        {
+            "subject": "malicious file",
+            "relation": "is a variant of",
+            "object": "CyberLink application installer"
+        },
+        {
+            "subject": "malicious file",
+            "relation": "includes",
+            "object": "malicious code"
+        },
+        {
+            "subject": "malicious code",
+            "relation": "downloads, decrypts, and loads",
+            "object": "second-stage payload"
+        },
+        {
+            "subject": "malicious file",
+            "relation": "was signed using",
+            "object": "valid certificate issued to CyberLink Corp."
+        },
+        {
+            "subject": "malicious file",
+            "relation": "is hosted on",
+            "object": "legitimate update infrastructure"
+        },
+        {
+            "subject": "legitimate update infrastructure",
+            "relation": "is owned by",
+            "object": "CyberLink Corp."
+        },
+        {
+            "subject": "malicious activity",
+            "relation": "impacted",
+            "object": "over 100 devices"
+        },
+        {
+            "subject": "over 100 devices",
+            "relation": "are located in",
+            "object": "Japan"
+        },
+        {
+            "subject": "over 100 devices",
+            "relation": "are located in",
+            "object": "Taiwan"
+        },
+        {
+            "subject": "over 100 devices",
+            "relation": "are located in",
+            "object": "Canada"
+        },
+        {
+            "subject": "over 100 devices",
+            "relation": "are located in",
+            "object": "the United States"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Microsoft Threat Intelligence",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "a supply chain attack",
+            "entity_type": "Event",
+            "mentions": [
+                "supply chain attack"
+            ]
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "Diamond Sleet (ZINC)",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "North Korea",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "CyberLink Corp.",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "multimedia software products",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "malicious file",
+            "entity_type": "Malware",
+            "mentions": [
+                "a malicious variant of an application"
+            ]
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "CyberLink application installer",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "malicious code",
+            "entity_type": "Malware Characteristic:Payload",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "second-stage payload",
+            "entity_type": "Malware Characteristic:Payload",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "valid certificate issued to CyberLink Corp.",
+            "entity_type": "Indicator:SSL Certificate",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "legitimate update infrastructure",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "malicious activity",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "over 100 devices",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "Japan",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 15,
+            "entity_name": "Taiwan",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 16,
+            "entity_name": "Canada",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 17,
+            "entity_name": "the United States",
+            "entity_type": "Location",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 4,
+                "entity_text": "malicious file"
+            },
+            "relation": "has impacted",
+            "object": {
+                "entity_id": 13,
+                "entity_text": "over 100 devices"
+            }
+        }
+    ]
+}

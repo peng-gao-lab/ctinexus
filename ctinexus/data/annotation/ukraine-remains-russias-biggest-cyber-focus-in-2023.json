@@ -1,0 +1,212 @@
+{
+    "text": "FROZENBARENTS (aka Sandworm), a group attributed to Russian Armed Forces\u2019 Main Directorate of the General Staff (GRU) Unit 74455, continues to focus heavily on the war in Ukraine with campaigns spanning intelligence collection, IO, and leaking hacked data through Telegram. As we described in the Fog of War report, FROZENBARENTS remains the most versatile GRU cyber actor with offensive capabilities including credential phishing, mobile activity, malware, external exploitation of services, and beyond. They target sectors of interest for Russian intelligence collection including government, defense, energy, transportation/logistics, education and humanitarian organizations. FROZENBARENTS continues to exploit EXIM mail servers globally and use these compromised hosts as part of their operational network, a trend going back to at least August 2019. These compromised hosts have been observed accessing victim networks, interacting with victim accounts, sending malicious emails and engaged in information operations (IO) activity.",
+    "explicit_triplets": [
+        {
+            "subject": "FROZENBARENTS",
+            "relation": "is attributed to",
+            "object": "Russian Armed Forces\u0002\u0018 Main Directorate of the General Staff (GRU) Unit 74455"
+        },
+        {
+            "subject": "FROZENBARENTS",
+            "relation": "focuses on",
+            "object": "the war in Ukraine"
+        },
+        {
+            "subject": "FROZENBARENTS",
+            "relation": "performs",
+            "object": "credential phishing"
+        },
+        {
+            "subject": "FROZENBARENTS",
+            "relation": "performs",
+            "object": "mobile activity"
+        },
+        {
+            "subject": "FROZENBARENTS",
+            "relation": "uses",
+            "object": "malware"
+        },
+        {
+            "subject": "FROZENBARENTS",
+            "relation": "performs",
+            "object": "external exploitation of services"
+        },
+        {
+            "subject": "FROZENBARENTS",
+            "relation": "targets",
+            "object": "government"
+        },
+        {
+            "subject": "FROZENBARENTS",
+            "relation": "targets",
+            "object": "defense"
+        },
+        {
+            "subject": "FROZENBARENTS",
+            "relation": "targets",
+            "object": "energy"
+        },
+        {
+            "subject": "FROZENBARENTS",
+            "relation": "targets",
+            "object": "transportation/logistics"
+        },
+        {
+            "subject": "FROZENBARENTS",
+            "relation": "targets",
+            "object": "education"
+        },
+        {
+            "subject": "FROZENBARENTS",
+            "relation": "targets",
+            "object": "humanitarian organizations"
+        },
+        {
+            "subject": "FROZENBARENTS",
+            "relation": "exploits",
+            "object": "EXIM mail servers"
+        },
+        {
+            "subject": "EXIM mail servers",
+            "relation": "have been compromised since",
+            "object": "August 2019"
+        },
+        {
+            "subject": "EXIM mail servers",
+            "relation": "used for",
+            "object": "accessing victim networks"
+        },
+        {
+            "subject": "EXIM mail servers",
+            "relation": "used for",
+            "object": "interacting with victim accounts"
+        },
+        {
+            "subject": "EXIM mail servers",
+            "relation": "used for",
+            "object": "sending malicious emails"
+        },
+        {
+            "subject": "EXIM mail servers",
+            "relation": "used for",
+            "object": "information operations (IO) activity"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "FROZENBARENTS",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "Russian Armed Forces\u0002\u0018 Main Directorate of the General Staff (GRU) Unit 74455",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "the war in Ukraine",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "credential phishing",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "mobile activity",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "malware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "external exploitation of services",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "government",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "defense",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "energy",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "transportation/logistics",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "education",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "humanitarian organizations",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "EXIM mail servers",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "August 2019",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 15,
+            "entity_name": "accessing victim networks",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 18,
+            "entity_name": "interacting with victim accounts",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 16,
+            "entity_name": "sending malicious emails",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 17,
+            "entity_name": "information operations (IO) activity",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

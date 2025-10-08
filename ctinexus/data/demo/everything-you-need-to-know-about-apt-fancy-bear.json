@@ -1,0 +1,285 @@
+{
+    "text": "Fancy Bear, also known as APT 28, Sofacy, or Swallowtail, is a cyberespionage group that is linked to the Russian government. The group has been in operation since 2008, targeting the energy, government, media, aerospace, and defense sectors via phishing campaigns and credential harvesting. Fancy Bear is known to target both computers and mobile devices, running multiple intrusion operations concurrently. In 2016, Fancy Bear was front and center after they attacked the Democratic National Committee (DNC). The group was also responsible for leaking confidential drug testing information after they attacked the World Anti-Doping Agency (WADA) during the same year. Fancy Bear took credit for the attack and leaked the stolen information on a site named Fancy Bears. Despite two very public attacks, Fancy Bear returned to the shadows in 2017. Since that time, the group's activities have become clandestine, motivated by intelligence gathering. Between 2017 and 2018, Fancy Bear targeted the following organizations: European military, European government, A South American country's government, An Eastern European embassy, A prominent international organization. After much attention, Fancy Bear became more discreet, and not much was heard from the APT until their recent attacks on Ukrainians. In July 2022, researchers from Malwarebytes observed malicious activity from the group. They were sending malicious documents that contained an exploit for the Microsoft zero-day, Follina (CVE-2022-30190).",
+    "explicit_triplets": [
+        {
+            "subject": "Fancy Bear",
+            "relation": "is linked to",
+            "object": "Russian government"
+        },
+        {
+            "subject": "Fancy Bear",
+            "relation": "has been in operation since",
+            "object": "2008"
+        },
+        {
+            "subject": "Fancy Bear",
+            "relation": "targets",
+            "object": "energy sector"
+        },
+        {
+            "subject": "Fancy Bear",
+            "relation": "targets",
+            "object": "government sector"
+        },
+        {
+            "subject": "Fancy Bear",
+            "relation": "targets",
+            "object": "media sector"
+        },
+        {
+            "subject": "Fancy Bear",
+            "relation": "targets",
+            "object": "aerospace sector"
+        },
+        {
+            "subject": "Fancy Bear",
+            "relation": "targets",
+            "object": "defense sector"
+        },
+        {
+            "subject": "Fancy Bear",
+            "relation": "conducts attacks via",
+            "object": "phishing campaigns"
+        },
+        {
+            "subject": "Fancy Bear",
+            "relation": "conducts attacks via",
+            "object": "credential harvesting"
+        },
+        {
+            "subject": "Fancy Bear",
+            "relation": "targets",
+            "object": "computers"
+        },
+        {
+            "subject": "Fancy Bear",
+            "relation": "targets",
+            "object": "mobile devices"
+        },
+        {
+            "subject": "Fancy Bear",
+            "relation": "attacked",
+            "object": "Democratic National Committee (DNC)"
+        },
+        {
+            "subject": "Fancy Bear",
+            "relation": "attacked",
+            "object": "World Anti-Doping Agency (WADA)"
+        },
+        {
+            "subject": "Fancy Bear",
+            "relation": "leaked information on",
+            "object": "Fancy Bears"
+        },
+        {
+            "subject": "Fancy Bear",
+            "relation": "became discreet in",
+            "object": "2017"
+        },
+        {
+            "subject": "Fancy Bear",
+            "relation": "targeted",
+            "object": "European military"
+        },
+        {
+            "subject": "Fancy Bear",
+            "relation": "targeted",
+            "object": "European government"
+        },
+        {
+            "subject": "Fancy Bear",
+            "relation": "targeted",
+            "object": "A South American country's government"
+        },
+        {
+            "subject": "Fancy Bear",
+            "relation": "targeted",
+            "object": "An Eastern European embassy"
+        },
+        {
+            "subject": "Fancy Bear",
+            "relation": "targeted",
+            "object": "A prominent international organization"
+        },
+        {
+            "subject": "Fancy Bear",
+            "relation": "conducted attacks on",
+            "object": "Ukrainians"
+        },
+        {
+            "subject": "Fancy Bear",
+            "relation": "sent",
+            "object": "malicious documents"
+        },
+        {
+            "subject": "malicious documents",
+            "relation": "contained exploit for",
+            "object": "Microsoft zero-day (CVE-2022-30190)"
+        },
+        {
+            "subject": "Malwarebytes",
+            "relation": "observed activity from",
+            "object": "Fancy Bear"
+        },
+        {
+            "subject": "Malwarebytes",
+            "relation": "observed activity in",
+            "object": "July 2022"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Fancy Bear",
+            "entity_type": "Attacker",
+            "mentions": [
+                "Fancy Bears"
+            ]
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "Russian government",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "2008",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "energy sector",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "government sector",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "media sector",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "aerospace sector",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "defense sector",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "phishing campaigns",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "credential harvesting",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "computers",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "mobile devices",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "Democratic National Committee (DNC)",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "World Anti-Doping Agency (WADA)",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "2017",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 15,
+            "entity_name": "European military",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 16,
+            "entity_name": "European government",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 17,
+            "entity_name": "A South American country's government",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 18,
+            "entity_name": "An Eastern European embassy",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 19,
+            "entity_name": "A prominent international organization",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 20,
+            "entity_name": "Ukrainians",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 21,
+            "entity_name": "malicious documents",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 22,
+            "entity_name": "Microsoft zero-day (CVE-2022-30190)",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 23,
+            "entity_name": "Malwarebytes",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 24,
+            "entity_name": "July 2022",
+            "entity_type": "Time",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

@@ -1,0 +1,170 @@
+{
+    "text": "In November 2021, security researchers detected malicious activity by Clop operators that exploited a SolarWinds Serv-U vulnerability to breach corporate networks and deliver the Clop ransomware as a payload. The Serv-U Managed File Transfer and Serv-U Secure FTP remote code execution (RCE) vulnerability, tracked as CVE-2021-35211, allowed RCE on the vulnerable server with elevated privileges. A maritime services giant with headquarters in Singapore also fell prey to Clop. In November 2021, it was reported that Clop breached its IT systems to steal classified proprietary commercial information and employee data that included bank account details, payroll information, passports, email addresses, and internal correspondence, among others. In October 2022, Microsoft Security reported that DEV-0950, a ransomware group that appears to be associated with the cybercriminal group FIN11 (aka TA505), distributed Clop in a campaign that targeted one of the victims of the Raspberry Robin worm.",
+    "explicit_triplets": [
+        {
+            "subject": "security researchers",
+            "relation": "detected malicious activity by",
+            "object": "Clop operators"
+        },
+        {
+            "subject": "Clop operators",
+            "relation": "exploited",
+            "object": "SolarWinds Serv-U vulnerability"
+        },
+        {
+            "subject": "SolarWinds Serv-U vulnerability",
+            "relation": "tracked as",
+            "object": "CVE-2021-35211"
+        },
+        {
+            "subject": "CVE-2021-35211",
+            "relation": "allowed",
+            "object": "remote code execution on the vulnerable server with elevated privileges"
+        },
+        {
+            "subject": "Clop operators",
+            "relation": "deliver",
+            "object": "the Clop ransomware"
+        },
+        {
+            "subject": "Clop",
+            "relation": "breached",
+            "object": "a maritime services giant with headquarters in Singapore"
+        },
+        {
+            "subject": "Clop",
+            "relation": "stole",
+            "object": "classified proprietary commercial information"
+        },
+        {
+            "subject": "Clop",
+            "relation": "stole",
+            "object": "employee data"
+        },
+        {
+            "subject": "DEV-0950",
+            "relation": "distributed",
+            "object": "Clop"
+        },
+        {
+            "subject": "DEV-0950",
+            "relation": "appears associated with",
+            "object": "FIN11 (aka TA505)"
+        },
+        {
+            "subject": "Clop",
+            "relation": "targeted",
+            "object": "victims of the Raspberry Robin worm"
+        },
+        {
+            "subject": "DEV-0950",
+            "relation": "reported by",
+            "object": "Microsoft Security"
+        },
+        {
+            "subject": "DEV-0950",
+            "relation": "distributed Clop ransomware in",
+            "object": "October 2022"
+        },
+        {
+            "subject": "Clop",
+            "relation": "breached IT systems in",
+            "object": "November 2021"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "security researchers",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "SolarWinds Serv-U vulnerability",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "CVE-2021-35211",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "remote code execution on the vulnerable server with elevated privileges",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "the Clop ransomware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "Clop",
+            "entity_type": "Attacker",
+            "mentions": [
+                "Clop operators"
+            ]
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "a maritime services giant with headquarters in Singapore",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "classified proprietary commercial information",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "employee data",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "DEV-0950",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "FIN11 (aka TA505)",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "victims of the Raspberry Robin worm",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "Microsoft Security",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "October 2022",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "November 2021",
+            "entity_type": "Time",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

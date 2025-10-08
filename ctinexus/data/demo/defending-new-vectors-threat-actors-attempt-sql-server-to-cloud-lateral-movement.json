@@ -1,0 +1,109 @@
+{
+    "text": "Microsoft security researchers recently identified a campaign where attackers attempted to move laterally to a cloud environment through a SQL Server instance. This attack technique demonstrates an approach we've seen in other cloud services such as VMs and Kubernetes cluster, but not in SQL Server. The attackers initially exploited a SQL injection vulnerability in an application within the target's environment. This allowed the attacker to gain access and elevated permissions on a Microsoft SQL Server instance deployed in Azure Virtual Machine (VM). The attackers then used the acquired elevated permission to attempt to move laterally to additional cloud resources by abusing the server's cloud identity. Cloud identities are commonly used in cloud services including SQL Server and may possess elevated permissions to carry out actions in the cloud. This attack highlights the need to properly secure cloud identities to defend SQL Server instances and cloud resources from unauthorized access.",
+    "explicit_triplets": [
+        {
+            "subject": "attackers",
+            "relation": "attempted to move laterally to",
+            "object": "a cloud environment"
+        },
+        {
+            "subject": "attackers",
+            "relation": "initially exploited",
+            "object": "a SQL injection vulnerability"
+        },
+        {
+            "subject": "SQL injection vulnerability",
+            "relation": "affected",
+            "object": "an application within the target's environment"
+        },
+        {
+            "subject": "attackers",
+            "relation": "gained access and elevated permissions on",
+            "object": "Microsoft SQL Server instance"
+        },
+        {
+            "subject": "Microsoft SQL Server instance",
+            "relation": "deployed in",
+            "object": "Azure Virtual Machine (VM)"
+        },
+        {
+            "subject": "attackers",
+            "relation": "used elevated permission to move laterally to",
+            "object": "additional cloud resources"
+        },
+        {
+            "subject": "attackers",
+            "relation": "abused",
+            "object": "server's cloud identity"
+        },
+        {
+            "subject": "Cloud identities",
+            "relation": "are commonly used in",
+            "object": "SQL Server"
+        },
+        {
+            "subject": "Cloud identities",
+            "relation": "may possess",
+            "object": "elevated permissions"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "attackers",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "a cloud environment",
+            "entity_type": "Infrastructure",
+            "mentions": [
+                "additional cloud resources"
+            ]
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "SQL injection vulnerability",
+            "entity_type": "Vulnerability",
+            "mentions": [
+                "a SQL injection vulnerability"
+            ]
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "an application within the target's environment",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Microsoft SQL Server instance",
+            "entity_type": "Infrastructure",
+            "mentions": [
+                "SQL Server"
+            ]
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Azure Virtual Machine (VM)",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Cloud identities",
+            "entity_type": "Credential",
+            "mentions": [
+                "server's cloud identity"
+            ]
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "elevated permissions",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

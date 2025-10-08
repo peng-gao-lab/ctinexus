@@ -1,0 +1,231 @@
+{
+    "text": "This report is an overview of the FiveHands Ransomware variant that successfully attacked an organization (CISA release date May 6, 2021). CISA reports that the variant used publicly-available pen test and exploitation tools, plus FiveHands ransomware and SombRAT remote access trojan (RAT), to steal information, obfuscate files, accomplish network discovery, accomplish credential access, and demand ransom from the victim. Tools used include SoftPerfect Network Scanner, FiveHands ransomware, PsExec.exe, ServeManager.exe, SombRAT, RouterScan.exe, grabff.exe, rclone.exe, and s3browser-9-5-3.exe. The initial access vector was a zero-day vulnerability in a VPN product. What followed is that the bad actor used SoftPerfect Network Scanner for the discovery of hostnames and network services. PsExec was then used to execute ServeManager.exe (what CISA calls FiveHands ransomware). FiveHands is a novel ransomware variant that uses a public key encryption scheme called NTRUEncrypt. Note: the NTRUEncrypt public key cryptosystem encryption algorithm (NTRU), is a lattice-based alternative to Rivest-Shamir-Adleman, known as RSA, and Elliptic-curve cryptography, or ECC, and is based on the shortest vector problem in a lattice. To prevent data recovery, FiveHands uses WMI to first enumerate then delete Volume Shadow copies. The malware also encrypts files in the recovery folder. After the files are encrypted, the program will write a ransom note to each folder and directory on the system.",
+    "explicit_triplets": [
+        {
+            "subject": "FiveHands Ransomware",
+            "relation": "successfully attacked",
+            "object": "an organization"
+        },
+        {
+            "subject": "CISA",
+            "relation": "released report on",
+            "object": "May 6, 2021"
+        },
+        {
+            "subject": "FiveHands Ransomware",
+            "relation": "used",
+            "object": "SombRAT"
+        },
+        {
+            "subject": "FiveHands Ransomware",
+            "relation": "used",
+            "object": "SoftPerfect Network Scanner"
+        },
+        {
+            "subject": "FiveHands Ransomware",
+            "relation": "used",
+            "object": "PsExec.exe"
+        },
+        {
+            "subject": "FiveHands Ransomware",
+            "relation": "used",
+            "object": "ServeManager.exe"
+        },
+        {
+            "subject": "FiveHands Ransomware",
+            "relation": "used",
+            "object": "RouterScan.exe"
+        },
+        {
+            "subject": "FiveHands Ransomware",
+            "relation": "used",
+            "object": "grabff.exe"
+        },
+        {
+            "subject": "FiveHands Ransomware",
+            "relation": "used",
+            "object": "rclone.exe"
+        },
+        {
+            "subject": "FiveHands Ransomware",
+            "relation": "used",
+            "object": "s3browser-9-5-3.exe"
+        },
+        {
+            "subject": "FiveHands Ransomware",
+            "relation": "used",
+            "object": "a zero-day vulnerability in a VPN product"
+        },
+        {
+            "subject": "SoftPerfect Network Scanner",
+            "relation": "used for",
+            "object": "discovery of hostnames and network services"
+        },
+        {
+            "subject": "PsExec.exe",
+            "relation": "used to execute",
+            "object": "ServeManager.exe"
+        },
+        {
+            "subject": "ServeManager.exe",
+            "relation": "is known as",
+            "object": "FiveHands ransomware"
+        },
+        {
+            "subject": "FiveHands Ransomware",
+            "relation": "uses encryption scheme",
+            "object": "NTRUEncrypt"
+        },
+        {
+            "subject": "FiveHands Ransomware",
+            "relation": "uses",
+            "object": "WMI"
+        },
+        {
+            "subject": "FiveHands Ransomware",
+            "relation": "deletes",
+            "object": "Volume Shadow copies"
+        },
+        {
+            "subject": "FiveHands Ransomware",
+            "relation": "encrypts files in",
+            "object": "the recovery folder"
+        },
+        {
+            "subject": "FiveHands Ransomware",
+            "relation": "writes",
+            "object": "a ransom note"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "FiveHands Ransomware",
+            "entity_type": "Malware",
+            "mentions": [
+                "FiveHands ransomware"
+            ]
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "an organization",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "CISA",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "May 6, 2021",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "SombRAT",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "SoftPerfect Network Scanner",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "PsExec.exe",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "ServeManager.exe",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "RouterScan.exe",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "grabff.exe",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "rclone.exe",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "s3browser-9-5-3.exe",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "a zero-day vulnerability in a VPN product",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "discovery of hostnames and network services",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "NTRUEncrypt",
+            "entity_type": "Malware Characteristic:Feature",
+            "mentions": []
+        },
+        {
+            "entity_id": 15,
+            "entity_name": "WMI",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 16,
+            "entity_name": "Volume Shadow copies",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 17,
+            "entity_name": "the recovery folder",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 18,
+            "entity_name": "a ransom note",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 2,
+                "entity_text": "CISA"
+            },
+            "relation": "reported on",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "FiveHands Ransomware"
+            }
+        }
+    ]
+}

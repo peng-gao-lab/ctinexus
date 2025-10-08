@@ -1,0 +1,146 @@
+{
+    "text": "Despite first being detected six years ago, malicious attackers continue to use the Magniber ransomware to compromise organizations. In October 2022, phishing attacks were reported to distribute the Magniber ransomware using standalone JavaScript files digitally signed with a malformed key, exploiting the zero-day vulnerability CVE-2022-44698 to bypass Mark-of-the-Web (MOTW) security warnings, and allowing malicious files to be executed without raising alerts. Microsoft later patched this vulnerability in December 2022. Formerly known as a successor of Cerber, the Magniber ransomware was primarily distributed via the Magnitude exploit kit and exclusively targeted South Korea in 2017. In 2018, it expanded its targets across Asia using CVE-2018-8174 for initial access.",
+    "explicit_triplets": [
+        {
+            "subject": "Magniber ransomware",
+            "relation": "compromise",
+            "object": "organizations"
+        },
+        {
+            "subject": "phishing attacks",
+            "relation": "distribute",
+            "object": "Magniber ransomware"
+        },
+        {
+            "subject": "phishing attacks",
+            "relation": "use",
+            "object": "standalone JavaScript files digitally signed with a malformed key"
+        },
+        {
+            "subject": "standalone JavaScript files digitally signed with a malformed key",
+            "relation": "exploit",
+            "object": "zero-day vulnerability CVE-2022-44698"
+        },
+        {
+            "subject": "zero-day vulnerability CVE-2022-44698",
+            "relation": "allows",
+            "object": "malicious files to be executed without raising alerts"
+        },
+        {
+            "subject": "Microsoft",
+            "relation": "patched",
+            "object": "zero-day vulnerability CVE-2022-44698"
+        },
+        {
+            "subject": "Microsoft",
+            "relation": "patched",
+            "object": "December 2022"
+        },
+        {
+            "subject": "Magniber ransomware",
+            "relation": "is successor of",
+            "object": "Cerber"
+        },
+        {
+            "subject": "Magniber ransomware",
+            "relation": "distributed via",
+            "object": "Magnitude exploit kit"
+        },
+        {
+            "subject": "Magniber ransomware",
+            "relation": "targeted",
+            "object": "South Korea"
+        },
+        {
+            "subject": "Magniber ransomware",
+            "relation": "expanded targets across",
+            "object": "Asia"
+        },
+        {
+            "subject": "Magniber ransomware",
+            "relation": "used",
+            "object": "CVE-2018-8174"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Magniber ransomware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "organizations",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "phishing attacks",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "standalone JavaScript files digitally signed with a malformed key",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "zero-day vulnerability CVE-2022-44698",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "malicious files to be executed without raising alerts",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Microsoft",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "December 2022",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "Cerber",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "Magnitude exploit kit",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "South Korea",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "Asia",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "CVE-2018-8174",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

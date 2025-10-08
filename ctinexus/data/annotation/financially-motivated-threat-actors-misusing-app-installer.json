@@ -1,0 +1,216 @@
+{
+    "text": "Since mid-November 2023, Microsoft Threat Intelligence has observed threat actors, including financially motivated actors like Storm-0569, Storm-1113, Sangria Tempest, and Storm-1674, utilizing the ms-appinstaller URI scheme (App Installer) to distribute malware. In addition to ensuring that customers are protected from observed attacker activity, Microsoft investigated the use of App Installer in these attacks. In response to this activity, Microsoft has disabled the ms-appinstaller protocol handler by default. The observed threat actor activity abuses the current implementation of the ms-appinstaller protocol handler as an access vector for malware that may lead to ransomware distribution. Multiple cybercriminals are also selling a malware kit as a service that abuses the MSIX file format and ms-appinstaller protocol handler. These threat actors distribute signed malicious MSIX application packages using websites accessed through malicious advertisements for legitimate popular software. A second vector of phishing through Microsoft Teams is also in use by Storm-1674.",
+    "explicit_triplets": [
+        {
+            "subject": "Microsoft Threat Intelligence",
+            "relation": "observed since",
+            "object": "mid-November 2023"
+        },
+        {
+            "subject": "Storm-0569",
+            "relation": "utilizes",
+            "object": "ms-appinstaller URI scheme"
+        },
+        {
+            "subject": "Storm-1113",
+            "relation": "utilizes",
+            "object": "ms-appinstaller URI scheme"
+        },
+        {
+            "subject": "Sangria Tempest",
+            "relation": "utilizes",
+            "object": "ms-appinstaller URI scheme"
+        },
+        {
+            "subject": "Storm-1674",
+            "relation": "utilizes",
+            "object": "ms-appinstaller URI scheme"
+        },
+        {
+            "subject": "ms-appinstaller URI scheme",
+            "relation": "is used to distribute",
+            "object": "malware"
+        },
+        {
+            "subject": "Microsoft",
+            "relation": "disabled",
+            "object": "ms-appinstaller protocol handler"
+        },
+        {
+            "subject": "ms-appinstaller protocol handler",
+            "relation": "is abused as",
+            "object": "access vector for malware"
+        },
+        {
+            "subject": "malware",
+            "relation": "may lead to",
+            "object": "ransomware distribution"
+        },
+        {
+            "subject": "cybercriminals",
+            "relation": "are selling",
+            "object": "malware kit as a service"
+        },
+        {
+            "subject": "malware kit as a service",
+            "relation": "abuses",
+            "object": "MSIX file format"
+        },
+        {
+            "subject": "malware kit as a service",
+            "relation": "abuses",
+            "object": "ms-appinstaller protocol handler"
+        },
+        {
+            "subject": "threat actors",
+            "relation": "distribute",
+            "object": "signed malicious MSIX application packages"
+        },
+        {
+            "subject": "signed malicious MSIX application packages",
+            "relation": "distributed through",
+            "object": "websites accessed through malicious advertisements"
+        },
+        {
+            "subject": "Storm-1674",
+            "relation": "uses",
+            "object": "phishing through Microsoft Teams"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Microsoft Threat Intelligence",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "mid-November 2023",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "Storm-0569",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "ms-appinstaller URI scheme",
+            "entity_type": "Infrastructure",
+            "mentions": [
+                "ms-appinstaller protocol handler"
+            ]
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Storm-1113",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Sangria Tempest",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Storm-1674",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "malware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "Microsoft",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "access vector for malware",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "ransomware distribution",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "cybercriminals",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "malware kit as a service",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "MSIX file format",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "threat actors",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 15,
+            "entity_name": "signed malicious MSIX application packages",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 16,
+            "entity_name": "websites accessed through malicious advertisements",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 17,
+            "entity_name": "phishing through Microsoft Teams",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 0,
+                "entity_text": "Microsoft Threat Intelligence"
+            },
+            "relation": "investigated",
+            "object": {
+                "entity_id": 3,
+                "entity_text": "ms-appinstaller URI scheme"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 15,
+                "entity_text": "signed malicious MSIX application packages"
+            },
+            "relation": "are distributed using",
+            "object": {
+                "entity_id": 3,
+                "entity_text": "ms-appinstaller URI scheme"
+            }
+        }
+    ]
+}

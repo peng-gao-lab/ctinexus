@@ -1,0 +1,113 @@
+{
+    "text": "Microsoft has identified a nation-state activity group tracked as Flax Typhoon, based in China, that is targeting dozens of organizations in Taiwan with the likely intention of performing espionage. Flax Typhoon gains and maintains long-term access to Taiwanese organizations' networks with minimal use of malware, relying on tools built into the operating system, along with some normally benign software to quietly remain in these networks. Microsoft has not observed Flax Typhoon using this access to conduct additional actions. This blog aims to raise awareness of the techniques used by this threat actor and inform better defenses to protect against future attacks.",
+    "explicit_triplets": [
+        {
+            "subject": "Microsoft",
+            "relation": "identified",
+            "object": "Flax Typhoon"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "is based in",
+            "object": "China"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "is targeting",
+            "object": "organizations in Taiwan"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "has intention of",
+            "object": "performing espionage"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "maintains access to",
+            "object": "Taiwanese organizations' networks"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "uses",
+            "object": "tools built into the operating system"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "uses",
+            "object": "normally benign software"
+        },
+        {
+            "subject": "Microsoft",
+            "relation": "has not observed",
+            "object": "Flax Typhoon using this access to conduct additional actions"
+        },
+        {
+            "subject": "Flax Typhoon",
+            "relation": "is categorized as",
+            "object": "Threat Actor"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Microsoft",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "Flax Typhoon",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "China",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "organizations in Taiwan",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "performing espionage",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Taiwanese organizations' networks",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "tools built into the operating system",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "normally benign software",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "Flax Typhoon using this access to conduct additional actions",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "Threat Actor",
+            "entity_type": "Attacker",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

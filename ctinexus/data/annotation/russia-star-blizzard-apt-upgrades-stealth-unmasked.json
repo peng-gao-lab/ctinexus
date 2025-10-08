@@ -1,0 +1,197 @@
+{
+    "text": "Star Blizzard (aka Seaborgium, BlueCharlie, Callisto Group, and Coldriver) has been carrying out email credential theft in service of cyberespionage and cyber influence campaigns since at least 2017. Historically, it has focused its aim on public and private organizations in NATO member countries, typically in fields related to politics, defense, and related sectors \u2014 NGOs, think tanks, journalists, academic institutions, intergovernmental organizations, and so on. In recent years, it has especially targeted individuals and organizations providing support for Ukraine. To aid in sneaking past email filters, Star Blizzard has started using password-protected PDF lure documents, or links to cloud-based file sharing platforms with the protected PDFs contained within. The passwords to these documents typically come packaged in the same phishing email, or an email sent shortly after the first.",
+    "explicit_triplets": [
+        {
+            "subject": "Star Blizzard",
+            "relation": "is also known as",
+            "object": "Seaborgium"
+        },
+        {
+            "subject": "Star Blizzard",
+            "relation": "is also known as",
+            "object": "BlueCharlie"
+        },
+        {
+            "subject": "Star Blizzard",
+            "relation": "is also known as",
+            "object": "Callisto Group"
+        },
+        {
+            "subject": "Star Blizzard",
+            "relation": "is also known as",
+            "object": "Coldriver"
+        },
+        {
+            "subject": "Star Blizzard",
+            "relation": "has been carrying out",
+            "object": "email credential theft"
+        },
+        {
+            "subject": "Star Blizzard",
+            "relation": "performs email credential theft since",
+            "object": "2017"
+        },
+        {
+            "subject": "Star Blizzard",
+            "relation": "conducts",
+            "object": "cyberespionage campaigns"
+        },
+        {
+            "subject": "Star Blizzard",
+            "relation": "conducts",
+            "object": "cyber influence campaigns"
+        },
+        {
+            "subject": "Star Blizzard",
+            "relation": "has targeted",
+            "object": "public and private organizations in NATO member countries"
+        },
+        {
+            "subject": "Star Blizzard",
+            "relation": "has targeted",
+            "object": "NGOs"
+        },
+        {
+            "subject": "Star Blizzard",
+            "relation": "has targeted",
+            "object": "think tanks"
+        },
+        {
+            "subject": "Star Blizzard",
+            "relation": "has targeted",
+            "object": "journalists"
+        },
+        {
+            "subject": "Star Blizzard",
+            "relation": "has targeted",
+            "object": "academic institutions"
+        },
+        {
+            "subject": "Star Blizzard",
+            "relation": "has targeted",
+            "object": "intergovernmental organizations"
+        },
+        {
+            "subject": "Star Blizzard",
+            "relation": "has targeted",
+            "object": "individuals and organizations providing support for Ukraine"
+        },
+        {
+            "subject": "Star Blizzard",
+            "relation": "has started using",
+            "object": "password-protected PDF lure documents"
+        },
+        {
+            "subject": "Star Blizzard",
+            "relation": "uses",
+            "object": "cloud-based file sharing platforms"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Star Blizzard",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "Seaborgium",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "BlueCharlie",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "Callisto Group",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Coldriver",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "email credential theft",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "2017",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "cyberespionage campaigns",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": [
+                "cyber influence campaigns"
+            ]
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "public and private organizations in NATO member countries",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "NGOs",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "think tanks",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "journalists",
+            "entity_type": "This entity cannot be classified into any of the existing types",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "academic institutions",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "intergovernmental organizations",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "individuals and organizations providing support for Ukraine",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 15,
+            "entity_name": "password-protected PDF lure documents",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 16,
+            "entity_name": "cloud-based file sharing platforms",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

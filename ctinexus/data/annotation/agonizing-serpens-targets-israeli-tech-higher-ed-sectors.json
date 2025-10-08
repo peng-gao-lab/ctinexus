@@ -1,0 +1,142 @@
+{
+    "text": "Unit 42 researchers have investigated a series of destructive cyberattacks beginning in January 2023 and continuing as recently as October 2023, targeting the education and technology sectors in Israel. The attacks are characterized by attempts to steal sensitive data, such as personally identifiable information (PII) and intellectual property. Once the attackers stole the information, they deployed various wipers intended to cover the attackers' tracks and to render the infected endpoints unusable.",
+    "explicit_triplets": [
+        {
+            "subject": "destructive cyberattacks",
+            "relation": "began in",
+            "object": "January 2023"
+        },
+        {
+            "subject": "destructive cyberattacks",
+            "relation": "continued as recently as",
+            "object": "October 2023"
+        },
+        {
+            "subject": "destructive cyberattacks",
+            "relation": "targeted",
+            "object": "education and technology sectors"
+        },
+        {
+            "subject": "education and technology sectors",
+            "relation": "are located in",
+            "object": "Israel"
+        },
+        {
+            "subject": "attackers",
+            "relation": "attempted to steal",
+            "object": "sensitive data"
+        },
+        {
+            "subject": "sensitive data",
+            "relation": "includes",
+            "object": "personally identifiable information (PII)"
+        },
+        {
+            "subject": "sensitive data",
+            "relation": "includes",
+            "object": "intellectual property"
+        },
+        {
+            "subject": "attackers",
+            "relation": "deployed",
+            "object": "wipers"
+        },
+        {
+            "subject": "wipers",
+            "relation": "intended to achieve",
+            "object": "cover the attackers' tracks"
+        },
+        {
+            "subject": "wipers",
+            "relation": "intended to achieve",
+            "object": "render the infected endpoints unusable"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "destructive cyberattacks",
+            "entity_type": "Event",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "January 2023",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "October 2023",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "education and technology sectors",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Israel",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "attackers",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "sensitive data",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "personally identifiable information (PII)",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "intellectual property",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "wipers",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "cover the attackers' tracks",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "render the infected endpoints unusable",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 0,
+                "entity_text": "destructive cyberattacks"
+            },
+            "relation": "attempt to steal",
+            "object": {
+                "entity_id": 6,
+                "entity_text": "sensitive data"
+            }
+        }
+    ]
+}

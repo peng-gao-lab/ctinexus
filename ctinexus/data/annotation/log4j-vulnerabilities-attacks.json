@@ -1,0 +1,146 @@
+{
+    "text": "Log4j has been making headlines recently after the public disclosure of three critical vulnerabilities in the utility which can lead to remote code execution (CVE-2021-44228 and CVE-2021-45046) and denial of service (CVE-2021-45105). The initial remote code execution vulnerability (CVE-2021-44228) has been dubbed Log4Shell and has dominated cyber-security news ever since it was publicly disclosed on December 9. The vulnerability has been exploited to deploy a plethora of payloads like coin miners, Dridex malware, and even ransomware such as Conti.",
+    "explicit_triplets": [
+        {
+            "subject": "Log4j",
+            "relation": "has",
+            "object": "three critical vulnerabilities"
+        },
+        {
+            "subject": "three critical vulnerabilities",
+            "relation": "can lead to",
+            "object": "remote code execution"
+        },
+        {
+            "subject": "three critical vulnerabilities",
+            "relation": "can lead to",
+            "object": "denial of service"
+        },
+        {
+            "subject": "remote code execution",
+            "relation": "tracked as",
+            "object": "CVE-2021-44228"
+        },
+        {
+            "subject": "remote code execution",
+            "relation": "tracked as",
+            "object": "CVE-2021-45046"
+        },
+        {
+            "subject": "denial of service",
+            "relation": "tracked as",
+            "object": "CVE-2021-45105"
+        },
+        {
+            "subject": "CVE-2021-44228",
+            "relation": "dubbed as",
+            "object": "Log4Shell"
+        },
+        {
+            "subject": "CVE-2021-44228",
+            "relation": "publicly disclosed on",
+            "object": "December 9"
+        },
+        {
+            "subject": "CVE-2021-44228",
+            "relation": "exploited to deploy",
+            "object": "coin miners"
+        },
+        {
+            "subject": "CVE-2021-44228",
+            "relation": "exploited to deploy",
+            "object": "Dridex malware"
+        },
+        {
+            "subject": "CVE-2021-44228",
+            "relation": "exploited to deploy",
+            "object": "Conti"
+        },
+        {
+            "subject": "Conti",
+            "relation": "is a type of",
+            "object": "ransomware"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Log4j",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "three critical vulnerabilities",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "remote code execution",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "denial of service",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "CVE-2021-44228",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "CVE-2021-45046",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "CVE-2021-45105",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "Log4Shell",
+            "entity_type": "Exploit Target",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "December 9",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "coin miners",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "Dridex malware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "Conti",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "ransomware",
+            "entity_type": "Malware",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

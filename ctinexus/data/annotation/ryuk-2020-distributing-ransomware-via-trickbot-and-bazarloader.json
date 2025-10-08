@@ -1,0 +1,98 @@
+{
+    "text": "Starting this year, Ryuk began using another dropper called BazarLoader (also known as BazarBackdoor). Like Trickbot, BazarLoader is also primarily distributed via phishing emails that contain either malicious attachments or links to websites (typically free, online file-hosting solutions) that host malware. These phishing emails use normal social engineering techniques: For example, they are usually disguised as business correspondence or other important messages. Once the payload is distributed, a command-and-control (C&C) server is used to deploy and install the backdoor. According to the advisory, the threat actor behind TrickBot is also connected to BazarLoader.",
+    "explicit_triplets": [
+        {
+            "subject": "Ryuk",
+            "relation": "began using",
+            "object": "BazarLoader"
+        },
+        {
+            "subject": "BazarLoader",
+            "relation": "is also known as",
+            "object": "BazarBackdoor"
+        },
+        {
+            "subject": "BazarLoader",
+            "relation": "is primarily distributed via",
+            "object": "phishing emails"
+        },
+        {
+            "subject": "phishing emails",
+            "relation": "contain",
+            "object": "malicious attachments"
+        },
+        {
+            "subject": "phishing emails",
+            "relation": "contain",
+            "object": "links to websites that host malware"
+        },
+        {
+            "subject": "phishing emails",
+            "relation": "are usually disguised as",
+            "object": "business correspondence or other important messages"
+        },
+        {
+            "subject": "command-and-control (C&C) server",
+            "relation": "is used to deploy and install",
+            "object": "BazarLoader"
+        },
+        {
+            "subject": "threat actor behind TrickBot",
+            "relation": "is connected to",
+            "object": "BazarLoader"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Ryuk",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "BazarLoader",
+            "entity_type": "Malware",
+            "mentions": [
+                "BazarBackdoor"
+            ]
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "phishing emails",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "malicious attachments",
+            "entity_type": "Indicator:File",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "links to websites that host malware",
+            "entity_type": "Indicator:URL",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "business correspondence or other important messages",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "command-and-control (C&C) server",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "threat actor behind TrickBot",
+            "entity_type": "Attacker",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

@@ -1,0 +1,91 @@
+{
+    "text": "BlackCat operators recently announced new updates to their tooling, including a utility called Munchkin that allows attackers to propagate the BlackCat payload to remote machines and shares on a victim organization network. For the past two years, the BlackCat ransomware operators have continued to evolve and iterate their tooling as part of their ransomware-as-a-service (RaaS) business model. As part of a recent investigation, Unit 42 researchers have acquired an instance of Munchkin that is unique, in that it is loaded in a customized Alpine virtual machine (VM). This new tactic of leveraging a customized VM to deploy malware has been gaining traction in recent months, allowing ransomware threat actors to use VMs to circumvent security solutions in deploying their malware payloads.",
+    "explicit_triplets": [
+        {
+            "subject": "BlackCat operators",
+            "relation": "announced updates",
+            "object": "Munchkin"
+        },
+        {
+            "subject": "Munchkin",
+            "relation": "allows attackers to propagate",
+            "object": "BlackCat payload"
+        },
+        {
+            "subject": "BlackCat operators",
+            "relation": "operate using",
+            "object": "ransomware-as-a-service (RaaS) business model"
+        },
+        {
+            "subject": "Unit 42 researchers",
+            "relation": "acquired",
+            "object": "Munchkin"
+        },
+        {
+            "subject": "Munchkin",
+            "relation": "is loaded in",
+            "object": "customized Alpine virtual machine (VM)"
+        },
+        {
+            "subject": "ransomware threat actors",
+            "relation": "use",
+            "object": "customized Alpine virtual machine (VM)"
+        },
+        {
+            "subject": "customized Alpine virtual machine (VM)",
+            "relation": "used to deploy",
+            "object": "malware payloads"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "BlackCat operators",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "Munchkin",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "BlackCat payload",
+            "entity_type": "Malware Characteristic:Payload",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "ransomware-as-a-service (RaaS) business model",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Unit 42 researchers",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "customized Alpine virtual machine (VM)",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "ransomware threat actors",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "malware payloads",
+            "entity_type": "Malware Characteristic:Payload",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

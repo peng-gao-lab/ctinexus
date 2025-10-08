@@ -1,0 +1,103 @@
+{
+    "text": "In January 2021, Threat Analysis Group (TAG) publicly disclosed a campaign from government backed actors in North Korea who used 0-day exploits to target security researchers working on vulnerability research and development. Over the past two and a half years, TAG has continued to track and disrupt campaigns from these actors, finding 0-days and protecting online users. Recently, TAG became aware of a new campaign likely from the same actors based on similarities with the previous campaign.",
+    "explicit_triplets": [
+        {
+            "subject": "Threat Actor",
+            "relation": "is located in",
+            "object": "North Korea"
+        },
+        {
+            "subject": "Threat Actor",
+            "relation": "used",
+            "object": "0-day exploits"
+        },
+        {
+            "subject": "Threat Actor",
+            "relation": "targeted",
+            "object": "security researchers"
+        },
+        {
+            "subject": "security researchers",
+            "relation": "worked on",
+            "object": "vulnerability research and development"
+        },
+        {
+            "subject": "Threat Analysis Group (TAG)",
+            "relation": "disclosed campaign of",
+            "object": "Threat Actor"
+        },
+        {
+            "subject": "Threat Analysis Group (TAG)",
+            "relation": "tracked",
+            "object": "Threat Actor"
+        },
+        {
+            "subject": "Threat Analysis Group (TAG)",
+            "relation": "became aware of",
+            "object": "a new campaign"
+        },
+        {
+            "subject": "a new campaign",
+            "relation": "is likely conducted by",
+            "object": "Threat Actor"
+        },
+        {
+            "subject": "campaign",
+            "relation": "was publicly disclosed in",
+            "object": "January 2021"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Threat Actor",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "North Korea",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "0-day exploits",
+            "entity_type": "Exploit Target",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "security researchers",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "vulnerability research and development",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Threat Analysis Group (TAG)",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "a new campaign",
+            "entity_type": "Event",
+            "mentions": [
+                "campaign"
+            ]
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "January 2021",
+            "entity_type": "Time",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": []
+}

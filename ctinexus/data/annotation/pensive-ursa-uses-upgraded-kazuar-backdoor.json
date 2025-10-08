@@ -1,0 +1,164 @@
+{
+    "text": "While tracking the evolution of Pensive Ursa (aka Turla, Uroburos), Unit 42 researchers came across a new, upgraded variant of Kazuar. Not only is Kazuar another name for the enormous and dangerous cassowary bird, Kazuar is an advanced and stealthy .NET backdoor that Pensive Ursa usually uses as a second stage payload. Pensive Ursa is a Russian-based threat group operating since at least 2004, which is linked to the Russian Federal Security Service (FSB). The Ukrainian CERT reported in July 2023 that this version of Kazuar was targeting the Ukrainian defense sector. The threat group behind this variant was going after sensitive assets such as those found in Signal messages, source control and cloud platforms data. Since Unit 42's discovery of Kazuar in 2017, we have seen it in the wild only a handful of times, targeting mostly organizations in the European government and military sectors. The Sunburst backdoor has been tied to Kazuar by code resemblance, which demonstrates its complexity level. Since late 2020, we had not seen new Kazuar samples in the wild \u2013 yet reports suggested Kazuar was under constant development.",
+    "explicit_triplets": [
+        {
+            "subject": "Kazuar",
+            "relation": "is variant of",
+            "object": "Malware"
+        },
+        {
+            "subject": "Pensive Ursa",
+            "relation": "uses",
+            "object": "Kazuar"
+        },
+        {
+            "subject": "Kazuar",
+            "relation": "is classified as",
+            "object": ".NET backdoor"
+        },
+        {
+            "subject": "Kazuar",
+            "relation": "used as",
+            "object": "second stage payload"
+        },
+        {
+            "subject": "Pensive Ursa",
+            "relation": "linked to",
+            "object": "Russian Federal Security Service (FSB)"
+        },
+        {
+            "subject": "Pensive Ursa",
+            "relation": "operating since",
+            "object": "2004"
+        },
+        {
+            "subject": "Kazuar",
+            "relation": "targeted",
+            "object": "Ukrainian defense sector"
+        },
+        {
+            "subject": "Kazuar",
+            "relation": "targets",
+            "object": "organizations in the European government and military sectors"
+        },
+        {
+            "subject": "Sunburst backdoor",
+            "relation": "tied to",
+            "object": "Kazuar"
+        },
+        {
+            "subject": "Kazuar",
+            "relation": "targeted",
+            "object": "sensitive assets in Signal messages"
+        },
+        {
+            "subject": "Kazuar",
+            "relation": "targeted",
+            "object": "source control and cloud platforms data"
+        },
+        {
+            "subject": "Ukrainian CERT",
+            "relation": "reported in",
+            "object": "July 2023"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Kazuar",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "Malware",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "Pensive Ursa",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": ".NET backdoor",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "second stage payload",
+            "entity_type": "Malware Characteristic:Payload",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Russian Federal Security Service (FSB)",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "2004",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "Ukrainian defense sector",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "organizations in the European government and military sectors",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "Sunburst backdoor",
+            "entity_type": "Malware",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "sensitive assets in Signal messages",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "source control and cloud platforms data",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "Ukrainian CERT",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "July 2023",
+            "entity_type": "Time",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 12,
+                "entity_text": "Ukrainian CERT"
+            },
+            "relation": "reported targeting by",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Kazuar"
+            }
+        }
+    ]
+}

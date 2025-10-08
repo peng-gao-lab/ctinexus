@@ -1,0 +1,143 @@
+{
+    "text": "The latest zero-day, which Google is tracking as CVE-2023-6345, stems from an integer overflow issue in Skia, an open source 2D graphic library in Chrome. The bug is one of seven Chrome vulnerabilities for which Google issued a security update this week. The company's advisory contained sparse details on CVE-2023-6345 beyond mentioning the fact that an exploit for it is publicly available. A brief description on NIST's National Vulnerability Database (NVD) site described the flaw as affecting versions of Chrome prior to 119.0.6045.199 and allowing a remote attacker who has compromised the renderer process to potentially perform a sandbox escape via a malicious file.",
+    "explicit_triplets": [
+        {
+            "subject": "zero-day vulnerability CVE-2023-6345",
+            "relation": "stems from",
+            "object": "integer overflow issue in Skia"
+        },
+        {
+            "subject": "Skia",
+            "relation": "is a component of",
+            "object": "Chrome"
+        },
+        {
+            "subject": "Google",
+            "relation": "issued",
+            "object": "a security update"
+        },
+        {
+            "subject": "Chrome vulnerabilities",
+            "relation": "include",
+            "object": "zero-day vulnerability CVE-2023-6345"
+        },
+        {
+            "subject": "zero-day vulnerability CVE-2023-6345",
+            "relation": "has",
+            "object": "a publicly available exploit"
+        },
+        {
+            "subject": "zero-day vulnerability CVE-2023-6345",
+            "relation": "affects",
+            "object": "versions of Chrome prior to 119.0.6045.199"
+        },
+        {
+            "subject": "remote attacker",
+            "relation": "can perform",
+            "object": "sandbox escape via a malicious file"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "zero-day vulnerability CVE-2023-6345",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "integer overflow issue in Skia",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "Skia",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "Chrome",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Google",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "a security update",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Chrome vulnerabilities",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "a publicly available exploit",
+            "entity_type": "Exploit Target",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "versions of Chrome prior to 119.0.6045.199",
+            "entity_type": "Tool",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "remote attacker",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "sandbox escape via a malicious file",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 0,
+                "entity_text": "zero-day vulnerability CVE-2023-6345"
+            },
+            "relation": "affects",
+            "object": {
+                "entity_id": 3,
+                "entity_text": "Chrome"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 4,
+                "entity_text": "Google"
+            },
+            "relation": "is tracking",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "zero-day vulnerability CVE-2023-6345"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 9,
+                "entity_text": "remote attacker"
+            },
+            "relation": "can exploit",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "zero-day vulnerability CVE-2023-6345"
+            }
+        }
+    ]
+}

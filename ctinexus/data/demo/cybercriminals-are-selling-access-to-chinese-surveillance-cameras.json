@@ -1,0 +1,257 @@
+{
+    "text": "Hikvision \u2013 short for Hangzhou Hikvision Digital Technology \u2013 is a Chinese state-owned manufacturer of video surveillance equipment. Their customers span over 100 countries (including the United States, despite the FCC labeling Hikvision \u201can unacceptable risk to U.S. national security\u201d in 2019). Last Fall, a command injection flaw in Hikvision cameras was revealed to the world as CVE-2021-36260. The exploit was given a \u201ccritical\u201d 9.8 out of 10 rating by NIST. Despite the severity of the vulnerability, and nearly a year into this story, over 80,000 affected devices remain unpatched. In the time since, the researchers have discovered \u201cmultiple instances of hackers looking to collaborate on exploiting Hikvision cameras using the command injection vulnerability,\u201d specifically in Russian dark web forums, where leaked credentials have been put up for sale. The extent of the damage done already is unclear. The authors of the report could only speculate that \u201cChinese threat groups such as MISSION2025/APT41, APT10 and its affiliates, as well as unknown Russian threat actor groups could potentially exploit vulnerabilities in these devices to fulfill their motives.",
+    "explicit_triplets": [
+        {
+            "subject": "Hikvision",
+            "relation": "is",
+            "object": "a Chinese state-owned manufacturer"
+        },
+        {
+            "subject": "Hikvision",
+            "relation": "has customers in",
+            "object": "the United States"
+        },
+        {
+            "subject": "FCC",
+            "relation": "labeled",
+            "object": "Hikvision an unacceptable risk to U.S. national security"
+        },
+        {
+            "subject": "command injection flaw",
+            "relation": "identified as",
+            "object": "CVE-2021-36260"
+        },
+        {
+            "subject": "exploit",
+            "relation": "received rating",
+            "object": "critical 9.8 out of 10 by NIST"
+        },
+        {
+            "subject": "80,000 affected devices",
+            "relation": "remain",
+            "object": "unpatched"
+        },
+        {
+            "subject": "hackers",
+            "relation": "collaborate on exploiting",
+            "object": "Hikvision cameras"
+        },
+        {
+            "subject": "command injection vulnerability",
+            "relation": "exploited by",
+            "object": "hackers on Russian dark web forums"
+        },
+        {
+            "subject": "leaked credentials",
+            "relation": "put up for sale on",
+            "object": "Russian dark web forums"
+        },
+        {
+            "subject": "Chinese threat groups",
+            "relation": "could exploit",
+            "object": "vulnerabilities in Hikvision cameras"
+        },
+        {
+            "subject": "Russian threat actor groups",
+            "relation": "could exploit",
+            "object": "vulnerabilities in Hikvision cameras"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Hikvision",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "a Chinese state-owned manufacturer",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "the United States",
+            "entity_type": "Location",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "FCC",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "Hikvision an unacceptable risk to U.S. national security",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "command injection flaw",
+            "entity_type": "Vulnerability",
+            "mentions": [
+                "command injection vulnerability"
+            ]
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "CVE-2021-36260",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "exploit",
+            "entity_type": "Exploit Target",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "critical 9.8 out of 10 by NIST",
+            "entity_type": "Information",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "80,000 affected devices",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 10,
+            "entity_name": "unpatched",
+            "entity_type": "Malware Characteristic:Behavior",
+            "mentions": []
+        },
+        {
+            "entity_id": 11,
+            "entity_name": "hackers",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 12,
+            "entity_name": "Hikvision cameras",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 13,
+            "entity_name": "hackers on Russian dark web forums",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 14,
+            "entity_name": "leaked credentials",
+            "entity_type": "Credential",
+            "mentions": []
+        },
+        {
+            "entity_id": 15,
+            "entity_name": "Russian dark web forums",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 16,
+            "entity_name": "Chinese threat groups",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 17,
+            "entity_name": "vulnerabilities in Hikvision cameras",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 18,
+            "entity_name": "Russian threat actor groups",
+            "entity_type": "Attacker",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 3,
+                "entity_text": "FCC"
+            },
+            "relation": "labeled as security risk by",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Hikvision"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 5,
+                "entity_text": "command injection flaw"
+            },
+            "relation": "was discovered in devices manufactured by",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Hikvision"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 7,
+                "entity_text": "exploit"
+            },
+            "relation": "targets devices from",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Hikvision"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 0,
+                "entity_text": "Hikvision"
+            },
+            "relation": "has devices that are",
+            "object": {
+                "entity_id": 10,
+                "entity_text": "unpatched"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 11,
+                "entity_text": "hackers"
+            },
+            "relation": "are exploiting vulnerabilities in devices of",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Hikvision"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 14,
+                "entity_text": "leaked credentials"
+            },
+            "relation": "are associated with",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Hikvision"
+            }
+        },
+        {
+            "subject": {
+                "entity_id": 17,
+                "entity_text": "vulnerabilities in Hikvision cameras"
+            },
+            "relation": "exist in products of",
+            "object": {
+                "entity_id": 0,
+                "entity_text": "Hikvision"
+            }
+        }
+    ]
+}

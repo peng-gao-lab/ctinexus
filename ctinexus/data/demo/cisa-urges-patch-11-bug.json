@@ -1,0 +1,125 @@
+{
+    "text": "A Windows 11 vulnerability, part of Microsoft\u2019s Patch Tuesday roundup of fixes, is being exploited in the wild, prompting the U.S. Cybersecurity and Infrastructure Security Agency (CISA) to advise patching of the elevation of privileges flaw by August 2. The recommendation is directed at federal agencies and concerns CVE-2022-22047, a vulnerability that carries a CVSS score of high (7.8) and exposes Windows Client Server Runtime Subsystem (CSRSS) used in Windows 11 (and earlier versions dating back to 7) and also Windows Server 2022 (and earlier versions 2008, 2012, 2016 and 2019) to attack. The CSRSS bug is an elevation of privileges vulnerability that allows adversaries with a pre-established foothold on a targeted system to execute code as an unprivileged user. When the bug was first reported by Microsoft\u2019s own security team earlier this month it was classified as a zero-day, or a known bug with no patch. ",
+    "explicit_triplets": [
+        {
+            "subject": "Windows 11",
+            "relation": "contains",
+            "object": "CVE-2022-22047"
+        },
+        {
+            "subject": "CVE-2022-22047",
+            "relation": "is exploited by",
+            "object": "attackers"
+        },
+        {
+            "subject": "U.S. Cybersecurity and Infrastructure Security Agency (CISA)",
+            "relation": "advises patching by",
+            "object": "August 2"
+        },
+        {
+            "subject": "CVE-2022-22047",
+            "relation": "affects",
+            "object": "Windows Client Server Runtime Subsystem (CSRSS)"
+        },
+        {
+            "subject": "Windows Client Server Runtime Subsystem (CSRSS)",
+            "relation": "is used in",
+            "object": "Windows 11"
+        },
+        {
+            "subject": "Windows Client Server Runtime Subsystem (CSRSS)",
+            "relation": "is used in",
+            "object": "Windows Server 2022"
+        },
+        {
+            "subject": "CVE-2022-22047",
+            "relation": "allows",
+            "object": "execute code as an unprivileged user"
+        },
+        {
+            "subject": "Microsoft",
+            "relation": "reported",
+            "object": "CVE-2022-22047"
+        },
+        {
+            "subject": "CVE-2022-22047",
+            "relation": "was classified as",
+            "object": "a zero-day"
+        }
+    ],
+    "entities": [
+        {
+            "entity_id": 0,
+            "entity_name": "Windows 11",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 1,
+            "entity_name": "CVE-2022-22047",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        },
+        {
+            "entity_id": 2,
+            "entity_name": "attackers",
+            "entity_type": "Attacker",
+            "mentions": []
+        },
+        {
+            "entity_id": 3,
+            "entity_name": "U.S. Cybersecurity and Infrastructure Security Agency (CISA)",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 4,
+            "entity_name": "August 2",
+            "entity_type": "Time",
+            "mentions": []
+        },
+        {
+            "entity_id": 5,
+            "entity_name": "Windows Client Server Runtime Subsystem (CSRSS)",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 6,
+            "entity_name": "Windows Server 2022",
+            "entity_type": "Infrastructure",
+            "mentions": []
+        },
+        {
+            "entity_id": 7,
+            "entity_name": "execute code as an unprivileged user",
+            "entity_type": "Malware Characteristic:Capability",
+            "mentions": []
+        },
+        {
+            "entity_id": 8,
+            "entity_name": "Microsoft",
+            "entity_type": "Organization",
+            "mentions": []
+        },
+        {
+            "entity_id": 9,
+            "entity_name": "a zero-day",
+            "entity_type": "Vulnerability",
+            "mentions": []
+        }
+    ],
+    "implicit_triplets": [
+        {
+            "subject": {
+                "entity_id": 3,
+                "entity_text": "U.S. Cybersecurity and Infrastructure Security Agency (CISA)"
+            },
+            "relation": "advised patching of",
+            "object": {
+                "entity_id": 1,
+                "entity_text": "CVE-2022-22047"
+            }
+        }
+    ]
+}
