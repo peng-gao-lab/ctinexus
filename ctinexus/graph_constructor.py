@@ -326,41 +326,42 @@ def create_graph_visualization(result: dict) -> str:
     if "EA" in result and "aligned_triplets" in result["EA"]:
         for triplet in result["EA"]["aligned_triplets"]:
             # Add subject node
-            subject = triplet["subject"]
+            subject = triplet.get("subject", {})
             G.add_node(
-                subject["entity_id"],
-                text=subject["entity_text"],
-                type=subject["mention_class"],
+                subject.get("entity_id"),
+                text=subject.get("entity_text", ""),
+                type=subject.get("mention_class", "default"),
                 color=entity_colors.get(
-                    subject["mention_class"], entity_colors["default"]
+                    subject.get("mention_class", "default"), entity_colors["default"]
                 ),
             )
 
             # Add object node
-            object_node = triplet["object"]
+            object_node = triplet.get("object", {})
             G.add_node(
-                object_node["entity_id"],
-                text=object_node["entity_text"],
-                type=object_node["mention_class"],
+                object_node.get("entity_id"),
+                text=object_node.get("entity_text", ""),
+                type=object_node.get("mention_class", "default"),
                 color=entity_colors.get(
-                    object_node["mention_class"], entity_colors["default"]
+                    object_node.get("mention_class", "default"),
+                    entity_colors["default"],
                 ),
             )
 
             # Add edge with relation
             G.add_edge(
-                subject["entity_id"],
-                object_node["entity_id"],
-                relation=triplet["relation"],
+                subject.get("entity_id"),
+                object_node.get("entity_id"),
+                relation=triplet.get("relation", ""),
             )
 
     # Add predicted links if available
     if "LP" in result and "predicted_links" in result["LP"]:
         for link in result["LP"]["predicted_links"]:
             G.add_edge(
-                link["subject"]["entity_id"],
-                link["object"]["entity_id"],
-                relation=link["relation"],
+                link.get("subject", {}).get("entity_id"),
+                link.get("object", {}).get("entity_id"),
+                relation=link.get("relation", ""),
                 predicted=True,
             )
 
@@ -413,9 +414,9 @@ def create_graph_visualization(result: dict) -> str:
     for node_id, node_attrs in G.nodes(data=True):
         net.add_node(
             node_id,
-            label=node_attrs["text"],
-            title=f"{node_attrs['text']}",
-            color=node_attrs["color"],
+            label=node_attrs.get("text", ""),
+            title=f"{node_attrs.get('text', '')}",
+            color=node_attrs.get("color", "#aaaaaa"),
             size=15 + len(G[node_id]) * 2,
         )
 
@@ -424,8 +425,8 @@ def create_graph_visualization(result: dict) -> str:
         net.add_edge(
             u,
             v,
-            label=edge_attrs["relation"],
-            title=edge_attrs["relation"],
+            label=edge_attrs.get("relation", ""),
+            title=edge_attrs.get("relation", ""),
             color="#ff4444" if edge_attrs.get("predicted") else "#666666",
         )
 

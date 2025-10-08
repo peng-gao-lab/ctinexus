@@ -128,6 +128,10 @@ def preprocessor(result: dict) -> dict:
     mention_id_map = {}
     current_id = 0
 
+    if not result:
+        logger.error("Result dict is empty, cannot preprocess")
+        return {}
+
     jsr = copy.deepcopy(result)
     jsr["EA"] = {}
     jsr["EA"]["aligned_triplets"] = result["ET"]["typed_triplets"]
@@ -144,8 +148,8 @@ def preprocessor(result: dict) -> dict:
 
                 # Assign the same mention_id for identical mention_text
                 entity["mention_id"] = mention_id_map[mention_text]
-                entity["mention_text"] = entity.pop("text")
-                entity["mention_class"] = entity.pop("class")
+                entity["mention_text"] = entity.pop("text", "")
+                entity["mention_class"] = entity.pop("class", "default")
 
                 # Handle mention_class if it's a dictionary
                 if isinstance(entity["mention_class"], dict):

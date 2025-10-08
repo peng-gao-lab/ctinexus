@@ -661,6 +661,6 @@ def extract_json_from_response(response_text):
                 return {"triplets": triplets}
         
         logger.warning(f"Failed to parse response, raw text: {response_text}")
-        return {"triplets": []}
+        raise ValueError("Failed to extract JSON from response text")
     else:
         return dict(response_text)
