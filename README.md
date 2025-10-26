@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/peng-gao-lab/CTINexus/feat/package-release/ctinexus/static/logo.png" alt="Logo" width="200">
+  <img src="https://raw.githubusercontent.com/peng-gao-lab/CTINexus/main/ctinexus/static/logo.png" alt="Logo" width="200">
   <h1 align="center">Automatic Cyber Threat Intelligence Knowledge Graph Construction Using Large Language Models</h1>
 </div>
 
@@ -14,7 +14,7 @@
 CTINexus adapts to various cybersecurity ontologies with minimal annotated examples and provides a user-friendly web interface for instant threat intelligence analysis.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/peng-gao-lab/CTINexus/feat/package-release/ctinexus/static/overview.png" alt="CTINexus Framework Overview" width="500"/>
+  <img src="https://raw.githubusercontent.com/peng-gao-lab/CTINexus/main/ctinexus/static/overview.png" alt="CTINexus Framework Overview" width="500"/>
 </p>
 
 ### What CTINexus Does
@@ -36,7 +36,7 @@ The framework automatically processes unstructured threat intelligence reports t
 - **Graph Visualization**: Interactive network visualization of the constructed cybersecurity knowledge graph
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/peng-gao-lab/CTINexus/feat/package-release/ctinexus/static/webui.png" alt="CTINexus WebUI" width="500"/>
+  <img src="https://raw.githubusercontent.com/peng-gao-lab/CTINexus/main/ctinexus/static/webui.png" alt="CTINexus WebUI" width="500"/>
 </p>
 
 ## News
