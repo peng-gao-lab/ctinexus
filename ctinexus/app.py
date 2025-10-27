@@ -128,7 +128,6 @@ def run_cmd_pipeline(args):
 			sys.exit(1)
 		provider = provider_matched
 	else:
-		# Auto-detect based on available API keys
 		if available_providers:
 			provider = available_providers[0]
 		else:
@@ -137,7 +136,6 @@ def run_cmd_pipeline(args):
 
 	defaults = get_default_models_for_provider(provider)
 
-	# Set models with fallbacks to defaults
 	base_model = args.model or defaults.get("model")
 	base_embedding_model = args.embedding_model or defaults.get("embedding_model")
 
@@ -181,7 +179,7 @@ def run_cmd_pipeline(args):
 
 		# Create Entity Relation Graph
 		result_dict = json.loads(result)
-		_, filepath = create_graph_visualization(result_dict)
+		filepath = create_graph_visualization(result_dict)
 		logger.info(f"Entity Relation Graph: {filepath}")
 
 	except Exception as e:
@@ -198,12 +196,10 @@ def main():
 
 	run_gui = not args.text and not args.input_file
 
-	# HTTP server to serve pyvis files
 	setup_http_server()
 	setup_logging(verbose=args.verbose)
 
 	if run_gui:
-		# GUI mode
 		warning = None
 		if not api_keys_available:
 			warning = (
@@ -213,7 +209,6 @@ def main():
 			logger.warning(warning.strip())
 		build_interface(warning)
 	else:
-		# Command line mode
 		if not api_keys_available:
 			warning = (
 				"No API Keys Configured. Please provide one API key in the `.env` file.\n"

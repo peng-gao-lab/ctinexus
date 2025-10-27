@@ -37,7 +37,8 @@ dependencies = [
     "pyvis",
     "python-dotenv",
     "scikit-learn",
-    "scipy"
+    "scipy",
+    "py2neo"
 ]
 
 [project.urls]
