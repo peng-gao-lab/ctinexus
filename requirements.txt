@@ -1,4 +1,3 @@
-py2neo
 gradio
 hydra-core
 jinja2
