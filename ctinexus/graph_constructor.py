@@ -11,6 +11,7 @@ from scipy.spatial.distance import cosine
 
 from ctinexus.llm_processor import LLMLinker, UsageCalculator
 from ctinexus.utils.http_server_utils import get_current_port
+from neo4j import GraphDatabase
 
 logger = logging.getLogger(__name__)
 
@@ -288,7 +289,6 @@ class Merger:
 		self.js["EA"]["response_time"] = self.response_time
 		return self.js
 
-
 def create_graph_visualization(result: dict) -> str:
 	"""Create an interactive graph visualization using Pyvis"""
 	# Create a directed graph
@@ -360,40 +360,40 @@ def create_graph_visualization(result: dict) -> str:
 	)
 
 	net.set_options("""
-    {
-      "physics": {
-        "enabled": true,
-        "barnesHut": {
-            "gravitationalConstant": -500,
-            "springLength": 200,
-            "springConstant": 0,
-            "damping": 0.4
-        }
-      },
-      "edges": {
-        "smooth": {
-          "enabled": true,
-          "type": "dynamic",
-          "roundness": 0.5
-        },
-        "font": {
-          "size": 15,
-          "color": "#ffffff",
-          "strokeWidth": 1,
-          "strokeColor": "#000000"
-        }
-      },
-      "interaction": {
-        "dragNodes": true,
-        "dragView": true,
-        "zoomView": true,
-        "hover": true
-      },
-      "layout": {
-        "improvedLayout": true
-      }
-    }
-    """)
+	{
+	  "physics": {
+		"enabled": true,
+		"barnesHut": {
+			"gravitationalConstant": -500,
+			"springLength": 200,
+			"springConstant": 0,
+			"damping": 0.4
+		}
+	  },
+	  "edges": {
+		"smooth": {
+		  "enabled": true,
+		  "type": "dynamic",
+		  "roundness": 0.5
+		},
+		"font": {
+		  "size": 15,
+		  "color": "#ffffff",
+		  "strokeWidth": 1,
+		  "strokeColor": "#000000"
+		}
+	  },
+	  "interaction": {
+		"dragNodes": true,
+		"dragView": true,
+		"zoomView": true,
+		"hover": true
+	  },
+	  "layout": {
+		"improvedLayout": true
+	  }
+	}
+	""")
 
 	# Add nodes to pyvis network
 	for node_id, node_attrs in G.nodes(data=True):
@@ -421,7 +421,6 @@ def create_graph_visualization(result: dict) -> str:
 	output_dir = os.path.join(os.getcwd(), "ctinexus_output")
 	os.makedirs(output_dir, exist_ok=True)
 	file_path = os.path.join(output_dir, file_name)
-
 	try:
 		net.save_graph(file_path)
 
@@ -430,33 +429,71 @@ def create_graph_visualization(result: dict) -> str:
 			html_content = f.read()
 
 		legend_html = """
-        <div style="position: fixed; top: 50px; right: 20px; background-color: #27272a; color: white; padding: 15px; border-radius: 8px; border: 1px solid #444; max-width: 200px; font-size: 15px;">
-            <h3 style="margin-top: 0; font-size: 18px;">Legend</h3>
-            <h4 style="margin-bottom: 5px; font-size: 15px;">Node Types:</h4>
-            <ul style="list-style: none; padding: 0; margin-bottom: 15px;">
-        """
+		<div style="position: fixed; top: 50px; right: 20px; background-color: #27272a; color: white; padding: 15px; border-radius: 8px; border: 1px solid #444; max-width: 200px; font-size: 15px;">
+			<h3 style="margin-top: 0; font-size: 18px;">Legend</h3>
+			<h4 style="margin-bottom: 5px; font-size: 15px;">Node Types:</h4>
+			<ul style="list-style: none; padding: 0; margin-bottom: 15px;">
+		"""
 
 		for entity_type, color in entity_colors.items():
 			if entity_type != "default":
 				legend_html += f"<li style='margin-bottom: 5px;'><span style='display: inline-block; width: 15px; height: 15px; background-color: {color}; margin-right: 10px; border-radius: 50%;'></span>{entity_type}</li>"
 
 		legend_html += """
-            </ul>
-            <br>
-            <h4 style="margin-bottom: 5px; font-size: 15px;">Edge Types:</h4>
-            <ul style="list-style: none; padding: 0;">
-            <li style='margin-bottom: 5px;'><span style='display: inline-block; width: 20px; height: 2px; background-color: #94a3b8; margin-right: 10px;'></span>Extracted</li>
-            <li style='margin-bottom: 5px;'><span style='display: inline-block; width: 20px; height: 3px; background: repeating-linear-gradient(to right, #ff6b6b 0px, #ff6b6b 5px, transparent 5px, transparent 10px); margin-right: 10px;'></span>Predicted</li>
-            </ul>
-        </div>
-        """
+			</ul>
+			<br>
+			<h4 style="margin-bottom: 5px; font-size: 15px;">Edge Types:</h4>
+			<ul style="list-style: none; padding: 0;">
+			<li style='margin-bottom: 5px;'><span style='display: inline-block; width: 20px; height: 2px; background-color: #94a3b8; margin-right: 10px;'></span>Extracted</li>
+			<li style='margin-bottom: 5px;'><span style='display: inline-block; width: 20px; height: 3px; background: repeating-linear-gradient(to right, #ff6b6b 0px, #ff6b6b 5px, transparent 5px, transparent 10px); margin-right: 10px;'></span>Predicted</li>
+			</ul>
+		</div>
+		"""
 
 		# Inject the legend HTML into the Pyvis graph HTML
 		html_content = html_content.replace("</body>", legend_html + "</body>")
 		with open(file_path, "w") as f:
 			f.write(html_content)
-
 	except Exception as e:
 		logger.error(f"Error saving graph: {e}")
+
+
+	# ---------------------------------------------------------------
+	# Export structured graph data into Neo4j
+	# ---------------------------------------------------------------
+
+
+	try:
+		driver = GraphDatabase.driver("connection_url", auth=("neo4j", "password"))
+		with driver.session() as session:
+			for u, v, edge_attrs in G.edges(data=True):
+				relation_type = edge_attrs.get("relation", "RELATED_TO")
+				# Đảm bảo tên quan hệ hợp lệ trong Neo4j (chỉ gồm ký tự chữ và số, viết hoa)
+				relation_type = "".join(ch if ch.isalnum() else "_" for ch in relation_type).upper()
+
+				query = f"""
+					MERGE (a:Entity {{id: $source_id}})
+					ON CREATE SET a.name = $source_name, a.type = $source_type
+					ON MATCH SET a.name = $source_name, a.type = $source_type
+					MERGE (b:Entity {{id: $target_id}})
+					ON CREATE SET b.name = $target_name, b.type = $target_type
+					ON MATCH SET b.name = $target_name, b.type = $target_type
+					MERGE (a)-[r:{relation_type}]->(b)
+					SET r.predicted = $predicted
+					"""
+
+				session.run(
+					query,
+					source_id=u,
+					target_id=v,
+					source_name=G.nodes[u].get("text", u),
+					source_type=G.nodes[u].get("type", "Entity"),
+					target_name=G.nodes[v].get("text", v),
+					target_type=G.nodes[v].get("type", "Entity"),
+					predicted=edge_attrs.get("predicted", False),
+				)
+		driver.close()
+	except Exception as e:
+		logger.error(f"Error exporting to Neo4j: {e}")
 
 	return f"http://localhost:{http_port}/{file_name}", file_path

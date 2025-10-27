@@ -1,3 +1,4 @@
+py2neo
 gradio
 hydra-core
 jinja2
@@ -10,3 +11,4 @@ pyvis
 python-dotenv
 scikit-learn
 scipy
+neo4j

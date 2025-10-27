@@ -189,3 +189,5 @@ ctinexus/.gradio/*
 # Output directory
 **/ctinexus_output/
 ctinexus/output/*
+
+testing/*
