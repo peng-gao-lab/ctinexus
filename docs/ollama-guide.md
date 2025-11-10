@@ -1,6 +1,6 @@
-# Using CTI Nexus with Ollama
+# Using CTINexus with Ollama
 
-CTI Nexus supports local LLM inference through Ollama, providing a free and private alternative to cloud-based AI providers.
+CTINexus supports local LLM inference through Ollama, providing a free and private alternative to cloud-based AI providers.
 
 ## Prerequisites
 
