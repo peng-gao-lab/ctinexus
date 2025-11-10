@@ -8,7 +8,7 @@
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-lavender.svg" alt="License: MIT"></a>
   <a href='https://ctinexus.github.io/' target='_blank'><img src='https://img.shields.io/badge/Project-Website-turquoise'></a>
   <a href="https://pepy.tech/projects/ctinexus" target='_blank'><img src="https://static.pepy.tech/personalized-badge/ctinexus?period=total&units=INTERNATIONAL_SYSTEM&left_color=GRAY&right_color=BRIGHTGREEN&left_text=Downloads" alt="PyPI Downloads"></a>
-  
+
 </p>
 
 **CTINexus** is a framework that leverages optimized in-context learning (ICL) of large language models (LLMs) for automatic cyber threat intelligence (CTI) knowledge extraction and cybersecurity knowledge graph (CSKG) construction.
