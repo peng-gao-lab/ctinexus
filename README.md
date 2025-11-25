@@ -78,12 +78,6 @@ The framework processes threat intelligence reports to:
   <img src="https://raw.githubusercontent.com/peng-gao-lab/CTINexus/main/ctinexus/static/webui.png" alt="CTINexus WebUI" width="600"/>
 </p>
 
-### Three Ways to Use CTINexus
-
-- **📦 Python Package**: Programmatic API for seamless integration into your projects
-- **⚡ Command Line**: Automation and batch processing ([CLI Guide](docs/cli-guide.md))
-- **🖥️ Web Interface**: User-friendly GUI for interactive analysis
-
 ---
 
 ## Supported AI Providers
