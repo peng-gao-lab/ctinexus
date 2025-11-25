@@ -157,15 +157,7 @@ Before using the CLI, ensure your API keys are configured in the `.env` file:
 # Copy the example file
 cp .env.example .env
 
-# Edit with your API keys
-OPENAI_API_KEY=your_openai_api_key_here
-GEMINI_API_KEY=your_gemini_api_key_here
-AWS_ACCESS_KEY_ID=your_aws_access_key
-AWS_SECRET_ACCESS_KEY=your_aws_secret_key
-AWS_REGION=us-east-1
-
-# For Ollama, set to the default (http://localhost:11434) or your custom URL.
-OLLAMA_BASE_URL=http://localhost:11434
+# Edit .env with your API keys
 ```
 
 You only need to configure one provider, but multiple providers can be set up for flexibility.

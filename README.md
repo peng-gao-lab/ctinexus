@@ -8,89 +8,125 @@
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-lavender.svg" alt="License: MIT"></a>
   <a href='https://ctinexus.github.io/' target='_blank'><img src='https://img.shields.io/badge/Project-Website-turquoise'></a>
   <a href="https://pepy.tech/projects/ctinexus" target='_blank'><img src="https://static.pepy.tech/personalized-badge/ctinexus?period=total&units=INTERNATIONAL_SYSTEM&left_color=GRAY&right_color=BRIGHTGREEN&left_text=Downloads" alt="PyPI Downloads"></a>
-
 </p>
 
-**CTINexus** is a framework that leverages optimized in-context learning (ICL) of large language models (LLMs) for automatic cyber threat intelligence (CTI) knowledge extraction and cybersecurity knowledge graph (CSKG) construction.
-CTINexus adapts to various cybersecurity ontologies with minimal annotated examples and provides a user-friendly web interface for instant threat intelligence analysis.
+---
+
+## News & Updates
+
+📦 [2025/10] CTINexus Python package released! Install with `pip install ctinexus` for seamless integration into your Python projects.
+
+🌟 [2025/07] CTINexus now features an intuitive Gradio interface! Submit threat intelligence text and instantly visualize extracted interactive graphs.
+
+🔥 [2025/04] We released the camera-ready paper on [arxiv](https://arxiv.org/pdf/2410.21060).
+
+🔥 [2025/02] CTINexus is accepted at 2025 IEEE European Symposium on Security and Privacy ([Euro S&P](https://eurosp2025.ieee-security.org/index.html)).
+
+
+## 📖 Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Supported AI Providers](#supported-ai-providers)
+- [Getting Started](#getting-started)
+  - [Option 1: Python Package](#python-package)
+  - [Option 2: Web Interface (Local)](#web-interface)
+  - [Option 3: Docker](#docker-setup)
+- [Command Line Interface](#command-line)
+- [Contributing](#contributing)
+- [Citation](#citation)
+- [License](#license)
+
+---
+
+## Overview
+
+**CTINexus** is a framework that leverages optimized in-context learning (ICL) of large language models (LLMs) to automatically extract cyber threat intelligence (CTI) from unstructured text and construct cybersecurity knowledge graphs (CSKG).
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/peng-gao-lab/CTINexus/main/ctinexus/static/overview.png" alt="CTINexus Framework Overview" width="500"/>
+  <img src="https://raw.githubusercontent.com/peng-gao-lab/CTINexus/main/ctinexus/static/overview.png" alt="CTINexus Framework Overview" width="600"/>
 </p>
 
-### What CTINexus Does
+The framework processes threat intelligence reports to:
 
-The framework automatically processes unstructured threat intelligence reports to:
+- 🔍 **Extract cybersecurity entities** (malware, vulnerabilities, tactics, IOCs)
+- 🔗 **Identify relationships** between security concepts
+- 📊 **Construct knowledge graphs** with interactive visualizations
+- ⚡ **Require minimal configuration** - no extensive training data or parameter tuning needed
 
-- **Extract cybersecurity entities** (malware, vulnerabilities, tactics, IOCs)
-- **Identify relationships** between security concepts
-- **Construct knowledge graphs** with interactive visualizations
-- **Require minimal configuration** - no extensive data or parameter tuning needed
+---
 
-### Core Components
+## Features
 
-- **Intelligence Extraction (IE)**: Automatically extracts cybersecurity entities and relationships from unstructured text using optimized prompt construction and demonstration retrieval
-- **Hierarchical Entity Alignment**: Canonicalizes extracted knowledge and removes redundancy through:
-  - **Entity Typing (ET)**: Groups mentions of the same semantic type
-  - **Entity Merging (EM)**: Merges mentions referring to the same entity with IOC (Indicator of Compromise) protection
-- **Link Prediction (LP)**: Predicts and adds missing relationships to complete the knowledge graph
-- **Graph Visualization**: Interactive network visualization of the constructed cybersecurity knowledge graph
+### Core Pipeline Components
+
+1. **Intelligence Extraction (IE)**
+   - Automatically extracts cybersecurity entities and relationships from unstructured text
+   - Uses optimized prompt construction and demonstration retrieval
+
+2. **Hierarchical Entity Alignment**
+   - **Entity Typing (ET)**: Classifies entities by semantic type
+   - **Entity Merging (EM)**: Canonicalizes entities and removes redundancy with IOC protection
+
+3. **Link Prediction (LP)**
+   - Predicts and adds missing relationships to complete the knowledge graph
+
+4. **Interactive Visualization**
+   - Network graph visualization of the constructed cybersecurity knowledge graph
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/peng-gao-lab/CTINexus/main/ctinexus/static/webui.png" alt="CTINexus WebUI" width="500"/>
+  <img src="https://raw.githubusercontent.com/peng-gao-lab/CTINexus/main/ctinexus/static/webui.png" alt="CTINexus WebUI" width="600"/>
 </p>
 
-## News
+---
 
-📦 [2025/09/03] CTINexus Python package released! Install with `pip install ctinexus` for seamless integration into your Python projects.
+## Supported AI Providers
 
-🌟 [2025/07/29] CTINexus now features an intuitive Gradio interface! Submit threat intelligence text and instantly visualize extracted interactive graphs.
+CTINexus supports multiple AI providers for flexibility:
 
-🔥 [2025/04/21] We released the camera-ready paper on [arxiv](https://arxiv.org/pdf/2410.21060).
+| Provider | Models | Setup Required |
+|----------|--------|----------------|
+| **OpenAI** | GPT-4, GPT-4o, o1, o3, etc. | API Key |
+| **Google Gemini** | Gemini 2.0, 2.5 Flash, etc. | API Key |
+| **AWS Bedrock** | Claude, Nova, Llama, DeepSeek, etc. | AWS Credentials |
+| **Ollama** | Llama, Mistral, Qwen, Gemma, etc. | Local Installation (FREE) |
 
-🔥 [2025/02/12] CTINexus is accepted at 2025 IEEE European Symposium on Security and Privacy ([Euro S&P](https://eurosp2025.ieee-security.org/index.html)).
+> Note: When using Ollama models, use the **📖 [Ollama Setup Guide](docs/ollama-guide.md)**.
 
-## Quick Start
+---
 
-You can use CTINexus in three ways:
+## Getting Started
 
-- **📦 Python Package**: Python package for easy integration
-- **⚡ Command Line**: For automation and batch processing → **[📖 CLI Guide](docs/cli-guide.md)**
-- **🖥️ Web Interface**: User-friendly GUI for interactive analysis (follow the setup below)
-
-### Supported Models
-
-CTINexus supports the following AI providers:
-**OpenAI**, **Gemini**, **AWS**, **Ollama**
-
-All models from these providers are supported. If you would like to see additional providers integrated, please open a feature request issue [here](https://github.com/peng-gao-lab/CTINexus/issues).
 
 <a id="python-package"></a>
 
-## 📦 Using as a Python Package
+### 📦 Option 1: Python Package
 
-CTINexus can be used as a Python library for seamless integration into your projects.
-
-### Installation
+#### Installation
 
 ```bash
 pip install ctinexus
 ```
 
-### Configuration
 
-Before using CTINexus, you need to configure API keys. Create a `.env` file in your project directory with your credentials. Look at the [example env](.env.example) for reference.
+#### Configuration
 
-### Usage
+Create a `.env` file in your project directory with credentials for at least one provider. Look at [.env.example](.env.example) for reference.
+
+#### Usage
 
 ```python
 from ctinexus import process_cti_report
 from dotenv import load_dotenv
 
+# Load API credentials
 load_dotenv()
 
-# Example usage
-text = "Your CTI text here"
+# Process threat intelligence
+text = """
+APT29 used PowerShell to download additional malware from command-and-control
+server at 192.168.1.100. The attack exploited CVE-2023-1234 in Microsoft Exchange.
+"""
 
 result = process_cti_report(
     text=text,
@@ -101,189 +137,183 @@ result = process_cti_report(
 )
 
 # Access results
-print(f"Graph:", result["entity_relation_graph"])
-# Outputs the html file with the graph visualization.
-# Open the html file on your browser to see the results.
+print(f"Graph saved to: {result['entity_relation_graph']}")
+# Open the HTML file in your browser to view the interactive graph
 ```
 
-### Parameters
+**API Parameters:**
 
-- `text` (str): The threat intelligence report text to process
-- `provider` (str, optional): AI provider ("openai", "gemini", "aws", "ollama"). Auto-detected from available keys if not specified
-- `model` (str, optional): Specific model name (e.g., "gpt-4", "gemini-pro")
-- `embedding_model` (str, optional): Model for embeddings
-- `ie_model`, `et_model`, `ea_model`, `lp_model` (str, optional): Specific models for each pipeline component
-- `similarity_threshold` (float, default 0.6): Threshold for entity similarity matching
-- `output` (str, optional): File path to save JSON results
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `text` | str | **Required** | Threat intelligence text to process |
+| `provider` | str | Auto-detect | `"openai"`, `"gemini"`, `"aws"`, or `"ollama"` |
+| `model` | str | Provider default | Model name (e.g., `"gpt-4o"`, `"gemini-2.0-flash"`) |
+| `embedding_model` | str | Provider default | Embedding model for entity alignment |
+| `similarity_threshold` | float | 0.6 | Entity similarity threshold (0.0-1.0) |
+| `output` | str | None | Path to save JSON results |
 
-### Return Value
+**Return Value:**
 
-Returns a dictionary containing the complete CTI analysis results:
+The function returns a dictionary with complete analysis results:
 
-- `text`: The original input text
-- `IE`: Intelligence Extraction results with:
-  - `triplets`: Raw extracted subject-relation-object triplets
-- `ET`: Entity Typing results with:
-  - `typed_triplets`: Triplets with entity type classifications (Malware, Vulnerability, Infrastructure, etc.)
-- `EA`: Entity Alignment results with:
-  - `aligned_triplets`: Triplets with merged entities and canonical entity IDs
-- `LP`: Link Prediction results with:
-  - `predicted_links`: Additional predicted relationships between entities
-- `entity_relation_graph`: File path to the interactive HTML visualization
+```python
+{
+    "text": "Original input text",
+    "IE": {"triplets": [...]},  # Extracted entities and relationships
+    "ET": {"typed_triplets": [...]},  # Entities with type classifications
+    "EA": {"aligned_triplets": [...]},  # Canonicalized entities
+    "LP": {"predicted_links": [...]},  # Predicted relationships
+    "entity_relation_graph": "path/to/graph.html"  # Interactive visualization
+}
+```
 
 ---
 
-<a id="local-setup"></a>
+<a id="web-interface"></a>
 
-## 🐍 Local Development Setup
+### 🖥️ Option 2: Web Interface (Local Setup)
 
-For users who want to run the web interface, use the command line interface, or contribute to the project, you'll need to clone the repository and set up the development environment.
-
-### Prerequisites
-
-- **API Key** from one of the supported providers: OpenAI, Gemini, AWS, or **Ollama** (local, free)
-- **Python 3.11+** and pip
-
-### Step 1: Clone the Repository
+#### Installation
 
 ```bash
 git clone https://github.com/peng-gao-lab/CTINexus.git
 cd CTINexus
-```
 
-### Step 2: Configure API Keys
-
-Create a `.env` file in the project root:
-
-```bash
-cp .env.example .env
-```
-
-Edit the `.env` file with your API credentials.
-
-> **Note**: You only need to set up one provider. If using Ollama, see the [Ollama Guide](docs/ollama-guide.md).
-
-### Step 3: Setup Python Environment
-
-```bash
-# Create virtual environment
+# Create and activate virtual environment
 python -m venv .venv
 
-# Activate virtual environment (macOS/Linux:)
+# Activate (macOS/Linux)
 source .venv/bin/activate
 
-# On Windows:
+# Activate (Windows)
 # .venv\Scripts\activate
 
-# Install package
+# Install the package
 pip install -e .
 ```
 
-### Step 4: Run the Application
+
+#### Configuration
+
+```bash
+# Copy the example environment file
+cp .env.example .env
+
+# Edit .env with your credentials
+```
+
+#### Usage
+
+**1. Launch the application:**
 
 ```bash
 ctinexus
 ```
 
-### Step 5: Access the Application
+**2. Access the web interface:**
 
-Open your browser and navigate to: **http://127.0.0.1:7860**
+Open your browser to: **http://127.0.0.1:7860**
 
-Use `Ctrl+C` in the terminal to stop the application.
+**3. Process threat intelligence:**
+
+1. **Paste** threat intelligence text into the input area
+2. **Select** your AI provider and model from dropdowns
+3. **Click** "Run" to analyze
+4. **View** extracted entities, relationships, and interactive graph
+5. **Export** results as JSON or save graph images
 
 ---
 
 <a id="docker-setup"></a>
 
-## 🐳 Docker Setup
+### 🐳 Option 3: Docker (Containerized Setup)
 
-For containerized deployment or development:
+**Prerequisites:**
+- Install [Docker Desktop](https://docs.docker.com/get-docker/)
 
-### Prerequisites
-
-- [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) installed
-- API keys configured (see Local Development Setup above)
-
-### Step 1: Clone the Repository
+**Setup:**
 
 ```bash
+# Clone the repository
 git clone https://github.com/peng-gao-lab/CTINexus.git
 cd CTINexus
+
+# Copy environment template
+cp .env.example .env
+
+# Edit .env with your credentials
 ```
 
-### Step 2: Configure API Keys
 
-Create a `.env` file as described in the Local Development Setup section.
+#### Usage
 
-### Step 3: Launch with Docker
+**1. Build and start:**
 
 ```bash
-# Build and start
+# Run in foreground
 docker compose up --build
 
-# Or run in detached mode (runs in background)
+# OR run in background (detached mode)
 docker compose up -d --build
+
+# View logs (if running in background)
+docker compose logs -f
 ```
 
-### Step 4: Access the Application
+**2. Access the application:**
 
-Open your browser and navigate to: **http://localhost:8000**
+Open your browser to: **http://localhost:8000**
 
-### Step 5: Stop the Application
+**3. Process threat intelligence:**
 
-```bash
-docker compose down
-```
+1. **Paste** threat intelligence text into the input area
+2. **Select** your AI provider and model from dropdowns
+3. **Click** "Run" to analyze
+4. **View** extracted entities, relationships, and interactive graph
+5. **Export** results as JSON or save graph images
 
 ---
 
-## Web Interface and CLI Usage
+<a id="command-line"></a>
 
-After setting up the local environment, you can use CTINexus through the web interface or command line.
+## ⚡ Command Line Interface
 
-### ⚡ Command Line Interface (CLI)
+The CLI works with **any installation method** and is perfect for automation and batch processing.
 
-For automation and batch processing:
+### Basic Usage
 
 ```bash
+# Process a file
 ctinexus --input-file report.txt
+
+# Process text directly
+ctinexus --text "APT29 exploited CVE-2023-1234 using PowerShell..."
+
+# Specify provider and model
+ctinexus -i report.txt --provider openai --model gpt-4o
+
+# Save to custom location
+ctinexus -i report.txt --output results/analysis.json
 ```
 
-**📖 [Complete CLI Documentation](docs/cli-guide.md)** - Detailed usage examples and options.
+**📖 [Complete CLI Documentation](docs/cli-guide.md)** - Detailed examples and all available options.
 
-### 🖥️ Web Interface (GUI)
-
-Once the application is running:
-
-1. **Open your browser** to the appropriate URL:
-
-   - Docker: `http://localhost:8000`
-   - Local: `http://127.0.0.1:7860`
-
-1. **Paste threat intelligence text** into the input area
-
-1. **Select your preferred AI model** from the dropdown
-
-1. **Click "Run"** to analyze the text
-
-1. **View results**:
-
-   - **Extracted Entities**: Identified cybersecurity entities
-   - **Relationships**: Discovered connections between entities
-   - **Interactive Graph**: Network visualization
-   - **Export Options**: Download results as JSON or images
+---
 
 ## Contributing
 
 We warmly welcome contributions from the community! Whether you're interested in:
 
-- 🐛 **Fixing bugs** or adding new features
-- 📖 **Improving documentation** or adding examples
-- 🎨 **UI/UX enhancements** for the web interface
+- 🐛 Fix bugs or add features
+- 📖 Improve documentation
+- 🎨 Enhance the UI/UX
+- 🧪 Add tests or examples
 
 Please check out our **[Contributing Guide](CONTRIBUTING.md)** for detailed information on how to get started, development setup, and submission guidelines.
 
 ## Citation
+
+If you use CTINexus in your research, please cite our paper:
 
 ```bibtex
 @inproceedings{cheng2025ctinexusautomaticcyberthreat,
