@@ -259,7 +259,7 @@ class TestCreateGraphVisualization:
 
 		result = {"EA": {"aligned_triplets": []}}
 
-		url, filepath = create_graph_visualization(result)
+		_, _ = create_graph_visualization(result)
 
 		output_dir = tmp_path / "ctinexus_output"
 		assert output_dir.exists()

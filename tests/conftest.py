@@ -189,7 +189,7 @@ def sample_llm_response():
 	return MockResponse()
 
 
-@pytest.fixture(autouse=True)
+@pytest.fixture
 def clean_output_dir():
 	"""Clean up output directory after each test."""
 	yield

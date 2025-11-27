@@ -102,28 +102,28 @@ Good documentation is key to a successful project. If you find areas in our docu
 
 1. **Commit Changes:** Commit your changes with a descriptive commit message. Use a category to indicate the type of change. Common categories include:
 
-- `feat`: New feature
-- `fix`: Bug fix
-- `docs`: Documentation changes
-- `refactor`: Code refactoring
-- `test`: Adding or updating tests
-- `chore`: Maintenance tasks
+   - `feat`: New feature
+   - `fix`: Bug fix
+   - `docs`: Documentation changes
+   - `refactor`: Code refactoring
+   - `test`: Adding or updating tests
+   - `chore`: Maintenance tasks
 
-Example:
+   Example:
 
-```bash
-git commit -m "feat: add support for new AI provider"
-```
+   ```bash
+   git commit -m "feat: add support for new AI provider"
+   ```
 
-If pre-commit hooks are installed, they will automatically run when you commit. If any checks fail, fix the issues and commit again.
+   If pre-commit hooks are installed, they will automatically run when you commit. If any checks fail, fix the issues and commit again.
 
-11. **Push to Fork:** Push your changes to your forked repository:
+1. **Push to Fork:** Push your changes to your forked repository:
 
-```bash
-git push origin feature-name
-```
+   ```bash
+   git push origin feature-name
+   ```
 
-10. **Open a Pull Request:** Open a pull request from your fork to the main repository. Include a detailed description of your changes and any related issues.
+1. **Open a Pull Request:** Open a pull request from your fork to the main repository. Include a detailed description of your changes and any related issues.
 
 ## Automated Checks
 

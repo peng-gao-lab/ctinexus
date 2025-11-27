@@ -8,7 +8,9 @@ from ctinexus import process_cti_report
 class TestProcessCTIReport:
 	"""Integration tests for the main process_cti_report function."""
 
-	def test_process_cti_report_with_mocked_llm(self, sample_cti_text, mock_env_vars, mocker, tmp_path):
+	def test_process_cti_report_with_mocked_llm(
+		self, sample_cti_text, mock_env_vars, mocker, tmp_path, monkeypatch, clean_output_dir
+	):
 		"""Test full pipeline with mocked LLM calls."""
 		# Mock LLM responses
 		mock_completion = mocker.patch("ctinexus.llm_processor.litellm.completion")
@@ -50,36 +52,29 @@ class TestProcessCTIReport:
 		mock_embedding.return_value = {"data": [{"embedding": [0.1, 0.2, 0.3]}]}
 
 		# Change to temp directory for output
-		import os
+		monkeypatch.chdir(tmp_path)
 
-		original_dir = os.getcwd()
-		os.chdir(tmp_path)
+		result = process_cti_report(
+			text=sample_cti_text,
+			provider="OpenAI",
+			model="gpt-4o",
+			output=str(tmp_path / "output.json"),
+		)
 
-		try:
-			result = process_cti_report(
-				text=sample_cti_text,
-				provider="OpenAI",
-				model="gpt-4o",
-				output=str(tmp_path / "output.json"),
-			)
+		# Verify result structure
+		assert "text" in result
+		assert "IE" in result
+		assert "ET" in result
+		assert "EA" in result
+		assert "LP" in result
+		assert "entity_relation_graph" in result
 
-			# Verify result structure
-			assert "text" in result
-			assert "IE" in result
-			assert "ET" in result
-			assert "EA" in result
-			assert "LP" in result
-			assert "entity_relation_graph" in result
+		# Verify output file was created
+		output_file = tmp_path / "output.json"
+		assert output_file.exists()
 
-			# Verify output file was created
-			output_file = tmp_path / "output.json"
-			assert output_file.exists()
-
-			# Verify graph file was created
-			assert result["entity_relation_graph"].endswith(".html")
-
-		finally:
-			os.chdir(original_dir)
+		# Verify graph file was created
+		assert result["entity_relation_graph"].endswith(".html")
 
 	def test_process_cti_report_no_api_key(self, sample_cti_text, monkeypatch):
 		"""Test that process_cti_report raises error when no API keys are configured."""
@@ -106,7 +101,9 @@ class TestProcessCTIReport:
 		with pytest.raises(ValueError, match="Provider .* not available"):
 			process_cti_report(text=sample_cti_text, provider="InvalidProvider")
 
-	def test_process_cti_report_auto_detect_provider(self, sample_cti_text, mock_env_vars, mocker, tmp_path):
+	def test_process_cti_report_auto_detect_provider(
+		self, sample_cti_text, mock_env_vars, mocker, tmp_path, monkeypatch
+	):
 		"""Test that provider is auto-detected when not specified."""
 		# Mock LLM calls
 		mock_completion = mocker.patch("ctinexus.llm_processor.litellm.completion")
@@ -144,21 +141,14 @@ class TestProcessCTIReport:
 		mock_completion.return_value = MockResponse()
 		mock_embedding.return_value = {"data": [{"embedding": [0.1, 0.2, 0.3]}]}
 
-		import os
+		monkeypatch.chdir(tmp_path)
 
-		original_dir = os.getcwd()
-		os.chdir(tmp_path)
+		# Don't specify provider - should auto-detect
+		result = process_cti_report(text=sample_cti_text)
 
-		try:
-			# Don't specify provider - should auto-detect
-			result = process_cti_report(text=sample_cti_text)
-
-			assert "IE" in result
-			assert "ET" in result
-			assert "EA" in result
-
-		finally:
-			os.chdir(original_dir)
+		assert "IE" in result
+		assert "ET" in result
+		assert "EA" in result
 
 
 class TestPipelineComponents:
@@ -247,7 +237,9 @@ class TestPipelineComponents:
 		assert "ET" in et_result
 		assert "typed_triplets" in et_result["ET"]
 
-	def test_full_pipeline_data_flow(self, sample_cti_text, mock_env_vars, mocker, tmp_path):
+	def test_full_pipeline_data_flow(
+		self, sample_cti_text, mock_env_vars, mocker, tmp_path, monkeypatch, clean_output_dir
+	):
 		"""Test that data flows correctly through entire pipeline."""
 		# This is a comprehensive integration test
 		mock_completion = mocker.patch("ctinexus.llm_processor.litellm.completion")
@@ -285,33 +277,26 @@ class TestPipelineComponents:
 		mock_completion.return_value = MockResponse()
 		mock_embedding.return_value = {"data": [{"embedding": [0.1, 0.2, 0.3]}]}
 
-		import os
+		monkeypatch.chdir(tmp_path)
 
-		original_dir = os.getcwd()
-		os.chdir(tmp_path)
+		result = process_cti_report(text=sample_cti_text, provider="OpenAI")
 
-		try:
-			result = process_cti_report(text=sample_cti_text, provider="OpenAI")
+		# Verify each stage produced expected output
+		assert result["text"] == sample_cti_text
 
-			# Verify each stage produced expected output
-			assert result["text"] == sample_cti_text
+		# IE stage
+		assert "triplets" in result["IE"]
+		assert isinstance(result["IE"]["triplets"], list)
 
-			# IE stage
-			assert "triplets" in result["IE"]
-			assert isinstance(result["IE"]["triplets"], list)
+		# ET stage
+		assert "typed_triplets" in result["ET"]
 
-			# ET stage
-			assert "typed_triplets" in result["ET"]
+		# EA stage
+		assert "aligned_triplets" in result["EA"]
+		assert "entity_num" in result["EA"]
 
-			# EA stage
-			assert "aligned_triplets" in result["EA"]
-			assert "entity_num" in result["EA"]
+		# LP stage
+		assert "predicted_links" in result["LP"]
 
-			# LP stage
-			assert "predicted_links" in result["LP"]
-
-			# Graph visualization
-			assert "entity_relation_graph" in result
-
-		finally:
-			os.chdir(original_dir)
+		# Graph visualization
+		assert "entity_relation_graph" in result

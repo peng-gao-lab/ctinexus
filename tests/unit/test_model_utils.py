@@ -40,6 +40,8 @@ class TestCheckApiKey:
 		assert result is True
 		assert "Gemini" in MODELS
 		assert "gemini-2.0-flash" in MODELS["Gemini"]
+		assert "Gemini" in EMBEDDING_MODELS
+		assert "gemini-embedding-001" in EMBEDDING_MODELS["Gemini"]
 
 	def test_check_api_key_with_aws(self, monkeypatch):
 		"""Test that AWS models are registered when credentials are present."""
@@ -54,6 +56,8 @@ class TestCheckApiKey:
 		assert result is True
 		assert "AWS" in MODELS
 		assert "anthropic.claude-3-5-sonnet" in MODELS["AWS"]
+		assert "AWS" in EMBEDDING_MODELS
+		assert "amazon.titan-embed-text-v2:0" in EMBEDDING_MODELS["AWS"]
 
 	def test_check_api_key_with_ollama(self, monkeypatch):
 		"""Test that Ollama models are registered when base URL is set."""
@@ -69,6 +73,8 @@ class TestCheckApiKey:
 		assert result is True
 		assert "Ollama" in MODELS
 		assert "llama3.1:8b" in MODELS["Ollama"]
+		assert "Ollama" in EMBEDDING_MODELS
+		assert "nomic-embed-text" in EMBEDDING_MODELS["Ollama"]
 
 	def test_check_api_key_no_keys(self, monkeypatch):
 		"""Test that check returns False when no API keys are set."""
