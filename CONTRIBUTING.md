@@ -76,13 +76,25 @@ Good documentation is key to a successful project. If you find areas in our docu
 
 1. **Make Changes:** Make your changes in your branch.
 
+1. **Run tests:** Run the test suite to ensure your changes don't break existing functionality:
+
+   ```bash
+   # Run all tests
+   uv run pytest tests/ -v
+
+   # Run with coverage report
+   uv run pytest tests/ --cov=ctinexus --cov-report=term-missing
+   ```
+
+   All tests must pass before submitting a pull request. If you've added new features, include tests for them.
+
 1. **Format and Lint your code:** Before committing, ensure your code follows our style guidelines:
 
    ```bash
    pre-commit run --all-files
    ```
 
-1. **Test your changes:** Ensure your changes work correctly:
+1. **Test your changes manually:** Ensure your changes work correctly in practice:
 
    ```bash
    ctinexus
