@@ -26,7 +26,7 @@ classifiers = [
 ]
 
 dependencies = [
-    "gradio",
+    "gradio>=5.0,<6.0",
     "hydra-core",
     "jinja2",
     "litellm",

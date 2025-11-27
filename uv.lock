@@ -570,7 +570,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "gradio" },
+    { name = "gradio", specifier = ">=5.0,<6.0" },
     { name = "hydra-core" },
     { name = "jinja2" },
     { name = "litellm" },
