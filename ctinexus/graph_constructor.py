@@ -437,8 +437,7 @@ def create_graph_visualization(result: dict) -> str:
         """
 
 		for entity_type, color in entity_colors.items():
-			if entity_type != "default":
-				legend_html += f"<li style='margin-bottom: 5px;'><span style='display: inline-block; width: 15px; height: 15px; background-color: {color}; margin-right: 10px; border-radius: 50%;'></span>{entity_type}</li>"
+			legend_html += f"<li style='margin-bottom: 5px;'><span style='display: inline-block; width: 15px; height: 15px; background-color: {color}; margin-right: 10px; border-radius: 50%;'></span>{entity_type.capitalize()}</li>"
 
 		legend_html += """
             </ul>
