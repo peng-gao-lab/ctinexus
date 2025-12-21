@@ -1,5 +1,6 @@
 import logging
 import os
+import re
 import time
 from collections import defaultdict
 
@@ -289,25 +290,49 @@ class Merger:
 		return self.js
 
 
+def _strip_type_suffix(text: str) -> str:
+	"""Remove parenthetical type suffix from text, e.g., 'ShadowStrike (Malware)' -> 'ShadowStrike'"""
+	return re.sub(r"\s*\([^)]+\)\s*$", "", text).strip()
+
+
+# Visualization styling constants
+_VIS_CONFIG = {
+	"background_color": "#27272a",
+	"font_color": "#ffffff",
+	"stroke_color": "#000000",
+	"node_font_size": 18,
+	"edge_font_size": 16,
+	"node_base_size": 20,
+	"node_size_multiplier": 3,
+	"edge_base_length": 500,
+	"edge_label_multiplier": 15,
+	"node_label_multiplier": 8,
+	"spring_base_length": 500,
+	"spring_edge_multiplier": 12,
+	"spring_node_multiplier": 10,
+	"gravitational_constant": -8000,
+	"extracted_edge_color": "#666666",
+	"predicted_edge_color": "#ff4444",
+}
+
+# Entity type to color mapping
+_ENTITY_COLORS = {
+	"Malware": "#ff4444",  # Bright Red
+	"Tool": "#44ff44",  # Bright Green
+	"Event": "#4444ff",  # Bright Blue
+	"Organization": "#ffaa44",  # Bright Orange
+	"Time": "#aa44ff",  # Bright Purple
+	"Information": "#44ffff",  # Bright Cyan
+	"Indicator": "#ff44ff",  # Bright Magenta
+	"Indicator:File": "#ff44ff",  # Bright Magenta
+	"default": "#aaaaaa",  # Light Gray
+}
+
+
 def create_graph_visualization(result: dict) -> str:
 	"""Create an interactive graph visualization using Pyvis"""
-	# Create a directed graph
 	G = nx.DiGraph()
-
 	http_port = get_current_port()
-
-	# Define colors for different entity types
-	entity_colors = {
-		"Malware": "#ff4444",  # Bright Red
-		"Tool": "#44ff44",  # Bright Green
-		"Event": "#4444ff",  # Bright Blue
-		"Organization": "#ffaa44",  # Bright Orange
-		"Time": "#aa44ff",  # Bright Purple
-		"Information": "#44ffff",  # Bright Cyan
-		"Indicator": "#ff44ff",  # Bright Magenta
-		"Indicator:File": "#ff44ff",  # Bright Magenta
-		"default": "#aaaaaa",  # Light Gray
-	}
 
 	# Add nodes and edges from the aligned triplets
 	if "EA" in result and "aligned_triplets" in result["EA"]:
@@ -318,7 +343,7 @@ def create_graph_visualization(result: dict) -> str:
 				subject.get("entity_id"),
 				text=subject.get("entity_text", ""),
 				type=subject.get("mention_class", "default"),
-				color=entity_colors.get(subject.get("mention_class", "default"), entity_colors["default"]),
+				color=_ENTITY_COLORS.get(subject.get("mention_class", "default"), _ENTITY_COLORS["default"]),
 			)
 
 			# Add object node
@@ -327,10 +352,7 @@ def create_graph_visualization(result: dict) -> str:
 				object_node.get("entity_id"),
 				text=object_node.get("entity_text", ""),
 				type=object_node.get("mention_class", "default"),
-				color=entity_colors.get(
-					object_node.get("mention_class", "default"),
-					entity_colors["default"],
-				),
+				color=_ENTITY_COLORS.get(object_node.get("mention_class", "default"), _ENTITY_COLORS["default"]),
 			)
 
 			# Add edge with relation
@@ -350,69 +372,107 @@ def create_graph_visualization(result: dict) -> str:
 				predicted=True,
 			)
 
-	# Create a Pyvis network
+	# Calculate dynamic spring length based on longest labels in the graph
+	max_edge_label_len = max((len(d.get("relation", "")) for _, _, d in G.edges(data=True)), default=0)
+	max_node_label_len = max((len(_strip_type_suffix(d.get("text", ""))) for _, d in G.nodes(data=True)), default=0)
+
+	cfg = _VIS_CONFIG
+	base_spring_length = (
+		cfg["spring_base_length"]
+		+ max_edge_label_len * cfg["spring_edge_multiplier"]
+		+ max_node_label_len * cfg["spring_node_multiplier"]
+	)
+
+	# Create Pyvis network
 	net = Network(
 		height="100vh",
 		width="100%",
-		bgcolor="#27272a",
-		font_color="white",
+		bgcolor=cfg["background_color"],
+		font_color=cfg["font_color"],
 		directed=True,
 	)
 
-	net.set_options("""
-    {
-      "physics": {
+	net.set_options(f"""
+    {{
+      "physics": {{
         "enabled": true,
-        "barnesHut": {
-            "gravitationalConstant": -500,
-            "springLength": 200,
+        "barnesHut": {{
+            "gravitationalConstant": {cfg["gravitational_constant"]},
+            "springLength": {base_spring_length},
             "springConstant": 0,
-            "damping": 0.4
-        }
-      },
-      "edges": {
-        "smooth": {
+            "damping": 0.4,
+            "avoidOverlap": 1
+        }}
+      }},
+      "nodes": {{
+        "font": {{
+          "size": {cfg["node_font_size"]},
+          "color": "{cfg["font_color"]}",
+          "strokeWidth": 2,
+          "strokeColor": "{cfg["stroke_color"]}"
+        }}
+      }},
+      "edges": {{
+        "smooth": {{
           "enabled": true,
-          "type": "dynamic",
-          "roundness": 0.5
-        },
-        "font": {
-          "size": 15,
-          "color": "#ffffff",
-          "strokeWidth": 1,
-          "strokeColor": "#000000"
-        }
-      },
-      "interaction": {
+          "type": "curvedCW",
+          "roundness": 0.15
+        }},
+        "font": {{
+          "size": {cfg["edge_font_size"]},
+          "color": "{cfg["font_color"]}",
+          "strokeWidth": 2,
+          "strokeColor": "{cfg["stroke_color"]}"
+        }}
+      }},
+      "interaction": {{
         "dragNodes": true,
         "dragView": true,
         "zoomView": true,
         "hover": true
-      },
-      "layout": {
+      }},
+      "layout": {{
         "improvedLayout": true
-      }
-    }
+      }}
+    }}
     """)
 
 	# Add nodes to pyvis network
 	for node_id, node_attrs in G.nodes(data=True):
+		label_text = _strip_type_suffix(node_attrs.get("text", ""))
 		net.add_node(
 			node_id,
-			label=node_attrs.get("text", ""),
-			title=f"{node_attrs.get('text', '')}",
-			color=node_attrs.get("color", "#aaaaaa"),
-			size=15 + len(G[node_id]) * 2,
+			label=label_text,
+			title=label_text,
+			color=node_attrs.get("color", _ENTITY_COLORS["default"]),
+			size=cfg["node_base_size"] + len(G[node_id]) * cfg["node_size_multiplier"],
+			font={
+				"size": cfg["node_font_size"],
+				"color": cfg["font_color"],
+				"strokeWidth": 2,
+				"strokeColor": cfg["stroke_color"],
+			},
 		)
 
-	# Add edges to pyvis network
+	# Add edges to pyvis network with dynamic length based on labels
 	for u, v, edge_attrs in G.edges(data=True):
+		relation = edge_attrs.get("relation", "")
+		source_text = _strip_type_suffix(G.nodes[u].get("text", "")) if u in G.nodes else ""
+		target_text = _strip_type_suffix(G.nodes[v].get("text", "")) if v in G.nodes else ""
+
+		edge_length = (
+			cfg["edge_base_length"]
+			+ len(relation) * cfg["edge_label_multiplier"]
+			+ (len(source_text) + len(target_text)) * cfg["node_label_multiplier"]
+		)
+
 		net.add_edge(
 			u,
 			v,
-			label=edge_attrs.get("relation", ""),
-			title=edge_attrs.get("relation", ""),
-			color="#ff4444" if edge_attrs.get("predicted") else "#666666",
+			label=relation,
+			title=relation,
+			color=cfg["predicted_edge_color"] if edge_attrs.get("predicted") else cfg["extracted_edge_color"],
+			length=edge_length,
 		)
 
 	# Save the graph to the pyvis_files directory
@@ -429,23 +489,23 @@ def create_graph_visualization(result: dict) -> str:
 		with open(file_path, "r") as f:
 			html_content = f.read()
 
-		legend_html = """
-        <div style="position: fixed; top: 50px; right: 20px; background-color: #27272a; color: white; padding: 15px; border-radius: 8px; border: 1px solid #444; max-width: 200px; font-size: 15px;">
+		legend_html = f"""
+        <div style="position: fixed; top: 50px; right: 20px; background-color: {cfg["background_color"]}; color: white; padding: 15px; border-radius: 8px; border: 1px solid #444; max-width: 200px; font-size: 15px;">
             <h3 style="margin-top: 0; font-size: 18px;">Legend</h3>
             <h4 style="margin-bottom: 5px; font-size: 15px;">Node Types:</h4>
             <ul style="list-style: none; padding: 0; margin-bottom: 15px;">
         """
 
-		for entity_type, color in entity_colors.items():
+		for entity_type, color in _ENTITY_COLORS.items():
 			legend_html += f"<li style='margin-bottom: 5px;'><span style='display: inline-block; width: 15px; height: 15px; background-color: {color}; margin-right: 10px; border-radius: 50%;'></span>{entity_type.capitalize()}</li>"
 
-		legend_html += """
+		legend_html += f"""
             </ul>
             <br>
             <h4 style="margin-bottom: 5px; font-size: 15px;">Edge Types:</h4>
             <ul style="list-style: none; padding: 0;">
-            <li style='margin-bottom: 5px;'><span style='display: inline-block; width: 20px; height: 2px; background-color: #94a3b8; margin-right: 10px;'></span>Extracted</li>
-            <li style='margin-bottom: 5px;'><span style='display: inline-block; width: 20px; height: 3px; background: repeating-linear-gradient(to right, #ff6b6b 0px, #ff6b6b 5px, transparent 5px, transparent 10px); margin-right: 10px;'></span>Predicted</li>
+            <li style='margin-bottom: 5px;'><span style='display: inline-block; width: 20px; height: 2px; background-color: {cfg["extracted_edge_color"]}; margin-right: 10px;'></span>Extracted</li>
+            <li style='margin-bottom: 5px;'><span style='display: inline-block; width: 20px; height: 2px; background-color: {cfg["predicted_edge_color"]}; margin-right: 10px;'></span>Predicted</li>
             </ul>
         </div>
         """
