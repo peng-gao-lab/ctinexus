@@ -178,10 +178,13 @@ def process_and_visualize(
 		metrics_table = get_metrics_box(ie_metrics, et_metrics, ea_metrics, lp_metrics)
 
 		return result, graph_html_content, metrics_table
-	except Exception:
+	except Exception as e:
+		import traceback
+
+		traceback.print_exc()
 		return (
 			result,
-			None,
+			f"<div style='color: red; text-align: center; padding: 20px;'>Error creating graph: {str(e)}</div>",
 			get_metrics_box(),
 		)
 

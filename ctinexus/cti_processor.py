@@ -115,6 +115,35 @@ class PostProcessor:
 		return self.js
 
 
+def validate_typed_triplet(triplet: dict) -> bool:
+	"""Validate that a typed triplet has the required structure for preprocessing.
+
+	A valid typed triplet must have:
+	- 'subject' dict with 'text' key
+	- 'relation' string
+	- 'object' dict with 'text' key
+	"""
+	if not isinstance(triplet, dict):
+		return False
+
+	required_keys = ["subject", "relation", "object"]
+	if not all(key in triplet for key in required_keys):
+		return False
+
+	for key in ["subject", "object"]:
+		value = triplet.get(key)
+		if not isinstance(value, dict):
+			return False
+		if not value.get("text"):
+			return False
+
+	relation = triplet.get("relation")
+	if not isinstance(relation, str) or not relation.strip():
+		return False
+
+	return True
+
+
 def preprocessor(result: dict) -> dict:
 	# Dictionary to track mention_text to mention_id mapping
 	mention_id_map = {}
@@ -126,12 +155,33 @@ def preprocessor(result: dict) -> dict:
 
 	jsr = copy.deepcopy(result)
 	jsr["EA"] = {}
-	jsr["EA"]["aligned_triplets"] = result["ET"]["typed_triplets"]
+
+	# Get typed triplets with validation
+	typed_triplets = result.get("ET", {}).get("typed_triplets", [])
+	if not isinstance(typed_triplets, list):
+		logger.warning("typed_triplets is not a list, resetting to empty")
+		typed_triplets = []
+
+	# Filter out invalid triplets
+	valid_triplets = []
+	for i, triplet in enumerate(typed_triplets):
+		if validate_typed_triplet(triplet):
+			valid_triplets.append(triplet)
+		else:
+			logger.warning(f"[preprocessor] Dropping invalid triplet at index {i}: {triplet}")
+
+	if len(valid_triplets) < len(typed_triplets):
+		logger.warning(
+			f"[preprocessor] Filtered {len(typed_triplets) - len(valid_triplets)} invalid triplets, "
+			f"{len(valid_triplets)} remaining"
+		)
+
+	jsr["EA"]["aligned_triplets"] = valid_triplets
 
 	for triple in jsr["EA"]["aligned_triplets"]:
 		for key, entity in triple.items():
 			if key in ["subject", "object"]:
-				mention_text = entity["text"]
+				mention_text = entity.get("text", "")
 
 				# Check if mention_text already has an ID
 				if mention_text not in mention_id_map:

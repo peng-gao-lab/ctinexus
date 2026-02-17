@@ -16,6 +16,38 @@ from ctinexus.utils.http_server_utils import get_current_port
 logger = logging.getLogger(__name__)
 
 
+def validate_aligned_triplet(triplet: dict) -> bool:
+	"""Validate that an aligned triplet has the required structure for graph construction.
+
+	A valid aligned triplet must have:
+	- 'subject' dict with 'entity_id' and 'entity_text' keys
+	- 'relation' string
+	- 'object' dict with 'entity_id' and 'entity_text' keys
+	"""
+	if not isinstance(triplet, dict):
+		return False
+
+	required_keys = ["subject", "relation", "object"]
+	if not all(key in triplet for key in required_keys):
+		return False
+
+	for key in ["subject", "object"]:
+		value = triplet.get(key)
+		if not isinstance(value, dict):
+			return False
+		# Must have entity_id (can be 0) and entity_text
+		if "entity_id" not in value:
+			return False
+		if not value.get("entity_text") and not value.get("mention_text"):
+			return False
+
+	relation = triplet.get("relation")
+	if not isinstance(relation, str) or not relation.strip():
+		return False
+
+	return True
+
+
 class Linker:
 	def __init__(self, config: DictConfig):
 		self.config = config
@@ -23,7 +55,53 @@ class Linker:
 
 	def call(self, result: dict) -> dict:
 		self.js = result
-		self.aligned_triplets = self.js["EA"]["aligned_triplets"]
+		aligned_triplets = self.js.get("EA", {}).get("aligned_triplets", [])
+
+		# Validate and filter triplets
+		if not isinstance(aligned_triplets, list):
+			logger.warning("[Linker] aligned_triplets is not a list, resetting to empty")
+			aligned_triplets = []
+
+		valid_triplets = []
+		for i, triplet in enumerate(aligned_triplets):
+			if validate_aligned_triplet(triplet):
+				valid_triplets.append(triplet)
+			else:
+				logger.warning(f"[Linker] Dropping invalid triplet at index {i}: {triplet}")
+
+		if len(valid_triplets) < len(aligned_triplets):
+			logger.warning(
+				f"[Linker] Filtered {len(aligned_triplets) - len(valid_triplets)} invalid triplets, "
+				f"{len(valid_triplets)} remaining"
+			)
+
+		self.aligned_triplets = valid_triplets
+		self.js["EA"]["aligned_triplets"] = valid_triplets
+
+		# Handle empty triplets case
+		if not self.aligned_triplets:
+			logger.warning("[Linker] No valid triplets to process, returning empty graph")
+			self.js["LP"] = {
+				"predicted_links": [],
+				"response_time": 0,
+				"model_usage": {
+					"model": self.config.model,
+					"input": {"tokens": 0, "cost": 0},
+					"output": {"tokens": 0, "cost": 0},
+					"total": {"tokens": 0, "cost": 0},
+				},
+				"topic_node": {
+					"entity_id": -1,
+					"entity_text": "",
+					"mention_text": "",
+					"mention_class": "default",
+					"mention_merged": [],
+				},
+				"main_nodes": [],
+				"subgraphs": [],
+				"subgraph_num": 0,
+			}
+			return self.js
 
 		for triplet in self.aligned_triplets:
 			subject_entity_id = triplet["subject"]["entity_id"]
@@ -131,6 +209,40 @@ class Linker:
 		return self.get_node(self.get_main_node(main_subgraph))
 
 
+def validate_preprocessed_triplet(triplet: dict) -> bool:
+	"""Validate that a preprocessed triplet has the required structure for merging.
+
+	A valid preprocessed triplet must have:
+	- 'subject' dict with 'mention_id', 'mention_text', 'mention_class' keys
+	- 'relation' string
+	- 'object' dict with 'mention_id', 'mention_text', 'mention_class' keys
+	"""
+	if not isinstance(triplet, dict):
+		return False
+
+	required_keys = ["subject", "relation", "object"]
+	if not all(key in triplet for key in required_keys):
+		return False
+
+	for key in ["subject", "object"]:
+		value = triplet.get(key)
+		if not isinstance(value, dict):
+			return False
+		# Must have mention_id (can be 0), mention_text, and mention_class
+		if "mention_id" not in value:
+			return False
+		if not value.get("mention_text"):
+			return False
+		if "mention_class" not in value:
+			return False
+
+	relation = triplet.get("relation")
+	if not isinstance(relation, str) or not relation.strip():
+		return False
+
+	return True
+
+
 class Merger:
 	def __init__(self, config: DictConfig):
 		self.config = config
@@ -203,6 +315,40 @@ class Merger:
 
 	def call(self, result: dict) -> dict:
 		self.js = result
+
+		# Validate and filter triplets
+		aligned_triplets = self.js.get("EA", {}).get("aligned_triplets", [])
+		if not isinstance(aligned_triplets, list):
+			logger.warning("[Merger] aligned_triplets is not a list, resetting to empty")
+			aligned_triplets = []
+
+		valid_triplets = []
+		for i, triplet in enumerate(aligned_triplets):
+			if validate_preprocessed_triplet(triplet):
+				valid_triplets.append(triplet)
+			else:
+				logger.warning(f"[Merger] Dropping invalid triplet at index {i}: {triplet}")
+
+		if len(valid_triplets) < len(aligned_triplets):
+			logger.warning(
+				f"[Merger] Filtered {len(aligned_triplets) - len(valid_triplets)} invalid triplets, "
+				f"{len(valid_triplets)} remaining"
+			)
+
+		self.js["EA"]["aligned_triplets"] = valid_triplets
+
+		# Handle empty triplets case
+		if not valid_triplets:
+			logger.warning("[Merger] No valid triplets to process")
+			self.js["EA"]["entity_num"] = 0
+			self.js["EA"]["model_usage"] = {
+				"model": self.config.embedding_model,
+				"input": {"tokens": 0, "cost": 0},
+				"output": {"tokens": 0, "cost": 0},
+				"total": {"tokens": 0, "cost": 0},
+			}
+			self.js["EA"]["response_time"] = 0
+			return self.js
 
 		for triple in self.js["EA"]["aligned_triplets"]:
 			for key, node in triple.items():
@@ -332,7 +478,6 @@ _ENTITY_COLORS = {
 def create_graph_visualization(result: dict) -> str:
 	"""Create an interactive graph visualization using Pyvis"""
 	G = nx.DiGraph()
-	http_port = get_current_port()
 
 	# Add nodes and edges from the aligned triplets
 	if "EA" in result and "aligned_triplets" in result["EA"]:
@@ -518,4 +663,10 @@ def create_graph_visualization(result: dict) -> str:
 	except Exception as e:
 		logger.error(f"Error saving graph: {e}")
 
-	return f"http://localhost:{http_port}/{file_name}", file_path
+	# Get port (this also ensures server is running and healthy)
+	http_port = get_current_port()
+	graph_url = f"http://localhost:{http_port}/{file_name}"
+
+	logger.debug(f"Graph saved to {file_path}, accessible at {graph_url}")
+
+	return graph_url, file_path
