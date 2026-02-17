@@ -29,6 +29,65 @@ except LookupError:
 litellm.drop_params = True
 
 
+def validate_triplet(triplet: dict) -> bool:
+	"""Validate that a triplet has the required structure.
+
+	A valid triplet must have 'subject', 'relation', and 'object' keys.
+	For IE stage: subject/object should be strings or have 'text' key.
+	For ET stage: subject/object should have 'text' and 'class' keys.
+	For EA stage: subject/object should have 'mention_text', 'mention_id', etc.
+	"""
+	if not isinstance(triplet, dict):
+		return False
+
+	required_keys = ["subject", "relation", "object"]
+	if not all(key in triplet for key in required_keys):
+		return False
+
+	# Check subject and object are valid (either strings or dicts with required keys)
+	for key in ["subject", "object"]:
+		value = triplet[key]
+		if value is None:
+			return False
+		if isinstance(value, str):
+			if not value.strip():
+				return False
+		elif isinstance(value, dict):
+			# Must have at least 'text' or 'mention_text'
+			if not (value.get("text") or value.get("mention_text")):
+				return False
+		else:
+			return False
+
+	# Relation should be a non-empty string
+	relation = triplet.get("relation")
+	if not isinstance(relation, str) or not relation.strip():
+		return False
+
+	return True
+
+
+def filter_valid_triplets(triplets: list, stage: str = "unknown") -> list:
+	"""Filter out invalid triplets and log warnings for dropped ones."""
+	if not triplets:
+		return []
+
+	valid_triplets = []
+	for i, triplet in enumerate(triplets):
+		if validate_triplet(triplet):
+			valid_triplets.append(triplet)
+		else:
+			logger.warning(f"[{stage}] Dropping invalid triplet at index {i}: {triplet}")
+
+	if len(valid_triplets) < len(triplets):
+		logger.warning(
+			f"[{stage}] Filtered {len(triplets) - len(valid_triplets)} invalid triplets, "
+			f"{len(valid_triplets)} remaining"
+		)
+
+	return valid_triplets
+
+
 def with_retry(max_attempts=5):
 	"""Decorator to handle retry logic for API calls"""
 
@@ -75,8 +134,15 @@ class LLMTagger:
 			else:
 				self.response_content["tagged_triples"] = []
 
+		# Validate and filter triplets
+		tagged_triplets = self.response_content.get("tagged_triples", [])
+		if not isinstance(tagged_triplets, list):
+			logger.warning("[ET] tagged_triples is not a list, resetting to empty")
+			tagged_triplets = []
+		tagged_triplets = filter_valid_triplets(tagged_triplets, stage="ET")
+
 		result["ET"] = {}
-		result["ET"]["typed_triplets"] = self.response_content["tagged_triples"]
+		result["ET"]["typed_triplets"] = tagged_triplets
 		result["ET"]["response_time"] = self.response_time
 		result["ET"]["model_usage"] = self.usage
 
@@ -393,12 +459,20 @@ class ResponseParser:
 		if "triplets" not in response_content:
 			response_content["triplets"] = []
 
+		# Validate and filter triplets from IE stage
+		triplets = response_content.get("triplets", [])
+		if not isinstance(triplets, list):
+			logger.warning("[IE] triplets is not a list, resetting to empty")
+			triplets = []
+		triplets = filter_valid_triplets(triplets, stage="IE")
+		response_content["triplets"] = triplets
+
 		self.output = {
 			"CTI": self.query,
 			"IE": response_content,
 			"usage": UsageCalculator(self.config, self.llm_response).calculate(),
 			"prompt": self.prompt,
-			"triples_count": len(response_content["triplets"]),
+			"triples_count": len(triplets),
 		}
 
 		return self.output
