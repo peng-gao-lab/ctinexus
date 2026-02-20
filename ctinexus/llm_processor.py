@@ -219,19 +219,21 @@ class UrlSourceInput:
 			"source_domain": metadata["source_domain"],
 			"metadata": metadata,
 			"raw_text_length": len(raw_text.strip()),
-			"normalized_text_length": len(normalized_text),
-			"normalized_text": normalized_text,
-			"focused_text_length": len(focused_text),
-			"focused_text": focused_text,
-			"extraction_candidates": hybrid_extract.get("candidates", []),
+			"prompt_template": getattr(self.config, "url_prompt_file", None) or "url_source_input.jinja",
 		}
 
-		result["prompt"] = self.generate_prompt(result, raw_text=raw_text, html_content=html_content)
+		summary_prompt = self.generate_prompt(
+			result,
+			raw_text=raw_text,
+			html_content=html_content,
+			normalized_text=normalized_text,
+			focused_text=focused_text,
+		)
 
 		summary_generated = False
 		summary_usage = None
 		try:
-			summary_text, summary_response_time, summary_usage = self.summarize(result["prompt"])
+			summary_text, summary_response_time, summary_usage = self.summarize(summary_prompt)
 			result["summarized_text"] = self.normalize_summary_text(summary_text)
 			result["summary_response_time"] = summary_response_time
 			result["summary_model_usage"] = summary_usage
@@ -248,6 +250,7 @@ class UrlSourceInput:
 				repaired_text, repaired_time, repaired_usage = self.repair_summary(
 					source_result=result,
 					initial_summary=result["summarized_text"],
+					focused_text=focused_text,
 				)
 				repaired_summary = self.normalize_summary_text(repaired_text)
 				if repaired_summary:
@@ -260,9 +263,17 @@ class UrlSourceInput:
 				logger.warning(f"URL summary repair failed; retaining initial summary: {e}")
 
 		result["final_text"] = result["summarized_text"] or normalized_text
+
 		return result
 
-	def generate_prompt(self, source_result: dict, raw_text: str = "", html_content: str = "") -> list[dict]:
+	def generate_prompt(
+		self,
+		source_result: dict,
+		raw_text: str = "",
+		html_content: str = "",
+		normalized_text: str = "",
+		focused_text: str = "",
+	) -> list[dict]:
 		"""Generate prompt payload for downstream summarization stages."""
 		url_prompt_folder = getattr(self.config, "url_prompt_folder", None) or "prompts"
 		url_prompt_file = getattr(self.config, "url_prompt_file", None) or "url_source_input.jinja"
@@ -282,14 +293,14 @@ class UrlSourceInput:
 				"author": source_result.get("metadata", {}).get("author"),
 				"date": source_result.get("metadata", {}).get("date"),
 				"published_date": source_result.get("metadata", {}).get("date"),
-				"content": source_result.get("focused_text", source_result.get("normalized_text", "")),
-				"normalized_text": source_result.get("normalized_text", ""),
-				"focused_text": source_result.get("focused_text", source_result.get("normalized_text", "")),
+				"content": focused_text or normalized_text,
+				"normalized_text": normalized_text,
+				"focused_text": focused_text or normalized_text,
 				"raw_text": raw_text,
 				"html_content": html_content,
 				"raw_text_length": source_result.get("raw_text_length", 0),
-				"normalized_text_length": source_result.get("normalized_text_length", 0),
-				"focused_text_length": source_result.get("focused_text_length", 0),
+				"normalized_text_length": len(normalized_text),
+				"focused_text_length": len(focused_text),
 			}
 
 			if variables:
@@ -299,9 +310,7 @@ class UrlSourceInput:
 			return [{"role": "user", "content": user_prompt}]
 		except Exception as e:
 			logger.warning(f"URL prompt generation failed, falling back to plain content prompt: {e}")
-			return [
-				{"role": "user", "content": source_result.get("focused_text", source_result.get("normalized_text", ""))}
-			]
+			return [{"role": "user", "content": focused_text or normalized_text}]
 
 	def extract_hybrid_content(self, html_content: str) -> dict:
 		"""Hybrid extraction: trafilatura variants + metadata/script fallbacks + CTI-aware merge."""
@@ -640,7 +649,7 @@ class UrlSourceInput:
 		usage = UsageCalculator(self.config, response).calculate()
 		return summary_text, response_time, usage
 
-	def repair_summary(self, source_result: dict, initial_summary: str) -> tuple[str, float, dict]:
+	def repair_summary(self, source_result: dict, initial_summary: str, focused_text: str) -> tuple[str, float, dict]:
 		"""Repair non-compliant summary output into strict CTINexus-ready paragraph format."""
 		repair_prompt = (
 			"You will rewrite a CTI summary into strict format.\n"
@@ -656,7 +665,7 @@ class UrlSourceInput:
 			"Original summary to fix:\n"
 			f"{initial_summary}\n\n"
 			"Relevant extracted CTI content:\n"
-			f"{source_result.get('focused_text', '')[:9000]}\n\n"
+			f"{focused_text[:9000]}\n\n"
 			"Output only the rewritten paragraph."
 		)
 		return self.summarize([{"role": "user", "content": repair_prompt}])
@@ -833,9 +842,7 @@ class UrlSourceInput:
 				"url": source_url,
 			},
 			"raw_text_length": 0,
-			"normalized_text_length": 0,
-			"normalized_text": "",
-			"prompt": [],
+			"prompt_template": getattr(self.config, "url_prompt_file", None) or "url_source_input.jinja",
 			"error": {"code": code, "message": message},
 		}
 
