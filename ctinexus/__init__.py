@@ -8,7 +8,8 @@ from .utils.model_utils import MODELS, check_api_key
 
 
 def process_cti_report(
-	text: str,
+	text: str = None,
+	source_url: str = None,
 	provider: str = None,
 	model: str = None,
 	embedding_model: str = None,
@@ -27,7 +28,8 @@ def process_cti_report(
 	visualization and optionally writes the results to a specified output file.
 
 	Args:
-		text (str): The raw text of the CTI report to process.
+		text (str, optional): The raw text of the CTI report to process.
+		source_url (str, optional): URL of a CTI report/blog to ingest and process.
 		provider (str, optional): The name of the model provider. Defaults to the first available provider.
 		model (str, optional): The base model to use for processing. Defaults to the provider's default model.
 		embedding_model (str, optional): The embedding model to use. Defaults to the provider's default embedding model.
@@ -41,6 +43,11 @@ def process_cti_report(
 	Returns:
 		dict: A dictionary containing the processed results, including the entity-relation graph file path.
 	"""
+	if not text and not source_url:
+		raise ValueError("No input provided. Provide either `text` or `source_url`.")
+	if text and source_url:
+		raise ValueError("`text` and `source_url` are mutually exclusive. Provide only one.")
+
 	api_keys_available = check_api_key()
 	if not api_keys_available:
 		raise RuntimeError(
@@ -70,6 +77,7 @@ def process_cti_report(
 
 	result = run_pipeline(
 		text=text,
+		source_url=source_url,
 		ie_model=ie_model_full,
 		et_model=et_model_full,
 		ea_model=ea_model_full,

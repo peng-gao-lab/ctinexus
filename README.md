@@ -122,7 +122,7 @@ from dotenv import load_dotenv
 # Load API credentials
 load_dotenv()
 
-# Process threat intelligence
+# Process threat intelligence text
 text = """
 APT29 used PowerShell to download additional malware from command-and-control
 server at 192.168.1.100. The attack exploited CVE-2023-1234 in Microsoft Exchange.
@@ -139,18 +139,28 @@ result = process_cti_report(
 # Access results
 print(f"Graph saved to: {result['entity_relation_graph']}")
 # Open the HTML file in your browser to view the interactive graph
+
+# Or process from a CTI report/blog URL
+result = process_cti_report(
+    source_url="https://example.com/threat-report",
+    provider="openai",
+    model="gpt-4",
+)
 ```
 
 **API Parameters:**
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
-| `text` | str | **Required** | Threat intelligence text to process |
+| `text` | str | None | Threat intelligence text to process (required if `source_url` is not provided) |
+| `source_url` | str | None | CTI report/blog URL to ingest and process (required if `text` is not provided) |
 | `provider` | str | Auto-detect | `"openai"`, `"gemini"`, `"aws"`, or `"ollama"` |
 | `model` | str | Provider default | Model name (e.g., `"gpt-4o"`, `"gemini-2.0-flash"`) |
 | `embedding_model` | str | Provider default | Embedding model for entity alignment |
 | `similarity_threshold` | float | 0.6 | Entity similarity threshold (0.0-1.0) |
 | `output` | str | None | Path to save JSON results |
+
+**Note**: `text` and `source_url` are mutually exclusive. Provide exactly one input source.
 
 **Return Value:**
 
