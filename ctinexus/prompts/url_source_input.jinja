@@ -1,0 +1,52 @@
+You are preparing a concise Cyber Threat Intelligence (CTI) report summary from WEBPAGE-EXTRACTED TEXT.
+
+Context:
+- The content below was fetched from a URL and extracted from HTML. It may contain heavy noise (navigation, cookie banners, footers, ads, social buttons, related posts, newsletter text, disclaimers, repeated site branding).
+- Your job is to IGNORE that noise and focus only on the core CTI report content: what happened, who/what is involved, when, how, impact, and any concrete technical identifiers.
+
+Source URL: {{ url }}
+Source Domain: {{ source_domain }}
+Title: {{ metadata.title or "Unknown" }}
+Published Date: {{ metadata.date or "Unknown" }}
+
+
+YOUR GOAL
+Produce a short, CTINexus-ready CTI summary that matches the style and concision of the examples below.
+
+WHAT TO EXTRACT (CTI SIGNAL)
+- Incident overview: what happened + timeframe
+- Reporting entity (who published / who discovered), if stated
+- Affected victims (orgs, sectors, regions), if stated
+- Threat actor / campaign (name/aliases), if stated
+- Malware / tooling / spyware / wipers / exploits, if stated
+- Vulnerabilities and CVEs (exact IDs), if stated
+- Attack behavior at a high level (initial access, exploitation, persistence, data theft, wiper/impact), only if supported by text
+- Outcomes/impact (data theft, disruption, espionage), if stated
+- Defensive action mentioned (patch released, update available), if stated
+
+WHAT TO IGNORE (NOISE)
+- Menus, category tags, trending/related articles, subscription prompts, cookie/privacy banners, generic marketing, author bios, company boilerplate, social share blocks, “read more”, repeated headers/footers.
+
+STRICT RULES (NO HALLUCINATION)
+- Do NOT guess missing details. If a name, date, CVE, victim, or malware is not clearly present, omit it.
+- If content is ambiguous or conflicting, summarize only what is clearly supported and use cautious wording (e.g., “reported”, “observed”, “according to the source”).
+- Do NOT output long lists. Keep only the most important identifiers (especially CVEs and named malware/actors).
+
+OUTPUT FORMAT
+Return ONLY one short paragraph (3 to 6 sentences). It must read like a clean CTI brief, focused on the threat report’s core message, with concrete identifiers when present.
+
+STYLE TARGETS (golden examples)
+Example 1:
+Last week Google’s Threat Analysis Group (TAG), in partnership with The Citizen Lab, discovered an in-the-wild 0-day exploit chain for iPhones. Developed by the commercial surveillance vendor, Intellexa, this exploit chain is used to install its Predator spyware surreptitiously onto a device. In response, yesterday, Apple patched the bugs in iOS 16.7 and iOS 17.0.1 as CVE-2023-41991, CVE-2023-41992, CVE-2023-41993. This quick patching from Apple helps to better protect users and we encourage all iOS users to install them as soon as possible.
+
+Example 2:
+Unit 42 researchers have investigated a series of destructive cyberattacks beginning in January 2023 and continuing as recently as October 2023, targeting the education and technology sectors in Israel. The attacks are characterized by attempts to steal sensitive data, such as personally identifiable information (PII) and intellectual property. Once the attackers stole the information, they deployed various wipers intended to cover the attackers' tracks and to render the infected endpoints unusable.
+
+Example 3:
+Apple released security updates to address this year's first zero-day vulnerability exploited in attacks that could impact iPhones, Macs, and Apple TVs. The zero-day fixed today is tracked as CVE-2024-23222 and is a WebKit confusion issue that attackers could exploit to gain code execution on targeted devices. Successful exploitation enables threat actors to execute arbitrary malicious code on devices running vulnerable iOS, macOS, and tvOS versions after opening a malicious web page.
+
+-------
+Return only the formatted CTINexus-ready summary. Do not include analysis or extra commentary outside the required sections.
+
+Extracted Web Content (noisy, untrusted layout):
+{{ content }}

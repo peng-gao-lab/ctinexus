@@ -1,5 +1,6 @@
 import json
 import traceback
+from urllib.parse import urlparse
 
 import gradio as gr
 from hydra import compose, initialize
@@ -7,7 +8,7 @@ from omegaconf import DictConfig
 
 from ..cti_processor import PostProcessor, preprocessor
 from ..graph_constructor import Linker, Merger, create_graph_visualization
-from ..llm_processor import LLMExtractor, LLMTagger
+from ..llm_processor import LLMExtractor, LLMTagger, UrlSourceInput
 from .model_utils import (
 	MODELS,
 	get_embedding_model_choices,
@@ -37,6 +38,11 @@ def run_intel_extraction(config: DictConfig, text: str = None) -> dict:
 def run_entity_tagging(config: DictConfig, result: dict) -> dict:
 	"""Wrapper for Entity Tagging"""
 	return LLMTagger(config).call(result)
+
+
+def run_url_source_input(config: DictConfig, source_url: str) -> dict:
+	"""Wrapper for URL source ingestion and extraction."""
+	return UrlSourceInput(config).call(source_url)
 
 
 def run_entity_alignment(config: DictConfig, result: dict) -> dict:
@@ -77,6 +83,7 @@ def get_config(model: str = None, embedding_model: str = None, similarity_thresh
 
 def run_pipeline(
 	text: str = None,
+	source_url: str = None,
 	ie_model: str = None,
 	et_model: str = None,
 	ea_model: str = None,
@@ -85,19 +92,40 @@ def run_pipeline(
 	progress=gr.Progress(track_tqdm=False),
 ):
 	"""Run the entire pipeline in sequence"""
-	if not text:
-		return "Please enter some text to process."
+	if not text and not source_url:
+		return "Error: Please enter CTI text or provide a report URL."
+
+	if source_url and not is_valid_source_url(source_url):
+		return "Error: Invalid URL format. Please provide a valid http/https URL."
 
 	try:
+		url_source_result = None
+
+		if source_url and source_url.strip():
+			config = get_config(ie_model, None, None)
+			progress(0.05, desc="Ingesting URL source...")
+			url_source_result = run_url_source_input(config, source_url)
+			if url_source_result.get("status") != "success":
+				error_info = url_source_result.get("error", {})
+				error_code = error_info.get("code", "url_ingestion_failed")
+				error_message = error_info.get("message", "URL ingestion failed.")
+				return f"Error: [{error_code}] {error_message}"
+			text = url_source_result.get("final_text") or url_source_result.get("normalized_text")
+
+		if not text:
+			return "Error: No usable report content was found from the URL source."
+
 		config = get_config(ie_model, None, None)
-		progress(0, desc="Intelligence Extraction...")
+		progress(0.2, desc="Intelligence Extraction...")
 		extraction_result = run_intel_extraction(config, text)
+		if url_source_result:
+			extraction_result["URL_SOURCE"] = url_source_result
 
 		config = get_config(et_model, None, None)
-		progress(0.3, desc="Entity Tagging...")
+		progress(0.45, desc="Entity Tagging...")
 		tagging_result = run_entity_tagging(config, extraction_result)
 
-		progress(0.6, desc="Entity Alignment...")
+		progress(0.7, desc="Entity Alignment...")
 		config = get_config(None, ea_model, similarity_threshold)
 		config.similarity_threshold = similarity_threshold
 		alignment_result = run_entity_alignment(config, tagging_result)
@@ -116,7 +144,9 @@ def run_pipeline(
 
 
 def process_and_visualize(
+	input_source,
 	text,
+	source_url,
 	ie_model,
 	et_model,
 	ea_model,
@@ -127,6 +157,11 @@ def process_and_visualize(
 	custom_embedding_model_input=None,
 	progress=gr.Progress(track_tqdm=False),
 ):
+	if input_source == "CTI Report URL":
+		text = None
+	else:
+		source_url = None
+
 	# Apply custom model only to dropdowns where 'Other' is selected
 	custom_model = f"{provider_dropdown}/{custom_model_input}" if provider_dropdown else custom_model_input
 	custom_embedding_model = (
@@ -139,7 +174,7 @@ def process_and_visualize(
 	ea_model = custom_embedding_model if ea_model == "Other" else ea_model
 
 	# Run pipeline with progress tracking
-	result = run_pipeline(text, ie_model, et_model, ea_model, lp_model, similarity_threshold, progress)
+	result = run_pipeline(text, source_url, ie_model, et_model, ea_model, lp_model, similarity_threshold, progress)
 	if result.startswith("Error:"):
 		return (
 			result,
@@ -192,6 +227,17 @@ def process_and_visualize(
 def clear_outputs():
 	"""Clear all outputs when run button is clicked"""
 	return "", None, get_metrics_box()
+
+
+def is_valid_source_url(source_url: str) -> bool:
+	"""Basic URL validation for Gradio input."""
+	if not source_url or not isinstance(source_url, str):
+		return False
+	candidate = source_url.strip()
+	if "://" not in candidate:
+		candidate = f"https://{candidate}"
+	parsed = urlparse(candidate)
+	return parsed.scheme in {"http", "https"} and bool(parsed.netloc and " " not in parsed.netloc)
 
 
 def build_interface(warning: str = None):
@@ -266,14 +312,36 @@ def build_interface(warning: str = None):
 
 		with gr.Row():
 			with gr.Column():
+				input_source_selector = gr.Radio(
+					choices=["CTI Report URL", "CTI Text"],
+					value="CTI Report URL",
+					label="Input Source",
+				)
+				url_input = gr.Textbox(
+					label="CTI Report URL",
+					placeholder="https://example.com/report",
+					lines=1,
+					visible=True,
+				)
 				text_input = gr.Textbox(
 					label="Input Threat Intelligence",
 					placeholder="Enter text for processing...",
 					lines=10,
+					visible=False,
 				)
 				gr.Markdown(
 					"**Note:** Intelligence Extraction does best with a reasoning or full gpt model (e.g. o4-mini, gpt-4.1), Entity Tagging tends to need a mid level gpt model (gpt-4o-mini, gpt-4.1-mini).",
 					elem_classes=["note-text"],
+				)
+
+				def toggle_input_source(source_choice):
+					use_text_input = source_choice == "CTI Text"
+					return gr.update(visible=use_text_input), gr.update(visible=not use_text_input)
+
+				input_source_selector.change(
+					fn=toggle_input_source,
+					inputs=[input_source_selector],
+					outputs=[text_input, url_input],
 				)
 
 				with gr.Row():
@@ -447,7 +515,9 @@ def build_interface(warning: str = None):
 		).then(
 			fn=process_and_visualize,
 			inputs=[
+				input_source_selector,
 				text_input,
+				url_input,
 				ie_dropdown,
 				et_dropdown,
 				ea_dropdown,

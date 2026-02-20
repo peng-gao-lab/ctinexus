@@ -13,6 +13,9 @@ ctinexus --text "Your threat intelligence text here"
 # Process a file
 ctinexus --input-file report.txt
 
+# Process a CTI report URL
+ctinexus --url "https://example.com/report"
+
 # Use specific models
 ctinexus --input-file report.txt --model gpt-4o --embedding-model text-embedding-3-large
 ```
@@ -25,8 +28,9 @@ ctinexus --input-file report.txt --model gpt-4o --embedding-model text-embedding
 | ------------------- | ----- | -------------------------------------------------- |
 | `--text TEXT`       | `-t`  | Input threat intelligence text to process directly |
 | `--input-file FILE` | `-i`  | Path to file containing threat intelligence text   |
+| `--url URL`         | `-u`  | CTI report URL to ingest and process               |
 
-**Note**: `--text` and `--input-file` are mutually exclusive - use one or the other.
+**Note**: `--text`, `--input-file`, and `--url` are mutually exclusive. Use exactly one input mode per command.
 
 ### Model Selection
 
@@ -102,6 +106,9 @@ ctinexus --input-file threat_report.txt
 
 # Process text directly
 ctinexus --text "APT29 used PowerShell to download additional malware from 192.168.1.100"
+
+# Process a web report directly from URL
+ctinexus --url "https://example.com/some-threat-report/"
 ```
 
 ### Provider and Model Selection

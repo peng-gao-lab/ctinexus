@@ -3,6 +3,7 @@
 from omegaconf import OmegaConf
 
 from ctinexus.llm_processor import (
+	UrlSourceInput,
 	UsageCalculator,
 	extract_json_from_response,
 )
@@ -203,3 +204,63 @@ class TestUsageCalculator:
 
 		expected_total_cost = result["input"]["cost"] + result["output"]["cost"]
 		assert abs(result["total"]["cost"] - expected_total_cost) < 0.0001
+
+
+class TestUrlSourceInput:
+	"""Test URL ingestion and extraction flow."""
+
+	def test_url_source_input_success(self, monkeypatch):
+		"""Should return normalized content and metadata on success."""
+		config = OmegaConf.create(
+			{
+				"url_prompt_folder": "prompts",
+				"url_prompt_file": "url_source_input.jinja",
+			}
+		)
+
+		def mock_fetch_url(_url):
+			return "<html>mock content</html>"
+
+		def mock_extract(*_args, **_kwargs):
+			return (
+				'{"title":"Mock CTI","author":"Analyst","date":"2026-01-01",'
+				'"text":"APT group used malware.\\n\\nSubscribe\\nAPT group used malware."}'
+			)
+
+		monkeypatch.setattr("ctinexus.llm_processor.trafilatura.fetch_url", mock_fetch_url)
+		monkeypatch.setattr("ctinexus.llm_processor.trafilatura.extract", mock_extract)
+
+		result = UrlSourceInput(config).call("example.com/report")
+
+		assert result["status"] == "success"
+		assert result["url"] == "https://example.com/report"
+		assert result["metadata"]["title"] == "Mock CTI"
+		assert result["source_domain"] == "example.com"
+		assert "Subscribe" not in result["normalized_text"]
+		assert result["normalized_text_length"] > 0
+		assert result["prompt"]
+
+	def test_url_source_input_invalid_url(self):
+		"""Should fail with invalid_url for malformed input."""
+		config = OmegaConf.create({})
+		result = UrlSourceInput(config).call("not a valid url value")
+		assert result["status"] == "error"
+		assert result["error"]["code"] == "invalid_url"
+
+	def test_url_source_input_fetch_failure(self, monkeypatch):
+		"""Should fail with fetch_failed when fetch_url returns no content."""
+		config = OmegaConf.create({})
+		monkeypatch.setattr("ctinexus.llm_processor.trafilatura.fetch_url", lambda *_args, **_kwargs: None)
+		result = UrlSourceInput(config).call("https://example.com/report")
+		assert result["status"] == "error"
+		assert result["error"]["code"] == "fetch_failed"
+
+	def test_url_source_input_extraction_failure(self, monkeypatch):
+		"""Should fail with extraction_failed when extract returns no text."""
+		config = OmegaConf.create({})
+		monkeypatch.setattr("ctinexus.llm_processor.trafilatura.fetch_url", lambda *_args, **_kwargs: "<html />")
+		monkeypatch.setattr("ctinexus.llm_processor.trafilatura.extract", lambda *_args, **_kwargs: None)
+
+		result = UrlSourceInput(config).call("https://example.com/report")
+		assert result["status"] == "error"
+		assert result["error"]["code"] == "extraction_failed"

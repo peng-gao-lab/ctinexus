@@ -17,6 +17,10 @@ similarity_threshold: 0.6  # Range: 0.0-1.0, higher = more strict matching
 tag_prompt_folder: prompts
 tag_prompt_file: et.jinja
 
+# URL Source Ingestion Configuration
+url_prompt_folder: prompts
+url_prompt_file: url_source_input.jinja
+
 # Demonstration Retrieval Settings
 # How similar examples are selected for few-shot learning
 retriever:
