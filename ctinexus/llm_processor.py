@@ -22,14 +22,31 @@ from ctinexus.utils.path_utils import resolve_path
 
 logger = logging.getLogger(__name__)
 
-# Download NLTK stopwords if not already present
-try:
-	stopwords.words("english")
-except LookupError:
-	logger.debug("Downloading NLTK stopwords...")
-	nltk.download("stopwords", quiet=True)
+_STOPWORDS_CACHE = None
 
 litellm.drop_params = True
+
+
+def get_english_stopwords():
+	"""Load English stopwords lazily to avoid import-time side effects."""
+	global _STOPWORDS_CACHE
+	if _STOPWORDS_CACHE is not None:
+		return _STOPWORDS_CACHE
+
+	try:
+		_STOPWORDS_CACHE = set(stopwords.words("english"))
+		return _STOPWORDS_CACHE
+	except LookupError:
+		logger.info("NLTK stopwords corpus not found. Downloading...")
+
+	try:
+		nltk.download("stopwords", quiet=True)
+		_STOPWORDS_CACHE = set(stopwords.words("english"))
+	except Exception as e:
+		logger.warning(f"Unable to load NLTK stopwords. Continuing without stopword filtering: {e}")
+		_STOPWORDS_CACHE = set()
+
+	return _STOPWORDS_CACHE
 
 
 def validate_triplet(triplet: dict) -> bool:
@@ -1275,7 +1292,7 @@ class DemoRetriever:
 				documents.append((js["text"], JSONfile))
 
 		documents_df = pd.DataFrame([doc[0] for doc in documents], columns=["documents"])
-		stop_words_l = stopwords.words("english")
+		stop_words_l = get_english_stopwords()
 		documents_df["documents_cleaned"] = documents_df.documents.apply(
 			lambda x: " ".join(
 				re.sub(r"[^a-zA-Z]", " ", w).lower()

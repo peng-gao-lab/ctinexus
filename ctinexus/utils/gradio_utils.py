@@ -2,7 +2,6 @@ import json
 import traceback
 from urllib.parse import urlparse
 
-import gradio as gr
 from hydra import compose, initialize
 from omegaconf import DictConfig
 
@@ -18,6 +17,12 @@ from .model_utils import (
 from .path_utils import resolve_path
 
 CONFIG_PATH = "../config"
+
+
+def _get_progress_callback(progress):
+	if callable(progress):
+		return progress
+	return lambda *args, **kwargs: None
 
 
 def get_metrics_box(
@@ -89,9 +94,11 @@ def run_pipeline(
 	ea_model: str = None,
 	lp_model: str = None,
 	similarity_threshold: float = 0.6,
-	progress=gr.Progress(track_tqdm=False),
+	progress=None,
 ):
 	"""Run the entire pipeline in sequence"""
+	progress_callback = _get_progress_callback(progress)
+
 	if not text and not source_url:
 		return "Error: Please enter CTI text or provide a report URL."
 
@@ -103,7 +110,7 @@ def run_pipeline(
 
 		if source_url and source_url.strip():
 			config = get_config(ie_model, None, None)
-			progress(0.05, desc="Ingesting URL source...")
+			progress_callback(0.05, desc="Ingesting URL source...")
 			url_source_result = run_url_source_input(config, source_url)
 			if url_source_result.get("status") != "success":
 				error_info = url_source_result.get("error", {})
@@ -116,29 +123,29 @@ def run_pipeline(
 			return "Error: No usable report content was found from the URL source."
 
 		config = get_config(ie_model, None, None)
-		progress(0.2, desc="Intelligence Extraction...")
+		progress_callback(0.2, desc="Intelligence Extraction...")
 		extraction_result = run_intel_extraction(config, text)
 		if url_source_result:
 			extraction_result["URL_SOURCE"] = url_source_result
 
 		config = get_config(et_model, None, None)
-		progress(0.45, desc="Entity Tagging...")
+		progress_callback(0.45, desc="Entity Tagging...")
 		tagging_result = run_entity_tagging(config, extraction_result)
 
-		progress(0.7, desc="Entity Alignment...")
+		progress_callback(0.7, desc="Entity Alignment...")
 		config = get_config(None, ea_model, similarity_threshold)
 		config.similarity_threshold = similarity_threshold
 		alignment_result = run_entity_alignment(config, tagging_result)
 
 		config = get_config(lp_model, None, None)
-		progress(0.9, desc="Link Prediction...")
+		progress_callback(0.9, desc="Link Prediction...")
 		linking_result = run_link_prediction(config, alignment_result)
 
-		progress(1.0, desc="Processing complete!")
+		progress_callback(1.0, desc="Processing complete!")
 
 		return json.dumps(linking_result, indent=4)
 	except Exception as e:
-		progress(1.0, desc="Error occurred!")
+		progress_callback(1.0, desc="Error occurred!")
 		traceback.print_exc()
 		return f"Error: {str(e)}"
 
@@ -155,7 +162,7 @@ def process_and_visualize(
 	provider_dropdown=None,
 	custom_model_input=None,
 	custom_embedding_model_input=None,
-	progress=gr.Progress(track_tqdm=False),
+	progress=None,
 ):
 	if input_source == "CTI Report URL":
 		text = None
@@ -241,6 +248,8 @@ def is_valid_source_url(source_url: str) -> bool:
 
 
 def build_interface(warning: str = None):
+	import gradio as gr
+
 	with gr.Blocks(title="CTINexus") as ctinexus:
 		gr.HTML("""
             <style>
@@ -474,9 +483,7 @@ def build_interface(warning: str = None):
                     """,
 				)
 
-		def update_model_choices(
-			provider,
-		) -> tuple[gr.Dropdown, gr.Dropdown, gr.Dropdown, gr.Dropdown]:
+		def update_model_choices(provider):
 			model_choices = get_model_choices(provider) + [("Other", "Other")]
 			embedding_choices = get_embedding_model_choices(provider) + [("Other", "Other")]
 
@@ -508,12 +515,41 @@ def build_interface(warning: str = None):
 			outputs=[ie_dropdown, et_dropdown, ea_dropdown, lp_dropdown],
 		)
 
+		def process_and_visualize_with_progress(
+			input_source,
+			text,
+			source_url,
+			ie_model,
+			et_model,
+			ea_model,
+			lp_model,
+			similarity_threshold,
+			provider_dropdown,
+			custom_model_input,
+			custom_embedding_model_input,
+			progress=gr.Progress(track_tqdm=False),
+		):
+			return process_and_visualize(
+				input_source,
+				text,
+				source_url,
+				ie_model,
+				et_model,
+				ea_model,
+				lp_model,
+				similarity_threshold,
+				provider_dropdown,
+				custom_model_input,
+				custom_embedding_model_input,
+				progress=progress,
+			)
+
 		run_all_button.click(
 			fn=clear_outputs,
 			inputs=[],
 			outputs=[results_box, graph_output, metrics_table],
 		).then(
-			fn=process_and_visualize,
+			fn=process_and_visualize_with_progress,
 			inputs=[
 				input_source_selector,
 				text_input,

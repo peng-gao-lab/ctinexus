@@ -1,29 +1,14 @@
 # flake8: noqa
 
 import argparse
-import sys
-import os
-import json
-import traceback
-import logging
-from dotenv import load_dotenv
 import importlib.metadata
+import json
+import logging
+import os
+import sys
+import traceback
 
-# Ensure the parent directory is in sys.path for absolute imports
-parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-if parent_dir not in sys.path:
-	sys.path.insert(0, parent_dir)
-
-from ctinexus.graph_constructor import create_graph_visualization
-from ctinexus.utils.gradio_utils import build_interface, run_pipeline
-from ctinexus.utils.http_server_utils import setup_http_server
-from ctinexus.utils.model_utils import (
-	MODELS,
-	check_api_key,
-)
-
-load_dotenv()
-load_dotenv(os.path.join(os.getcwd(), ".env"))
+from dotenv import load_dotenv
 
 # Set up logging
 logger = logging.getLogger("ctinexus")
@@ -51,14 +36,17 @@ def setup_logging(verbose=False):
 
 
 def create_argument_parser():
+	try:
+		package_version = importlib.metadata.version("ctinexus")
+	except importlib.metadata.PackageNotFoundError:
+		package_version = "dev"
+
 	parser = argparse.ArgumentParser(
 		description="CTINexus",
 		formatter_class=argparse.RawDescriptionHelpFormatter,
 	)
 
-	parser.add_argument(
-		"--version", "-v", action="version", version=f"CTINexus {importlib.metadata.version('ctinexus')}"
-	)
+	parser.add_argument("--version", "-v", action="version", version=f"CTINexus {package_version}")
 
 	input_group = parser.add_mutually_exclusive_group(required=False)
 	input_group.add_argument("--text", "-t", type=str, help="Input threat intelligence text to process")
@@ -101,7 +89,16 @@ def get_default_models_for_provider(provider):
 	return defaults.get(provider, {})
 
 
+def load_environment() -> None:
+	"""Load environment variables from shell and local .env file."""
+	load_dotenv()
+	load_dotenv(os.path.join(os.getcwd(), ".env"))
+
+
 def run_cmd_pipeline(args):
+	from ctinexus.utils.gradio_utils import run_pipeline
+	from ctinexus.utils.model_utils import MODELS
+
 	source_url = args.url
 
 	if args.input_file:
@@ -184,6 +181,10 @@ def run_cmd_pipeline(args):
 				sys.exit(1)
 
 		# Create Entity Relation Graph
+		from ctinexus.graph_constructor import create_graph_visualization
+		from ctinexus.utils.http_server_utils import setup_http_server
+
+		setup_http_server()
 		result_dict = json.loads(result)
 		_, filepath = create_graph_visualization(result_dict)
 		logger.info(f"Entity Relation Graph: {filepath}")
@@ -198,15 +199,22 @@ def main():
 	parser = create_argument_parser()
 	args = parser.parse_args()
 
+	setup_logging(verbose=args.verbose)
+	load_environment()
+
+	from ctinexus.utils.model_utils import check_api_key
+
 	api_keys_available = check_api_key()
 
 	run_gui = not args.text and not args.input_file and not args.url
 
-	# HTTP server to serve pyvis files
-	setup_http_server()
-	setup_logging(verbose=args.verbose)
-
 	if run_gui:
+		from ctinexus.utils.gradio_utils import build_interface
+		from ctinexus.utils.http_server_utils import setup_http_server
+
+		# HTTP server to serve pyvis files
+		setup_http_server()
+
 		# GUI mode
 		warning = None
 		if not api_keys_available:
