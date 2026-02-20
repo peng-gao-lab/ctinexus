@@ -13,16 +13,16 @@ def check_api_key() -> bool:
 	"""Define Models and check if API KEYS are set"""
 	if os.getenv("OPENAI_API_KEY"):
 		MODELS["OpenAI"] = {
+			"gpt-4.1-mini": "GPT-4.1 Mini — Balanced for intelligence, speed, and cost ($0.4 • $1.6)",
+			"gpt-4.1": "GPT-4.1 — Flagship GPT model for complex tasks ($2 • $8)",
 			"o4-mini": "o4 Mini — Faster, more affordable reasoning model ($1.1 • $4.4)",
 			"o3-mini": "o3 Mini — A small reasoning model alternative to o3 ($1.1 • $4.4)",
 			"o3": "o3 — Most powerful reasoning model ($2 • $8)",
 			"o3-pro": "o3 Pro — Version of o3 with more compute for better responses ($20 • $80)",
-			"gpt-4.1": "GPT-4.1 — Flagship GPT model for complex tasks ($2 • $8)",
 			"gpt-4o": "GPT-4o — Fast, intelligent, flexible GPT model ($2.5 • $10)",
 			"gpt-4": "GPT-4 — An older high-intelligence GPT model ($30 • $60)",
 			"gpt-4-turbo": "GPT-4 Turbo — An older high-intelligence GPT model ($10 • $30)",
 			"gpt-3.5-turbo": "GPT-3.5 Turbo — Legacy GPT model for cheaper chat and non-chat tasks ($0.5 • $1.5)",
-			"gpt-4.1-mini": "GPT-4.1 Mini — Balanced for intelligence, speed, and cost ($0.4 • $1.6)",
 			"gpt-4o-mini": "GPT-4o Mini — Fast, affordable small model for focused tasks ($0.15 • $0.6)",
 			"gpt-4.1-nano": "GPT-4.1 Nano — Fastest, most cost-effective GPT-4.1 model ($0.1 • $0.4)",
 		}

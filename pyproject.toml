@@ -7,7 +7,7 @@ name = "ctinexus"
 version = "0.1.0"
 description = "CTINexus: A framework for data-efficient cyber threat intelligence extraction and knowledge graph construction using LLMs."
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.10,<3.14"
 license = {file = "LICENSE.txt"}
 
 authors = [
@@ -26,7 +26,7 @@ classifiers = [
 ]
 
 dependencies = [
-    "gradio",
+    "gradio>=5.0.0,<6.0.0",
     "hydra-core",
     "jinja2",
     "litellm",
@@ -37,7 +37,8 @@ dependencies = [
     "pyvis",
     "python-dotenv",
     "scikit-learn",
-    "scipy"
+    "scipy",
+    "trafilatura",
 ]
 
 [project.urls]
