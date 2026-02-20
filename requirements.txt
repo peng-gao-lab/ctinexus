@@ -10,3 +10,4 @@ pyvis
 python-dotenv
 scikit-learn
 scipy
+trafilatura

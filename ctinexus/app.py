@@ -63,6 +63,7 @@ def create_argument_parser():
 	input_group = parser.add_mutually_exclusive_group(required=False)
 	input_group.add_argument("--text", "-t", type=str, help="Input threat intelligence text to process")
 	input_group.add_argument("--input-file", "-i", type=str, help="Path to file containing threat intelligence text")
+	input_group.add_argument("--url", "-u", type=str, help="CTI report URL to ingest and process")
 	parser.add_argument(
 		"--provider",
 		type=str,
@@ -101,6 +102,8 @@ def get_default_models_for_provider(provider):
 
 
 def run_cmd_pipeline(args):
+	source_url = args.url
+
 	if args.input_file:
 		try:
 			with open(args.input_file, "r", encoding="utf-8") as f:
@@ -114,8 +117,8 @@ def run_cmd_pipeline(args):
 	else:
 		text = args.text
 
-	if not text:
-		logger.error("No input text provided")
+	if not text and not source_url:
+		logger.error("No input provided. Use one of --text, --input-file, or --url.")
 		sys.exit(1)
 
 	provider = args.provider
@@ -152,6 +155,7 @@ def run_cmd_pipeline(args):
 	try:
 		result = run_pipeline(
 			text=text,
+			source_url=source_url,
 			ie_model=ie_model,
 			et_model=et_model,
 			ea_model=ea_model,
@@ -196,7 +200,7 @@ def main():
 
 	api_keys_available = check_api_key()
 
-	run_gui = not args.text and not args.input_file
+	run_gui = not args.text and not args.input_file and not args.url
 
 	# HTTP server to serve pyvis files
 	setup_http_server()

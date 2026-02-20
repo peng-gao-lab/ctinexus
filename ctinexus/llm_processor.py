@@ -5,11 +5,14 @@ import random
 import re
 import time
 from functools import wraps
+from html import unescape
+from urllib.parse import urlparse
 
 import litellm
 import nltk
 import numpy as np
 import pandas as pd
+import trafilatura
 from jinja2 import Environment, FileSystemLoader, meta
 from nltk.corpus import stopwords
 from omegaconf import DictConfig
@@ -162,6 +165,679 @@ class LLMTagger:
 
 		prompt = [{"role": "user", "content": UserPrompt}]
 		return prompt
+
+
+class UrlSourceInput:
+	def __init__(self, config: DictConfig):
+		self.config = config
+
+	def call(self, source_url: str) -> dict:
+		if not isinstance(source_url, str) or not source_url.strip():
+			return self._build_error("invalid_url", "URL input is empty or not a string.", source_url)
+
+		normalized_url = self._normalize_url(source_url)
+		if not self._is_valid_url(normalized_url):
+			return self._build_error("invalid_url", "URL must be a valid http/https address.", normalized_url)
+
+		try:
+			html_content = trafilatura.fetch_url(normalized_url)
+		except Exception as e:
+			logger.error(f"Failed to fetch URL {normalized_url}: {e}")
+			return self._build_error("fetch_failed", f"Failed to fetch URL content: {e}", normalized_url)
+
+		if not html_content:
+			return self._build_error("fetch_failed", "No content returned while fetching URL.", normalized_url)
+
+		hybrid_extract = self.extract_hybrid_content(html_content)
+		if not hybrid_extract.get("text"):
+			return self._build_error(
+				"extraction_failed", "No readable article/report content could be extracted.", normalized_url
+			)
+
+		raw_text = hybrid_extract.get("text", "")
+		normalized_text = self.normalize_text(raw_text)
+		if not normalized_text:
+			return self._build_error(
+				"empty_content",
+				"Extracted content was empty after normalization.",
+				normalized_url,
+			)
+		focused_text = self.build_cti_focus_text(normalized_text)
+
+		metadata = {
+			"title": hybrid_extract.get("title"),
+			"author": hybrid_extract.get("author"),
+			"date": hybrid_extract.get("date"),
+			"source_domain": self._extract_domain(normalized_url),
+			"url": normalized_url,
+		}
+
+		result = {
+			"status": "success",
+			"source_type": "url",
+			"url": normalized_url,
+			"source_domain": metadata["source_domain"],
+			"metadata": metadata,
+			"raw_text_length": len(raw_text.strip()),
+			"normalized_text_length": len(normalized_text),
+			"normalized_text": normalized_text,
+			"focused_text_length": len(focused_text),
+			"focused_text": focused_text,
+			"extraction_candidates": hybrid_extract.get("candidates", []),
+		}
+
+		result["prompt"] = self.generate_prompt(result, raw_text=raw_text, html_content=html_content)
+
+		summary_generated = False
+		summary_usage = None
+		try:
+			summary_text, summary_response_time, summary_usage = self.summarize(result["prompt"])
+			result["summarized_text"] = self.normalize_summary_text(summary_text)
+			result["summary_response_time"] = summary_response_time
+			result["summary_model_usage"] = summary_usage
+			summary_generated = True
+		except Exception as e:
+			logger.warning(f"URL summarization failed, falling back to normalized text: {e}")
+			result["summarized_text"] = normalized_text
+			result["summary_response_time"] = 0
+			result["summary_model_usage"] = None
+
+		# Force paragraph-only CTI output if first pass drifts to bullets/headers.
+		if summary_generated and not self.is_well_formed_cti_paragraph(result["summarized_text"]):
+			try:
+				repaired_text, repaired_time, repaired_usage = self.repair_summary(
+					source_result=result,
+					initial_summary=result["summarized_text"],
+				)
+				repaired_summary = self.normalize_summary_text(repaired_text)
+				if repaired_summary:
+					result["summarized_text"] = repaired_summary
+					result["summary_response_time"] += repaired_time
+					result["summary_model_usage"] = self.merge_usages(summary_usage, repaired_usage)
+				else:
+					logger.warning("URL summary repair returned empty text; retaining initial summary.")
+			except Exception as e:
+				logger.warning(f"URL summary repair failed; retaining initial summary: {e}")
+
+		result["final_text"] = result["summarized_text"] or normalized_text
+		return result
+
+	def generate_prompt(self, source_result: dict, raw_text: str = "", html_content: str = "") -> list[dict]:
+		"""Generate prompt payload for downstream summarization stages."""
+		url_prompt_folder = getattr(self.config, "url_prompt_folder", None) or "prompts"
+		url_prompt_file = getattr(self.config, "url_prompt_file", None) or "url_source_input.jinja"
+
+		try:
+			env = Environment(loader=FileSystemLoader(resolve_path(url_prompt_folder)))
+			template_file = env.loader.get_source(env, url_prompt_file)[0]
+			template = env.get_template(url_prompt_file)
+			variables = meta.find_undeclared_variables(env.parse(template_file))
+
+			prompt_context = {
+				"url": source_result.get("url"),
+				"source_url": source_result.get("url"),
+				"source_domain": source_result.get("source_domain"),
+				"metadata": source_result.get("metadata", {}),
+				"title": source_result.get("metadata", {}).get("title"),
+				"author": source_result.get("metadata", {}).get("author"),
+				"date": source_result.get("metadata", {}).get("date"),
+				"published_date": source_result.get("metadata", {}).get("date"),
+				"content": source_result.get("focused_text", source_result.get("normalized_text", "")),
+				"normalized_text": source_result.get("normalized_text", ""),
+				"focused_text": source_result.get("focused_text", source_result.get("normalized_text", "")),
+				"raw_text": raw_text,
+				"html_content": html_content,
+				"raw_text_length": source_result.get("raw_text_length", 0),
+				"normalized_text_length": source_result.get("normalized_text_length", 0),
+				"focused_text_length": source_result.get("focused_text_length", 0),
+			}
+
+			if variables:
+				user_prompt = template.render(**prompt_context)
+			else:
+				user_prompt = template.render()
+			return [{"role": "user", "content": user_prompt}]
+		except Exception as e:
+			logger.warning(f"URL prompt generation failed, falling back to plain content prompt: {e}")
+			return [
+				{"role": "user", "content": source_result.get("focused_text", source_result.get("normalized_text", ""))}
+			]
+
+	def extract_hybrid_content(self, html_content: str) -> dict:
+		"""Hybrid extraction: trafilatura variants + metadata/script fallbacks + CTI-aware merge."""
+		candidate_bodies = []
+		metadata = {"title": None, "author": None, "date": None}
+
+		json_extract = self._extract_trafilatura_json(html_content)
+		if json_extract:
+			self._merge_metadata(metadata, json_extract)
+			text = json_extract.get("text")
+			if text:
+				candidate_bodies.append({"source": "trafilatura_json", "text": text})
+
+		txt_extract = self._extract_trafilatura_text(html_content)
+		if txt_extract:
+			candidate_bodies.append({"source": "trafilatura_txt", "text": txt_extract})
+
+		bare_extract = self._extract_trafilatura_bare(html_content)
+		if bare_extract:
+			self._merge_metadata(metadata, bare_extract)
+			text = bare_extract.get("text")
+			if text:
+				candidate_bodies.append({"source": "trafilatura_bare", "text": text})
+
+		jsonld_extract = self._extract_jsonld_text(html_content)
+		if jsonld_extract:
+			self._merge_metadata(metadata, jsonld_extract)
+			text = jsonld_extract.get("text")
+			if text:
+				candidate_bodies.append({"source": "jsonld", "text": text})
+
+		meta_extract = self._extract_meta_description(html_content)
+		if meta_extract:
+			text = meta_extract.get("text")
+			if text:
+				candidate_bodies.append({"source": "meta_description", "text": text})
+
+		normalized_candidates = []
+		for item in candidate_bodies:
+			normalized = self.normalize_text(item["text"])
+			if not normalized:
+				continue
+			normalized_candidates.append(
+				{
+					"source": item["source"],
+					"text": normalized,
+					"length": len(normalized),
+				}
+			)
+
+		merged_text = self.merge_extraction_candidates(normalized_candidates)
+		return {
+			"text": merged_text,
+			"title": metadata.get("title"),
+			"author": metadata.get("author"),
+			"date": metadata.get("date"),
+			"candidates": [{k: v for k, v in c.items() if k != "text"} for c in normalized_candidates],
+		}
+
+	def merge_extraction_candidates(self, candidates: list, max_chars: int = 16000) -> str:
+		if not candidates:
+			return ""
+
+		source_priority = {
+			"trafilatura_json": 0,
+			"trafilatura_bare": 1,
+			"trafilatura_txt": 2,
+			"readability": 3,
+			"jsonld": 4,
+			"meta_description": 5,
+		}
+		candidates_sorted = sorted(
+			candidates,
+			key=lambda x: (source_priority.get(x["source"], 99), -x["length"]),
+		)
+		base_text = candidates_sorted[0]["text"]
+		base_lines = [line.strip() for line in base_text.splitlines() if line.strip()]
+		seen = {line.lower() for line in base_lines}
+		merged_lines = list(base_lines)
+
+		for candidate in candidates_sorted[1:]:
+			for line in candidate["text"].splitlines():
+				line = line.strip()
+				if not line:
+					continue
+				line_key = line.lower()
+				if line_key in seen:
+					continue
+				if not self.is_cti_signal_line(line):
+					continue
+				seen.add(line_key)
+				merged_lines.append(line)
+
+		merged = "\n".join(merged_lines).strip()
+		if len(merged) > max_chars:
+			merged = merged[:max_chars].rsplit(" ", 1)[0].strip()
+		return merged
+
+	def is_cti_signal_line(self, line: str) -> bool:
+		lower_line = line.lower()
+		drop_patterns = [
+			r"^figure\s+\d+",
+			r"^source:",
+			r"^sources:",
+			r"^cookie",
+			r"^subscribe",
+			r"^sign up",
+			r"^read more",
+			r"^trend micro solutions?",
+			r"^here are some security best practices",
+			r"^recommendations?$",
+		]
+		if any(re.match(pattern, lower_line) for pattern in drop_patterns):
+			return False
+
+		strong_terms = [
+			"ransomware",
+			"threat actor",
+			"campaign",
+			"extortion",
+			"raas",
+			"cve-",
+			"exploit",
+			"vulnerability",
+			"cobalt strike",
+			"mimikatz",
+			"psexec",
+			"anydesk",
+			"rclone",
+			"winscp",
+			"linux",
+			"esxi",
+			"vpn",
+			"initial access",
+			"persistence",
+			"defense evasion",
+			"lateral movement",
+			"command and control",
+			"exfiltration",
+			"impact",
+			"encrypt",
+			"leak site",
+			"conti",
+			"ryuk",
+			"akira",
+			"victim",
+			"compromis",
+			"credential",
+			"double extortion",
+			"tor",
+			"hc3",
+			"cisco",
+		]
+		if any(term in lower_line for term in strong_terms):
+			return True
+
+		# Preserve descriptive narrative lines that are sentence-like and non-trivial.
+		if len(line) >= 90 and re.search(r"[.!?]$", line):
+			return True
+		return False
+
+	def _extract_trafilatura_json(self, html_content: str) -> dict:
+		try:
+			result = trafilatura.extract(
+				html_content,
+				output_format="json",
+				with_metadata=True,
+				include_comments=False,
+				include_tables=False,
+				deduplicate=True,
+				favor_recall=True,
+			)
+			if not result:
+				return {}
+			if isinstance(result, str):
+				try:
+					return json.loads(result)
+				except json.JSONDecodeError:
+					return {"text": result}
+			return result
+		except Exception as e:
+			logger.debug(f"Trafilatura JSON extraction failed: {e}")
+			return {}
+
+	def _extract_trafilatura_text(self, html_content: str) -> str:
+		try:
+			result = trafilatura.extract(
+				html_content,
+				output_format="txt",
+				include_comments=False,
+				include_tables=False,
+				deduplicate=True,
+				favor_recall=True,
+			)
+			return result or ""
+		except Exception as e:
+			logger.debug(f"Trafilatura text extraction failed: {e}")
+			return ""
+
+	def _extract_trafilatura_bare(self, html_content: str) -> dict:
+		if not hasattr(trafilatura, "bare_extraction"):
+			return {}
+
+		try:
+			result = trafilatura.bare_extraction(
+				html_content,
+				with_metadata=True,
+				include_comments=False,
+				include_tables=False,
+				deduplicate=True,
+				favor_recall=True,
+			)
+			if isinstance(result, dict):
+				return result
+			return {}
+		except Exception as e:
+			logger.debug(f"Trafilatura bare extraction failed: {e}")
+			return {}
+
+	def _extract_jsonld_text(self, html_content: str) -> dict:
+		jsonld_scripts = re.findall(
+			r'<script[^>]+type=["\']application/ld\+json["\'][^>]*>(.*?)</script>',
+			html_content,
+			flags=re.IGNORECASE | re.DOTALL,
+		)
+		collected_text = []
+		collected_title = None
+		collected_date = None
+		collected_author = None
+
+		for script_text in jsonld_scripts:
+			payload = script_text.strip()
+			if not payload:
+				continue
+
+			try:
+				parsed = json.loads(payload)
+			except json.JSONDecodeError:
+				# Retry for occasional malformed but recoverable script payloads.
+				cleaned = re.sub(r"[\x00-\x1f]", "", payload)
+				try:
+					parsed = json.loads(cleaned)
+				except json.JSONDecodeError:
+					continue
+
+			for item in self._iterate_jsonld_nodes(parsed):
+				article_body = item.get("articleBody")
+				description = item.get("description")
+				headline = item.get("headline")
+				date_published = item.get("datePublished")
+				author = item.get("author")
+
+				if article_body and isinstance(article_body, str):
+					collected_text.append(article_body)
+				if description and isinstance(description, str):
+					collected_text.append(description)
+				if not collected_title and isinstance(headline, str):
+					collected_title = headline
+				if not collected_date and isinstance(date_published, str):
+					collected_date = date_published
+				if not collected_author:
+					collected_author = self._normalize_jsonld_author(author)
+
+		return {
+			"title": collected_title,
+			"date": collected_date,
+			"author": collected_author,
+			"text": "\n".join(collected_text).strip(),
+		}
+
+	def _extract_meta_description(self, html_content: str) -> dict:
+		patterns = [
+			r'<meta[^>]+name=["\']description["\'][^>]+content=["\']([^"\']+)["\']',
+			r'<meta[^>]+property=["\']og:description["\'][^>]+content=["\']([^"\']+)["\']',
+		]
+		for pattern in patterns:
+			match = re.search(pattern, html_content, flags=re.IGNORECASE)
+			if match:
+				return {"text": unescape(match.group(1).strip())}
+		return {}
+
+	def _merge_metadata(self, target: dict, source: dict):
+		for key in ["title", "author", "date"]:
+			if not target.get(key) and source.get(key):
+				target[key] = source.get(key)
+
+	def _iterate_jsonld_nodes(self, value):
+		if isinstance(value, dict):
+			yield value
+			graph = value.get("@graph")
+			if isinstance(graph, list):
+				for item in graph:
+					yield from self._iterate_jsonld_nodes(item)
+		elif isinstance(value, list):
+			for item in value:
+				yield from self._iterate_jsonld_nodes(item)
+
+	def _normalize_jsonld_author(self, author_value):
+		if isinstance(author_value, str):
+			return author_value
+		if isinstance(author_value, dict):
+			return author_value.get("name")
+		if isinstance(author_value, list):
+			names = []
+			for item in author_value:
+				if isinstance(item, str):
+					names.append(item)
+				elif isinstance(item, dict) and item.get("name"):
+					names.append(item.get("name"))
+			return ", ".join(names) if names else None
+		return None
+
+	def summarize(self, prompt: list[dict]) -> tuple[str, float, dict]:
+		"""Summarize URL content into CTINexus-ready text using configured model."""
+		start_time = time.time()
+		provider = self.config.provider.lower()
+		model_id = self.config.model
+
+		completion_kwargs = {
+			"messages": prompt,
+			"temperature": 0.0,
+		}
+
+		if provider == "gemini":
+			response = litellm.completion(model=f"gemini/{model_id}", **completion_kwargs)
+		elif provider == "ollama":
+			ollama_base_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+			response = litellm.completion(model=f"ollama/{model_id}", api_base=ollama_base_url, **completion_kwargs)
+		else:
+			response = litellm.completion(model=model_id, **completion_kwargs)
+
+		response_time = time.time() - start_time
+		summary_text = response.choices[0].message.content.strip() if response.choices else ""
+		if not summary_text:
+			raise ValueError("Empty summary response from URL summarization model")
+		usage = UsageCalculator(self.config, response).calculate()
+		return summary_text, response_time, usage
+
+	def repair_summary(self, source_result: dict, initial_summary: str) -> tuple[str, float, dict]:
+		"""Repair non-compliant summary output into strict CTINexus-ready paragraph format."""
+		repair_prompt = (
+			"You will rewrite a CTI summary into strict format.\n"
+			"Rules:\n"
+			"1) Return exactly one paragraph with 3 to 6 sentences.\n"
+			"2) No markdown, no bullets, no headings, no preface.\n"
+			"3) Keep only verifiable CTI facts from the source.\n"
+			"4) Preserve concrete identifiers if present (CVE IDs, malware/tool names, actor/campaign names).\n"
+			"5) Remove vendor marketing, generic recommendations, and product promotion.\n\n"
+			f"Source URL: {source_result.get('url')}\n"
+			f"Source Domain: {source_result.get('source_domain')}\n"
+			f"Title: {source_result.get('metadata', {}).get('title')}\n\n"
+			"Original summary to fix:\n"
+			f"{initial_summary}\n\n"
+			"Relevant extracted CTI content:\n"
+			f"{source_result.get('focused_text', '')[:9000]}\n\n"
+			"Output only the rewritten paragraph."
+		)
+		return self.summarize([{"role": "user", "content": repair_prompt}])
+
+	def build_cti_focus_text(self, normalized_text: str, max_chars: int = 10000) -> str:
+		"""Trim obvious non-CTI sections while preserving attack chain details."""
+		lines = [line.strip() for line in normalized_text.splitlines() if line.strip()]
+		skip_patterns = [
+			r"^recommendations?$",
+			r"^trend micro solutions?$",
+			r"^to protect systems against similar threats",
+			r"^here are some best practices",
+			r"^audit and inventory$",
+			r"^configure and monitor$",
+			r"^patch and update$",
+			r"^protect and recover$",
+			r"^secure and defend$",
+			r"^about trend micro$",
+			r"^copyright",
+		]
+		drop_line_patterns = [
+			r"^figure\s+\d+",
+			r"^source:",
+			r"^sources:",
+			r"^read more",
+			r"^related",
+			r"^subscribe",
+		]
+
+		filtered = []
+		skip_section = False
+		for line in lines:
+			line_lower = line.lower()
+			if any(re.match(pat, line_lower) for pat in skip_patterns):
+				skip_section = True
+				continue
+			if skip_section:
+				# Resume when we hit core technical section headers
+				if re.match(
+					r"^(infection chain and techniques|initial access|execution|defense evasion|lateral movement|command and control|exfiltration|impact|other technical details)",
+					line_lower,
+				):
+					skip_section = False
+				else:
+					continue
+			if any(re.match(pat, line_lower) for pat in drop_line_patterns):
+				continue
+			filtered.append(line)
+
+		focused = "\n".join(filtered).strip()
+		if len(focused) > max_chars:
+			focused = focused[:max_chars].rsplit(" ", 1)[0].strip()
+		return focused
+
+	def normalize_summary_text(self, summary_text: str) -> str:
+		"""Normalize summary output to a single clean paragraph string."""
+		if not isinstance(summary_text, str):
+			return ""
+		s = summary_text.strip()
+		s = re.sub(r"^```[a-zA-Z]*\s*", "", s)
+		s = re.sub(r"\s*```$", "", s)
+		s = re.sub(r"\s+", " ", s).strip()
+		return s
+
+	def is_well_formed_cti_paragraph(self, summary_text: str) -> bool:
+		"""Check strict formatting/quality expectations for CTINexus-ready summary text."""
+		if not summary_text or not isinstance(summary_text, str):
+			return False
+
+		text = summary_text.strip()
+		if len(text) < 120:
+			return False
+		if re.search(r"(^|\n)\s*[-*+]\s+", text):
+			return False
+		if re.search(r"(^|\n)\s*#{1,6}\s+", text):
+			return False
+		if text.lower().startswith(("here is", "here's", "summary:", "in summary")):
+			return False
+
+		sentences = re.split(r"(?<=[.!?])\s+", text)
+		sentence_count = len([s for s in sentences if s.strip()])
+		if sentence_count < 3 or sentence_count > 6:
+			return False
+		return True
+
+	def merge_usages(self, usage_a: dict, usage_b: dict) -> dict:
+		if not usage_a:
+			return usage_b
+		if not usage_b:
+			return usage_a
+		if usage_a.get("model") != usage_b.get("model"):
+			return usage_b
+
+		return {
+			"model": usage_a["model"],
+			"input": {
+				"tokens": usage_a["input"]["tokens"] + usage_b["input"]["tokens"],
+				"cost": usage_a["input"]["cost"] + usage_b["input"]["cost"],
+			},
+			"output": {
+				"tokens": usage_a["output"]["tokens"] + usage_b["output"]["tokens"],
+				"cost": usage_a["output"]["cost"] + usage_b["output"]["cost"],
+			},
+			"total": {
+				"tokens": usage_a["total"]["tokens"] + usage_b["total"]["tokens"],
+				"cost": usage_a["total"]["cost"] + usage_b["total"]["cost"],
+			},
+		}
+
+	def normalize_text(self, extracted_text: str) -> str:
+		"""Light cleanup to reduce web boilerplate and normalize whitespace."""
+		if not isinstance(extracted_text, str):
+			return ""
+
+		cleaned = unescape(extracted_text).replace("\r\n", "\n").replace("\r", "\n")
+		cleaned = re.sub(r"[\u200b-\u200f\u2060\ufeff]", "", cleaned)
+
+		boilerplate_patterns = [
+			r"^\s*cookie(s)?\b",
+			r"^\s*accept (all )?cookies\b",
+			r"^\s*privacy policy\b",
+			r"^\s*terms (of use|and conditions)\b",
+			r"^\s*subscribe\b",
+			r"^\s*sign up\b",
+			r"^\s*advertisement\b",
+			r"^\s*all rights reserved\b",
+		]
+
+		normalized_lines = []
+		seen = set()
+		for line in cleaned.splitlines():
+			line = re.sub(r"\s+", " ", line).strip()
+			if not line:
+				continue
+			if any(re.match(pattern, line, flags=re.IGNORECASE) for pattern in boilerplate_patterns):
+				continue
+			line_key = line.lower()
+			if line_key in seen:
+				continue
+			seen.add(line_key)
+			normalized_lines.append(line)
+
+		normalized = "\n".join(normalized_lines)
+		normalized = re.sub(r"\n{3,}", "\n\n", normalized).strip()
+		return normalized
+
+	def _normalize_url(self, source_url: str) -> str:
+		url = source_url.strip()
+		parsed = urlparse(url)
+		if not parsed.scheme:
+			url = f"https://{url}"
+		return url
+
+	def _is_valid_url(self, source_url: str) -> bool:
+		parsed = urlparse(source_url)
+		return parsed.scheme in {"http", "https"} and bool(parsed.netloc and " " not in parsed.netloc)
+
+	def _extract_domain(self, source_url: str) -> str:
+		return urlparse(source_url).netloc.lower()
+
+	def _build_error(self, code: str, message: str, source_url: str = None) -> dict:
+		return {
+			"status": "error",
+			"source_type": "url",
+			"url": source_url,
+			"source_domain": self._extract_domain(source_url)
+			if source_url and self._is_valid_url(source_url)
+			else None,
+			"metadata": {
+				"title": None,
+				"author": None,
+				"date": None,
+				"source_domain": None,
+				"url": source_url,
+			},
+			"raw_text_length": 0,
+			"normalized_text_length": 0,
+			"normalized_text": "",
+			"prompt": [],
+			"error": {"code": code, "message": message},
+		}
 
 
 class LLMLinker:
