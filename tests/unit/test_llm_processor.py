@@ -210,7 +210,7 @@ class TestUrlSourceInput:
 	"""Test URL ingestion and extraction flow."""
 
 	def test_url_source_input_success(self, monkeypatch):
-		"""Should return normalized content and metadata on success."""
+		"""Should return public URL-source output and metadata on success."""
 		config = OmegaConf.create(
 			{
 				"url_prompt_folder": "prompts",
@@ -236,9 +236,14 @@ class TestUrlSourceInput:
 		assert result["url"] == "https://example.com/report"
 		assert result["metadata"]["title"] == "Mock CTI"
 		assert result["source_domain"] == "example.com"
-		assert "Subscribe" not in result["normalized_text"]
-		assert result["normalized_text_length"] > 0
-		assert result["prompt"]
+		assert "Subscribe" not in result["summarized_text"]
+		assert "Subscribe" not in result["final_text"]
+		assert result["final_text"]
+		assert "normalized_text" not in result
+		assert "normalized_text_length" not in result
+		assert "focused_text" not in result
+		assert "focused_text_length" not in result
+		assert "extraction_candidates" not in result
 
 	def test_url_source_input_invalid_url(self):
 		"""Should fail with invalid_url for malformed input."""

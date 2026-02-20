@@ -65,6 +65,10 @@ include-package-data = true
 where = ["."]
 namespaces = false
 
+[tool.uv]
+constraint-dependencies = ["tld<1"]
+
+
 # ===== Ruff Configuration =====
 [tool.ruff]
 line-length = 120
