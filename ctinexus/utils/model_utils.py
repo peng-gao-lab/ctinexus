@@ -1,9 +1,5 @@
 import os
 
-from dotenv import load_dotenv
-
-load_dotenv()
-
 # Available models
 MODELS = {}
 EMBEDDING_MODELS = {}

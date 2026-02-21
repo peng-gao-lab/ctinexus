@@ -1,10 +1,30 @@
 import json
 import os
+from importlib.metadata import PackageNotFoundError, version
 
-from .app import get_default_models_for_provider
-from .graph_constructor import create_graph_visualization
-from .utils.gradio_utils import run_pipeline
-from .utils.model_utils import MODELS, check_api_key
+from dotenv import load_dotenv
+
+try:
+	__version__ = version("ctinexus")
+except PackageNotFoundError:
+	__version__ = "dev"
+
+__all__ = [
+	"__version__",
+	"get_default_models_for_provider",
+	"process_cti_report",
+]
+
+
+def _load_environment() -> None:
+	load_dotenv()
+	load_dotenv(os.path.join(os.getcwd(), ".env"))
+
+
+def get_default_models_for_provider(provider):
+	from .app import get_default_models_for_provider as _get_defaults
+
+	return _get_defaults(provider)
 
 
 def process_cti_report(
@@ -43,6 +63,10 @@ def process_cti_report(
 	Returns:
 		dict: A dictionary containing the processed results, including the entity-relation graph file path.
 	"""
+	from .graph_constructor import create_graph_visualization
+	from .utils.gradio_utils import run_pipeline
+	from .utils.model_utils import MODELS, check_api_key
+
 	if not text and not source_url:
 		raise ValueError("No input provided. Provide either `text` or `source_url`.")
 	if text and source_url:
@@ -101,3 +125,6 @@ def process_cti_report(
 			json.dump(result_dict, f, indent=4)
 
 	return result_dict
+
+
+_load_environment()
