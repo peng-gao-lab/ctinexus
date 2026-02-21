@@ -38,7 +38,8 @@ dependencies = [
     "python-dotenv",
     "scikit-learn",
     "scipy",
-    "trafilatura",
+    "tld>=0.13,<1",
+    "trafilatura==2.0.0",
 ]
 
 [project.urls]
@@ -64,10 +65,6 @@ include-package-data = true
 [tool.setuptools.packages.find]
 where = ["."]
 namespaces = false
-
-[tool.uv]
-constraint-dependencies = ["tld<1"]
-
 
 # ===== Ruff Configuration =====
 [tool.ruff]

@@ -10,4 +10,5 @@ pyvis
 python-dotenv
 scikit-learn
 scipy
-trafilatura
+tld>=0.13,<1
+trafilatura==2.0.0
