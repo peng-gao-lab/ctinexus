@@ -82,6 +82,8 @@ class TestCheckApiKey:
 		monkeypatch.delenv("GEMINI_API_KEY", raising=False)
 		monkeypatch.delenv("AWS_ACCESS_KEY_ID", raising=False)
 		monkeypatch.delenv("OLLAMA_BASE_URL", raising=False)
+		monkeypatch.delenv("CUSTOM_BASE_URL", raising=False)
+		monkeypatch.delenv("CUSTOM_API_KEY", raising=False)
 		MODELS.clear()
 		EMBEDDING_MODELS.clear()
 
@@ -89,6 +91,23 @@ class TestCheckApiKey:
 
 		assert result is False
 		assert len(MODELS) == 0
+
+	def test_check_api_key_with_custom_endpoint(self, monkeypatch):
+		"""Test that custom endpoint mode enables OpenAI model registration."""
+		monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+		monkeypatch.delenv("GEMINI_API_KEY", raising=False)
+		monkeypatch.delenv("AWS_ACCESS_KEY_ID", raising=False)
+		monkeypatch.delenv("OLLAMA_BASE_URL", raising=False)
+		monkeypatch.setenv("CUSTOM_BASE_URL", "https://gateway.example.com/v1")
+		monkeypatch.setenv("CUSTOM_API_KEY", "custom-test-key")
+		MODELS.clear()
+		EMBEDDING_MODELS.clear()
+
+		result = check_api_key()
+
+		assert result is True
+		assert "OpenAI" in MODELS
+		assert "gpt-4o" in MODELS["OpenAI"]
 
 	def test_check_api_key_multiple_providers(self, monkeypatch):
 		"""Test that multiple providers can be registered simultaneously."""

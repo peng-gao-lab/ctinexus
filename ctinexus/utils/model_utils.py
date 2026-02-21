@@ -7,7 +7,9 @@ EMBEDDING_MODELS = {}
 
 def check_api_key() -> bool:
 	"""Define Models and check if API KEYS are set"""
-	if os.getenv("OPENAI_API_KEY"):
+	custom_base_url = (os.getenv("CUSTOM_BASE_URL") or "").strip()
+
+	if os.getenv("OPENAI_API_KEY") or custom_base_url:
 		MODELS["OpenAI"] = {
 			"gpt-4.1-mini": "GPT-4.1 Mini — Balanced for intelligence, speed, and cost ($0.4 • $1.6)",
 			"gpt-4.1": "GPT-4.1 — Flagship GPT model for complex tasks ($2 • $8)",

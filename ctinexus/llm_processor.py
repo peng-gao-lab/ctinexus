@@ -25,6 +25,35 @@ logger = logging.getLogger(__name__)
 _STOPWORDS_CACHE = None
 
 litellm.drop_params = True
+_CUSTOM_ENDPOINT_LOGGED = False
+
+
+def get_litellm_endpoint_overrides(default_api_base: str = None) -> dict:
+	"""Resolve LiteLLM endpoint overrides from environment variables."""
+	global _CUSTOM_ENDPOINT_LOGGED
+
+	custom_base_url = (os.getenv("CUSTOM_BASE_URL") or "").strip()
+	if custom_base_url:
+		custom_api_key = os.getenv("CUSTOM_API_KEY")
+		if not _CUSTOM_ENDPOINT_LOGGED:
+			logger.info("Using custom LLM endpoint: %s", custom_base_url)
+			_CUSTOM_ENDPOINT_LOGGED = True
+		return {
+			"api_base": custom_base_url,
+			"api_key": custom_api_key if custom_api_key is not None else "",
+		}
+
+	if default_api_base:
+		return {"api_base": default_api_base}
+
+	return {}
+
+
+def call_litellm_completion(model: str, *, default_api_base: str = None, **completion_kwargs):
+	"""Call LiteLLM completion with optional endpoint overrides."""
+	request_kwargs = dict(completion_kwargs)
+	request_kwargs.update(get_litellm_endpoint_overrides(default_api_base))
+	return litellm.completion(model=model, **request_kwargs)
 
 
 def get_english_stopwords():
@@ -652,12 +681,16 @@ class UrlSourceInput:
 		}
 
 		if provider == "gemini":
-			response = litellm.completion(model=f"gemini/{model_id}", **completion_kwargs)
+			response = call_litellm_completion(model=f"gemini/{model_id}", **completion_kwargs)
 		elif provider == "ollama":
 			ollama_base_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
-			response = litellm.completion(model=f"ollama/{model_id}", api_base=ollama_base_url, **completion_kwargs)
+			response = call_litellm_completion(
+				model=f"ollama/{model_id}",
+				default_api_base=ollama_base_url,
+				**completion_kwargs,
+			)
 		else:
-			response = litellm.completion(model=model_id, **completion_kwargs)
+			response = call_litellm_completion(model=model_id, **completion_kwargs)
 
 		response_time = time.time() - start_time
 		summary_text = response.choices[0].message.content.strip() if response.choices else ""
@@ -1002,14 +1035,14 @@ class LLMCaller:
 					for msg in self.prompt
 					if msg["role"] in ["user", "assistant"]
 				]
-				response = litellm.completion(
+				response = call_litellm_completion(
 					model=model_id,
 					messages=messages,
 					max_tokens=self.max_tokens,
 					response_format={"type": "json_object"},
 				)
 			elif provider == "gemini":
-				response = litellm.completion(
+				response = call_litellm_completion(
 					model=f"gemini/{model_id}",
 					messages=[{"role": "user", "content": self.prompt[-1]["content"]}],
 					max_tokens=self.max_tokens,
@@ -1017,7 +1050,7 @@ class LLMCaller:
 					response_format={"type": "json_object"},
 				)
 			elif provider == "meta":
-				response = litellm.completion(
+				response = call_litellm_completion(
 					model=model_id,
 					messages=[{"role": "user", "content": self.prompt[-1]["content"]}],
 					max_tokens=self.max_tokens,
@@ -1032,15 +1065,15 @@ class LLMCaller:
 					+ "\n\nIMPORTANT: output should be a valid JSON object with no extra text or description."
 				)
 
-				response = litellm.completion(
+				response = call_litellm_completion(
 					model=f"ollama/{model_id}",
 					messages=[{"role": "user", "content": improved_prompt}],
 					max_tokens=self.max_tokens,
 					temperature=0.8,
-					api_base=ollama_base_url,
+					default_api_base=ollama_base_url,
 				)
 			else:
-				response = litellm.completion(
+				response = call_litellm_completion(
 					model=model_id,
 					messages=[{"role": "user", "content": self.prompt[-1]["content"]}],
 					max_tokens=self.max_tokens,
