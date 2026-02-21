@@ -83,6 +83,8 @@ class TestProcessCTIReport:
 		monkeypatch.delenv("GEMINI_API_KEY", raising=False)
 		monkeypatch.delenv("AWS_ACCESS_KEY_ID", raising=False)
 		monkeypatch.delenv("OLLAMA_BASE_URL", raising=False)
+		monkeypatch.delenv("CUSTOM_BASE_URL", raising=False)
+		monkeypatch.delenv("CUSTOM_API_KEY", raising=False)
 
 		# Clear MODELS dict
 		from ctinexus.utils.model_utils import MODELS

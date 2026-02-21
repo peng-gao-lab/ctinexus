@@ -113,6 +113,10 @@ pip install ctinexus
 
 Create a `.env` file in your project directory with credentials for at least one provider. Look at [.env.example](.env.example) for reference.
 
+To route requests through a custom OpenAI-compatible gateway, set:
+- `CUSTOM_BASE_URL` (for example, `https://gateway.example.com/v1`)
+- `CUSTOM_API_KEY` (if needed)
+
 #### Usage
 
 ```python
