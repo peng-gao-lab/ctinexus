@@ -7,12 +7,14 @@
   <a href='https://arxiv.org/abs/2410.21060'><img src='https://img.shields.io/badge/Paper-Arxiv-crimson'></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-lavender.svg" alt="License: MIT"></a>
   <a href='https://ctinexus.github.io/' target='_blank'><img src='https://img.shields.io/badge/Project-Website-turquoise'></a>
-  <a href="https://pepy.tech/projects/ctinexus" target='_blank'><img src="https://static.pepy.tech/personalized-badge/ctinexus?period=total&units=INTERNATIONAL_SYSTEM&left_color=GRAY&right_color=BRIGHTGREEN&left_text=Downloads" alt="PyPI Downloads"></a>
+  <a href="https://pepy.tech/projects/ctinexus" target='_blank'><img src="https://img.shields.io/pepy/dt/ctinexus?color=green&label=Downloads" alt="Downloads"></a>
 </p>
 
 ---
 
 ## News & Updates
+
+📢 [2026/02] CTINexus was presented as a [tutorial](https://ctinexus.github.io/prism-workshop) at the PRISM Workshop (Co-located with NDSS).
 
 📦 [2025/10] CTINexus Python package released! Install with `pip install ctinexus` for seamless integration into your Python projects.
 
